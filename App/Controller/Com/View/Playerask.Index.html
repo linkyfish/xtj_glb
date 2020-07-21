@@ -1,0 +1,203 @@
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_head.html'); ?>
+<style>
+    .layui-table-view .layui-table .layui-table-cell{text-align: left}
+    .detail-box{padding:10px}
+</style>
+<body>
+<div class="templatemo-flex-row">
+    <?php include _include(__APPDIR__ . 'Controller/Com/View/Public_nav.html'); ?>
+    <div class="templatemo-content col-1 light-gray-bg">
+        <?php include _include(__APPDIR__ . 'Controller/Com/View/Public_top.html'); ?>
+        <div class="row content" style="padding:5px 0px 0px 0px;">
+            <section class="content">
+                <div class="detail" style="background:#FFF">
+                    <div class="box-body">
+                        <table class="layui-hide" id="<?php echo $__PRE__?>table" lay-filter="<?php echo $__PRE__?>table"></table>
+                    </div>
+
+                    <div class="fly-panel detail-box" id="flyReply">
+                        <ul class="jieda" id="jieda"></ul>
+                        <div class="layui-form layui-form-pane">
+                            <form action="../../com/ask/add/" method="post">
+                                <div class="layui-form-item layui-form-text">
+                                    <textarea id="content" name="content" style="display: none;"></textarea>
+                                </div>
+                                <input type="hidden" id="images" name="images">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs3 layui-col-sm3 layui-col-md2 text-right">
+                                        <button class="layui-btn layui-btn-sm" lay-filter="*" lay-submit id="submit">
+                                            提交回复
+                                        </button>
+                                        <br>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+</div>
+<script id="jieda_tpl" type="text/html">
+    {{#  layui.each(d.results, function(index, item){ }}
+    <li class="jieda" style="min-height:60px;">
+        <div class="detail-about detail-about-reply">
+            <div class="fly-detail-user" style="margin-bottom:10px">
+                <span class="layui-badge {{# if(item.AdminID){ }}layui-bg-blue{{# }else{ }}layui-bg-black{{# } }}">{{ item.userid }}</span>
+                <span>{{ laytpl.toDateString(item.questime*1000) }}</span>
+            </div>
+            <div class="detail-body jieda-body photos">
+                 玩家问题:{{ htmlspecialchars_decode(item.question) }}
+                <br/>
+                回复:{{ htmlspecialchars_decode(item.reply) }}
+            </div>
+        </div>
+    </li>
+    <hr />
+    {{#  }); }}
+</script>
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_footjs.html'); ?>
+<script>
+    function htmlspecialchars_decode(str) {
+         str = str.replace(/\\/g, "");
+         str = str.replace(/&amp;/g, '&');
+         str = str.replace(/&lt;/g, '<');
+         str = str.replace(/&gt;/g, '>');
+         str = str.replace(/&quot;/g, "'");
+        return str;
+    }
+
+    laytpl.toDateString = function (d, format) {
+        var date = new Date(d || new Date())
+            , ymd = [
+            this.digit(date.getFullYear(), 4)
+            , this.digit(date.getMonth() + 1)
+            , this.digit(date.getDate())
+        ]
+            , hms = [
+            this.digit(date.getHours())
+            , this.digit(date.getMinutes())
+            , this.digit(date.getSeconds())
+        ];
+
+        format = format || 'yyyy-MM-dd HH:mm:ss';
+        return format.replace(/yyyy/g, ymd[0]).replace(/MM/g, ymd[1]).replace(/dd/g, ymd[2]).replace(/HH/g, hms[0]).replace(/mm/g, hms[1]).replace(/ss/g, hms[2]);
+    };
+
+    laytpl.digit = function (num, length, end) {
+        var str = '';
+        num = String(num);
+        length = length || 2;
+        for (var i = num.length; i < length; i++) {
+            str += '0';
+        }
+        return num < Math.pow(10, length) ? str + (num | 0) : num;
+    };
+
+    var  <?php echo $__PRE__?>table = table.render({
+        elem: '#<?php echo $__PRE__?>table'
+        ,url:'../../com/Playerask/more'
+        ,page: true
+        ,height: '400'
+        ,limit:50
+        ,limits: [50,100,200]
+        ,cols: [[
+            {field:'id', title:'id', width:80, unresize: true}
+            ,{field:'userid', title:'玩家ID', width:140}
+            ,{field:'question', title:'简介', minWidth:200,templet:function (d) {
+                    return htmlspecialchars_decode(d.question)
+                }}
+            ,{field:'questime', title:'留言时间', width:200,templet:function (d) {
+                    return laytpl.toDateString(d.questime*1000)
+                }
+            }
+            ,{field:'doit', title:'详情', width:80,templet:function (d) {
+                return "<div class='layui-btn-group'><a href='../../com/playerask.aspx?agent_id="+d.id+"' class='layui-btn layui-btn-sm layui-btn-normal'>查看</a></div>"
+            }}
+        ]]
+        ,response: {
+            statusCode: "0000"
+        }
+        ,parseData: function(res){
+            return {
+                "code": res.resp_code,
+                "msg": res.msg,
+                "count": res.total,
+                "data": res.results
+            };
+        }
+    });
+
+
+    var layedit = layui.layedit, laypage = layui.laypage, laytpl = layui.laytpl, upload = layui.upload;
+    var edit_index = layedit.build('content', {
+        height: "90px",
+        tool: [
+             'center' //居中对齐
+        ]
+    }); //建立编辑器
+
+    function get_data(page) {
+        $.post('../../com/Playerask', {page: page,agent_id:<?=$agent_id?>}, function (e) {
+            var getTpl = jieda_tpl.innerHTML
+                , view = document.getElementById('jieda');
+            laytpl(getTpl).render(e, function (html) {
+                console.log(e);
+                view.innerHTML = html;
+                    if(e.results[0].reply=='未回复')
+                    {
+                        $(".layui-form-pane").show();
+                     }
+                        else{
+                            $(".layui-form-pane").hide();
+                            $(".layui-form-pane").attr('ask_user_id',e.results[0].userid);
+                        }
+            });
+            layui.each(e.results, function (index, item) {
+
+            })
+
+            laypage.render({
+                elem: 'pager' //注意，这里的 test1 是 ID，不用加 # 号
+                , count: e.total //数据总数，从服务端得到
+                , jump: function (obj, first) {
+                    if (!first) {
+                        get_data(Number(page) + 1);
+                    }
+                }
+            });
+        })
+    }
+
+    get_data(1);
+
+
+    form.on('submit(*)', function (data) {
+        // console.log(data.elem) //被执行事件的元素DOM对象，一般为button对象
+        // console.log(data.form) //被执行提交的form对象，一般在存在form标签时才会返回
+        //console.log(data.field) //当前容器的全部表单字段，名值对形式：{name: value}
+        var jload = layer.load(1);
+        var usrid = $(".layui-form-pane").attr('ask_user_id')
+        $.post('../../com/Playerask/reply', {content: layedit.getContent(edit_index),usrid:usrid, images: data.field.images, agent_id:<?=$agent_id?>}, function (e) {
+            if(e.resp_code=='0000'){
+                layer.msg('提交成功');
+                setTimeout(function () {
+                    window.location.reload();
+                    layer.close(jload);
+                }, 1500)
+
+            }else{
+                layer.msg(e.msg,{icon:2,anim: 6})
+                setTimeout(function () {
+                    layer.close(jload);
+                }, 1500)
+            }
+
+        })
+        return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+    });
+</script>

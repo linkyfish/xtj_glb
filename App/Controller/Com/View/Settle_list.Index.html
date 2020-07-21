@@ -1,0 +1,410 @@
+<?php include _include(__APPDIR__.'Controller/Com/View/Public_head.html');?>
+    <body>
+<style>
+    .layui-laydate-content th {
+        font-weight: 400;
+        color: white;
+    !important;
+    }
+</style>
+<div class="templatemo-flex-row">
+    <?php include _include(__APPDIR__.'Controller/Com/View/Public_nav.html');?>
+
+    <div class="templatemo-content col-1 light-gray-bg">
+        <?php include _include(__APPDIR__.'Controller/Com/View/Public_top.html');?>
+        <div class="row content" style="padding:5px 0px 0px 0px;">
+
+
+            <section class="content">
+                <div class="alert alert-danger">
+                    操作前望您熟知！<br><br>
+                    1.请使用  <b>结算组账号</b>  操作<br><br>
+                    2.生成账单后,请逐个确认无问题， <b>最后最后最后</b> 再点击  <b>账单审核通过</b>，否则后果自负！！！ 通过后 钱会直接进收益账户<br><br>
+                    3.<b>打款时 自动综合累计欠款</b>，  您只需要核实代理本期账单和代理总账是否一致。不要重复 多此一举的  修正金额<br><br>
+                    4.代理收益账户本期实际入账金额  <b>公式</b> ：   实际打款金额= （修正金额 - 本期抵扣往期负账） + 3个点的提现手续费<br><br>
+                    5.如果本期是负账。将持续给代理累计至下期<br>
+                </div>
+                <div class="box box-primary box-solid">
+
+                    <div class="box-header with-border">
+                        <h3 class="box-title text-muted"><span style=" color:White;">自助结算-代理本期结算金额<small
+                                        style="margin-left:8px; margin-right:8px;"><a
+                                            href="javascript:window.history.back()" target="_self"
+                                            onclick="javascript:window.history.back();"><i
+                                                class="fa fa-arrow-left"></i> 返回</a></small></span>
+                        </h3>
+                        <?php
+                        if($taskInfo["status"]==2){
+                        ?>
+                            <button type="button" class="btn btn-success " title="" onfocus="this.blur();" onclick="auth_money(<?php echo $taskId ?>)">账单审核通过
+                            </button>
+                            <?php
+                        }
+                        ?>
+
+                    </div>
+
+                    <div class="box-body">
+
+
+                        <div class="table-responsive">
+                            <table class="table table-hover table-bordered" id="data_list">
+                                <thead>
+                                <tr>
+                                    <th>统计日期</th>
+                                    <th>结束日期</th>
+                                    <th>代理id(账号)</th>
+                                    <th>代理欠款(当前最新)</th>
+                                    <th>系统计算金额(元)</th>
+                                    <th>修正金额(元)</th>
+                                    <th>本期抵扣往期负账</th>
+                                    <th>实际打款</th>
+                                    <th>本期产生负账</th>
+                                    <th>当前状态</th>
+                                    <th>下发状态</th>
+                                    <th>绑定玩家账户</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tblData">
+                                <?php
+                                if(!empty($agentMoneyList)){
+                                    foreach ($agentMoneyList as $index => $item) {
+                                        ?>
+                                        <tr id="<?= $item["id"] ?>">
+
+                                            <td nowrap="nowrap" class="text-left"><?= $item["start_ymd"] ?></td>
+                                            <td nowrap="nowrap" class="text-left"><?= $item["end_ymd"] ?></td>
+
+                                            <td nowrap="nowrap" class="text-left">   <?= $item["agent_id"]."(".$mapAgentBasicInfo[$item["agent_id"]]["Account"] .")"?>     </td>
+                                            <td nowrap="nowrap" class="text-left"><?= $mapLess[$item["agent_id"]] ?></td>
+
+                                            <td nowrap="nowrap" class="text-left"><?= $item["sys_money"] ?></td>
+                                            <td nowrap="nowrap" class="text-left"><?= $item["real_money"] ?></td>
+                                            <td nowrap="nowrap" class="text-left"><?php $tmpDikou=$item["player_recharge_status"]==1?$item["dikou_money"]:($item["real_money"]<=$mapLess[$item["agent_id"]]?$item["real_money"]:$mapLess[$item["agent_id"]]); echo $tmpDikou; ?></td>
+                                            <td nowrap="nowrap" class="text-left"><?= $item["real_money"]+$tmpDikou>0?( $item["real_money"]+$tmpDikou)." + ".sprintf("%.2f",($item["real_money"]+$tmpDikou)*0.03):0 ?></td>
+
+                                            <td nowrap="nowrap" class="text-left"><?= $item["real_money"]+$tmpDikou>0?0:$item["real_money"]+$tmpDikou?></td>
+                                            <td nowrap="nowrap" class="text-left">
+                                                <?php
+                                                if($item["status"]==0){
+                                                    echo "等待审核";
+                                                }else if($item["status"]==1){
+                                                    echo "审核通过";
+                                                }
+                                                ?>
+                                            </td>
+                                            <td nowrap="nowrap" class="text-left">
+                                                <?php
+                                                if($item["player_recharge_status"]==0){
+                                                    echo "未打入玩家账户";
+                                                }else if($item["player_recharge_status"]==1){
+                                                    echo "已打入";
+                                                }
+                                                ?>
+                                            </td>
+                                            <td nowrap="nowrap" class="text-left">
+                                                <?php
+                                                if(empty($mapAgentBasicInfo[$item["agent_id"]]["UserID"])){
+                                            ?>
+                                                    <button type="button" class="btn btn-primary btn-xs" title="" onfocus="this.blur();" onclick="bind_player(<?=$item["agent_id"] ?>)">绑定玩家账号
+                                                    </button>
+                                    <?php
+                                                }else{
+                                                    echo "已绑定(id:".$mapAgentBasicInfo[$item["agent_id"]]["UserID"].")";
+                                                    ?>
+                                                    <button type="button" class="btn btn-primary btn-xs" title="" onfocus="this.blur();" onclick="bind_player(<?=$item["agent_id"] ?>)">修改
+                                                    </button>
+                                                    <?php
+                                                }
+                                                ?>
+                                            </td>
+                                            <td nowrap="nowrap" class="text-left">
+                                                <?php
+                                                if($item["status"]==0){
+                                                    ?>
+                                                    <button type="button" class="btn btn-primary btn-xs" title="" onfocus="this.blur();" onclick="fix_money(<?php echo $item["id"] ?>)">修正金额
+                                                    </button>
+                                                    <?php
+                                                }else{
+                                                    echo "";
+                                                }
+                                                if($item["status"]==1 && $item["player_recharge_status"]==0){
+                                                    ?>
+                                                    <button type="button" class="btn btn-primary btn-xs" title="" onfocus="this.blur();" onclick="player_money(<?php echo $item["id"] ?>)">打入玩家账户
+                                                    </button>
+                                                    <?php
+                                                }else{
+                                                    echo "";
+                                                }
+
+
+                                                ?>
+                                                <button type="button" class="btn btn-primary btn-xs" title="" onfocus="this.blur();" onclick="dailizongzhang(<?php echo $item["id"] ?>)">总账详情
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <?php
+                                    }}else{
+                                    ?>
+                                    <tr>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <?php
+
+                                }
+                                ?>
+
+
+
+                                </tbody>
+                            </table>
+                        </div>
+
+
+
+                    </div>
+
+
+
+                </div>
+
+
+            </section>
+
+
+        </div>
+    </div>
+</div>
+<script src="/res/js/WdatePicker.js" type="text/javascript"></script>
+
+<script>
+    $(function(){
+        $("#Button_OK").on("click",function(){
+            var start_time=$("#txt_StartDateTime").val();
+            var end_time=$("#txt_EndDateTime").val();
+            if(!start_time){
+                swal("请选择开始日期", "", "info")
+            }
+            if(!end_time){
+                swal("请选择结束日期", "", "info")
+            }
+            $.ajax({
+                url: "../ashx/settle/make_settle.ashx",
+                type: "post",
+                dataType: "json",
+                cache: !1,
+                data: {
+                    start_time:start_time,
+                    end_time:end_time,
+                    rand: rand()
+                },
+                success: function(a) {
+                    a.success ? (alertOk(),location.href="Settle_agent.aspx") : swal(a.msg, "", "info")
+
+                },
+                beforeSend: function() {
+                    alertDoing();
+                    $("#Button_OK").attr("disabled", "disabled").text("正在操作")
+                },
+                complete: function() {
+                    $("#Button_OK").removeAttr("disabled")
+                }
+            })
+        })
+    })
+function bind_player(agentid){
+
+
+        swal({
+            title: "绑定提现玩家账号",
+            type: "input",
+            confirmButtonText: "绑定",
+            cancelButtonText: "取消",
+            showCancelButton: true,
+            closeOnConfirm: false,
+            inputPlaceholder: "请输入要绑定玩家id或者手机号",
+            closeOnConfirm : false
+        }, function(txt) {
+            swal.close()
+            if(txt){
+                $.ajax({
+                    url: "../ashx/settle/bind_agent_player.ashx",
+                    type: "post",
+                    dataType: "json",
+                    cache: !1,
+                    data: {
+                        agent_id:agentid,
+                        player:txt,
+                        rand: rand()
+                    },
+                    success: function(a) {
+                        a.success ? (alertOk(),location.reload()) : swal(a.msg, "", "info")
+
+                    },
+                    beforeSend: function() {
+                        alertDoing();
+
+                    },
+                    complete: function() {
+
+                    }
+                })
+
+            }
+
+
+        });
+
+
+
+    }
+
+
+    function fix_money(id){
+
+
+
+            swal({
+                title: "请输入实际要转给代理的金额",
+                type: "input",
+                confirmButtonText: "更改",
+                cancelButtonText: "取消",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                inputPlaceholder: "允许负数",
+                closeOnConfirm : false
+            }, function(txt) {
+                swal.close()
+                if(txt){
+                    $.ajax({
+                        url: "../ashx/settle/fix_money.ashx",
+                        type: "post",
+                        dataType: "json",
+                        cache: !1,
+                        data: {
+                            money:txt,
+                            id:id,
+                            rand: rand()
+                        },
+                        success: function(a) {
+                            a.success ? (alertOk(),location.reload()) : swal(a.msg, "", "info")
+
+                        },
+                        beforeSend: function() {
+                            alertDoing();
+
+                        },
+                        complete: function() {
+
+                        }
+                    })
+
+                }
+
+
+            });
+
+    }
+
+    function auth_money(taskid){
+
+
+
+        swal({
+            title: "确认账单无问题？",
+            type: "warning",
+            confirmButtonText: "确认打款",
+            cancelButtonText: "再想想",
+            showCancelButton: true,
+            closeOnConfirm: false,
+            closeOnConfirm : false
+        }, function(confirm) {
+            swal.close()
+            if(confirm){
+                $.ajax({
+                    url: "../ashx/settle/confirm_money.ashx",
+                    type: "post",
+                    dataType: "json",
+                    cache: !1,
+                    data: {
+                        task_id:taskid,
+                        rand: rand()
+                    },
+                    success: function(a) {
+                        a.success ? (alertOk(),location.reload()) : swal(a.msg, "", "info")
+
+                    },
+                    beforeSend: function() {
+                        alertDoing();
+
+                    },
+                    complete: function() {
+
+                    }
+                })
+
+            }
+
+
+        });
+
+    }
+
+    function player_money(id){
+
+
+
+        swal({
+            title: "确认打款？",
+            type: "warning",
+            confirmButtonText: "确认打款",
+            cancelButtonText: "再想想",
+            showCancelButton: true,
+            closeOnConfirm: false,
+            closeOnConfirm : false
+        }, function(confirm) {
+            swal.close()
+            if(confirm){
+                $.ajax({
+                    url: "../ashx/settle/daqian.ashx",
+                    type: "post",
+                    dataType: "json",
+                    cache: !1,
+                    data: {
+                        id:id,
+                        rand: rand()
+                    },
+                    success: function(a) {
+                        a.success ? (alertOk(),location.reload()) : swal(a.msg, "", "info")
+
+                    },
+                    beforeSend: function() {
+                        alertDoing();
+
+                    },
+                    complete: function() {
+
+                    }
+                })
+
+            }
+
+
+        });
+
+    }
+
+    function dailizongzhang(id){
+        window.location.href="settle_detail.aspx?id="+id;
+    }
+
+</script>
+<?php include _include(__APPDIR__.'Controller/Com/View/Public_footjs.html');?>

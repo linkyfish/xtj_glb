@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.01, user-scalable=no">
+    <title>Detail</title>
+    <link rel="stylesheet" href="/res/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/res/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/res/css/AdminLTE.css">
+    <link rel="stylesheet" href="/res/css/page.css">
+    <link rel="stylesheet" href="/res/css/laypage.css">
+    <link href="/res/css/bootstrap-timepicker.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/res/css/sweetalert.css">
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="callout callout-danger lead d_tip" style=" display:none; padding:3px;">
+                <h5 class="text-center">此订单已被处理!</h5>
+            </div>
+            <div class="box box-primary box-solid" id="tb_list_2">
+                <div class="box-header with-border">
+                    <h3 class="box-title">
+                        <span style="color: White;">账目列表</span></h3>
+                    <div class="box-tools pull-right">
+                        <button data-widget="collapse" class="btn btn-box-tool" type="button">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="box-body" style="display: block; padding: 0px;">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-bordered">
+                            <thead>`
+                            <tr>
+                                <th>序号</th>
+                                <th>系统结算</th>
+                                <th>负帐</th>
+                                <th>日期时间</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tblData_2">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <span style="color:green;" id="exec_result"></span>
+        </div>
+    </div>
+</body>
+</html>
+<script src="/layui/layui.all.js?ver=<?php echo _CONF('app_v')?>"></script>
+<script src="/res/js/jquery-1.11.3.min.js"></script>
+<script src="/res/js/bootstrap.min.js"></script>
+<script src="/res/js/app.min.js"></script>
+<script src="/res/js/js-cn.js"></script>
+<script src="/res/js/WdatePicker.js" type="text/javascript"></script>
+<script src="/res/js/bootstrap-timepicker.min.js" type="text/javascript"></script>
+<script src="/res/js/laypage.js" type="text/javascript"></script>
+<script src="/res/js/sweetalert.min.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+    var is_init_show=true;
+    var pagei, _user, _sDate, _arr, _LogDataStr, _gameID, _eDate, _sid = GetQueryString("sid"),
+        _id = GetQueryString("id"), _currMoney = 0, _LogDataType = 0, pageSize2 = 20;;
+    function Historysettle(a) {
+        return $("#tb_list_2").hide(), $.trim(a).length <= 0 ? !1 : ($.ajax({
+            url: "../ashx/log/log.ashx",
+            type: "post",
+            dataType: "json",
+            data: {action: "historysettle", user: _sid, CurDateTime: getCurrDate()},
+            success: function (a) {
+                var b, c;
+                a.success ? a.results.length > 0 ? ($("#tb_list_2 tr:gt(0)").remove(), b = "", c = 0,
+                    $.each(a.results, function (d) {
+                        var i, f = parseFloat(a.results[d].AfterNum).toFixed(2),
+                            g = parseFloat(a.results[d].ScoreNum).toFixed(2), h = a.results[d].Action_Type;
+                        b += '<tr class="tr_h">', b += "<td>", b += a.results[d].Rownum, b += "</td>", b += "<td>", b += a.results[d].RealNum, b += "</td>", b += "<td>", b += a.results[d].Sub, b += "</td>", b += "<td>", b += a.results[d].CreateAT, b += "</tr>"
+                    }), $("#tblData_2").append(b), $("#tb_list_2").show(), layer.close(pagei)) : (layer.close(pagei), $("#tb_list_2").fadeOut(1000), $("#tb_list_2 tr:gt(0)").remove(), $("#tblData_2").append('<tr class="tr_h"><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>暂无记录</td></tr>')) : (layer.close(pagei), $("#tb_list_2").fadeOut(1000), global_Error500 == a.ERROR_TYPE && (parent.location.href = global_e_p_500), global_NoLicense != a.msg ? ($("#tb_list_2 tr:gt(0)").remove(), $("#tblData_2").append('<tr class="tr_h"><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>暂无记录</td></tr>')) : parent.location.href = global_jump_login)
+            }
+        }), void 0)
+    }
+
+    Historysettle(0)
+
+
+</script>
+
+

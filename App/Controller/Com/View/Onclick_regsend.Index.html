@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.01, user-scalable=no">
+	<title></title>
+	<link rel="stylesheet" href="/res/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/res/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/res/css/AdminLTE.css">
+	<link rel="stylesheet" href="/res/css/page.css">
+</head>
+<body>
+<div class="container-fluid">
+	<div class="table-responsive">
+		<table class="tablesorter table table-bordered table-striped" id="tb_server">
+			<thead>
+			<tr>
+				<th nowrap='nowrap'>#</th>
+				<th nowrap='nowrap'>帐号(ID)</th>
+				<th nowrap='nowrap'>注册时间</th>
+				<th nowrap='nowrap'>注册送</th>
+			</tr>
+			</thead>
+			<tbody id="t_playerList">
+			<?php foreach ($userlist as $k => $v) { ?>
+				<?php if ($player['usrid']==$v['usrid']) { ?>
+					<tr class="text-red">
+				<?php } else { ?>
+					<tr>
+				<?php } ?>
+				<td nowrap='nowrap'><?php echo $k + 1 ?></td>
+				<?php if($_role['dh']){ ?>
+					<td nowrap='nowrap'><?php echo $v['openid'] ?>(<?php echo $v['usrid'] ?>)</td>
+				<?php }else{ ?>
+					<td nowrap='nowrap'><?php echo $v['usrid'] ?></td>
+				<?php } ?>
+				<td nowrap='nowrap'><?php echo $v['regtime'] ?></td>
+				<td nowrap='nowrap'><?php switch ($v['reg_give']) {
+						case 1:
+							echo '<button type="button" class="btn btn-success btn-xs">已赠送</button>';
+							break;
+						case 2:
+							echo '<button type="button" class="btn btn-primary btn-xs">已忽略</button>';
+							break;
+						default:
+							echo '<button type="button" class="btn btn-warning btn-xs">未赠送</button>';
+					} ?></td>
+				</tr>
+			<?php } ?>
+			<?php if (!$player['reg_give']) { ?>
+				<tr>
+					<td colspan="4">
+						<div class="direct-chat-text bg-red msg" style="display:none;"></div>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<button type="button" class="btn btn-success onsubmit" id="Button_Yes">赠送</button>
+						<button type="button" class="btn btn-primary onsubmit" id="Button_Not">忽略</button>
+						<button type="button" class="btn btn-default onsubmit" id="Button_Ref">刷新</button>
+					</td>
+				</tr>
+
+			<?php } ?>
+			</tbody>
+		</table>
+	</div>
+</div>
+</body>
+</html>
+
+<script src="/res/js/jquery-1.11.3.min.js" type="text/javascript"></script>
+<script src="/res/js/js-cn.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+    var _user = "<?=$player['usrid']?>";
+    $(function () {
+        $("#Button_Ref").click(function () {
+            window.location.reload(), $(".loading").show().fadeOut(3e3)
+        }), $("#Button_Yes").click(function () {
+            $.ajax({
+                url: ".../../../com/com_RegScore.aspx",
+                type: "post",
+                dataType: "json",
+                data: {
+                    action: "send",
+                    usrid: _user,
+                    type: 1,
+                    CurDateTime: rand()
+                },
+                success: function (a) {
+                    a.success ? $(".msg").removeClass('bg-red').addClass('bg-green').show().text("操作成功.") : $(".msg").removeClass('bg-green').addClass('bg-red').show().text(a.msg)
+                },
+                beforeSend: function () {
+                    $(".onsubmit").attr("disabled", "disabled");
+                    $("#Button_Yes").text("正在提交");
+                },
+                complete: function () {
+                    $("#Button_Ref").removeAttr("disabled");
+                    $("#Button_Yes").text("已赠送");
+                }
+            })
+        }), $("#Button_Not").click(function () {
+
+            $.ajax({
+                url: ".../../../com/com_RegScore.aspx",
+                type: "post",
+                dataType: "json",
+                data: {
+                    action: "send",
+                    usrid: _user,
+                    type: 2,
+                    CurDateTime: rand()
+                },
+                success: function (a) {
+                    a.success ? $(".msg").removeClass('bg-red').addClass('bg-green').show().text("操作成功.") : $(".msg").removeClass('bg-green').addClass('bg-red').show().text(a.msg)
+                },
+                beforeSend: function () {
+                    $(".onsubmit").attr("disabled", "disabled");
+                    $("#Button_Not").text("正在提交");
+                },
+                complete: function () {
+                    $("#Button_Ref").removeAttr("disabled");
+                    $("#Button_Not").text("已忽略");
+                }
+            })
+        })
+    });
+
+</script>

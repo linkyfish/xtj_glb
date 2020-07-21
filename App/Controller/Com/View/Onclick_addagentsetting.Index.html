@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.01, user-scalable=no">
+    <title></title>
+    <link rel="stylesheet" href="/res/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/res/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/res/css/AdminLTE.css">
+    <link rel="stylesheet" href="/res/css/page.css">
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="table-responsive">
+
+                <table class="table table-bordered table-condensed">
+                    <tbody>
+                    <?php if ($isadmin) { ?>
+                        <tr>
+                            <td class="text-right">是否可新增管理：</td>
+                            <td>
+                                <input type="checkbox" name="is_allow_addagent" <?php echo $agent['is_allow_addagent']?'checked':''; ?> id="is_allow_addagent" title="不选定表示这个管理帐号不能新增下级管理.">
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="text-right">是否可新增扩展：</td>
+                            <td>
+                                <input type="checkbox" name="is_allow_addPromotion" <?php echo $agent['is_allow_addPromotion']?'checked':''; ?> id="is_allow_addPromotion" title="不选定表示这个管理帐号不能新增下级扩展号.">
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="text-right">能否改扩展密码：</td>
+                            <td>
+                                <input type="checkbox" <?php echo $agent['is_allow_ad_pwd']?'checked':''; ?> id="checkbox-setPWD">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-right">是否开启申请送：</td>
+                            <td>
+                                <input type="checkbox" <?php echo $agent['is_req_give']?'checked':''; ?> id="checkbox-Apply">
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="direct-chat-text bg-red msg" style=" display:none;"></div>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-primary btn-block" id="Button_OK">确认</button>
+                            </td>
+                        </tr>
+                    <?php }else{ ?>
+                        <tr>
+                            <td class="text-right">是否可新增管理：</td>
+                            <td>
+                                <?php if ($agent['is_allow_addagent']) { ?>
+                                    <span class="badge bg-green text-bold">开启</span>
+                                <?php } else { ?>
+                                    关闭
+                                <?php } ?>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="text-right">是否可新增扩展：</td>
+                            <td>
+                                <?php if ($agent['is_allow_addPromotion']) { ?>
+                                    <span class="badge bg-green text-bold">开启</span>
+                                <?php } else { ?>
+                                    关闭
+                                <?php } ?>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="text-right">能否改扩展密码：</td>
+                            <td>
+                                <?php if ($agent['is_allow_ad_pwd']) { ?>
+                                    <span class="badge bg-green text-bold">开启</span>
+                                <?php } else { ?>
+                                    关闭
+                                <?php } ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-right">是否开启申请送：</td>
+                            <td>
+                                <?php if ($agent['is_req_give']) { ?>
+                                    <span class="badge bg-green text-bold">开启</span>
+                                <?php } else { ?>
+                                    关闭
+                                <?php } ?>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+<script src="/res/js/jquery-1.11.3.min.js" type="text/javascript"></script>
+<script src="/res/js/js-cn.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+
+    $(function () {
+        $("#Button_OK").click(function () {
+            $.ajax({
+                url: "../ashx/account/account.ashx",
+                type: "post",
+                dataType: "json",
+                data: {
+                    action: "doUpdateSetting",
+                    user: "<?=$agent['username']?>",
+                    is_allow_addagent: $("#is_allow_addagent").is(":checked") ? "1" : "0",
+                    is_allow_addPromotion: $("#is_allow_addPromotion").is(":checked") ? "1" : "0",
+                    setPWD: $("#checkbox-setPWD").is(":checked") ? "1" : "0",
+                    Apply: $("#checkbox-Apply").is(":checked") ? "1" : "0",
+                    CurDateTime: rand()
+                },
+                success: function (a) {
+                    a.success ? $(".msg").show().text("操作成功.") : $(".msg").show().text(a.msg)
+                },
+                beforeSend: function () {
+                    $("#Button_OK").attr("disabled", "disabled").text("正在提交")
+                },
+                complete: function () {
+                    $("#Button_OK").removeAttr("disabled").text("确定")
+                }
+            })
+        })
+    });
+
+</script>

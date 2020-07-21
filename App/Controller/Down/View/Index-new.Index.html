@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{$app_name}</title>
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Cache-Control" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta name="description" content="">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="icon" href="/down/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/down/reset.css?ver=<?php echo _CONF('app_v')?>">
+    <link rel="stylesheet" href="/down/swiper.min.css?ver=<?php echo _CONF('app_v')?>">
+    <link rel="stylesheet" href="/down/index.css?ver=<?php echo _CONF('app_v')?>">
+    <script src="/down/rem.js"></script>
+    <script src="https://unpkg.com/better-scroll/dist/bscroll.min.js"></script>
+    <style type="text/css">
+        @keyframes roundAni {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        .round-loading-wrap {
+            position: relative;
+            width: 28px;
+            height: 28px;
+            animation: roundAni 1s linear infinite;
+        }
+        .round-loading {
+            position: absolute;
+            z-index: 2;
+            border-radius: 100%;
+            width: 28px;
+            height: 28px;
+            background-color: transparent;
+            border: 2px solid rgb(218,218,218);
+            border-bottom-color: transparent;
+            border-left-color: transparent;
+            box-sizing: border-box;
+        }
+        .round-loading-1 {
+            transform: rotate(100deg);
+        }
+
+        .mask {
+            z-index: 2;
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: rgba(0,0,0,.5);
+        }
+
+        .mask img {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 80%;
+        }
+    </style>
+
+
+</head>
+<body>
+<div class="wrap">
+    <header>
+        <div class="header_info">
+            <div class="info_pic"> <img src="/down/logo.png"> </div>
+            <div class="info_text">
+                <h2 id="app_name">大洋娱港</h2>
+                <div class="info">佣金日结，让您轻轻松松月赚百万。</div>
+                <div class="btn_open">
+                    <button type="button" id="download_btn" class="open">
+                        <a href="{$ios_url}" style="color: inherit;" id="download-btn">
+                            下载客户端
+                        </a>
+                    </button>
+                    <button type="button" id="app_web" class="open" style="display: none">
+                        <a href="#" style="color: inherit;" id="download-btn-add">
+                            下载金币版
+                        </a>
+                    </button>
+                    <a href="#" class="more look fr"></a></div>
+
+                <a href="#" class="more look fr"></a>
+            </div>
+        </div>
+        <div class="header_remarks">
+            <div class="remarks_rating">
+                <h3> <span id="grade">5.0</span> <img src="/down/start.png"> </h3>
+                <p id="grade_person_count">8.4k个评分</p>
+            </div>
+            <div class="remarks_info">
+                <div class="remarks_info_item">
+                    <h3><span>#</span>50</h3>
+                    <p>策略游戏</p>
+                </div>
+                <div class="remarks_info_item">
+                    <h3>18<span>+</span></h3>
+                    <p>年龄</p>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="view">
+        <h2>预览</h2>
+        <div class="swiper-container">
+            <div class="swiper-wrapper small-img">
+                <img src="/down/1.png?v=9999" class="swiper-slide">
+                <img src="/down/2.png?v=9999" class="swiper-slide">
+                <img src="/down/3.png?v=9999" class="swiper-slide">
+                <img src="/down/4.png?v=9999" class="swiper-slide">
+                <img src="/down/5.png?v=9999" class="swiper-slide">
+            </div>
+        </div>
+
+    </div>
+    <div class="mark">
+        <h2>评分与评论 </h2>
+        <div class="grade_box">
+            <div class="grade fl"><span>4.9</span>（满分 5 分）</div>
+            <img src="/down/pingfen.jpg" class="fr" />
+            <p class="ratings_count">36,3697份评论</p>
+        </div>
+    </div>
+
+    <div class="header_gongneng">
+        <h2>新功能 </h2>
+
+        <div class="gongneng_text">
+            <p>大洋娱港</p>
+        </div>
+    </div>
+    <div class="header_gongneng message">
+        <h2>信息</h2>
+
+        <div class="info_detail">
+            <div class="info_content">大小 <div class="value fr"> 23.5MB</div>
+            </div>
+            <div class="info_content">兼容性 <div class="value fr"> 需要IOS8.0或更高版本。与iphone、ipad和ipad touch兼容。</div>
+            </div>
+            <div class="info_content">语言 <div class="value fr"> 英语，简体中文</div>
+            </div>
+            <div class="info_content">年龄分级 <div class="value fr"> 限4岁以上</div>
+            </div>
+            <div class="info_content">copyright <div class="value fr"> ©2019 大洋娱港</div>
+            </div>
+            <div class="info_content">价格 <div class="value fr">免费</div>
+            </div>
+            <div class="info_content">隐私政策 <div class="value fr"><img src="/down/zc.jpg" /></div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="disclaimer">
+        <p>免责声明：<br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本网站仅为开发者提供App的下载和安装退关，App内的内容和运营相关事项由App开发者负责，与本网站无关。</p>
+    </div>
+
+
+</div>
+
+
+
+<div class="install">
+    <div class="install_title">
+        <h4>安装教程</h4>
+        <span class="close" style="font-size: .5rem;">×</span>
+    </div>
+    <div id="iosafter" class="wrapper">
+        <ul class="content">
+            <li>
+                <img src="/down/install_1.png?v=9999" class="img_01">
+
+            </li>
+            <li>
+                <img src="/down/install_2.png?v=9999" class="img_01">
+
+            </li>
+            <li>
+                <img src="/down/install_3.png?v=9999" class="img_01">
+
+            </li>
+            <li>
+                <img src="/down/install_4.png?v=9999" class="img_01">
+
+            </li>
+            <li>
+                <img src="/down/install_5.png?v=9999" class="img_01">
+
+            </li>
+            <li>
+                <img src="/down/install_6.png?v=9999" class="img_01">
+
+            </li>
+            <li>
+                <img src="/down/install_7.png?v=9999" class="img_01">
+
+            </li>
+        </ul>
+    </div>
+
+</div>
+
+<div class="showBigImg">
+    <div class="closeBigImg">
+        ×
+    </div>
+    <div class="showBigImgWrap swiper-container">
+        <div class="allImgBox swiper-wrapper">
+            <div class="imgIte swiper-slide">
+                <span></span>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- 蒙版 -->
+<div class="mask">
+    <img src="/down/go-safari.png" alt="">
+</div>
+<!-- safari提示框 -->
+<div class="mask-box safari-tips" style="display: none;">
+    <div class="mask-bg"></div>
+    <div class="mask-pop">
+        <!-- <span class="mask-colsed"><img src="http://public.hiapp.net/supersign/img/colsed.png" alt=""></span> -->
+        <img class="copy-url-img" src="/down/safari-tip.png" alt="">
+        <div class="copy-url">
+            <input id="foo" type="text">
+            <button data-clipboard-target="#foo">复制</button>
+        </div>
+    </div>
+</div>
+</div>
+<script src="/down/jquery.min.js"></script>
+<script src="/down/swiper.min.js"></script>
+<script src="/down/zepto.min.js"></script>
+<script src="/down/jquery.min.js"></script>
+<script src="/down/jquery.qrcode.min.js"></script>
+<script src="/down/axios.min.js"></script>
+<script src="/down/fingerprint2.min.js"></script>
+<script src="/down/swiper.min.js"></script>
+<script src="/down/clipboard.min.js"></script>
+<script src="/down/index.js"></script>
+<script type="text/javascript">
+    /** popup */
+    var notice=function(message,title,buttonCapture){var isDom=document.getElementById("popup-backdrop");if(isDom){document.body.removeChild(isDom)}var isDom_back=document.getElementById("noticePopup");if(isDom_back){document.body.removeChild(isDom_back)}message==null?message="nulll":message,title==null?title="":title,buttonCapture==null?buttonCapture="确定":buttonCapture;var popupBackdrop=document.createElement("div");popupBackdrop.setAttribute("class","popup-backdrop fadeIn");popupBackdrop.setAttribute("id","popup-backdrop");popupBackdrop.setAttribute("style","display: none;");var noticePopup=document.createElement("div");noticePopup.setAttribute("id","noticePopup");noticePopup.setAttribute("class","own-popup");noticePopup.setAttribute("style","display: none;");var appendDom="<div id='popup-in' class='animated pulse'><div class='popup-inner'><div class='popup-title'>"+title+"</div><div class='popup-text'>"+message+"</div></div><div class='popup-buttons' id='notice' onclick=\"noticeHide()\"><span class='popup-button popup-button-bold' ontouchstart=btn_touchstart(this); ontouchend=btn_ontouchend(this);>"+buttonCapture+"</span></div></div>";noticePopup.innerHTML=appendDom;document.body.appendChild(popupBackdrop);document.body.appendChild(noticePopup);document.getElementById("popup-backdrop").style.display="block";document.getElementById("noticePopup").style.display="flex"};var confirms=function(message,title){var isDom=document.getElementById("confirmPopup");if(isDom){document.body.removeChild(isDom)}var isDom_back=document.getElementById("popup-backdrop");if(isDom_back){document.body.removeChild(isDom_back)}message==null?message="nulll":message,title==null?title="":title;var popupBackdrop=document.createElement("div");popupBackdrop.setAttribute("class","popup-backdrop fadeIn");popupBackdrop.setAttribute("id","popup-backdrop");popupBackdrop.setAttribute("style","display: none;");var confirmPopup=document.createElement("div");confirmPopup.setAttribute("id","confirmPopup");confirmPopup.setAttribute("class","own-popup");confirmPopup.setAttribute("style","display: none;");var appendDom='<div id="popup-in" class="animated pulse"><div class="popup-inner"><div class="popup-title">'+title+'</div><div class="popup-text">'+message+'</div></div><div class="popup-buttons"><span class="popup-button" id="confirmY" onclick=isConfirm_confirm(); ontouchstart=btn_touchstart(this); ontouchend=btn_ontouchend(this);>是</span><span class="popup-button popup-button-bold" style="border-left: 1px #CCC solid;" id="confirmX" onclick=isConfirm_confirm(); ontouchstart=btn_touchstart(this); ontouchend=btn_ontouchend(this);>否</span></div></div>';confirmPopup.innerHTML=appendDom;document.body.appendChild(popupBackdrop);document.body.appendChild(confirmPopup);document.getElementById("popup-backdrop").style.display="block";document.getElementById("confirmPopup").style.display="flex"};var prompts=function(message,title,tip){var isDom=document.getElementById("dialoguePopup");if(isDom){document.body.removeChild(isDom)}var isDom_back=document.getElementById("popup-backdrop");if(isDom_back){document.body.removeChild(isDom_back)}message==null?message="nulll":message,title==null?title="":title,tip==null?tip="":tip;var popupBackdrop=document.createElement("div");popupBackdrop.setAttribute("class","popup-backdrop fadeIn");popupBackdrop.setAttribute("id","popup-backdrop");popupBackdrop.setAttribute("style","display: none;");var promptPopup=document.createElement("div");promptPopup.setAttribute("id","dialoguePopup");promptPopup.setAttribute("class","own-popup");promptPopup.setAttribute("style","display: none;");var appendDom='<div id="popup-in" class="animated pulse"><div class="popup-inner"><div class="popup-title">'+title+'</div><div class="popup-text">'+message+'</div><div class="popup-input"><input type="text" name="promptObtain" autofocus="" placeholder='+tip+'></div></div><div class="popup-buttons"><span class="popup-button" id="dialogueY" onclick=isConfirm_prompt(); ontouchstart=btn_touchstart(this); ontouchend=btn_ontouchend(this);>确定</span><span class="popup-button popup-button-bold" id="dialogueX" style="border-left: 1px #CCC solid;" onclick=isConfirm_prompt(); ontouchstart=btn_touchstart(this); ontouchend=btn_ontouchend(this);>取消</span></div></div>';promptPopup.innerHTML=appendDom;document.body.appendChild(popupBackdrop);document.body.appendChild(promptPopup);document.getElementById("popup-backdrop").style.display="block";document.getElementById("dialoguePopup").style.display="flex"};function noticeHide(){document.getElementById("popup-backdrop").style.display="none";document.getElementById("noticePopup").style.display="none"}function isConfirm_confirm(text){document.getElementById("popup-backdrop").style.display="none";document.getElementById("confirmPopup").style.display="none"}function isConfirm_prompt(text){document.getElementById("popup-backdrop").style.display="none";document.getElementById("dialoguePopup").style.display="none"}function btn_touchstart(thises){thises.style.backgroundColor="rgba(234,234,235,0.95)"}function btn_ontouchend(thises){thises.style.backgroundColor="rgba(255,255,255,.95)"};
+</script>
+
+<script type="text/javascript">
+    var ua = navigator.userAgent;
+    // if (/(iPhone|iPad|iPod|iOS)/i.test(ua)) {
+    if (document.body.offsetWidth <= 1024) {
+        if ((/Safari/.test(ua) && !/Chrome/.test(ua) && !/baidubrowser/.test(ua))) {} else {
+            var ual = ua.toLowerCase();
+            var isWeixin = ual.indexOf('micromessenger') != -1;
+            if (isWeixin) {
+                $('.mask').show();
+                $("html").add("body").css({
+                    "overflow": "hidden"
+                })
+            } else {
+                // $('.safari-tips').show();
+            }
+        }
+    } else if (/(Android|Linux)/i.test(ua)) {}
+    else {
+        $('.contain-page').hide();
+        $('.pc-box').show();
+    }
+
+</script>
+
+<script>
+    //
+    var swiper = new Swiper('.imgs-box', {
+        scrollbar: '.imgs-box .swiper-scrollbar',
+        scrollbarHide: true,
+        slidesPerView: 'auto',
+        grabCursor: true
+    });
+    //
+</script>
+
+
+<script type="text/javascript">
+    function getCookie(cookieName) {
+        var strCookie = document.cookie;
+        var arrCookie = strCookie.split("; ");
+        for(var i = 0; i < arrCookie.length; i++){
+            var arr = arrCookie[i].split("=");
+            if(cookieName == arr[0]){
+                return arr[1];
+            }
+        }
+        return null;
+    }
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        var qrcode = $("#qrcode").qrcode({
+            render: "canvas",
+            text: location.href,
+            width: "240",
+            height: "240",
+            background: "#ffffff",
+            foreground: "#4488ff"
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    var need_password = '0'
+    var is_frozen = '0'
+    var appid = '69c32a1608bd9e7869d2a3c5df472144'
+    var timer;
+    var mainurl = '{$mainurl}'
+    if (location.href.indexOf('localhost') > -1) {
+        mainurl = 'http://localhost:5000/'
+    }
+    var clicked = false
+    $(function() {
+        $("#app_web").on('click',function () {
+            alert('暂未更新');
+        });
+
+        if (location.search.indexOf('udid=') > 0) {
+            var udid = location.search.split('?udid=')[1]
+            udid = udid.replace('_', '-')
+            document.cookie = 'udid=' + udid
+            tryInstall()
+        } else if (getCookie('udid') && getCookie('udid').length > 0) {
+            updateState()
+        } else {
+            $('.btn-mini.state5').show()
+        }
+
+        //
+        $('#foo').val(location.href)
+        var copyBtn = new ClipboardJS('.copy-url button');
+        copyBtn.on('success',function(e){
+            toast('网址已复制')
+            $('.safari-tips').hide();
+        });
+
+        //
+        var introBox=$('.app-intro-con');
+        for(var j=0;j<introBox.length;j++){
+            var introHeight=introBox.eq(j).find('p').height();
+            var introBoxHeight=introBox.eq(j).height();
+            if(introHeight>introBoxHeight){
+                introBox.eq(j).find('span').show();
+            }else{
+                introBox.eq(j).css('height','auto')
+                introBox.eq(j).find('span').hide();
+            }
+        }
+
+        $('.app-intro-con span').on('click',function(){
+            var $this=$(this);
+            if($this.html()=='更多'||$this.html()=='more'){
+                $('.app-intro-con').addClass('open');$this.hide()
+            }else{
+                $('.app-intro-con').removeClass('open');$this.html(unfold)
+            }
+        })
+
+        //
+        if (is_frozen == 1) {
+            $('.state-frozen').show()
+            $('.state-normal').hide()
+        }
+    })
+
+    function toggleMiniBtnState (state) {
+        $('.state-loading').hide()
+        $('.btn-mini.state0').hide()
+        $('.btn-mini.state1').hide()
+        $('.btn-mini.state2').hide()
+        $('.btn-mini.state3').hide()
+        $('.btn-mini.state4').hide()
+        $('.btn-mini.state5').hide()
+        $('.btn-mini.state6').hide()
+
+        if (state == 'loading') {
+            $('.state-loading').show()
+            return
+        }
+
+        $('.btn-mini.state' + state).show()
+    }
+
+    function updateState (loop) {
+        axios.post(mainurl + 'public/supersign/downloadstate', {
+            id: appid,
+            udid: getCookie('udid')
+        })
+            .then(function(response) {
+                if (response && response.status === 200) {
+                    if (response.data.code === 0) {
+                        var data = response.data.data
+
+                        log(data.state)
+
+                        toggleMiniBtnState(data.state)
+
+                        if (data.state == 1 && data.url && data.url.length > 0) {
+                            if (clicked) {
+                                location.reload()
+                            } else {
+                                toggleMiniBtnState('loading')
+                                location.href = data.url
+                            }
+                        }
+
+                        if (data.state == 2 || data.state == 3 || data.state == 4) {
+                            if (!loop) {
+                                timer = setInterval(function() {
+                                    updateState(true)
+                                }, 3000)
+                            }
+                        }
+
+                        if (data.state == 1 || data.state == 5) {
+                            clearInterval(timer)
+                        }
+
+                        if (data.state == 6) {
+                            toast(data.reason)
+                        }
+
+                    } else {
+                        toast(response.data.message)
+                    }
+                }
+            })
+    }
+
+    function log(str) {
+        console.log(str)
+    }
+
+    function toast (msg){
+        var m = document.createElement('div')
+        m.innerHTML = '<span style="background-color:black;opacity:0.8;color:white;padding:18px 26px; border-radius: 4px; font-size: 16px;">' + msg + '</span>'
+        m.style.cssText="z-index: 1000; position:absolute;top:0;left:0;right:0;bottom:0;display:flex;justify-content:center;align-items:center;"
+        document.body.appendChild(m)
+        setTimeout(function() {
+            var d = 0.1;
+            m.style.webkitTransition = '-webkit-transform ' + d + 's ease-in, opacity ' + d + 's ease-in'
+            m.style.opacity = '0'
+            setTimeout(function() { document.body.removeChild(m) }, d * 2000)
+        }, 2000)
+    }
+
+    function install(password) {
+        toggleMiniBtnState('loading')
+
+        if (!password) {
+            password = ''
+        }
+
+        axios.post(mainurl + 'public/supersign/startdownload', {
+            id: appid,
+            udid: getCookie('udid'),
+            password: password
+        })
+            .then(function(response) {
+                if (response && response.status === 200) {
+                    if (response.data.code === 0) {
+                        // mobileconfig
+                        var data = response.data.data
+                        if (data.url) {
+                            location.href = data.url
+                            setTimeout(function() {
+                                confirms('接下来需要配置描述文件，是否现在前往该页面？','提示')
+                                document.getElementById("confirmY").addEventListener("click",function() {
+                                    location.href = '{$mobileprovision}'
+                                });
+                            },1500)
+                        } else {
+                            updateState()
+                        }
+
+                    } else {
+                        updateState()
+                        toast(response.data.message)
+                    }
+                } else {
+                    toast('网络异常')
+                }
+            })
+    }
+    //判断设备
+    function checkIsAppleDevice() {
+        var u = navigator.userAgent, app = navigator.appVersion;
+        var ios = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+        var iPad = u.indexOf('iPad') > -1;
+        var iPhone = u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1;
+        if (ios || iPad || iPhone) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    function tryInstall() {
+        if(!checkIsAppleDevice())
+        {
+            window.location.href = "{$ios_url}";
+            return;
+        }
+        if (need_password == '1' && getCookie('udid') && getCookie('udid').length > 0) {
+            prompts('请输入此应用的下载码','提示','')
+
+            document.getElementById("dialogueY").addEventListener("click",function() {
+                var value = document.getElementsByName("promptObtain")[0].value;
+                if (value.length == '') {
+                    toast('请输入密码')
+                } else if (value.length != 32) {
+                    toast('下载码不正确')
+                } else {
+                    install(value)
+                }
+            });
+            return
+        }
+
+        install()
+    }
+
+    $('.install').click(function () {
+        clicked = true
+        tryInstall()
+    })
+
+
+    if(!checkIsAppleDevice())
+    {
+        $("#download-btn").attr('href',"{$apk_url}");
+    }
+    else{
+
+    }
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,72 @@
+<?php include _include(__APPDIR__.'Controller/Com/View/Public_head.html');?>
+<body>
+<div class="templatemo-flex-row">
+    <?php include _include(__APPDIR__.'Controller/Com/View/Public_nav.html');?>
+
+    <div class="templatemo-content col-1 light-gray-bg">
+        <?php include _include(__APPDIR__.'Controller/Com/View/Public_top.html');?>
+        <div class="row content" style="padding:5px 0px 0px 0px;">
+
+
+            <section class="content">
+                <div class="box box-primary box-solid" id="tb_list_1" style="display: none;">
+                    <div class="box-header with-border">
+                        <h3 class="box-title text-muted"><span style=" color:White;">系统公告</span>
+                            <small><a href="javascript:window.history.back()" target="_self"
+                                      style="margin-left:8px; margin-right:8px;"
+                                      onclick='javascript:window.history.back();'><i class="fa fa-arrow-left"></i>
+                                    返回</a></small>
+                        </h3>
+                    </div>
+                    <div class="box-body" style="display: block; padding:0px;">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered" id="data_list">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>公告内容</th>
+                                    <th>日期时间</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tblData"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <script type="text/javascript">
+                function getDataList() {
+                    $("#tb_list_1").hide(), $.ajax({
+                        url: "../ashx/system/system.ashx",
+                        type: "post",
+                        dataType: "json",
+                        data: {action: "GetSysNoticeInfo", CurDateTime: rand()},
+                        success: function (a) {
+                            if (a.success) if (a.results.length > 0) {
+                                $("#data_list tr:gt(0)").remove();
+                                var b = "";
+                                $.each(a.results, function (c, d) {
+                                    b += '<tr class="tr_h">', b += "<td>", b += c + 1, b += "</td>", b += '<td class="text-left">', b += a.results[c].MarqueeText, b += "</td>", b += "<td>", b += a.results[c].C_DateTime, b += "</td>", b += "</tr>"
+                                }), $("#tblData").append(b), $("#tb_list_1").show(), layer.close(pagei)
+                            } else layer.close(pagei), $("#tb_list_1").fadeOut(1000), web_tips("\u6682\u65e0\u516c\u544a."); else layer.close(pagei), global_Error500 == a.ERROR_TYPE && (parent.location.href = global_e_p_500), global_NoLicense != a.msg ? web_tips("\u83b7\u53d6\u516c\u544a\u4fe1\u606f\u5931\u8d25,\u8bf7\u91cd\u8bd5.") : parent.location.href = global_jump_login
+                        },
+                        beforeSend: function () {
+                            pagei = layer.msg('请稍候..', {icon: 16,shade: 0.01})
+                        }
+                    })
+                }
+
+                var pagei;
+                $(function () {
+                    getDataList()
+                });
+
+            </script>
+
+        </div>
+    </div>
+</div>
+
+<?php include _include(__APPDIR__.'Controller/Com/View/Public_footjs.html');?>

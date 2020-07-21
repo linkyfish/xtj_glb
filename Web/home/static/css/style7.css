@@ -1,0 +1,81 @@
+
+@import url("i_style.css");
+
+html,body{　-webkit-text-size-adjust:none; }
+body{ background:#f8f8f8 url(../image/topMenuBG.jpg) center top repeat-x; }
+
+*{ margin:0; padding:0; box-sizing:border-box; font:15px/27px Arial, "文泉驛正黑", "WenQuanYi Zen Hei", "儷黑 Pro", "LiHei Pro", "微軟正黑體", "Microsoft JhengHei", "新細明體","PMingLiU",  "標楷體", DFKai-SB, sans-serif; text-decoration: none; }
+
+h1{ display:none; }
+
+
+.FloatLeft		{ float:left;}
+.FloatRight		{ float:right;}
+.ClearBoth		{ clear:both;}
+.TextalignLeft  { text-align:left;}
+.TextalignCenter{ text-align:center;}
+.TextalignRight { text-align:right;}
+.TextTitle		{ color:#3366ff;}
+.FontWeight		{ font-weight:bold;}
+
+.show		{display:block !important;}
+.hidden		{display:none !important;}
+.invisible	{visibility: hidden;}
+
+	
+.FontBlack	{color:#000;}
+.FontRed	{color:#900; font-weight:bold;}
+.FontOrange	{color:#F90;}
+.FontYellow	{color:#FF9;}
+.FontGreen	{color:#060;}
+.FontBlue	{color:#3CF;}
+.FontPurple	{color:#309;}
+.FontWhite	{color:#fff;}
+.FontPoint	{color:#F00;}
+
+
+
+.wrapper	{width:100%; background: url(../image/bg_banktop.jpg) center 85px no-repeat; }
+.container	{width:inherit; position:relative; }
+	
+.header_buyStore{position:relative; width:1280px; height:240px; margin:0 auto; } 
+.bank_title {position:absolute; width:100%; height:auto; margin:0 auto; top:120px;}
+	.bank_title img	{ display:block; margin:0 auto;}
+.btn_goto	{ position:absolute; width:162px; height:auto; top:195px; left:900px;}
+
+
+	
+.content_buyStore { width:775px; margin:0 auto; clear:both; padding-bottom:50px;}
+	.content_buyStore > p{ }
+	.content_buyStore > a{ }
+	.content_buyStore > a:hover{ }
+	
+	.storagebig { width:auto; height:295px; display:block; margin-bottom:15px; }
+	.storagebig_box01, .storagebig_box02{ width:370px; height:295px; display:block; float:left;  }
+		.storagebig_box01{ margin-right:30px;}
+	
+	.storage01 { width:auto; height:280px; display:block; margin-bottom:15px; }
+	.storage01_box01, .storage01_box02, .storage01_box03 { width:245px; height:280px; display:block; float:left; }
+	.storage01_box01, .storage01_box02 { margin-right:20px; }
+	
+	.storage02 { width:auto; height:280px; display:block; }
+	.storage02_box01, .storage02_box02, .storage02_box03 { width:245px; height:280px; display:block; float:left; }
+	.storage02_box01, .storage02_box02 { margin-right:20px; }
+
+
+
+#footer_buyStore {display:block; width:100%; bottom:0; left:0; }
+
+
+	
+.auto-style1 { color:#CC3399; }
+#overlay { position:fixed; left:0px; top:0px; right:0px; bottom:0px; background-color:rgba(0, 0, 0, 0.8); z-index:9999; display:none;
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', endColorstr='#cc000000',GradientType=0 );  }
+	#overlay > .table {	display:table; width:100%; height:100%; }
+	#overlay > .table > .td { display:table-cell; width:100%; height:100%; text-align:center; vertical-align:middle; }
+div.popup {	position:relative; display:none; }
+.icon_X { position:absolute; width:53px; height:53px; background:url(../image/icon_X.png); right:-20px; top:-20px; }
+
+	.note{ position:relative; width:700px; height:360px; margin:0 auto; background:url(../image/notebg.jpg) center top no-repeat; border-radius:30px; }
+	.note_btn{ position: relative; width:530px; height:auto; margin:0 auto; top:265px; }
+		.note_btn01, .note_btn02 { width:230px; height:72px; float:left; margin:0 15px; }

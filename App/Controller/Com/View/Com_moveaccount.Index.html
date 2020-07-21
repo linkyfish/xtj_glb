@@ -1,0 +1,182 @@
+<?php include _include(__APPDIR__.'Controller/Com/View/Public_head.html');?>
+<body>
+<div class="templatemo-flex-row">
+    <?php include _include(__APPDIR__.'Controller/Com/View/Public_nav.html');?>
+
+    <div class="templatemo-content col-1 light-gray-bg">
+        <?php include _include(__APPDIR__.'Controller/Com/View/Public_top.html');?>
+        <div class="row content" style="padding:5px 0px 0px 0px;">
+
+
+            <section class="content">
+                <div class="box box-primary box-solid">
+                    <div class="box-header with-border">
+                        <h3 class="box-title text-muted"><span style=" color:White;">转移帐号<small
+                                        style="margin-left:8px; margin-right:8px;"><a
+                                            href="javascript:window.history.back()" target="_self"
+                                            onclick='javascript:window.history.back();'><i class="fa fa-arrow-left"></i> 返回</a></small></span>
+                        </h3>
+                    </div>
+
+                    <div class="box-body">
+						<div style="font-size:18px;color:red;text-align:center">避免账目错乱,【无数据的账户】可以任意转移,【有数据账户】生成结算数据之后才可转移</div>
+						<div class="form-group">
+                            <label>要被转移的帐号</label>
+                            <input type="text" PLACEHOLDER="请输入被转移的玩家账号或代理账号" class="form-control" id="txt_UserName" maxlength="17">
+                        </div>
+
+                        <div class="form-group">
+                            <label>转到哪个帐号下</label>
+                            <input type="text" class="form-control" PLACEHOLDER="请输入转入的代理账号" id="txt_Agent" maxlength="17">
+                        </div>
+
+                    </div>
+
+                    <div class="box-footer">
+                        <button type="button" class="btn btn-primary" id="Button_OK_PLAYER">玩家切换代理</button>
+                        <button type="button" class="btn btn-primary" id="Button_OK">代理转移代理</button>
+                        <button type="button" class="btn btn-default" style=" margin-left:15px;" id="Button_Cancel">取消
+                        </button>
+                    </div>
+
+				</div>
+                <!--列表 开始-->
+                <div class="box box-primary box-solid" id="tb_list">
+                    <div class="box-header with-border">
+                        <h3 class="box-title text-bold"><span class="text-sm"
+                                                              style=" color:White;">转移日志(默认显示最后100笔)</span></h3>
+                    </div>
+                    <div class="box-body" style="display: block; padding:0px;">
+                        <div class="table-responsive">
+
+                            <table class="table table-hover table-bordered" id="data_list">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>操作员帐号</th>
+                                    <th>被转移帐号</th>
+                                    <th>转移之前管理</th>
+                                    <th>转移之后管理</th>
+                                    <th>日期时间</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tblData"></tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                    <div class="overlay" id="overlay_Log" style="display:none;">
+                        <i class="fa fa-refresh fa-spin"></i>
+                    </div>
+                </div>
+                <!--列表 结束-->
+
+            </section>
+
+            <script type="text/javascript">
+                function DefaultGet() {
+                    $("#data_list tr:gt(0)").remove(), $.ajax({
+                        url: "../ashx/log/log.ashx",
+                        type: "post",
+                        dataType: "json",
+                        data: {action: "getMoveUserLog", CurDateTime: rand()},
+                        success: function (a) {
+                            if (a.success) if (a.results.length > 0) {
+                                var b = "";
+                                $.each(a.results, function (c) {
+                                    b += "<tr>", b += "<td>", b += c + 1, b += "</td>", b += "<td>", b += a.results[c].Account, b += "</td>", b += '<td><span class="badge bg-gray">', b += a.results[c].UserName, b += "</span></td>", b += '<td><span class="badge bg-gray">', b += a.results[c].BeforeAgent, b += "</span></td>", b += '<td><span class="badge bg-gray">', b += a.results[c].AfterAgent, b += "</span></td>", b += "<td>", b += a.results[c].C_DateTime, b += "</td>", b += "</tr>"
+                                }), $("#tblData").append(b), $("#tb_list").show(), $("#overlay_Log").fadeOut(1000)
+                            } else $("#tb_list").show(), $("#overlay_Log").fadeOut(1000), $("#tblData").append('<tr class="tr_h"><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>暂无数据</td></tr>'); else $("#tb_list,#overlay_Log").fadeOut(1000), a.ERROR_TYPE == global_Error500 && (parent.location.href = "../PageError/500.html"), global_NoLicense != a.msg ? web_tips(a.msg) : parent.location.href = "../Login.aspx"
+                        }
+                    })
+                }
+
+                $(function () {
+                    DefaultGet(),
+                        $("#Button_OK").click(function () {
+                        return $.trim($("#txt_UserName").val()).length <= 0 || $.trim($("#txt_Agent").val()).length <= 0 ? (web_tips("输入不能为空."), !1) : (
+                            swal({
+                                    title: "确定要把代理"+$("#txt_UserName").val()+"转移到"+$("#txt_Agent").val()+"代理下吗?",
+                                    type: "warning",
+                                    showCancelButton: !0,
+                                    confirmButtonText: "确定",
+                                    cancelButtonText: "取消",
+                                    closeOnConfirm: !1
+                                },
+                                function() {
+                                    $.ajax({
+                                        url: "../ashx/account/account.ashx",
+                                        type: "post",
+                                        dataType: "json",
+                                        data: {
+                                            action: "MoveAccount",
+                                            types:"agent",
+                                            userName: $("#txt_UserName").val(),
+                                            agentName: $("#txt_Agent").val(),
+                                            CurDateTime: rand()
+                                        },
+                                        success: function (a) {
+                                            a.success ? (web_dialog(a.msg), $("#Button_Cancel").click(), DefaultGet()) : (a.ERROR_TYPE == global_Error500 && (parent.location.href = "../PageError/500.html"), global_NoLicense != a.msg ? web_dialog(a.msg) : parent.location.href = "../Login.aspx")
+                                        },
+                                        beforeSend: function () {
+                                            alertDoing();
+                                            $("#Button_OK").attr("disabled", "disabled").text("正在提交")
+                                        },
+                                        complete: function () {
+                                            $("#Button_OK").removeAttr("disabled").text("代理转移代理")
+                                        }
+                                    })
+                                })
+                            ,
+                                void 0)
+                    }),
+                        $("#Button_OK_PLAYER").click(function () {
+
+                            return $.trim($("#txt_UserName").val()).length <= 0 || $.trim($("#txt_Agent").val()).length <= 0 ? (web_tips("输入不能为空."), !1) : (
+                                swal({
+                                        title: "确定要把玩家"+$("#txt_UserName").val()+"转移到"+$("#txt_Agent").val()+"代理下吗?",
+                                        type: "warning",
+                                        showCancelButton: !0,
+                                        confirmButtonText: "确定",
+                                        cancelButtonText: "取消",
+                                        closeOnConfirm: !1
+                                    },function() {
+
+                                $.ajax({
+                                url: "../ashx/account/account.ashx",
+                                type: "post",
+
+                                dataType: "json",
+                                data: {
+                                    action: "MoveAccount",
+                                    userName: $("#txt_UserName").val(),
+                                    types:"player",
+                                    agentName: $("#txt_Agent").val(),
+                                    CurDateTime: rand()
+                                },
+                                success: function (a) {
+                                    a.success ? (web_dialog(a.msg), $("#Button_Cancel").click(), DefaultGet()) : (a.ERROR_TYPE == global_Error500 && (parent.location.href = "../PageError/500.html"), global_NoLicense != a.msg ? web_dialog(a.msg) : parent.location.href = "../Login.aspx")
+                                },
+                                beforeSend: function () {
+                                    alertDoing();
+                                    $("#Button_OK_PLAYER").attr("disabled", "disabled").text("正在提交")
+                                },
+                                complete: function () {
+                                    $("#Button_OK_PLAYER").removeAttr("disabled").text("玩家切换代理")
+                                }
+                            })
+                                }),
+                                    void 0)
+                        }),
+                        $("#Button_Cancel").click(function () {
+                        $("#txt_UserName,#txt_Agent").val("")
+                    })
+                });
+            </script>
+
+        </div>
+    </div>
+</div>
+
+
+<?php include _include(__APPDIR__.'Controller/Com/View/Public_footjs.html');?>

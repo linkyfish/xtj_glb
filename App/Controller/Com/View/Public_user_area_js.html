@@ -1,0 +1,125 @@
+
+<script type="text/javascript">
+
+    var <?php echo $__PRE__?>ol_area_chart = echarts.init(document.getElementById("<?php echo $__PRE__?>ol_area"));
+    var <?php echo $__PRE__?>ol_game_chart = echarts.init(document.getElementById("<?php echo $__PRE__?>ol_game"));
+
+    function getUserIpAreaData() {
+        $.ajax({
+            url: "../com/stat/online.ashx",
+            type: "post",
+            dataType: "json",
+            data: {CurDateTime: rand()},
+            success: function (a) {
+                // 使用刚指定的配置项和数据显示图表。
+				<?php echo $__PRE__?>ol_game_chart.setOption(
+                  {
+
+                        tooltip: {
+                            trigger: 'axis',
+                            axisPointer: {
+                                type: 'shadow'
+                            }
+                        },
+                        grid: {
+                            top:'1%',
+                            left: '2%',
+                            right: '4%',
+                            bottom: '3%',
+                            containLabel: true
+                        },
+                        xAxis: {
+                            type: 'value',
+
+                        },
+                        yAxis: {
+                            type: 'category',
+                            data: a.online.games
+                        },
+                        series: [
+                            {
+                                name: '人数',
+                                type: 'bar',
+                                data: a.online.online
+                            }
+                        ]
+                    }
+
+                );
+				<?php echo $__PRE__?>ol_area_chart.setOption(
+                  {
+
+                        tooltip: {
+                            trigger: 'axis',
+                            axisPointer: {
+                                type: 'shadow'
+                            }
+                        },
+                        grid: {
+                            top:'1%',
+                            left: '2%',
+                            right: '4%',
+                            bottom: '3%',
+                            containLabel: true
+                        },
+                        xAxis: {
+                            type: 'value',
+                        },
+                        yAxis: {
+                            type: 'category',
+                            data: a.area.city
+                        },
+                        series: [
+                            {
+                                name: '人数',
+                                type: 'bar',
+                                data: a.area.online
+                            }
+                        ]
+                    }
+
+                );
+            }
+        })
+    }
+
+    getUserIpAreaData();
+	setInterval(function () {
+        getUserIpAreaData();
+    },60000)
+</script>
+
+
+<script type="text/javascript">
+
+        table.render({
+            elem: '#<?php echo $__PRE__?>table_stat_time'
+            , url: '/admin/role/index?page=1&limit=50'
+
+            , cols: [[ //标题栏
+				{align: 'center',field: 'time', title: '游戏', width: 120, rowspan: 2,fixed:'left'}
+				<?php for($i=0;$i<25;$i++){ ?>
+                , {align: 'center',title: '<?php echo str_pad($i,2,0,STR_PAD_LEFT)?>',colspan: 3}
+				<?php } ?>
+            ],
+                [<?php for($i=0;$i<25;$i++){ ?>
+                    {align: 'center',field: 'center1<?=$i?>', title: '人数',width: 60},
+                    {align: 'center',field: 'center2<?=$i?>', title: '压住',width: 80},
+                    {align: 'center',field: 'center3<?=$i?>', title: '萤分',width: 80},
+					<?php } ?>]
+            ]
+            ,page:false
+			,response: {statusCode: "0000"}
+			,parseData: function(res){
+				return {
+					"code": res.resp_code,
+					"msg": res.msg,
+					"count": res.data.total,
+					"data": res.data.results
+				};
+			}
+        });
+
+
+</script>
+

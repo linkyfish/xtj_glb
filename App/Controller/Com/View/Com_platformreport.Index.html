@@ -1,0 +1,599 @@
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_head.html'); ?>
+    <script src="/res/js/iframeTools.source.js" type="text/javascript"></script>
+    <script src="/res/js/jscharts.js" type="text/javascript"></script>
+    <script src="/js/echarts.min.js" type="text/javascript"></script>
+    <style>
+        .v-xs-sm {
+            font-size: 16px;
+            color: White;
+        }
+
+        .v-nm {
+            font-size: 28px;
+            color: White;
+        }
+
+        .small-box-footer {
+            cursor: pointer;
+        }
+
+        .info-box-text {
+            color: #A3A3A3;
+        }
+    </style>
+
+
+    <body>
+
+    <div class="templatemo-flex-row">
+        <?php include _include(__APPDIR__ . 'Controller/Com/View/Public_nav.html'); ?>
+
+        <div class="templatemo-content col-1 light-gray-bg">
+            <?php include _include(__APPDIR__ . 'Controller/Com/View/Public_top.html'); ?>
+
+            <div class="row content" style="padding:5px 0px 0px 0px;">
+
+                <section class="content">
+                    <div class="row e_page" style="display:none;">
+                        <div class="col-lg-3 col-xs-6">
+                            <div class="small-box bg-green">
+                                <div class="inner">
+                                    <h3 class="visible-lg visible-md"><span class="v-nm total_agent"></span></h3>
+                                    <h3 class="visible-xs visible-sm"><span class="v-xs-sm total_agent"></span></h3>
+                                    <p class="text-black">管理总数</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                <span class="small-box-footer plat_data1">获取最新 <i class="fa fa-refresh"></i></span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-xs-6">
+                            <div class="small-box bg-aqua">
+                                <div class="inner">
+                                    <h3 class="visible-lg visible-md"><span class="v-nm total_player"></span></h3>
+                                    <h3 class="visible-xs visible-sm"><span class="v-xs-sm total_player"></span></h3>
+                                    <p class="text-black">玩家总数</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                <span class="small-box-footer plat_data1">获取最新 <i class="fa fa-refresh"></i></span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-xs-6">
+                            <div class="small-box bg-yellow">
+                                <div class="inner">
+                                    <h3 class="visible-lg visible-md"><span class="v-nm total_promo"></span></h3>
+                                    <h3 class="visible-xs visible-sm"><span class="v-xs-sm total_promo"></span></h3>
+                                    <p class="text-black">扩展号总数</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                <span class="small-box-footer plat_data1">获取最新 <i class="fa fa-refresh"></i></span>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-3 col-xs-6">
+                            <div class="small-box bg-red">
+                                <div class="inner">
+                                    <h3 class="visible-lg visible-md"><span class="v-nm total_Online"></span></h3>
+                                    <h3 class="visible-xs visible-sm"><span class="v-xs-sm total_Online"></span></h3>
+                                    <p class="text-black">在线人数</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                <span class="small-box-footer plat_data2">获取最新 <i class="fa fa-refresh"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row f_page" style="display:none;">
+
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="small-box bg-aqua">
+                                <div class="inner">
+                                    <h3 class="visible-lg visible-md"><span class="v-nm total_player"></span></h3>
+                                    <h3 class="visible-xs visible-sm"><span class="v-xs-sm total_player"></span></h3>
+                                    <p class="text-black">玩家总数</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                <span class="small-box-footer plat_data1">获取最新 <i class="fa fa-refresh"></i></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="small-box bg-red">
+                                <div class="inner">
+                                    <h3 class="visible-lg visible-md"><span class="v-nm total_Online"></span></h3>
+                                    <h3 class="visible-xs visible-sm"><span class="v-xs-sm total_Online"></span></h3>
+                                    <p class="text-black">在线人数</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                <span class="small-box-footer plat_data2">获取最新 <i class="fa fa-refresh"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row a_page" style="display:none;">
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="info-box">
+                                <span class="info-box-icon bg-aqua"><i class="fa fa-bank"></i></span>
+
+                                <div class="info-box-content">
+                                    <span class="info-box-text">今天游戏总压住</span>
+                                    <span class="info-box-number today_totaoBet"></span>
+                                    <span class="small-box-footer info-box-text plat_data3">获取最新 <i
+                                                class="fa fa-refresh"></i></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="info-box">
+                                <span class="info-box-icon bg-green"><i class="fa fa-bank"></i></span>
+
+                                <div class="info-box-content">
+                                    <span class="info-box-text">今天游戏总萤分</span>
+                                    <span class="info-box-number today_totaoWin"></span>
+                                    <span class="small-box-footer info-box-text plat_data3">获取最新 <i
+                                                class="fa fa-refresh"></i></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="info-box">
+                                <span class="info-box-icon bg-red"><i class="fa fa-bank"></i></span>
+
+                                <div class="info-box-content">
+                                    <span class="info-box-text">当月游戏总压住</span>
+                                    <span class="info-box-number month_TotalBet"></span>
+                                    <span class="small-box-footer info-box-text plat_data4">获取最新 <i
+                                                class="fa fa-refresh"></i></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="info-box">
+                                <span class="info-box-icon bg-yellow"><i class="fa fa-bank"></i></span>
+
+                                <div class="info-box-content">
+                                    <span class="info-box-text">当月游戏总萤分</span>
+                                    <span class="info-box-number month_TotalWin"></span>
+                                    <span class="small-box-footer info-box-text plat_data4">获取最新 <i
+                                                class="fa fa-refresh"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row c_page" style="display:none;">
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="info-box">
+                                <span class="info-box-icon bg-aqua-gradient"><i class="fa fa-anchor"></i></span>
+
+                                <div class="info-box-content">
+                                    <span class="info-box-text">今天系统总压住</span>
+                                    <span class="info-box-number today_totaoPKBet"></span>
+                                    <span class="small-box-footer info-box-text plat_data5">获取最新 <i
+                                                class="fa fa-refresh"></i></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="info-box">
+                                <span class="info-box-icon bg-green-gradient"><i class="fa fa-anchor"></i></span>
+
+                                <div class="info-box-content">
+                                    <span class="info-box-text">今天系统总抽水</span>
+                                    <span class="info-box-number today_totaoPKWin"></span>
+                                    <span class="small-box-footer info-box-text plat_data5">获取最新 <i
+                                                class="fa fa-refresh"></i></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="info-box">
+                                <span class="info-box-icon bg-red-gradient"><i class="fa fa-anchor"></i></span>
+
+                                <div class="info-box-content">
+                                    <span class="info-box-text">当月系统总压住</span>
+                                    <span class="info-box-number month_TotalPKBet"></span>
+                                    <span class="small-box-footer info-box-text plat_data6">获取最新 <i
+                                                class="fa fa-refresh"></i></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="info-box">
+                                <span class="info-box-icon bg-yellow-gradient"><i
+                                            class="fa fa-anchor"></i></span>
+
+                                <div class="info-box-content">
+                                    <span class="info-box-text">当月系统总抽水</span>
+                                    <span class="info-box-number month_TotalPKWin"></span>
+                                    <span class="small-box-footer info-box-text plat_data6">获取最新 <i
+                                                class="fa fa-refresh"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row b_page" style="display:none;">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="info-box">
+                                <span class="info-box-icon bg-green"><i class="fa fa-bank"></i></span>
+
+                                <div class="info-box-content">
+                                    <span class="info-box-text">今天游戏总萤分</span>
+                                    <span class="info-box-number today_totaoWin"></span>
+                                    <span class="small-box-footer info-box-text plat_data3">获取最新 <i
+                                                class="fa fa-refresh"></i></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="info-box">
+                                <span class="info-box-icon bg-yellow"><i class="fa fa-bank"></i></span>
+
+                                <div class="info-box-content">
+                                    <span class="info-box-text">当月游戏总萤分</span>
+                                    <span class="info-box-number month_TotalWin"></span>
+                                    <span class="small-box-footer info-box-text plat_data4">获取最新 <i
+                                                class="fa fa-refresh"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="row d_page" style="display:none;">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="info-box">
+                                <span class="info-box-icon bg-aqua-gradient"><i class="fa fa-anchor"></i></span>
+
+                                <div class="info-box-content">
+                                    <span class="info-box-text">今天系统总抽水</span>
+                                    <span class="info-box-number today_totaoPKWin"></span>
+                                    <span class="small-box-footer info-box-text plat_data5">获取最新 <i
+                                                class="fa fa-refresh"></i></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="info-box">
+                                <span class="info-box-icon bg-red-gradient"><i class="fa fa-anchor"></i></span>
+
+                                <div class="info-box-content">
+                                    <span class="info-box-text">当月系统总抽水</span>
+                                    <span class="info-box-number month_TotalPKWin"></span>
+                                    <span class="small-box-footer info-box-text plat_data6">获取最新 <i
+                                                class="fa fa-refresh"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+<!--                    <div class="row" style="display: --><?php //if(!$isadmin){echo 'none';} ?><!--">-->
+<!--                        <section class="col-md-12">-->
+<!--                            <div class="box box-primary box-solid">-->
+<!--                                <div class="box-header with-border">-->
+<!--                                    <i class="fa fa-bar-chart"></i>-->
+<!--                                    <h3 class="box-title"><span style="color:White;">玩家分布图</span></h3>-->
+<!--                                </div>-->
+<!--                                <div id="playerArea" class="box-body table-responsive">-->
+<!--                                    <div id="main" style="width: 500px;height:400px;"></div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </section>-->
+<!--                    </div>-->
+                    <div class="row">
+                        <section class="col-md-12">
+                            <div class="box box-primary box-solid">
+                                <div class="box-header with-border">
+                                    <i class="fa fa-bar-chart"></i>
+                                    <h3 class="box-title"><span style="color:White;">莹利曲线</span></h3>
+                                </div>
+
+                                <div id="selectDate" class="box-body">
+                                    <div class="form-group">
+                                        <label>开始日期</label>
+                                        <input type="text" onclick="WdatePicker();" maxlength="10"
+                                               id="txt_StartDateTime" class="form-control" value="2016-05-16">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>结束日期</label>
+                                        <input type="text" onclick="WdatePicker();" maxlength="10" id="txt_EndDateTime"
+                                               class="form-control" value="2016-05-16">
+                                    </div>
+                                </div>
+                                <div class="box-footer">
+                                    <button id="bt_chart_PlatWin" class="btn btn-primary" type="button">生成曲线</button>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="row">
+                        <section class="col-md-12">
+                            <div class="box box-primary box-solid" id="div_chartContainer" style="display:none;">
+                                <div class="box-header with-border">
+									<i class="fa fa-bar-chart"></i>
+									<h3 class="box-title"><span style="color:White;">曲线</span></h3>
+                                </div>
+                                <div class="box-body">
+
+                                    <div class="table-responsive">
+
+                                        <table class="table" id="chart_tb">
+                                            <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div id="graph"></div>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="row">
+                        <section class="col-md-12">
+                            <div class="box box-primary box-solid" id="tb_list" style="display:none;">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title text-bold"><span style="color:White;">数据列表</span><span
+                                                id="td_totalWin" class="badge bg-gray"></span></h3>
+                                    <div class="box-tools pull-right">
+                                        <button data-widget="collapse" class="btn btn-box-tool" type="button"><i
+                                                    class="fa fa-minus"></i></button>
+                                    </div>
+                                </div>
+                                <div class="box-body" style="display: block; padding:0px;">
+                                    <div class="table-responsive">
+
+                                        <table class="table table-hover table-bordered">
+                                            <thead>
+                                            <tr>
+
+                                                <th nowrap='nowrap' class="td_date">日期时间</th>
+                                                <th nowrap='nowrap' class="cal_1">游戏压住</th>
+                                                <th nowrap='nowrap' class="td_win">游戏萤分</th>
+                                                <th nowrap='nowrap' class="cal_1">游戏收易率</th>
+                                                <th nowrap='nowrap' class="cal_1">系统压住</th>
+                                                <th nowrap='nowrap' class="td_pk_win">系统胜负量</th>
+                                                <th nowrap='nowrap' class="td_pk_pump">系统抽水</th>
+<!--                                                <th nowrap='nowrap' class="cal_1">系统收易率</th>-->
+                                            </tr>
+                                            </thead>
+                                            <tbody id="tblData"></tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+                <script src="/res/js/WdatePicker.js" type="text/javascript"></script>
+                <script src="/res/js/xdate.js" type="text/javascript"></script>
+                <script type="text/javascript">
+                    var isAdmin = <?php echo $isadmin?> ;
+                    function getPlatData1(a) {
+                        a && (pagei =layer.msg('加载中', {
+                            icon: 16
+                            ,shade: 0.01
+                        })), $.ajax({
+                            url: "../ashx/getData/getPlatFormReport.ashx",
+                            type: "post",
+                            dataType: "json",
+                            data: {action: "plat_common_1", CurDateTime: rand()},
+                            success: function (b) {
+                                b.success ? (b.results.length > 0 ? ($(".total_agent").text(b.results[0].TotalAgent), $(".total_player").text(b.results[0].TotalPlayer), $(".total_promo").text(b.results[0].TotalPromo)) : ($(".total_agent").text(0), $(".total_player").text(0), $(".total_promo").text(0)), a && layer.close(pagei)) : (layer.close(pagei), global_NoLicense == b.msg && (alert("无权限或者异常！")))
+                            }
+                        })
+                    }
+
+                    function getPlatData2(a) {
+                        a && (pagei = layer.msg('加载中', {
+                            icon: 16
+                            ,shade: 0.01
+                        })), $.ajax({
+                            url: "../ashx/getData/GetOnlineNum.ashx",
+                            type: "post",
+                            dataType: "json",
+                            data: {action: "GetOnlineNumByAgent", CurDateTime: rand()},
+                            success: function (b) {
+                                b.success ? ($(".total_Online").text(b.Num), a && layer.close(pagei)) : (layer.close(pagei), global_NoLicense == b.msg && (alert("无权限或者异常！")))
+                            }
+                        })
+                    }
+
+                    function getPlatData3(a) {
+                        a && (pagei = layer.msg('加载中', {
+                            icon: 16
+                            ,shade: 0.01
+                        })), $.ajax({
+                            url: "../ashx/getData/getPlatFormReport.ashx",
+                            type: "post",
+                            dataType: "json",
+                            data: {action: "plat_common_3", CurDateTime: rand()},
+                            success: function (b) {
+                                b.success ? ($(".today_totaoBet").text(parseFloat(b.results[0].TotalBet).toFixed(2)), $(".today_totaoWin").text(parseFloat(b.results[0].TotalWin).toFixed(2)), a && layer.close(pagei)) : (layer.close(pagei), global_NoLicense == b.msg && (alert("无权限或者异常！")))
+                            }
+                        })
+                    }
+
+                    function getPlatData4(a) {
+                        a && (pagei = layer.msg('加载中', {
+                            icon: 16
+                            ,shade: 0.01
+                        })), $.ajax({
+                            url: "../ashx/getData/getPlatFormReport.ashx",
+                            type: "post",
+                            dataType: "json",
+                            data: {action: "plat_common_4", CurDateTime: rand()},
+                            success: function (a) {
+                                a.success ? ($(".month_TotalBet").text(parseFloat(a.results[0].TotalBet).toFixed(2)), $(".month_TotalWin").text(parseFloat(a.results[0].TotalWin).toFixed(2)), layer.close(pagei)) : (layer.close(pagei), global_NoLicense == a.msg && (alert("无权限或者异常！")))
+                            }
+                        })
+                    }
+
+                    function getPlatData5(a) {
+                        a && (pagei = layer.msg('加载中', {
+                            icon: 16
+                            ,shade: 0.01
+                        })), $.ajax({
+                            url: "../ashx/getData/getPlatFormReport.ashx",
+                            type: "post",
+                            dataType: "json",
+                            data: {action: "plat_common_5", CurDateTime: rand()},
+                            success: function (b) {
+                                b.success ? ($(".today_totaoPKBet").text(parseFloat(b.results[0].TotalBet).toFixed(2)), $(".today_totaoPKWin").text(parseFloat(b.results[0].TotalWin).toFixed(2)), a && layer.close(pagei)) : (layer.close(pagei), global_NoLicense == b.msg && (alert("无权限或者异常！")))
+                            }
+                        })
+                    }
+
+                    function getPlatData6(a) {
+                        a && (pagei = layer.msg('加载中', {
+                            icon: 16
+                            ,shade: 0.01
+                        })), $.ajax({
+                            url: "../ashx/getData/getPlatFormReport.ashx",
+                            type: "post",
+                            dataType: "json",
+                            data: {action: "plat_common_6", CurDateTime: rand()},
+                            success: function (a) {
+                                a.success ? ($(".month_TotalPKBet").text(parseFloat(a.results[0].TotalBet).toFixed(2)), $(".month_TotalPKWin").text(parseFloat(a.results[0].TotalWin).toFixed(2)), layer.close(pagei)) : (layer.close(pagei), global_NoLicense == a.msg && (alert("无权限或者异常！")))
+                            }
+                        })
+                    }
+
+                    var pagei, chatData_Arr, _currUser = "1", _sDate = "N/A", _eDate = "N/A", _totalNum = 0,
+                        _totalWin = 0;
+                    $(function () {
+
+                        $("#txt_StartDateTime").attr("value", getFirstDay()), $("#txt_EndDateTime").attr("value", getLastDay()), pagei = layer.msg('加载中', {
+                            icon: 16
+                            ,shade: 0.01
+                        }), "1" == _currUser && $(".a_page,.c_page,.e_page").show(), "2" == _currUser && $(".b_page,.d_page,.e_page").show(), "3" == _currUser && $(".b_page,.d_page,.f_page").show(), getPlatData1(0), getPlatData2(0), getPlatData3(0), getPlatData4(0), getPlatData5(0), getPlatData6(0), $(".plat_data1").click(function () {
+                            getPlatData1(1)
+                        }), $(".plat_data2").click(function () {
+                            getPlatData2(1)
+                        }), $(".plat_data3").click(function () {
+                            getPlatData3(1)
+                        }), $(".plat_data4").click(function () {
+                            getPlatData4(1)
+                        }), $(".plat_data5").click(function () {
+                            getPlatData5(1)
+                        }), $(".plat_data6").click(function () {
+                            getPlatData6(1)
+                        }), $("#bt_chart_PlatWin").click(function () {
+                            return chatData_Arr = new Array, _totalNum = 0, _totalWin = 0, $("#tb_list,#div_chartContainer").fadeOut("fast"), _sDate = $("#txt_StartDateTime").val(), _eDate = $("#txt_EndDateTime").val(), $.trim(_sDate).length <= 0 || $.trim(_eDate).length <= 0 ? (web_tips("日期不能为空."), !1) : ($.ajax({
+                                url: "../ashx/chart/chart.ashx",
+                                type: "post",
+                                dataType: "json",
+                                data: {
+                                    action: "chat",
+                                    sDate: _sDate,
+                                    eDate: _eDate,
+                                    type: "AgentChart",
+                                    user: "<?=$agent['username']?>",
+                                    rbl: <?=$this->isadmin?>,
+                                    CurDateTime: rand()
+                                },
+                                success: function (a) {
+                                    var b, c, d;
+                                    if (a.success) if ($("#tb_list").fadeOut("slow"), 1 == a.ViewTYPE ? $(".cal_1").hide() : $(".cal_1").show(), a.results.length > 0) {
+                                        for (_totalNum = a.results.length, b = 0; b < a.results.length; b++) for (chatData_Arr[b] = new Array, c = 0; 2 > c; c++) chatData_Arr[b][c] = 0;
+                                        $("#tb_list tr:gt(0)").remove(), d = "", $.each(a.results, function (b) {
+                                            var e = 0;
+                                            e = Number(a.results[b].Game_Win) + Number(a.results[b].Poker_Pump), chatData_Arr[b][0] = b + 1, chatData_Arr[b][1] = 1 * parseFloat(e).toFixed(2), d += "<tr>", d += "<td>", d += a.results[b].mydate, d += "</td>", 0 == a.ViewTYPE && (d += "<td>", d += parseFloat(a.results[b].Game_Bet).toFixed(2), d += "</td>"), d += "<td>", d += parseFloat(a.results[b].Game_Win).toFixed(2), d += "</td>", 0 == a.ViewTYPE && (d += "<td>", d += parseFloat(a.results[b].Game_yield).toFixed(2), d += "</td>"), 0 == a.ViewTYPE && (d += "<td>", d += parseFloat(a.results[b].Poker_Bet).toFixed(2), d += "</td>"), d += "<td>", d += parseFloat(a.results[b].Poker_Win).toFixed(2), d += "</td>", d += "<td>", d += parseFloat(a.results[b].Poker_Pump).toFixed(2), d += "</td>", 10 == a.ViewTYPE && (d += "<td>", d += parseFloat(a.results[b].Poker_yield).toFixed(2), d += "</td>"), d += "</tr>"
+                                        }), $("#tblData").append(d), drawChart_Line(chatData_Arr, _totalNum), $("#div_chartContainer").fadeIn("fast"), $("#tb_list").fadeIn("slow"), layer.close(pagei)
+                                    } else layer.close(pagei), web_tips("暂无数据."), $("#tb_list").fadeOut(1000); else a.ERROR_TYPE == global_Error500 && (parent.location.href = "../PageError/500.html"), global_NoLicense != a.msg ? (web_tips(a.msg), $("#tb_list").fadeOut(1000)) : alert("无权限或者异常！"), layer.close(pagei)
+                                },
+                                beforeSend: function () {
+                                    $("#bt_chart_PlatWin").attr("disabled", "disabled"), pagei = layer.msg('加载中', {
+                                        icon: 16
+                                        ,shade: 0.01
+                                    })
+                                },
+                                complete: function () {
+                                    $("#bt_chart_PlatWin").removeAttr("disabled")
+                                }
+                            }), void 0)
+                        })
+                    });
+                </script>
+
+            </div>
+        </div>
+    </div>
+	<?php /*
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        function getUserIpAreaData() {
+            $.ajax({
+                url: "../ashx/getData/getPlatFormReport.ashx",
+                type: "post",
+                dataType: "json",
+                data: {action: "userIpArea", CurDateTime: rand()},
+                success: function (a) {
+                    // 使用刚指定的配置项和数据显示图表。
+                    myChart.setOption( {
+                            title: {
+                                text: '玩家分布图',
+                                subtext: '登录人数',
+                                left: 'center'
+                            },
+                            tooltip: {
+                                trigger: 'item',
+                                formatter: '{a} <br/>{b} : {c} ({d}%)'
+                            },
+
+                            series: [
+                                {
+                                    name: '访问来源',
+                                    type: 'pie',
+                                    radius: '55%',
+                                    center: ['50%', '60%'],
+                                    data: a.data,
+                                    emphasis: {
+                                        itemStyle: {
+                                            shadowBlur: 10,
+                                            shadowOffsetX: 0,
+                                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    );
+                }
+            })
+        }
+        getUserIpAreaData();
+    </script>
+ */ ?>
+    <?php include _include(__APPDIR__ . 'Controller/Com/View/Public_footjs.html'); ?>

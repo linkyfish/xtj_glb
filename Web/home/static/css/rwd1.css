@@ -1,0 +1,121 @@
+@charset "UTF-8";
+
+.wrapper {
+  background-size: 150%;
+  overflow: hidden;
+}
+
+
+.header .container {
+  width: 100%;
+  height: 0;
+  padding-bottom: 43.67188%;
+}
+
+.header .logo {
+  width: 16.09375%;
+  height: 0;
+  padding-bottom: 10.39062%;
+  left: 0.39062%;
+  top: 0%;
+}
+
+.header .logo a {
+  width: 100%;
+  height: 0;
+  padding-bottom: 64.56311%;
+  background-size: 100%;
+}
+
+.header .slogan {
+  width: 50.78125%;
+  height: 0;
+  padding-bottom: 11.5625%;
+  top: 3.04114%;
+  left: 34.375%;
+  background-size: 100%;
+}
+
+.header .sub {
+  width: 34.375%;
+  height: 0;
+  padding-bottom: 15.46875%;
+  top: 30.94812%;
+  left: 34.375%;
+  background-size: 100%;
+}
+
+.header .moto {
+  width: 40.39062%;
+  height: 0;
+  padding-bottom: 43.28125%;
+  top: 26.29696%;
+  left: 60.15625%;
+  background-size: 100%;
+}
+
+.nav {
+  width: 100%;
+}
+
+.nav .container {
+  width: 100%;
+  max-width: 1016px;
+}
+
+.nav .container ul.navBtn li {
+  width: 25%;
+  height: 0;
+  margin: 0;
+  padding-bottom: 11.51575%;
+}
+
+.nav .container ul.navBtn li.navBtn1 a {
+  background-position-x: 0% !important;
+}
+
+.nav .container ul.navBtn li.navBtn2 a {
+  background-position-x: -100% !important;
+}
+
+.nav .container ul.navBtn li.navBtn3 a {
+  background-position-x: -200% !important;
+}
+
+.nav .container ul.navBtn li.navBtn4 a {
+  background-position-x: -300% !important;
+}
+
+.nav .container ul.navBtn li a {
+  width: 100%;
+  height: 0;
+  padding-bottom: 46.06299%;
+  background-size: 400%;
+}
+
+
+.content {
+  padding: 30px 0;
+}
+
+.content > h3 {
+  padding: 0 0 10px 0;
+}
+
+.content > h3 img {
+  display: block;
+  width: 60%;
+  margin: 0 auto;
+}
+
+.content .container {
+  width: 95%;
+  padding: 0;
+}
+
+@media only screen and (max-width: 500px) {
+  .content .container .noteBtn a {
+    padding: 10px 15px;
+    font-size: 20px;
+  }
+}

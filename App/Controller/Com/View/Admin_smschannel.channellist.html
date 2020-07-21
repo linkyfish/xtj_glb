@@ -1,0 +1,144 @@
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_head.html'); ?>
+<body>
+<div class="templatemo-flex-row">
+    <?php include _include(__APPDIR__ . 'Controller/Com/View/Public_nav.html'); ?>
+    <div class="templatemo-content col-1 light-gray-bg">
+        <?php include _include(__APPDIR__ . 'Controller/Com/View/Public_top.html'); ?>
+        <div class="row content" style="padding:5px 0px 0px 0px;">
+
+            <section class="content">
+                <div class="box box-primary box-solid" id="tb_list_1" style="display: block;">
+                    <div class="box-header with-border">
+                        <h3 class="box-title text-muted">
+                            <small><a href="javascript:window.history.back()" target="_self"
+                                      style="margin-left:8px; margin-right:8px;"
+                                      onclick="javascript:window.history.back();"><i class="fa fa-arrow-left"></i>
+                                返回</a></small>
+                            <small>
+                                <a href="###" style="margin-left:8px; margin-right:8px;" target="_self"
+                                   onclick="javascript:reloadList();"><i class="fa fa-refresh"></i> 刷新</a>
+                            </small>
+                           </h3>
+                    </div>
+                    <div class="box-body" style="display: block; padding:0px;">
+                        <div class="table-responsive">
+
+                            <table class="table table-hover table-bordered" id="data_List">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>渠道名称</th>
+                                    <th>验证码渠道</th>
+                                    <th>营销渠道</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tblData">
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <!--Pager-->
+                        <div id="Pagination" class="pull-left"></div>
+                    </div>
+                </div>
+            </section>
+            <script src="/res/js/laypage.js" type="text/javascript"></script>
+            <script type="text/javascript">
+                function SetMoneyMb(a,itemID){
+                    var dd=document.getElementById('price'+a+'_'+itemID).value;
+                    var sort=document.getElementById('sort'+a+'_'+itemID).value;
+                    if(sort==null||undefined)
+                    {
+                        sort='0';
+                    }
+                    $.ajax({
+                        url: "../ashx/system/system.ashx",
+                        type: "post",
+                        dataType: "json",
+                        data: {
+                            action: "setChannelMoneyMb",
+                            keyvalue:dd,
+                            sortvalue:sort,
+                            keytype:a,
+                            id:itemID,
+                            CurDateTime: rand()
+                        },
+                        success: function(a) {
+                            a.success ? swal("操作成功.", "", "success") : swal(a.msg, "", "info")
+                        }
+                    })
+                }
+
+                function reloadList() {
+                    $("#data_List tr:gt(0)").remove(), $("#Pagination").html(""), getDataList(0)
+                }
+
+                function getDataList(a) {
+                    $("#tb_list_1").hide();
+                    var b = a;
+                    $.ajax({
+                        url: "../ashx/system/system.ashx",
+                        type: "post",
+                        dataType: "json",
+                        data: {
+                            action: "GetRechargechannelList",
+                            CurDateTime: rand()
+                        },
+                        success: function (a) {
+                            var c, d;
+                            a.success ? (1> 0 ? ( $("#data_List tr:gt(0)").remove(), d = "", $.each(a.results, function (b) {
+                                var e = $.trim(a.results[b].ID), f = a.results[b].Rownum；
+                                    d += '<tr class="tr_h">',
+                                    d += "<td>",
+                                    d += f,
+                                    d += "</td>",
+                                    d += "<td>",
+                                    d += a.results[b].Name,
+                                    d += "</td>",
+                                    d += "<td>",
+                                    d += 1 == a.results[b].IsCommon ? '<button type="button" class="btn btn-success btn-xs" title="点击禁用" onfocus="this.blur();" onclick=\'onDisablePaymentChannel(this,"' + e + "\",10,reloadList);'>使用中</button>" : '<button type="button" class="btn btn-gray btn-xs" title="点击启用" onfocus="this.blur();" onclick=\'onDisablePaymentChannel(this,"' + e + "\",10,reloadList);'>未使用</button>";
+                                    d +='<button  type="button" class="btn btn-warning btn-xs" onclick="SetMoneyMb(10,'+a.results[b].ID+');">设定</button>';
+                                    d += "</td>",
+                                    d += "<td>",
+                                    d += 1 == a.results[b].IsPromotion ? ' <button type="button" class="btn btn-success btn-xs" title="点击禁用" onfocus="this.blur();" onclick=\'onDisablePaymentChannel(this,"' + e + "\",20,reloadList);'>使用中</button>" : '<button type="button" class="btn btn-gray btn-xs" title="点击启用" onfocus="this.blur();" onclick=\'onDisablePaymentChannel(this,"' + e + "\",20,reloadList);'>未使用</button>";
+                                    d +='<button  type="button" class="btn btn-warning  btn-xs" onclick="SetMoneyMb(20,'+a.results[b].ID+');">设定</button>';
+                                    d += "</td>",
+                                    d += "</tr>"
+
+                            }), $("#tblData").append(d), $("#tb_list_1").show(), $("#data_List").trigger("update"), $(".pagination").show(), layer.close(pagei), laypage({
+                                cont: "Pagination",
+                                pages: numPages(c, pageSize),
+                                skip: !0,
+                                skin: "molv",
+                                first: 1,
+                                last: numPages(c, pageSize),
+                                prev: "<",
+                                next: ">",
+                                curr: b + 1,
+                                groups: 5,
+                                jump: function (a, b) {
+                                    b || pageselectCallback(a.curr - 1)
+                                }
+                            })) : (layer.close(pagei), $(".pagination").fadeOut(1000), $("#tb_list_1").fadeIn(1000), $("#data_List tr:gt(0)").remove(), $("#tblData").append('<tr class="tr_h"><td>-</td><td>-</td><td>-</td><td>-</td><td>暂无.</td></tr>'))) : (layer.close(pagei), a.ERROR_TYPE == global_Error500 && (parent.location.href = "../PageError/500.html"), global_NoLicense != a.msg ? (web_tips(a.msg), $("#tb_list_1,.pagination").fadeOut(1000)) : parent.location.href = "../Login.aspx")
+                        },
+                        beforeSend: function () {
+                            pagei = layer.msg('请稍候..', {icon: 16,shade: 0.01})
+                        }
+                    })
+                }
+
+                function pageselectCallback(a) {
+                    getDataList(a)
+                }
+
+                var pagei, pageIndex = 0, pageSize = 50;
+                $(function () {
+                    $("#tb_list_1").hide(), $("#Pagination").html(""), getDataList(0)
+                });
+            </script>
+
+        </div>
+    </div>
+</div>
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_footjs.html'); ?>

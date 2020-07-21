@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.01, user-scalable=no">
+    <title></title>
+    <link rel="stylesheet" href="/res/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/res/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/res/css/AdminLTE.css">
+    <link rel="stylesheet" href="/res/css/page.css">
+</head>
+<body>
+<div class="container-fluid">
+    <div class="table-responsive">
+        <table class="tablesorter table table-bordered table-striped" id="tb_server">
+            <thead>
+            <tr>
+                <th nowrap='nowrap'># </th>
+                <th nowrap='nowrap'>帐号(ID) - IP <?=$e?></th>
+                <th nowrap='nowrap'>离线多久</th>
+                <th nowrap='nowrap'>总上下分</th>
+                <th nowrap='nowrap'>总萤钱</th>
+                <th nowrap='nowrap'>当前余额</th>
+
+            </tr>
+            </thead>
+            <tbody id="t_playerList">
+
+            <?php foreach($userlist as $k =>$v){ ?>
+                <tr>
+                    <td nowrap='nowrap'><?php echo  $k+1?></td>
+                    <td nowrap='nowrap'><?php echo  $v['Account']?>(<?php echo  $v['idx']?>)</td>
+                    <td nowrap='nowrap'><?php if($v['Online']>0 && $v['Online'] !=99999){ echo '在线';} else{ echo '离线'.$v['DisOnlineDay'].'小时';}  ?></td>
+                    <td nowrap='nowrap'><?php echo  $v['ScoreNum']?></td>
+                    <td nowrap='nowrap'><?php echo  $v['Win']?></td>
+                    <td nowrap='nowrap'><?php echo  $v['Balance']?></td>
+
+                </tr>
+            <?php } ?>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+</body>
+</html>
+
+<script src="/res/js/jquery-1.11.3.min.js" type="text/javascript"></script>
+<script src="/res/js/js-cn.js" type="text/javascript"></script>

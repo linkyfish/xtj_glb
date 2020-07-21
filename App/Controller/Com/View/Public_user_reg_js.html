@@ -1,0 +1,47 @@
+<script type="text/html" id="<?php echo $__PRE__ ?>table_bar_reg">
+	<div>
+		<input style="width:250px" type="text" class="layui-input" id="<?php echo $__PRE__?>_date_reg_input" placeholder="选择查询时间">
+	</div>
+</script>
+<script>
+	var reg_value;
+    var  <?php echo $__PRE__ ?>table_bar_reg =   table.render({
+        elem: '#<?php echo $__PRE__?>table_reg'
+        , url: '../com/stat/reg_history.aspx'
+        , toolbar: '#<?php echo $__PRE__?>table_bar_reg' //开启头部工具栏，并为其绑定左侧模板
+        , defaultToolbar: ['exports']
+        , cols: [[ //标题栏
+            {align: 'center',field: 'Name', title: '区域', width: 200}
+            , {align: 'center',field: 'Num', title: '会员数',width: 160,sort:true}
+            , {align: 'center',field: 'Add', title: '储值数',width: 160,sort:true}
+            , {align: 'center',field: 'AddMoney', title: '储值金额',width: 160,sort:true,templet:function (d) {
+						return (d.AddMoney/1000).toFixed(2);
+                }}
+            , {align: 'center',field: 'Cash', title: '提线数',width: 160,sort:true}
+            , {align: 'center',field: 'CashMoney', title: '提线金额',width: 160,sort:true,templet:function (d) {
+                    return (d.CashMoney/1000).toFixed(2);
+                }}
+        ]]
+        , page: false,
+		response: {statusCode: "0000"}
+        ,parseData: function(res){
+            return {
+                "code": res.resp_code,
+                "msg": res.msg,
+                "data": res.data
+            };
+        },done:function () {
+            laydate.render({
+                elem: '#<?php echo $__PRE__?>_date_reg_input',range: true,value:reg_value
+
+                , done: function (value, date, endDate) {
+                    console.log(endDate);
+                    reg_value=value;
+					<?php echo $__PRE__ ?>table_bar_reg.reload({
+                        where: {ymd: value}
+                    })
+                }
+            });
+        }
+    });
+</script>

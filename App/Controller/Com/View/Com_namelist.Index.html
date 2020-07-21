@@ -1,0 +1,251 @@
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_head.html'); ?>
+<body>
+<style>
+    .layui-laydate-content th {
+        font-weight: 400;
+        color: white;
+    !important;
+    }
+
+    .layui-form-label {
+        width: 120px
+    }
+
+    tbody td {
+        text-align: left
+    }
+
+    .layui-tab {
+        margin-top: 0
+    }
+</style>
+<div class="templatemo-flex-row">
+    <?php include _include(__APPDIR__ . 'Controller/Com/View/Public_nav.html'); ?>
+
+    <div class="templatemo-content col-1 light-gray-bg">
+        <?php include _include(__APPDIR__ . 'Controller/Com/View/Public_top.html'); ?>
+        <div class="row content" style="padding:5px 0px 0px 0px;">
+
+            <section class="content">
+                <div class="box box-primary box-solid">
+                    <div class="box-header with-border">
+                        <h3 class="box-title text-muted"><span style=" color:White;">策略管理<small
+                                style="margin-left:8px; margin-right:8px;"><a
+                                href="javascript:window.history.back()" target="_self"
+                                onclick='javascript:window.history.back();'><i class="fa fa-arrow-left"></i> 返回</a></small></span>
+                        </h3>
+                        <div class="box-tools pull-right">
+                            <button data-widget="collapse" class="btn btn-box-tool" type="button"><i
+                                    class="fa fa-minus"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="box-body">
+
+                        <div class="layui-tab layui-tab-brief" lay-filter="<?php echo $__PRE__ ?>tab">
+                            <ul class="layui-tab-title">
+                               <!-- <li lay-id="lost">平台书分时策略</li>
+                                <li lay-id="win">平台萤分时策略</li>-->
+                                <li lay-id="name">黑白名单</li>
+                            </ul>
+                            <div class="layui-tab-content" style="padding:5px 0">
+                                <!--   <div class="layui-tab-item">
+                                     <div lay-filter="<?php echo $__PRE__ ?>table_lost"
+                                          id="<?php echo $__PRE__ ?>table_lost"></div>
+                                 </div>
+                                 <div class="layui-tab-item">
+                                     <div lay-filter="<?php echo $__PRE__ ?>table_win"
+                                          id="<?php echo $__PRE__ ?>table_win"></div>
+                                 </div>-->
+                                 <div class="layui-tab-item">
+
+                                     <form style="margin-top:10px" class="layui-form layui-form-pane" lay-size="sm" lay-filter="<?php echo $__PRE__ ?>search_form">
+                                         <div class="layui-row layui-col-space10">
+                                             <div class="layui-col-xs6 layui-col-sm4 layui-col-md2 layui-col-lg2">
+                                                 <input class="layui-input" name="username" id="txtUserName" placeholder="用户名" autocomplete="off">
+                                             </div>
+
+                                             <div class="layui-col-xs6 layui-col-sm4 layui-col-md3 layui-col-lg2">
+                                                 <div class="layui-btn-group">
+                                                     <button type="button" class="layui-btn" lay-submit lay-filter="<?php echo $__PRE__ ?>search_submit">搜索
+                                                     </button>
+                                                     <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                                                 </div>
+                                             </div>
+                                             <div class="layui-col-xs6 layui-col-sm4 layui-col-md2 layui-col-lg1">
+                                                 <div class="layui-btn-group">
+                                                     <button type="button" id="<?php echo $__PRE__ ?>add" class="layui-btn layui-btn-normal">添加到点控列表</button>
+                                                 </div>
+                                             </div>
+                                         </div>
+                                     </form>
+
+
+                                     <div class="layui-clear" style="margin-top:10px"></div>
+                                     <div lay-filter="<?php echo $__PRE__ ?>table_name"
+                                          id="<?php echo $__PRE__ ?>table_name"></div>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+             </section>
+         </div>
+     </div>
+ </div>
+
+
+ <?php include _include(__APPDIR__ . 'Controller/Com/View/Public_footjs.html'); ?>
+ <script src="/js/index.js?ver=<?php echo _CONF('app_v') ?>"></script>
+ <script>
+     var <?php echo $__PRE__?>table_lost = table.render({
+         elem: '#<?php echo $__PRE__?>table_lost'
+         , url: '../../com/com_NameList.aspx'
+         , page: false
+         , where: {action: 'lost'}
+         , height: 'full-220'
+         , cols: [[
+             {field: 'id', title: '#', width: 280}
+             , {field: 'start_val', title: '萤分下限', minWidth: 100, edit: 'text'}
+             , {field: 'end_val', title: '萤分上限', minWidth: 100, edit: 'text'}
+             , {field: 'code', title: '标识名称', minWidth: 100, edit: 'text'}
+             , {field: 'control_val', title: '概率加成%', width: 100, edit: 'text'}
+             , {field: 'do', title: ''}
+         ]]
+         , response: {
+             statusCode: "0000"
+         }
+         , parseData: function (res) {
+             return {
+                 "code": res.resp_code,
+                 "msg": res.msg,
+                 "data": res.results
+             };
+         }
+     });
+
+     var <?php echo $__PRE__?>table_win = table.render({
+         elem: '#<?php echo $__PRE__?>table_win'
+         , url: '../../com/com_NameList.aspx'
+         , page: false
+         , where: {action: 'win'}
+         , height: 'full-220'
+         , cols: [[
+             {field: 'id', title: '#', width: 280}
+             , {field: 'start_val', title: '书分下限', minWidth: 100, edit: 'text'}
+             , {field: 'end_val', title: '书分上限', minWidth: 100, edit: 'text'}
+             , {field: 'code', title: '标识名称', minWidth: 100, edit: 'text'}
+             , {field: 'control_val', title: '概率加成%', width: 100, edit: 'text'}
+             , {field: 'do', title: ''}
+         ]]
+         , response: {
+             statusCode: "0000"
+         }
+         , parseData: function (res) {
+             return {
+                 "code": res.resp_code,
+                 "msg": res.msg,
+                 "data": res.results
+             };
+         }
+     });
+
+
+     var <?php echo $__PRE__?>table_name = table.render({
+         elem: '#<?php echo $__PRE__?>table_name'
+         , url: '../../com/com_NameList.aspx'
+         , page: true
+         , where: {action: 'superItemList'}
+         , height: 'full-220'
+         , cols: [[
+             {field: 'id', title: '#', width: 280}
+             , {field: 'player_id', title: '玩家', minWidth: 100}
+             , {field: 'times', title: '添加时间', minWidth: 100}
+             , {field: 'action', title: '操作', minWidth: 100}
+         ]]
+         , response: {
+             statusCode: "0000"
+         }
+         , parseData: function (res) {
+             return {
+                 "code": res.resp_code,
+                 "msg": res.msg,
+                 "data": res.results
+             };
+         }
+     });
+
+     element.on('tab(<?php echo $__PRE__?>tab)', function(data){
+         var id = $(this).attr('lay-id');
+         table.reload('<?php echo $__PRE__?>table_'+id);
+     });
+
+     form.on('submit(<?php echo $__PRE__?>search_submit)', function (data) {
+     <?php echo $__PRE__?>table_name.reload({
+             where: data.field
+         });
+         return false;
+     });
+
+
+     function reloadSuperNameList()
+     {
+         <?php echo $__PRE__?>table_name.reload({
+         });
+             return false;
+     }
+
+
+
+     $("#<?php echo $__PRE__ ?>add").click(function () {
+
+         if ($.trim($("#txtUserName").val()).length <= 0 )return swal("用户名或者账号不能为空.", "", "info"), !1;
+         $.ajax({
+             url: "../../com/com_NameList.aspx",
+             type: "post",
+             dataType: "json",
+             data: {
+                 action: "supuercontrol_add",
+                 username: $("#txtUserName").val(),
+                 CurDateTime: rand()
+             },
+             success: function (a) {
+                 a.success ? (swal(a.msg, "", "success"), $("#txt_MarqText,#txt_Title").val(""),   <?php echo $__PRE__?>table_name.reload()) : (a.ERROR_TYPE == global_Error500 && (parent.location.href = "../PageError/500.html"), global_NoLicense != a.msg ? swal(a.msg, "", "info") : parent.location.href = "../Login.aspx")
+             },
+             beforeSend: function () {
+                 $("#Button_OK").attr("disabled", "disabled").text("正在提交")
+             },
+             complete: function () {
+                 $("#Button_OK").removeAttr("disabled").text("确定")
+             }
+         })
+     })
+
+     element.tabChange('<?php echo $__PRE__?>tab', 'name');
+     form.render();
+
+     table.on('edit(<?php echo $__PRE__?>table_lost)', function(obj){
+         $.xpost('../../com/com_NameList.aspx',{action: 'lost_control_edit',id:obj.data.id,value:obj.value,field:obj.field},function (e) {
+             if(e.resp_code=='0000'){
+                 layer.msg(e.msg);
+             }else{
+                 layer.msg(e.msg,{icon:2,anim:6});
+             }
+         })
+     });
+
+     table.on('edit(<?php echo $__PRE__?>table_win)', function(obj){
+
+         $.xpost('../../com/com_NameList.aspx',{action: 'win_control_edit',id:obj.data.id,value:obj.value,field:obj.field},function (e) {
+             if(e.resp_code=='0000'){
+                 layer.msg(e.msg);
+             }else{
+                 layer.msg(e.msg,{icon:2,anim:6});
+             }
+         })
+     });
+
+
+
+
+ </script>
+

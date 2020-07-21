@@ -1,0 +1,227 @@
+<?php include _include(__APPDIR__.'Controller/Com/View/Public_head.html');?>
+<body>
+
+<div class="templatemo-flex-row">
+    <?php include _include(__APPDIR__.'Controller/Com/View/Public_nav.html');?>
+
+    <div class="templatemo-content col-1 light-gray-bg">
+        <?php include _include(__APPDIR__.'Controller/Com/View/Public_top.html');?>
+        <div class="row content" style="padding:5px 0px 0px 0px;">
+
+
+            <section class="content">
+                <div class="box box-primary box-solid">
+                    <div class="box-header with-border">
+                        <h3 class="box-title text-muted"><span style=" color:White;">会员分数设定</span>
+                            <small><a href="javascript:window.history.back()" target="_self"
+                                      style="margin-left:8px; margin-right:8px;"
+                                      onclick='javascript:window.history.back();'><i class="fa fa-arrow-left"></i>
+                                    返回</a></small>
+                        </h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label>会员帐号/ID</label>
+                            <input type="text" class="form-control" id="txt_UserName" maxlength="17">
+                        </div>
+
+                        <div class="form-group d_currScore" style="display:none;">
+                            <label>当前分数</label><span class="badge bg-yellow" id="curNum" style="margin-left:8px;"></span> <label style="margin-left:18px;">玩家账号</label><span  id="username" style="margin-left:8px;" class="badge bg-blue"></span><span id="state_loading_1" style="display:none;"><img
+                                        alt="Loading..." src="/res/image/loading_1.gif" align="absmiddle"
+                                        style="margin-left:10px;"></span>
+                        </div>
+
+                        <div class="form-group d_setNum" style="display:none;">
+                            <label>设定分数</label><span class="badge bg-red" id="maxValue"></span><span
+                                    id="state_loading_2" style="display:none;"><img alt="Loading..."
+                                                                                    src="/res/image/loading_1.gif"
+                                                                                    align="absmiddle"
+                                                                                    style="margin-left:10px;"></span>
+                            <input type="text" class="form-control" id="txt_scoreNum" >
+                            <p id="p1" class="help-block">设定分数:如 100、-100 或 10.50</p>
+                        </div>
+                    </div>
+
+                    <div class="box-footer">
+                        <button type="button" class="btn bg-navy margin" id="bt_UserInfo">获取帐号信息</button>
+                        <button type="button" class="btn btn-primary" id="Button_OK" style="display:none;">开始提交设定
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <div class="box box-primary box-solid" id="tb_list_2" style="display:none;">
+                    <div class="box-header with-border">
+                        <h3 class="box-title"><span style=" color:White;">最后20笔进分记录</span></h3>
+                        <div class="box-tools pull-right">
+                            <button data-widget="collapse" class="btn btn-box-tool" type="button"><i
+                                        class="fa fa-minus"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body" style="display: block;padding:0px;">
+                        <div class="table-responsive">
+
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>序号</th>
+                                    <th>操作人</th>
+                                    <th>会员ID</th>
+                                    <th>之前分数</th>
+                                    <th>设定分数</th>
+                                    <th>之后分数</th>
+                                    <th>操作IP</th>
+                                    <th>日期时间</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tblData_2"></tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+            <script src="/res/js/jquery-ui.min.js"></script>
+            <script type="text/javascript">
+				function DataReload(a) {
+                    $.ajax({
+                        url: "../ashx/account/account.ashx",
+                        type: "post",
+                        dataType: "json",
+                        data: {action: "getAccountInfo", userName: a},
+                        success: function (a) {
+                            if (a.success) {
+                                $("#curNum").html(a.UserLimitNum);
+                                $("#username").text(a.username);
+                                $("#state_loading_1").show().fadeOut(2000), $(".d_currScore,.d_setNum,#Button_OK").show()
+                            } else a.ERROR_TYPE == global_Error500 && (parent.location.href = global_e_p_500), global_NoLicense == a.msg ? parent.location.href = global_jump_login : web_tips(a.msg)
+                        }
+                    })
+                }
+
+                function LastScoreLog(a) {
+                    return $("#tb_list_2").hide(), $.trim(a).length <= 0 ? !1 : ($.ajax({
+                        url: "../ashx/log/log.ashx",
+                        type: "post",
+                        dataType: "json",
+                        data: {action: "Last20ScoreLog", user: a, CurDateTime: getCurrDate()},
+                        success: function (a) {
+                            var b, c;
+                            a.success ? a.results.length > 0 ? ($("#tb_list_2 tr:gt(0)").remove(), b = "", c = 0, $.each(a.results, function (d) {
+                                var i, f = parseFloat(a.results[d].AfterNum).toFixed(2),
+                                    g = parseFloat(a.results[d].ScoreNum).toFixed(2), h = a.results[d].Action_Type;
+                                    b += '<tr class="tr_h">', b += "<td>", b += a.results[d].Rownum, b += "</td>", b += "<td>", b += a.results[d].Account, b += "</td>", b += "<td>", b += a.results[d].UserName, b += "</td>", Number(f - g).toFixed(2) <= 0 ? (b += "<td>0.00", b += "</td>") : (b += "<td>", b += parseFloat(f - g).toFixed(2), b += "</td>"), i = parseFloat(a.results[d].ScoreNum).toFixed(2);
+                                    switch (h) {
+                                    case 25:
+                                        b += '<td class="text-left"> 注册送：';
+                                        break;
+                                    case 29:
+                                        b += '<td class="text-left"> 申请送：';
+                                        break;
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                    case 5:
+                                    case 6:
+                                    case 8:
+                                    case 9:
+                                    case 11:
+                                    case 17:
+                                    case 35:
+                                        b += '<td class="text-left"> '+_arr[h]+'：';
+                                        break;
+                                    case 36:
+                                        b += '<td class="text-left"> 活动送：';
+                                        break;
+                                    case 37:
+                                        b += '<td class="text-left text-red"> 提现：';
+                                        break;
+                                    case 38:
+                                        b += '<td class="text-left text-red"> 取消提现：';
+                                        break;
+                                    case 50:
+                                        b += '<td class="text-left"> 短信送：';
+                                        break;
+                                    case 51:
+                                        b += '<td class="text-left text-red"> 手工加：';
+                                        break;
+                                    case 52:
+                                        b += '<td class="text-left"> 减分：';
+                                        break;
+                                    case 61:
+                                        b += '<td class="text-left text-red"> 商城加：';
+                                        break;
+                                    case 71:
+                                        b += '<td class="text-left text-red"> 代理结算：';
+                                        break;
+                                    case 114:
+                                        b += '<td class="text-left"> 活动清零调整：';
+                                        break;
+                                    default:
+                                        a.results[d].ScoreNum>0? b += '<td class="text-left"> 加分：':b += '<td class="text-left"> 减分：'
+                                }
+                                b += parseFloat(a.results[d].ScoreNum).toFixed(2), b += "</td>", b += "<td>", b += parseFloat(a.results[d].AfterNum).toFixed(2), b += "</td>", b += "<td>", b += a.results[d].ActionIP, b += "</td>", b += "<td>", b += a.results[d].C_DateTime, b += "</td>", b += "</tr>"
+                            }), $("#tblData_2").append(b), $("#tb_list_2").show(), layer.close(pagei)) : (layer.close(pagei), $("#tb_list_2").fadeOut(1000), $("#tb_list_2 tr:gt(0)").remove(), $("#tblData_2").append('<tr class="tr_h"><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>暂无记录</td></tr>')) : (layer.close(pagei), $("#tb_list_2").fadeOut(1000), global_Error500 == a.ERROR_TYPE && (parent.location.href = global_e_p_500), global_NoLicense != a.msg ? ($("#tb_list_2 tr:gt(0)").remove(), $("#tblData_2").append('<tr class="tr_h"><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>暂无记录</td></tr>')) : parent.location.href = global_jump_login)
+                        }
+                    }), void 0)
+                }
+
+                var pagei, _user, maxValue, _sid = GetQueryString("sid"),jzindex,_arr=<?php echo json_encode($this->MoneyTrans->Type)?>;
+                $(function () {
+                    _sid && "undefined" != typeof _sid && 0 != _sid && 0 !== _sid.length && $("#txt_UserName").val(_sid),0 == parseInt("1") && $("#bt_UserInfo,#Button_OK").attr("disabled", "disabled"), $("#bt_UserInfo").click(function () {
+                        return $.trim($("#txt_UserName").val()).length <= 0 ? (web_tips("请输入帐号."), !1) : (pagei =layer.msg('请稍候..', {icon: 16,shade: 0.01}), _user = $("#txt_UserName").val(), DataReload(_user), LastScoreLog(_user), void 0)
+                    }), $("#Button_OK").click(function () {
+                        return $.trim($("#txt_UserName").val()).length <= 0 ? (web_tips("请输入帐号."), !1) : (_user = $("#txt_UserName").val(), $.trim($("#txt_scoreNum").val()).length <= 0 ? (web_tips("请设定分数."), !1) : checkNum($("#txt_scoreNum").val()) ? (maxValue = parseFloat(maxValue).toFixed(2), parseFloat($("#curNum").text()) + parseFloat($("#txt_scoreNum").val()) >= 0 ?
+                            ( jzindex = layer.open({type: 1
+                                ,title: false //不显示标题栏
+                                ,closeBtn: false
+                                ,content: '<div style="padding:15px 20px;text-align: center"><h1>正在处理,请稍后...</h1><br><h3>正在处理,请耐心等候，不要重复操作...</h3></div>',btn:false
+                            }),$.ajax({
+                            url: "../ashx/account/setScore.ashx",
+                            type: "post",
+                            dataType: "json",
+                            data: {
+                                action: "setServerScore",
+                                scoreNum: $("#txt_scoreNum").val(),
+                                MaxNum: maxValue,
+                                userName: _user,
+                                CurDateTime: rand()
+                            },
+                            success: function (a) {
+
+                                if (a.success) swal("操作成功.", "", "success"), DataReload(_user),LastScoreLog(_user), $("#txt_scoreNum").val(""),layui.layer.close(jzindex); else if (global_NoLicense != a.msg) switch (a.type) {
+                                    case 1:
+                                        web_tips("无此帐号.");
+                                        layui.layer.close(jzindex)
+                                        break;
+                                    case 2:
+                                        web_tips("玩家在游戏中,不能减分.");
+                                        layui.layer.close(jzindex)
+                                        break;
+                                    default:
+                                        web_tips(a.msg?a.msg:"操作失败,请重试.")
+                                        layui.layer.close(jzindex)
+                                } else parent.location.href = global_jump_login
+                            },
+                            beforeSend: function () {
+                                $("#Button_OK").attr("disabled", "disabled").text("正在提交设定")
+                            },
+                            complete: function () {
+                                $("#Button_OK").removeAttr("disabled").text("开始提交设定")
+                            }
+                        })) : swal("超出设定范围.", "", "info"), void 0) : (web_tips("分数格式有误."), !1))
+                    }), $("#Button_Cancel").click(function () {
+                        $("#txt_UserName,#txt_scoreNum").val("")
+                    })
+                });
+            </script>
+
+        </div>
+    </div>
+</div>
+
+
+<?php include _include(__APPDIR__.'Controller/Com/View/Public_footjs.html');?>

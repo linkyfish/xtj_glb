@@ -1,0 +1,97 @@
+<?php include _include(__APPDIR__.'Controller/Com/View/Public_head.html');?>
+<body>
+<div class="templatemo-flex-row">
+    <?php include _include(__APPDIR__.'Controller/Com/View/Public_nav.html');?>
+
+    <div class="templatemo-content col-1 light-gray-bg">
+        <?php include _include(__APPDIR__.'Controller/Com/View/Public_top.html');?>
+        <div class="row content" style="padding:5px 0px 0px 0px;">
+            <style>
+                .layui-table-view .layui-table .layui-table-cell{text-align:center}
+            </style>
+            <section class="content">
+                <div class="box box-primary box-solid">
+                    <div class="box-header with-border">
+                        <h3 class="box-title text-muted"><span style=" color:White;">数据统计<small
+                                        style="margin-left:8px; margin-right:8px;"><a
+                                            href="javascript:window.history.back()" target="_self"
+                                            onclick='javascript:window.history.back();'><i class="fa fa-arrow-left"></i> 返回</a></small></span>
+						</h3>
+						<span class="hidden-xs hidden-sm"><a href="javascript:reloadList();" target="_self" onclick="javascript:reloadList();"><i class="fa fa-refresh"></i> 刷新</a></span>
+                		<span class="hidden-xs hidden-sm"><a href="javascript:reloadtree();" target="_self" onclick="javascript:reloadtree();"><i class="fa fa-refresh"></i> 修复层级</a></span>
+                    </div>
+
+                        <table class="layui-hide" id="<?php echo $__PRE__?>table" lay-filter="<?php echo $__PRE__?>table"></table>
+
+                </div>
+
+            </section>
+
+        </div>
+    </div>
+</div>
+
+
+<?php include _include(__APPDIR__.'Controller/Com/View/Public_footjs.html');?>
+
+<script>
+	function reloadList() {
+		<?php echo $__PRE__?>table.reload()
+    }
+	function reloadtree() {
+        layer.confirm('更新确认！', {icon: 3, title:'确定更新网络结构'}, function(index){
+            $.post('../../com/admin_stat.aspx',{action:'reload'},function (e) {
+                layer.close(index);
+                layer.msg(e.msg);
+				<?php echo $__PRE__?>table.reload()
+            });
+        });
+    }
+
+    var  <?php echo $__PRE__?>table = table.render({
+        elem: '#<?php echo $__PRE__?>table'
+        ,url:'../../com/admin_stat.aspx'
+        ,where: {action:'data'}
+        ,height: 'full-160'
+        ,cols: [[
+            {type:'numbers', title:'序号', width:60, unresize: true}
+            ,{field:'ymd', title:'日期', width:240}
+            ,{field:'update_at', title:'更新时间', width:240}
+            ,{field:'doit', title:'操作', width:240,templet:function (d) {
+					var e="";
+                    e += '<button type="button" class="btn btn-primary btn-xs " lay-event="detail">更新数据</button>'
+                    return e;
+                }},{field:'d', title:''}
+        ]]
+        ,response: {
+            statusCode: "0000"
+        }
+        ,parseData: function(res){
+            return {
+                "code": res.resp_code,
+                "msg": res.msg,
+                "data": res.results
+            };
+        }
+    });
+
+
+    table.on('tool(<?php echo $__PRE__?>table)', function(obj){
+        var data = obj.data;
+        var layEvent = obj.event;
+        var tr = obj.tr;
+
+        if(layEvent === 'detail'){
+            layer.confirm('更新确认！', {icon: 3, title:'确定更新数据'}, function(index){
+                $.post('../../com/admin_stat.aspx',{action:'send',ymd:data.ymd},function (e) {
+                    layer.close(index);
+                    layer.msg(e.msg);
+                    <?php echo $__PRE__?>table.reload()
+                });
+            });
+        }
+    });
+
+
+</script>
+

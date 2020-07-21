@@ -1,0 +1,151 @@
+<?php include _include(__APPDIR__.'Controller/Com/View/Public_head.html');?>
+<body>
+<div class="templatemo-flex-row">
+    <?php include _include(__APPDIR__.'Controller/Com/View/Public_nav.html');?>
+
+    <div class="templatemo-content col-1 light-gray-bg">
+        <?php include _include(__APPDIR__.'Controller/Com/View/Public_top.html');?>
+        <div class="row content" style="padding:5px 0px 0px 0px;">
+
+            <section class="content">
+                <div class="box box-primary box-solid">
+                    <div class="box-header with-border">
+                        <h3 class="box-title text-muted"><span style=" color:White;">帐号解锁<small
+                                        style="margin-left:8px; margin-right:8px;"><a
+                                            href="javascript:window.history.back()" target="_self"
+                                            onclick='javascript:window.history.back();'><i class="fa fa-arrow-left"></i> 返回</a></small></span>
+                        </h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label>帐号</label>
+                            <input type="text" class="form-control" id="txt_UserName" maxlength="17">
+                        </div>
+                    </div>
+
+                    <div class="box-footer">
+                        <button type="button" class="btn btn-danger" id="Button_View" style="margin-right:1em;">查看日志
+                        </button>
+                        <button type="button" class="btn btn-success" id="Button_OK">开始解锁</button>
+                        <button type="button" class="btn btn-success" id="Button_New_Player_OK">解锁新玩家</button>
+                        <button type="button" class="btn btn-success" id="Button_Reset_Player_Online_OK">修正玩家状态</button>
+                    </div>
+
+                </div>
+
+                <div class="box box-primary" id="tb_list_1" style="display:none;">
+                    <div class="box-header with-border">
+                        <h3 class="box-title text-bold"><span id="d_tip_1" class="badge bg-yellow"></span></h3>
+                        <div class="box-tools pull-right">
+                            <button data-widget="collapse" class="btn btn-box-tool" type="button"><i
+                                        class="fa fa-minus"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body" style="display: block;padding:0px;">
+                        <div class="table-responsive">
+
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>日期时间</th>
+                                    <th>账户</th>
+                                    <th>操作人</th>
+
+                                    <th>描述</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tblData"></tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <script src="/res/js/jquery-ui.min.js"></script>
+            <script type="text/javascript">
+                var pagei, _user = "", _flag = "true";
+                $(function () {
+                    // $("#txt_UserName").autocomplete({source: "../ashx/getData/AutoComplete.ashx"}),
+                    $("#tb_list_1").hide(), "true" == _flag ? $("#Button_View").show() : $("#Button_View").hide(), $("#Button_OK").click(function () {
+                        return $.trim($("#txt_UserName").val()).length <= 0 ? (web_tips("请输入帐号."), !1) : (_user = $("#txt_UserName").val(), $.ajax({
+                            url: "../ashx/log/log.ashx",
+                            type: "post",
+                            dataType: "json",
+                            data: {action: "UnlockUser", user: _user, CurDateTime: rand()},
+                            success: function (a) {
+                                a.success ? (layer.close(pagei), $("#tb_list_1").fadeOut(1000), web_tips("解锁成功.")) : (layer.close(pagei), a.ERROR_TYPE == global_Error500 && (parent.location.href = "../PageError/500.html"), global_NoLicense != a.msg ? (web_tips("解锁失败."), $("#tb_list_1").fadeOut(1000)) : parent.location.href = "../Login.aspx")
+                            },
+                            beforeSend: function () {
+                                $("#Button_OK").attr("disabled", "disabled"), pagei = layer.msg('请稍候..', {icon: 16,shade: 0.01})
+                            },
+                            complete: function () {
+                                $("#Button_OK").removeAttr("disabled")
+                            }
+                        }), void 0)
+                    }), $("#Button_View").click(function () {
+                        return $("#tb_list_1").hide(), $.trim($("#txt_UserName").val()).length <= 0 ? (web_tips("请输入帐号."), !1) : (_user = $("#txt_UserName").val(), $.ajax({
+                            url: "../ashx/log/log.ashx",
+                            type: "post",
+                            dataType: "json",
+                            data: {action: "UnlockUserLog", user: _user, CurDateTime: rand()},
+                            success: function (a) {
+                                if (a.success) if (a.results.length > 0) {
+                                    $("#d_tip_1").text("合计: " + a.results.length), $("#tb_list_1 tr:gt(0)").remove();
+                                    var b = "";
+                                    $.each(a.results, function (ii,c) {
+                                        b += "<tr>", b += "<td>", b += (ii+1), b += "</td>", b += "<td>", b += c.C_DateTime, b += "</td>", b += "<td>", b += c.Account, b += "</td>", b += '<td class="text-left">', b += c.UserName, b += "</td>",b += '<td class="text-left">进行了解锁</td>', b += "</tr>"
+                                    }), $("#tblData").append(b), $("#tb_list_1").show(), layer.close(pagei)
+                                } else layer.close(pagei), $("#tb_list_1").fadeOut(1000), web_tips("暂无数据."); else layer.close(pagei), a.ERROR_TYPE == global_Error500 && (parent.location.href = "../PageError/500.html"), global_NoLicense != a.msg ? (web_tips("暂无数据"), $("#tb_list_1").fadeOut(1000)) : parent.location.href = "../Login.aspx"
+                            },
+                            beforeSend: function () {
+                                $("#Button_View").attr("disabled", "disabled"), pagei = layer.msg('请稍候..', {icon: 16,shade: 0.01})
+                            },
+                            complete: function () {
+                                $("#Button_View").removeAttr("disabled")
+                            }
+                        }), void 0)
+                    }),$("#Button_New_Player_OK").click(function () {
+                        return $.trim($("#txt_UserName").val()).length <= 0 ? (web_tips("请输入帐号."), !1) : (_user = $("#txt_UserName").val(), $.ajax({
+                            url: "../ashx/log/log.ashx",
+                            type: "post",
+                            dataType: "json",
+                            data: {action: "UnlockNewPlayer", user: _user, CurDateTime: rand()},
+                            success: function (a) {
+                                a.success ? (layer.close(pagei), $("#tb_list_1").fadeOut(1000), web_tips("解锁成功.")) : (layer.close(pagei), a.ERROR_TYPE == global_Error500 && (parent.location.href = "../PageError/500.html"), global_NoLicense != a.msg ? (web_tips("解锁失败."), $("#tb_list_1").fadeOut(1000)) : parent.location.href = "../Login.aspx")
+                            },
+                            beforeSend: function () {
+                                $("#Button_OK").attr("disabled", "disabled"), pagei = layer.msg('请稍候..', {icon: 16,shade: 0.01})
+                            },
+                            complete: function () {
+                                $("#Button_OK").removeAttr("disabled")
+                            }
+                        }), void 0)
+                    })
+                        ,$("#Button_Reset_Player_Online_OK").click(function () {
+                        return $.trim($("#txt_UserName").val()).length <= 0 ? (web_tips("请输入帐号."), !1) : (_user = $("#txt_UserName").val(), $.ajax({
+                            url: "../ashx/log/log.ashx",
+                            type: "post",
+                            dataType: "json",
+                            data: {action: "ResetPlayerOnlineStatus", user: _user, CurDateTime: rand()},
+                            success: function (a) {
+                                a.success ? (layer.close(pagei), $("#tb_list_1").fadeOut(1000), web_tips("状态修复成功.")) : (layer.close(pagei), a.ERROR_TYPE == global_Error500 && (parent.location.href = "../PageError/500.html"), global_NoLicense != a.msg ? (web_tips("解锁失败."), $("#tb_list_1").fadeOut(1000)) : parent.location.href = "../Login.aspx")
+                            },
+                            beforeSend: function () {
+                                $("#Button_OK").attr("disabled", "disabled"), pagei = layer.msg('请稍候..', {icon: 16,shade: 0.01})
+                            },
+                            complete: function () {
+                                $("#Button_OK").removeAttr("disabled")
+                            }
+                        }), void 0)
+                    })
+
+                });
+            </script>
+
+        </div>
+    </div>
+</div>
+
+<?php include _include(__APPDIR__.'Controller/Com/View/Public_footjs.html');?>

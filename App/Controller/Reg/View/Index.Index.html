@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0" />
+    <meta name="description" content="">
+    <title>用户注册</title>
+    <!-- Bootstrap core CSS -->
+    <link href="/reg/css/bootstrap/css/bootstrap.min.css?ver=<?php echo _CONF('app_v')?>" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="/reg/css/reg.css?v=<?php echo _CONF('app_v')?>" rel="stylesheet">
+    <script src="/reg/js/jquery-3.4.1.min.js?ver=<?php echo _CONF('app_v')?>"></script>
+    <style>
+        .mask {
+            z-index: 2;
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: rgba(0,0,0,.9);
+        }
+    </style>
+</head>
+<body class="top-bg">
+<input type="hidden" id="btnIsReg" value="0">
+<div style="margin-top: 10px"></div>
+<div style="width: 95%; margin: 0 auto">
+    <img src="/reg/images/top-bu.png " alt="" style="margin: 20px 3px; height: 40px; width: 360px;" >
+    <img src="/reg/images/top-logo.png" alt="" style="margin: 20px 20px; height: 80px; width: 300px;" >
+
+</div>
+
+<div class="form-container text-sm-centers" style="background: url(/reg/images/Kuang.png) no-repeat; width:350px; height: 320px ;padding-top:35px;        background-size: 100%;
+        background-repeat:no-repeat; margin: 0 auto">
+    <div class="form-group" style="padding: 0 3%">
+        <input type="text" class="form-control uname" style="width: 100%" placeholder="账号/手机号" maxlength="11" id="name" onkeyup="value=value.replace(/[\W]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" required="">
+    </div>
+    <div class="form-group"  class="form-group" style="padding: 0 3%">
+        <input type="password" class="form-control pword" style="width: 100%" placeholder="密码" id="password" required="">
+    </div>
+    <div class="form-group" style="text-align:left; padding: 0px 15px">
+        <input type="text" style="color: #999c9e; width:60%; display: inline-block" class="form-control" placeholder="推广账号" maxlength="7" id="parendID" value="<?php echo $code;?>" <?php echo $disabled; ?>>
+        <span style="float:right;cursor: pointer; display: block; color: #fff; line-height: 35px"> 《 推广号</span>
+    </div>
+    <div class="form-group" style="padding: 0px 15px">
+        <input type="text" class="form-control" placeholder="短信验证码" maxlength="8"  style="color:black;width:60%;float:left;margin:0px 0px;" name="v_code" id="v_code" required=""> <span id="spanGetSms" class="btn btn-primary" style=" float: right">获取短信</span>
+    </div>
+    <div class="form-group" style="display: none">
+        <input type="text" class="form-control" placeholder="验证码" style="color:black;width:60%;float:left;margin:0px 0px;" name="v_code" id="v_code2" required=""> <img id="verify" src="/index/index/checkverify.html" onclick="javascript:this.src='{:url('user/checkverify')}?tm='+Math.random();" style="float:right;cursor: pointer">
+    </div>
+    <div class="form-group" style="padding: 0 3%">
+        <a style="margin-top: 70px" class="btn btn-warning btn-block" id="Register_btn">注册</a>
+    </div>
+</div>
+</div>
+
+<!-- 蒙版 -->
+<div class="mask">
+    <img src="/down/images/go-safari.jpg" alt="">
+</div>
+<div style="position: fixed; z-index: 99999; bottom: 0px">
+    <a href="javascript:void(0)" class="down_url"><img src="/reg/images/top-down.png?ver=<?php echo _CONF('app_v')?>" alt="" style="height: 70px"></a>
+</div>
+<script>
+    //判断设备
+    function checkIsAppleDevice() {
+        var u = navigator.userAgent, app = navigator.appVersion;
+        var ios = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+        var iPad = u.indexOf('iPad') > -1;
+        var iPhone = u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1;
+        if (ios || iPad || iPhone) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    var isWeixin = function () { //判断是否是微信
+        var ua = navigator.userAgent.toLowerCase();
+        return ua.match(/MicroMessenger/i) == "micromessenger";
+    };
+    if(isWeixin())
+    {
+        $('.mask').css( "zIndex", 89898989 ).show();
+    }
+
+
+
+    //点击下载
+    /*
+    $(".down_url").bind("click", function () {
+        if (checkIsAppleDevice()) {
+            window.location.href = "<?php echo $ios_url; ?>";
+        } else {
+            window.location.href = "<?php echo $apk_url; ?>";
+        }
+    })
+
+     */
+
+    $(function(){
+
+        $("#spanGetSms").on('click',function () {
+            var userName = $("#name").val();
+            if(!userName)
+            {
+                alert('请输入账号/手机号');
+                return;
+            }
+            $.ajax({
+                url:"../../",
+                type:'POST',
+                dataType:'json',
+                data:{
+                    phone :userName,
+                    action:'GetMsg'
+                },
+                success:function(res)
+                {
+                    if(res.success)
+                    {
+                        $("#v_code").val('');
+                        alert('短信发送成功');
+                        //$("#spanGetSms").html('60秒后重新获取');
+                    }
+                    else{
+                        alert(res.msg);
+                    }
+                }
+            })
+        });
+
+        $("#Register_btn").on('click',function(){
+            var userName = $("#name").val();
+            var password = $("#password").val();
+            var parentId = $("#parendID").val();
+            var v_code = $("#v_code").val();
+
+            if(!userName)
+            {
+                alert('请输入账号/手机号');
+                return;
+            }
+            else if(!password)
+            {
+                alert('请输入账号/手机号');
+                return;
+            }
+            else if(!v_code)
+            {
+                alert('请输入验证码');
+                return;
+            }
+            else if(userName.length !=11)
+            {
+                alert('收集号码格式不正确');
+                return;
+            }
+
+            $.ajax({
+                url:"../../",
+                type:'POST',
+                dataType:'json',
+                data:{
+                    action:'Doregister',
+                    userName :userName,
+                    password:password,
+                    v_code:v_code,
+                    parentId:parentId
+                },
+                success:function(res)
+                {
+                    if(res.success)
+                    {
+                        $("#btnIsReg").val(1);
+                        alert('已注册成功点击网页上方下载按钮进行下载');
+                    }
+                    else{
+                        $("#verify").click();
+                        alert(res.msg);
+                    }
+                }
+            })
+        })
+
+    });
+
+
+    function checkIsAppleDevice() {
+        var u = navigator.userAgent, app = navigator.appVersion;
+        var ios = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+        var iPad = u.indexOf('iPad') > -1;
+        var iPhone = u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1;
+        if (ios || iPad || iPhone) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    //点击下载
+    $(".down_url").bind("click", function () {
+        var  isOldUser = $("#btnIsReg").val();
+        if(isOldUser!="1")
+        {
+            alert('请在下方注册后再点击下载');
+            if(confirm('已有账号，直接下载？'))
+            {
+                if (checkIsAppleDevice()) {
+                    //window.location.href = "{:url('/index/index/jc')}";
+                    window.location.href = "<?php echo  $ios_url ;?>";
+                } else {
+                    window.location.href = "<?php echo  $apk_url ;?>";
+                }
+            }
+        }
+        else{
+            if (checkIsAppleDevice()) {
+                //window.location.href = "{:url('/index/index/jc')}";
+                window.location.href = "<?php echo  $ios_url ;?>";
+            } else {
+                window.location.href = "<?php echo  $apk_url ;?>";
+            }
+        }
+
+    })
+</script>
+</body>
+</html>

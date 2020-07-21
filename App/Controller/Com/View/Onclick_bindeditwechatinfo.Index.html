@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.01, user-scalable=no">
+    <title></title>
+    <link rel="stylesheet" href="/res/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/res/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/res/css/AdminLTE.css">
+    <link rel="stylesheet" href="/res/css/page.css">
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="table-responsive">
+
+                <table class="table table-bordered table-condensed">
+                    <tbody>
+                    <!--
+                    <tr>
+                        <td class="text-right">银行卡号：</td>
+                        <td>
+                            <input type="text" class="form-control text-bold text-red" id="txt_BankCardID"
+                                   maxlength="35">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-right">开户行信息：</td>
+                        <td>
+                            <input type="text" class="form-control text-red" id="txt_BankAddress" maxlength="100">
+                            <p class="help-block">格式: 建行-成都市青羊区XXX支行</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-right">姓名：</td>
+                        <td>
+                            <input type="text" class="form-control" id="txt_Name" maxlength="20" placeholder="请填写卡主姓名">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-right">手机：</td>
+                        <td>
+                            <input type="text" class="form-control" id="txt_Tel" maxlength="20" placeholder="请填写手机号码">
+                        </td>
+                    </tr>
+                    -->
+                    <tr>
+                        <td class="text-right">微信或者QQ：</td>
+                        <td>
+                            <input type="text" class="form-control" id="txt_WeChatID" maxlength="30"
+                                   placeholder="微信或者QQ">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="msg"></td>
+                        <td>
+                            <button type="button" class="btn btn-primary btn-block" id="Button_OK">确定</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+<script src="/res/js/jquery-1.11.3.min.js" type="text/javascript"></script>
+<script src="/res/js/js-cn.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+    function doGetDefault() {
+        $.ajax({
+            url: "../ashx/account/account.ashx",
+            type: "post",
+            dataType: "json",
+            data: {action: "Get_weChatID", CurDateTime: rand()},
+            success: function (a) {
+                a.success && ("N/A" == a.BankCardID ? $("#txt_BankCardID").val("") : $("#txt_BankCardID").val(a.BankCardID), "N/A" == a.BankAddress ? $("#txt_BankAddress").val("") : $("#txt_BankAddress").val(a.BankAddress), "N/A" == a.Name ? $("#txt_Name").val("") : $("#txt_Name").val(a.Name), "N/A" == a.Tel ? $("#txt_Tel").val("") : $("#txt_Tel").val(a.Tel), "N/A" == a.weChatID ? $("#txt_WeChatID").val("") : $("#txt_WeChatID").val(a.weChatID))
+            }
+        })
+    }
+
+    $(function () {
+        doGetDefault(), onFormatBankID("#txt_BankCardID"), $("#Button_OK").click(function () {
+
+            return $.trim($("#txt_WeChatID").val()).length < 1 ? (alert("请输入微信号."), !1) : ($.ajax({
+                url: "../ashx/account/account.ashx",
+                type: "post",
+                dataType: "json",
+                data: {
+                    action: "Edit_weChatID",
+                    BankCardID: $("#txt_BankCardID").val(),
+                    BankAddress: $("#txt_BankAddress").val(),
+                    Name: $("#txt_Name").val(),
+                    Tel: $("#txt_Tel").val(),
+                    weChatID: $("#txt_WeChatID").val(),
+                    QQ: $("#txt_QQ").val(),
+                    CurDateTime: rand()
+                },
+                success: function (a) {
+                    a.success ? $(".msg").removeClass('bg-red').addClass('bg-green').show().text("操作成功.") : $(".msg").removeClass('bg-green').addClass('bg-red').show().text(a.msg)
+                },
+                beforeSend: function () {
+                    $("#Button_OK").attr("disabled", "disabled").text("正在提交")
+                },
+                complete: function () {
+                    $("#Button_OK").removeAttr("disabled").text("确定")
+                }
+            }));
+        })
+    });
+</script>

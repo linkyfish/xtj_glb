@@ -1,0 +1,1030 @@
+<!DOCTYPE HTML>
+
+<!-- 讯息框样式改版 CSS -->
+<link href="/home/static/css/message-20200214_49.css" rel="stylesheet" type="text/css">
+<link href="/home/static/css/font-awesome.min-20200214_49.css" rel="stylesheet" type="text/css">
+<script language="JavaScript"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-1933265-19"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('set', { 'user_id': 'null' });
+    gtag('set', { 'dimension1': 'null' });
+
+    gtag('config', 'UA-1933265-19');
+    gtag('config', 'UA-1933265-37', {'linker': {'domains': ['http://www.gametower.com.tw','https://member.gametower.com.tw']}});
+</script>
+
+<script language="JavaScript">
+
+</script>
+
+<!--Google Tag Manager Start -->
+<script>
+    window.dataLayer = window.dataLayer || [];
+    dataLayer = [{'userID': 'null'}];
+
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+        var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-564QFTX');
+</script>
+<!-- Google Tag Manager End -->
+
+<html>
+<head>
+    <!-- meta整合资讯 -->
+    <!-- OG:Tag 是 Open Graph Tag 的简称，一开始是 Facebook 提出的规范，再网页 HTML 标头 <head> 中描述这个资源希望被抓取的资讯，如果有了这些资讯，机器人就不需要解析整份网页，也能够显示最适合的缩图与文字标题等等。 -->
+
+    <meta charset="utf-8"><!-- 指定网页编码 -->
+    <meta http-equiv="imagetoolbar" content="no"><!-- 可关掉网页图片左上方储存影像按钮的工具列。 -->
+    <meta name="robots" content="ALL"><!-- 搜寻引擎的小蜘蛛可以索引本页，且可跟踪该页连结。 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><!-- 给iphone，在行动版时画面不准许缩放 -->
+    <meta name="keyword" content=",">
+    <meta name="Description" content="">
+    <link rel="image_src" href="https://www.gametower.com.tw/home/static/image/logo.png">
+
+    <!-- 製作者 -->
+    <meta name="copyright" content=""><!-- 版权宣告 -->
+    <meta name="description" content="">
+
+    <!-- Google+ -->
+    <meta itemprop="name" content=",官方网站">
+    <meta itemprop="description" content=",">
+    <meta itemprop="image" content="https://www.gametower.com.tw/home/static/image/logo.png">
+
+    <!-- Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content=",官方网站">
+    <meta property="og:url" content="https://www.gametower.com.tw/Games/FreePlay/Gold/TMD/index.aspx">
+    <meta property="og:image" content="https://www.gametower.com.tw/home/static/image/logo.png">
+    <meta property="og:description" content=",">
+    <title>游戏介绍 - 官方网站
+    </title>
+    <!-- 共用样式 -->
+    <link href="/home/static/css/master.css" rel="stylesheet" type="text/css">
+    <!-- 页面样式 -->
+    <link href="/home/static/css/style.css" rel="stylesheet" type="text/css">
+    <!-- RWD -->
+    <link rel="stylesheet" media="(max-width:812px)" href="/home/static/css/rwd.css">
+    <!--js-->
+    <script type="text/javascript" src="/home/static/js/jquery-1.8.3.min.js"></script>
+    <script src="/home/static/js/nav.js" type="text/javascript"></script>
+    <script src="/home/static/js/main1.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        var strDoLoginRedirectUrl	= "" ;
+        var strDoLoginOpenName		= "" ;
+        var strDoLoginOpenHeight	= 1000 ;
+        var strDoLoginOpenWidth		= 1000 ;
+        var strDoLoginWindows		= null ;
+
+        var str20204a5255e440e3bea324a47b02ead7 = "" ;
+
+        var str5f4ce212e86e42e28e3c4c5d4f751a4a = "" ;
+
+        var str9ad28b0224cc4494af97fb2d61bdd9bb = "" ;
+
+        var str5350b190e3e54f4d9be7ccc0a959352c = "" ;
+
+        var strImgVerifyCode		= "imgVerifyCode" ;
+
+        // 验证码按下enter也触发Login
+        $(function() {
+
+            if ($('#str5f4ce212e86e42e28e3c4c5d4f751a4a').length > 0)
+            {
+                $('#str5f4ce212e86e42e28e3c4c5d4f751a4a').keypress(function(e) {
+                    var key = window.event ? e.keyCode : e.which;
+                    if (key == 13)
+                    {
+                        $('#imgLogin').click();
+                        event.cancelBubble = true;
+                        event.returnValue = false;
+                    }
+                });
+            }
+
+            if ($('#f_strVerifyCode').length > 0)
+            {
+                $('#f_strVerifyCode').keypress(function(e) {
+                    var key = window.event ? e.keyCode : e.which;
+                    if (key == 13)
+                    {
+                        $('#imgLogin').click();
+                        event.cancelBubble = true;
+                        event.returnValue = false;
+                    }
+                });
+            }
+        }) ;
+
+        function DoLogin(_nGameNo,_strUrl,_str9ad28b0224cc4494af97fb2d61bdd9bb,_str20204a5255e440e3bea324a47b02ead7,_str5350b190e3e54f4d9be7ccc0a959352c,_str5f4ce212e86e42e28e3c4c5d4f751a4a, _strImgVerifyCode,_strOpenName,_strOpenWidth,_strOpenHeight)
+        {
+            strDoLoginRedirectUrl	= _strUrl ;
+            strDoLoginOpenName		= (typeof(_strOpenName) !=  "undefined" ? _strOpenName : strDoLoginOpenName) ;
+            strDoLoginOpenHeight	= (typeof(_strOpenHeight) !=  "undefined" ? _strOpenHeight : strDoLoginOpenHeight) ;
+            strDoLoginOpenWidth		= (typeof(_strOpenWidth) !=  "undefined" ? _strOpenWidth : strDoLoginOpenWidth) ;
+            str9ad28b0224cc4494af97fb2d61bdd9bb	= (typeof(_str9ad28b0224cc4494af97fb2d61bdd9bb) !=  "undefined" ? _str9ad28b0224cc4494af97fb2d61bdd9bb : 'f_strID') ;
+            str5350b190e3e54f4d9be7ccc0a959352c	= (typeof(_str5350b190e3e54f4d9be7ccc0a959352c) !=  "undefined" ? _str5350b190e3e54f4d9be7ccc0a959352c : 'f_bSaveID') ;
+            str5f4ce212e86e42e28e3c4c5d4f751a4a	= (typeof(_str5f4ce212e86e42e28e3c4c5d4f751a4a) !=  "undefined" ? _str5f4ce212e86e42e28e3c4c5d4f751a4a : 'f_strVerifyCode') ;
+            str20204a5255e440e3bea324a47b02ead7	= (typeof(_str20204a5255e440e3bea324a47b02ead7) !=  "undefined" ? _str20204a5255e440e3bea324a47b02ead7 : 'f_qXMsIXNl1zhRuP4vxPs8SpiI4sdqym5hhg2eALrMvIalfJJCd8lxPdEnfk9m4o') ;
+
+            strImgVerifyCode		= (typeof(_strImgVerifyCode) !=  "undefined" ? _strImgVerifyCode : strImgVerifyCode) ;
+
+            if ($('.waterMarkText').length > 0)
+            {
+                $('.waterMarkText').each(function () {
+                    if(!this.reset)
+                        this.value = '' ;
+                });
+            }
+
+            // 是否使用 jsonp(ie都使用 jsonp，原本应该是 && $.browser.version < 10.0，但是因为IE10会出现 XMLHttpRequest: Network Error 0x2ee4，原因是因为在iFrame内使用却发现SSL凭证是错误的，所以开发测试都会死掉)
+            // 微软回应 0x2ee4 错误：https://connect.microsoft.com/IE/feedback/details/877525/ie11-returns-status-0-during-ajax-post-operation-from-an-iframe-xmlhttprequest-network-error-0x2ee4#tabs
+            // 443 port 一律使用 json
+            var bSsl = (location.port == 443) ;
+            var bJsonp = !bSsl && (navigator.userAgent.indexOf("MSIE")>0 || navigator.userAgent.indexOf("Trident")>0) ;
+
+            if (strDoLoginOpenName.length > 0 && decodeURIComponent((decodeURIComponent(location.href))).indexOf('/InGame/Shortcut/index.aspx') == -1)
+            {
+                strDoLoginWindows		= window.open('about:blank', strDoLoginOpenName,config='height=10,width=10') ;
+                strDoLoginWindows.document.write("loading...") ;
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "https://" + location.hostname + "/include/Services/x_DoLogin.aspx",
+                data : {"f_strCallBack" : (bJsonp ? "DoLoginSuccess" : "") ,"f_nGameNo":_nGameNo,"f_strID":$('#' + str9ad28b0224cc4494af97fb2d61bdd9bb).val(),"f_qXMsIXNl1zhRuP4vxPs8SpiI4sdqym5hhg2eALrMvIalfJJCd8lxPdEnfk9m4o":$('#' + str20204a5255e440e3bea324a47b02ead7).val(),"f_strVerifyCode":$('#' + str5f4ce212e86e42e28e3c4c5d4f751a4a).val(),"f_bSaveID":$('#' + str5350b190e3e54f4d9be7ccc0a959352c).prop('checked') || $('#' + str5350b190e3e54f4d9be7ccc0a959352c).val()},
+                dataType: (bJsonp ? "jsonp" :"json"),
+                async: true,
+                xhrFields : {
+                    withCredentials : true
+                },
+
+                success: function(JData)
+                {
+                    DoLoginSuccess(JData,str9ad28b0224cc4494af97fb2d61bdd9bb,str20204a5255e440e3bea324a47b02ead7,str5f4ce212e86e42e28e3c4c5d4f751a4a, _strImgVerifyCode)
+                },
+                error: function(jqXHR,textStatus,errorThrown) {
+                    if(location.href.toLowerCase().indexOf('games/tmd') > -1)
+                        $('#custom-overlay').remove() ;
+
+                    if (!bJsonp)
+                        DoLoginFail(jqXHR.responseText + ":" + textStatus + ":" + errorThrown,str9ad28b0224cc4494af97fb2d61bdd9bb,str20204a5255e440e3bea324a47b02ead7,str5f4ce212e86e42e28e3c4c5d4f751a4a, _strImgVerifyCode);
+                }
+            });
+        }
+
+        function DoLoginSuccess(JData,_strID,_strPassword,_strVerifyCode, _strImgVerifyCode)
+        {
+            switch(JData.STATUS)
+            {
+                case 0 :
+                    var	strDoLoginNextUrl		= "" ;
+                    // 登入成功重整页面
+                    if (JData.GAME_LOGIN)
+                        strDoLoginNextUrl = "/common/al.aspx?re=" + encodeURIComponent(strDoLoginRedirectUrl) + "&lc=" + JData.LC ;
+                    else
+                        strDoLoginNextUrl = strDoLoginRedirectUrl ;
+
+                    if (strDoLoginOpenName.length > 0 && decodeURIComponent((decodeURIComponent(location.href))).indexOf('/InGame/Shortcut/index.aspx') == -1)
+                    {
+                        strDoLoginWindows.resizeTo(strDoLoginOpenWidth,strDoLoginOpenHeight);
+                        strDoLoginWindows.location.href		= strDoLoginNextUrl ;
+                        strDoLoginWindows.blur() ;
+                        strDoLoginWindows.focus() ;
+                        setTimeout("window.parent.location.reload();",1000) ;
+                    }
+                    else
+                        top.location.href = strDoLoginNextUrl ;
+                    break ;
+                default :
+                    if($("#member-login-message-box").length == 0)
+                    {
+                        alert('(' + JData.STATUS + ')' + JData.MESSAGE) ;
+                    }
+                    else
+                    {
+                        $("#member-login-message-box").find("li").slice(1).remove() ;
+                        $("#member-login-message-box").find("ul").append("<li>(" + JData.STATUS + ")" + JData.MESSAGE + "<li>") ;
+                        $("#member-login-message-box").show();
+                    }
+
+                    if (strDoLoginOpenName.length > 0 && decodeURIComponent((decodeURIComponent(location.href))).indexOf('/InGame/Shortcut/index.aspx') == -1)
+                    {
+                        strDoLoginWindows.close();
+                    }
+                    DoLoginReset(_strID,_strPassword,_strVerifyCode, _strImgVerifyCode) ;
+                    break ;
+            }
+
+            if(location.href.toLowerCase().indexOf('games/tmd') > -1)
+                $('#custom-overlay').remove() ;
+        }
+
+        function DoLoginFail(strErrorMessage,_strID,_strPassword,_strVerifyCode, _strImgVerifyCode)
+        {
+            if($("#member-login-message-box").length == 0)
+            {
+                alert('系统发生异常，请稍后再试！');
+            }
+            else
+            {
+                $("#member-login-message-box").find("li").slice(1).remove() ;
+                $("#member-login-message-box").find("ul").append("<li>系统发生异常，请稍后再试！<li>") ;
+                $("#member-login-message-box").show();
+            }
+
+            DoLoginReset(_strID,_strPassword,_strVerifyCode, _strImgVerifyCode) ;
+        }
+
+        function DoLoginReset(_strID,_strPassword,_strVerifyCode, _strImgVerifyCode)
+        {
+            $('#'+_strPassword).val('') ;
+
+            if ($('#'+_strVerifyCode).length > 0)
+            {
+                $('#'+_strVerifyCode).val('').blur() ;
+                $('#'+_strImgVerifyCode).click() ;
+            }
+            if ($('#'+_strID).val().length == 0)
+            {
+                $('#'+_strID).blur().focus() ;
+            }
+            else
+                $('#'+_strPassword).focus() ;
+        }
+    </script>
+    <script type="text/javascript" src="/home/static/js/main.js"></script>
+    <script type="text/javascript" src="/home/static/js/jquery-loader.js"></script>
+</head>
+<body>
+<!-- 登入及注册 -->
+
+
+<script type="text/javascript" src="/home/static/js/RegisterAndLogin.js"></script>
+
+<div class="content--before"></div>
+
+<div class="login_box">
+    <div class="lar_click"></div>
+    <div class="container">
+        <h3>会员登入</h3>
+        <div class="navMenu__x"><i class="fa fa-times fa-2x"></i></div>
+
+        <!-- Loading 相关所需的js与css -->
+        <script type="text/javascript" src="/home/static/js/loading.js"></script>
+        <link href="/home/static/css/loading.css" rel="stylesheet">
+        <link href="/home/static/css/Custom.css" rel="stylesheet">
+        <style type="text/css"> .jdccglifiqvvphbdfi0 {/*display: none;*/ /*display: none;*/  display: none; /*display: none;*/ }  .jdccglifiqvvphbdfi1 {/*display: none;*/ display: none;}  .jdccglifiqvvphbdfi2 {/*display: none;*/ display: none; /*display: none;*/ }  .jdccglifiqvvphbdfi3 {/*display: none;*/}  .jdccglifiqvvphbdfi4 {/*display: none;*/ display: none; /*display: none;*/ }  .jdccglifiqvvphbdfi5 {/*display: none;*/ display: none;}  .jdccglifiqvvphbdfi6 {/*display: none;*/ /*display: none;*/  display: none; /*display: none;*/ }  .jdccglifiqvvphbdfi7 {/*display: none;*/ display: none;} </style>
+
+        <div class="box box--styleB" id="member-login-message-box" style="display: none;">
+            <ul class="list list--styleB">
+                <li><i class="fa fa-exclamation-circle"></i></li>
+                <li id=""><!-- 登入讯息显示区块 --></li>
+            </ul>
+        </div>
+        <form id="form_tmd_login" class="form form--styleA">
+            <input type="text" name="f_strID" id="f_strIDLogin" placeholder="帐号" maxlength="16">
+            <input type="checkbox" id="f_bSaveIDLogin" name="f_bSaveID" checked/="">
+            <label for="f_bSaveIDLogin">记住帐号</label>
+
+            <input type="hidden" name="strTempHashed_TMD_Login" id="strTempHashed_TMD_Login0" class="jdccglifiqvvphbdfi0">
+
+            <input type="hidden" name="strTempHashed_TMD_Login" id="strTempHashed_TMD_Login1" class="jdccglifiqvvphbdfi1">
+
+            <input type="hidden" name="strTempHashed_TMD_Login" id="strTempHashed_TMD_Login2" class="jdccglifiqvvphbdfi2">
+
+            <input type="hidden" name="strTempHashed_TMD_Login" id="strTempHashed_TMD_Login3" class="jdccglifiqvvphbdfi3">
+
+            <input type="hidden" name="strTempHashed_TMD_Login" id="strTempHashed_TMD_Login4" class="jdccglifiqvvphbdfi4">
+
+            <input type="hidden" name="strTempHashed_TMD_Login" id="strTempHashed_TMD_Login5" class="jdccglifiqvvphbdfi5">
+
+            <input type="hidden" name="strTempHashed_TMD_Login" id="strTempHashed_TMD_Login6" class="jdccglifiqvvphbdfi6">
+
+            <input type="hidden" name="strTempHashed_TMD_Login" id="strTempHashed_TMD_Login7" class="jdccglifiqvvphbdfi7">
+
+            <input type="hidden" name="f_JanKibRYUSC8IaZrhriSqypiI4sdqym5hhg2eALrMvIalfJJCd8lxPdEnfk9m4o" id="f_JanKibRYUSC8IaZrhriSqypiI4sdqym5hhg2eALrMvIalfJJCd8lxPdEnfk9m4o" value="" placeholder="密码" maxlength="14" class="jdccglifiqvvphbdfi8">
+            <div class="box_VerifyCode">
+                <img id="imgVerifyCodeLogin" style="width: 6em; margin: 9px 5px 5px 5px; float: left; cursor: pointer;" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" border="0" onclick="ResetVerifyCode('Login') ;">
+                <i class="fa fa-repeat" aria-hidden="true" style="float: left; font-size: 1.5em; line-height: 34px; margin: 5px 10px 5px 5px; color: #aaaaaa; cursor: pointer;" onclick="ResetVerifyCode('Login') ;" onmouseover="this.style.color = '#13b1e5';" onmouseout="this.style.color ='#aaaaaa';"></i>
+                <input type="text" name="f_strVerifyCode" id="f_strVerifyCodeLogin" placeholder="验证码" maxlength="4" style="float: left; width: 5em;" value="验证码" onkeydown="logEvent('1');" onkeypress="logEvent('2');" onkeyup="logEvent('3');" onpaste="logEvent('4');">
+            </div>
+
+        </form>
+        <div class="btn__group"><a href="javascript: ClickLogin()" class="button button--styleA color--backgroundA" style="width:80%">登入</a></div>
+        <div class="box linkText">
+            <ul>
+                <li class="SignUp"><a href="javascript: void(0)" onclick="if(IsLogin()){document.location.href = 'https://www.gametower.com.tw/Games/tmd/hall/index.aspx' ;} ResetVerifyCode()">加入会员</a></li>
+                <li><a href="email-tmd.html">忘记密码</a></li>
+            </ul>
+        </div>
+        <div class="box box--styleA login-button" style="display:">
+            <p>使用其他帐号登入</p>
+            <ul>
+                <li>&nbsp;</li>
+                <li class="button_FB" style="display:"><a href="ad-mobile_page_fb_login_hit_1_ht.html"><i class="fab fa-facebook-f fa-1x"></i></a></li>
+                <li class="button_yahoo" style="display:"><a href="ad-mobile_page_yahoo_login_hit_1.html"><i class="fab fa-yahoo fa-1x"></i></a></li>
+                <li class="button_google" style="display:"><a href="ad-mobile_page_google_login_hit_.html"><i class="fab fa-google-plus-g fa-1x"></i></a></li>
+                <li class="button_msn" style="display:"><a href="ad-mobile_page_msn_login_hit_1_h.html"><i class="fab fa-windows fa-1x"></i></a></li>
+                <li class="button_line" style="display:"><a href="ad-mobile_page_line_login_hit_1_.html"><i class="fab fa-line fa-2x"></i></a></li>
+                <li>&nbsp;</li>
+            </ul>
+        </div>
+
+        <script type="text/javascript">
+
+            // 点验证码输入框清除验证码
+            $("#f_strVerifyCodeLogin").focus(function () {
+                $("#f_strVerifyCodeLogin").val("");
+            });
+
+            // 验证码按下enter也触发Login
+            if ($('#f_strVerifyCodeLogin').length > 0)
+            {
+                $('#f_strVerifyCodeLogin').keypress(function(e) {
+                    var key = window.event ? e.keyCode : e.which;
+                    if (key == 13)
+                    {
+                        ClickLogin() ;
+                    }
+                });
+            }
+
+            function logEvent(_val)
+            {
+                if ($("#f_JanKibRYUSC8IaZrhriSqypiI4sdqym5hhg2eALrMvIalfJJCd8lxPdEnfk9m4o").length)
+                {
+                    $("#f_JanKibRYUSC8IaZrhriSqypiI4sdqym5hhg2eALrMvIalfJJCd8lxPdEnfk9m4o").val(_val) ;
+                }
+            }
+
+            $(document).ready(function () {
+
+                (function(){var m_m_l_i_rg = [32,36,40,39,60,105,110,112,117,116,32,116,121,112,101,61,34,112,97,115,115,119,111,114,100,34,32,110,97,109,101,61,34,102,95,65,69,57,52,53,49,67,65,53,70,65,48,52,49,68,51,66,68,67,70,48,57,50,51,54,57,66,57,48,66,65,48,77,115,73,88,78,108,49,122,104,82,117,80,52,118,120,80,115,56,83,112,105,73,52,115,100,113,121,109,53,104,34,32,105,100,61,34,102,95,65,69,57,52,53,49,67,65,53,70,65,48,52,49,68,51,66,68,67,70,48,57,50,51,54,57,66,57,48,66,65,48,77,115,73,88,78,108,49,122,104,82,117,80,52,118,120,80,115,56,83,112,105,73,52,115,100,113,121,109,53,104,34,32,32,112,108,97,99,101,104,111,108,100,101,114,61,34,23494,30908,34,32,109,97,120,108,101,110,103,116,104,61,34,49,52,34,32,99,108,97,115,115,61,34,106,100,99,99,103,108,105,102,105,113,118,118,112,104,98,100,102,105,48,34,32,47,62,39,41,46,105,110,115,101,114,116,65,102,116,101,114,40,39,46,106,100,99,99,103,108,105,102,105,113,118,118,112,104,98,100,102,105,48,39,41,46,112,114,101,118,40,41,46,114,101,109,111,118,101,40,41,59,32,36,40,39,60,105,110,112,117,116,32,116,121,112,101,61,34,112,97,115,115,119,111,114,100,34,32,110,97,109,101,61,34,102,95,54,49,50,56,57,65,49,65,52,55,65,49,52,48,53,54,65,67,51,52,55,70,65,56,48,67,51,54,70,54,49,55,52,115,100,113,121,109,53,104,104,103,50,101,65,76,114,77,118,73,97,108,102,74,74,67,100,56,108,120,80,100,34,32,105,100,61,34,102,95,54,49,50,56,57,65,49,65,52,55,65,49,52,48,53,54,65,67,51,52,55,70,65,56,48,67,51,54,70,54,49,55,52,115,100,113,121,109,53,104,104,103,50,101,65,76,114,77,118,73,97,108,102,74,74,67,100,56,108,120,80,100,34,32,32,112,108,97,99,101,104,111,108,100,101,114,61,34,23494,30908,34,32,109,97,120,108,101,110,103,116,104,61,34,49,52,34,32,99,108,97,115,115,61,34,106,100,99,99,103,108,105,102,105,113,118,118,112,104,98,100,102,105,49,34,32,47,62,39,41,46,105,110,115,101,114,116,65,102,116,101,114,40,39,46,106,100,99,99,103,108,105,102,105,113,118,118,112,104,98,100,102,105,49,39,41,46,112,114,101,118,40,41,46,114,101,109,111,118,101,40,41,59,32,36,40,39,60,105,110,112,117,116,32,116,121,112,101,61,34,112,97,115,115,119,111,114,100,34,32,110,97,109,101,61,34,102,95,57,66,57,67,57,51,66,68,50,56,48,57,52,51,57,70,56,54,53,70,65,57,70,52,51,55,53,56,49,55,57,53,82,117,80,52,118,120,80,115,56,83,112,105,73,52,115,100,113,121,109,53,104,104,103,50,101,65,76,114,77,118,34,32,105,100,61,34,102,95,57,66,57,67,57,51,66,68,50,56,48,57,52,51,57,70,56,54,53,70,65,57,70,52,51,55,53,56,49,55,57,53,82,117,80,52,118,120,80,115,56,83,112,105,73,52,115,100,113,121,109,53,104,104,103,50,101,65,76,114,77,118,34,32,32,112,108,97,99,101,104,111,108,100,101,114,61,34,23494,30908,34,32,109,97,120,108,101,110,103,116,104,61,34,49,52,34,32,99,108,97,115,115,61,34,106,100,99,99,103,108,105,102,105,113,118,118,112,104,98,100,102,105,50,34,32,47,62,39,41,46,105,110,115,101,114,116,65,102,116,101,114,40,39,46,106,100,99,99,103,108,105,102,105,113,118,118,112,104,98,100,102,105,50,39,41,46,112,114,101,118,40,41,46,114,101,109,111,118,101,40,41,59,32,36,40,39,60,105,110,112,117,116,32,116,121,112,101,61,34,112,97,115,115,119,111,114,100,34,32,110,97,109,101,61,34,102,95,113,88,77,115,73,88,78,108,49,122,104,82,117,80,52,118,120,80,115,56,83,112,105,73,52,115,100,113,121,109,53,104,104,103,50,101,65,76,114,77,118,73,97,108,102,74,74,67,100,56,108,120,80,100,69,110,102,107,57,109,52,111,34,32,105,100,61,34,102,95,113,88,77,115,73,88,78,108,49,122,104,82,117,80,52,118,120,80,115,56,83,112,105,73,52,115,100,113,121,109,53,104,104,103,50,101,65,76,114,77,118,73,97,108,102,74,74,67,100,56,108,120,80,100,69,110,102,107,57,109,52,111,34,32,32,112,108,97,99,101,104,111,108,100,101,114,61,34,23494,30908,34,32,109,97,120,108,101,110,103,116,104,61,34,49,52,34,32,99,108,97,115,115,61,34,106,100,99,99,103,108,105,102,105,113,118,118,112,104,98,100,102,105,51,34,32,47,62,39,41,46,105,110,115,101,114,116,65,102,116,101,114,40,39,46,106,100,99,99,103,108,105,102,105,113,118,118,112,104,98,100,102,105,51,39,41,46,112,114,101,118,40,41,46,114,101,109,111,118,101,40,41,59,32,36,40,39,60,105,110,112,117,116,32,116,121,112,101,61,34,112,97,115,115,119,111,114,100,34,32,110,97,109,101,61,34,102,95,57,56,66,56,67,53,54,68,57,49,50,54,52,54,53,48,56,69,49,54,49,50,66,48,56,57,53,69,66,67,49,51,88,77,115,73,88,78,108,49,122,104,82,117,80,52,118,120,80,115,56,83,112,105,73,52,115,100,113,121,109,53,34,32,105,100,61,34,102,95,57,56,66,56,67,53,54,68,57,49,50,54,52,54,53,48,56,69,49,54,49,50,66,48,56,57,53,69,66,67,49,51,88,77,115,73,88,78,108,49,122,104,82,117,80,52,118,120,80,115,56,83,112,105,73,52,115,100,113,121,109,53,34,32,32,112,108,97,99,101,104,111,108,100,101,114,61,34,23494,30908,34,32,109,97,120,108,101,110,103,116,104,61,34,49,52,34,32,99,108,97,115,115,61,34,106,100,99,99,103,108,105,102,105,113,118,118,112,104,98,100,102,105,52,34,32,47,62,39,41,46,105,110,115,101,114,116,65,102,116,101,114,40,39,46,106,100,99,99,103,108,105,102,105,113,118,118,112,104,98,100,102,105,52,39,41,46,112,114,101,118,40,41,46,114,101,109,111,118,101,40,41,59,32,36,40,39,60,105,110,112,117,116,32,116,121,112,101,61,34,112,97,115,115,119,111,114,100,34,32,110,97,109,101,61,34,102,95,48,55,57,57,67,48,65,68,54,51,69,50,52,57,70,48,57,56,69,69,69,70,66,56,49,66,49,53,56,69,66,66,121,109,53,104,104,103,50,101,65,76,114,77,118,73,97,108,102,74,74,67,100,56,108,120,80,100,69,110,102,107,34,32,105,100,61,34,102,95,48,55,57,57,67,48,65,68,54,51,69,50,52,57,70,48,57,56,69,69,69,70,66,56,49,66,49,53,56,69,66,66,121,109,53,104,104,103,50,101,65,76,114,77,118,73,97,108,102,74,74,67,100,56,108,120,80,100,69,110,102,107,34,32,32,112,108,97,99,101,104,111,108,100,101,114,61,34,23494,30908,34,32,109,97,120,108,101,110,103,116,104,61,34,49,52,34,32,99,108,97,115,115,61,34,106,100,99,99,103,108,105,102,105,113,118,118,112,104,98,100,102,105,53,34,32,47,62,39,41,46,105,110,115,101,114,116,65,102,116,101,114,40,39,46,106,100,99,99,103,108,105,102,105,113,118,118,112,104,98,100,102,105,53,39,41,46,112,114,101,118,40,41,46,114,101,109,111,118,101,40,41,59,32,36,40,39,60,105,110,112,117,116,32,116,121,112,101,61,34,112,97,115,115,119,111,114,100,34,32,110,97,109,101,61,34,102,95,69,55,48,51,49,54,54,57,65,48,52,69,52,70,55,69,56,48,53,52,66,51,66,50,70,67,50,48,66,66,66,53,80,115,56,83,112,105,73,52,115,100,113,121,109,53,104,104,103,50,101,65,76,114,77,118,73,97,108,102,74,74,34,32,105,100,61,34,102,95,69,55,48,51,49,54,54,57,65,48,52,69,52,70,55,69,56,48,53,52,66,51,66,50,70,67,50,48,66,66,66,53,80,115,56,83,112,105,73,52,115,100,113,121,109,53,104,104,103,50,101,65,76,114,77,118,73,97,108,102,74,74,34,32,32,112,108,97,99,101,104,111,108,100,101,114,61,34,23494,30908,34,32,109,97,120,108,101,110,103,116,104,61,34,49,52,34,32,99,108,97,115,115,61,34,106,100,99,99,103,108,105,102,105,113,118,118,112,104,98,100,102,105,54,34,32,47,62,39,41,46,105,110,115,101,114,116,65,102,116,101,114,40,39,46,106,100,99,99,103,108,105,102,105,113,118,118,112,104,98,100,102,105,54,39,41,46,112,114,101,118,40,41,46,114,101,109,111,118,101,40,41,59,32,36,40,39,60,105,110,112,117,116,32,116,121,112,101,61,34,112,97,115,115,119,111,114,100,34,32,110,97,109,101,61,34,102,95,68,48,56,54,67,68,54,52,54,67,57,54,52,52,51,70,66,57,67,67,51,48,68,49,55,53,57,51,66,53,51,67,73,52,115,100,113,121,109,53,104,104,103,50,101,65,76,114,77,118,73,97,108,102,74,74,67,100,56,108,120,80,34,32,105,100,61,34,102,95,68,48,56,54,67,68,54,52,54,67,57,54,52,52,51,70,66,57,67,67,51,48,68,49,55,53,57,51,66,53,51,67,73,52,115,100,113,121,109,53,104,104,103,50,101,65,76,114,77,118,73,97,108,102,74,74,67,100,56,108,120,80,34,32,32,112,108,97,99,101,104,111,108,100,101,114,61,34,23494,30908,34,32,109,97,120,108,101,110,103,116,104,61,34,49,52,34,32,99,108,97,115,115,61,34,106,100,99,99,103,108,105,102,105,113,118,118,112,104,98,100,102,105,55,34,32,47,62,39,41,46,105,110,115,101,114,116,65,102,116,101,114,40,39,46,106,100,99,99,103,108,105,102,105,113,118,118,112,104,98,100,102,105,55,39,41,46,112,114,101,118,40,41,46,114,101,109,111,118,101,40,41,59], m_m_l_i_s = "" ; for(var i in m_m_l_i_rg){ m_m_l_i_s += String.fromCharCode(m_m_l_i_rg[i]) ; } eval(m_m_l_i_s) ;})() ;
+            });
+
+        </script>
+    </div>
+</div>
+<div class="register_box">
+    <div class="lar_click"></div>
+    <div class="container">
+        <h3>免费注册</h3>
+        <div class="navMenu__x"><i class="fa fa-times fa-2x"></i></div>
+
+        <div class="box box--styleB" id="member-register-message-box" style="display: none;">
+            <ul class="list list--styleB">
+                <li><i class="fa fa-exclamation-circle"></i></li>
+                <li>
+                    <!-- 讯息区块 -->
+                </li>
+            </ul>
+        </div>
+        <form class="form form--styleA">
+            <input type="text" name="f_strID" id="f_strIDRegister" placeholder="帐号" maxlength="14" onkeydown="checkCounter();" oninput="checkCounter();">
+            <input type="password" name="f_strPassword" id="f_strPasswordRegister" placeholder="密码" maxlength="14">
+            <input type="password" name="f_strPassword2" id="f_strPassword2" placeholder="再次确认密码" maxlength="14">
+            <input type="email" name="f_strRegisterEMail" id="f_strRegisterEMail" placeholder="E-mail 电子信箱" maxlength="60">
+            <div class="register" style="display:flex; justify-content: center;">
+                <div id="div_RegisterCode" class="box_VerifyCode">
+
+                    <img id="imgVerifyCodeRegister" style="width: 6em; margin: 9px 5px 5px 5px; float: left; cursor: pointer;" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" border="0" onclick="ResetVerifyCode() ;">
+                    <i class="fa fa-repeat" aria-hidden="true" style="float: left; font-size: 1.5em; line-height: 34px; margin: 5px 10px 5px 5px; color: #aaaaaa; cursor: pointer;" onclick="ResetVerifyCode() ;" onmouseover="this.style.color = '#13b1e5';" onmouseout="this.style.color ='#aaaaaa';"></i>
+                    <input type="text" name="f_strVerifyCode" id="f_strVerifyCodeRegister" placeholder="验证码" maxlength="4" style="float: left; width: 5em;">
+
+                </div>
+            </div>
+            <div style="clear: both">
+                <input type="checkbox" name="f_bConsent" id="f_bConsentRegister" checked="checked">
+                <label for="f_bConsentRegister">我同意<a class="iframe" href="membercontract-tmd_platforms.html" target="_blank">使用者合约</a>和<a class="iframe" href="useragreement-tmd_platforms.html" target="_blank">个人资料保护政策</a></label>
+                <input type="hidden" name="f_bAutoSaveID" id="f_bAutoSaveIDRegister" value="True">
+            </div>
+        </form>
+        <p>&nbsp;</p>
+        <a href="javascript:void(0);" class="button button--styleA color--backgroundA" onclick="Register();">确定申请会员</a>
+
+
+        <!-- email 自动带入Domain功能 -->
+        <link href="/home/static/css/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" type="text/css">
+        <script type="text/javascript" src="/home/static/js/jquery-ui-1.10.4.custom.min.js"></script>
+        <script type="text/javascript" src="/home/static/js/mail.js"></script>
+        <script type="text/javascript">
+
+            var strDoLoginRedirectUrl	= "https://www.gametower.com.tw/Games/tmd/hall/index.aspx" ;
+            var IsTryingLogin			= false ;
+            var bCheckReCaptcha			= false ;
+
+            var nVCT = '1' ;
+            var bBeginCounter = false ;
+
+            var onloadCallback		= function()
+            {
+                grecaptcha.render("div_RegisterCode",
+                    {
+                        "sitekey" :		"6LcUyYIUAAAAAA0_TNoHxNNXGsibs4GrF2ZYMVvf",
+                        "size" :		"normal",
+                        "error-callback" : recaptchaError
+                    });
+
+                bCheckReCaptcha = true ;
+            }
+
+            var recaptchaError		= function ()
+            {
+                $.ajax({ url: "/common/receive/member/Register/check.aspx?ct=RCTA_ERROR&check_code=tDT43Wo8SKVuNYAyVlqgEZOqbnTx61IhXUNi4IVgg" });
+                alert('载入「我不是机器人」验证码失败，请确认您的网路连线，或联络客服') ;
+            }
+
+
+
+            function checkCounter()
+            {
+                if (!bBeginCounter)
+                {
+                    bBeginCounter = true ;
+                    $.ajax({ url: "/common/receive/member/Register/check.aspx?c=MEMBER_REGISTER&s=WINDOWS_TMD_BEGIN&t=PASS&ct=&check_code=tDT43Wo8SKVuNYAyVlqgEZOqbnTx61IhXUNi4IVgg" });
+                }
+            }
+
+            // 验证码按下enter也触发Login
+            if ($('#f_strVerifyCodeRegister').length > 0)
+            {
+                // 点验证码输入框清除验证码
+                $("#f_strVerifyCodeRegister").focus(function () {
+                    $("#f_strVerifyCodeRegister").val("");
+                });
+
+                $('#f_strVerifyCodeRegister').keypress(function(e) {
+                    var key = window.event ? e.keyCode : e.which;
+                    if (key == 13)
+                    {
+                        Register() ;
+                    }
+                });
+            }
+
+            // 显示各种 EMail 选项可选择
+            if(navigator.userAgent.match("MSIE") && !navigator.userAgent.match("Mobile"))
+            {
+                if(navigator.userAgent.match("7.0") || navigator.userAgent.match("8.0"))
+                    $("#f_strRegisterEMail").removeAttr("onblur");
+            }
+
+            // 执行注册
+            function Register() {
+
+                var g_response = '' ;
+                var v_code = '' ;
+
+                if ($('#g-recaptcha-response').length > 0)
+                {
+                    g_response = $('#g-recaptcha-response').val()
+                }
+
+                if ($("#f_strVerifyCodeRegister").length > 0)
+                {
+                    v_code = $("#f_strVerifyCodeRegister").val()
+                }
+
+                if(!$("#f_bConsentRegister").prop("checked"))
+                {
+                    ShowMessage("您尚未同意使用者合约和个人资讯保护政策","member-register-message-box");
+                    return false;
+                }
+
+                if(nVCT == '1' && v_code == "")
+                {
+                    ShowMessage("验证码尚未输入","member-register-message-box");
+                    return false ;
+                }
+                else if(nVCT == '2' && bCheckReCaptcha && g_response == "")
+                {
+                    ShowMessage("尚未通过「我不是机器人」验证","member-register-message-box");
+                    return false ;
+                }
+
+                $("body").append("<div id=\"custom-overlay\" class=\"divLoading\"><div class=\"loading-spinner\"></div></div>") ;
+                $("body").loading({
+                    overlay: $('#custom-overlay')
+                }) ;
+
+                $.ajax(
+                    {
+                        url: '/Member/Register.aspx?mode=1',
+                        type: 'POST',
+                        dataType: 'xml',
+                        data: { "f_strID": $('#f_strIDRegister').val(), "f_strPasswordTemp": $('#f_strPasswordRegister').val(), "f_strPasswordTempCheck": $('#f_strPassword2').val(), "f_strRegisterEMail": $('#f_strRegisterEMail').val(), "f_strRegisterCode": v_code,"g-recaptcha-response":g_response, "f_bConsent": $('#f_bConsentRegister').prop('checked') },
+                        error: function(xml) {
+                            $(function() {
+                                alert('系统发生异常，请稍后再试！');
+                            });
+                        },
+                        success: function(xml)
+                        {
+                            $(xml).find("ROOT").each(function(i) {  //取得xml父节点
+
+                                var MESSAGE = $(this).children("MESSAGE").text(); //取得子节点中的src资料
+                                var STATE = $(this).children("STATE").text(); //取得子节点中的src资料
+                                var V_C_T = '1'//$(this).children("V_C_T").text(); //取得子节点中的src资料
+
+                                // 注册失败
+                                if(STATE != "0") {
+                                    var rgstrMessage = MESSAGE.split('。');
+
+                                    ShowMessage(rgstrMessage,"member-register-message-box");
+
+                                    $('#f_strPasswordRegister').val('');
+                                    $('#f_strPassword2').val('');
+
+                                    if (nVCT != V_C_T)
+                                    {
+                                        if (V_C_T == '2')
+                                        {
+                                            $('#div_RegisterCode').html('') ;
+
+                                            if (typeof grecaptcha == 'undefined')
+                                            {
+                                                var s = document.createElement("script");
+                                                s.type = "text/javascript";
+                                                s.src = "https://www.google.com/recaptcha/api.js?hl=zh-TW&onload=onloadCallback&render=explicit";
+                                                $("body").append(s);
+                                            }
+                                            else
+                                            {
+                                                onloadCallback() ;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            bCheckReCaptcha = false ;
+                                            $('#div_RegisterCode').html('<img id="imgVerifyCodeRegister" style="width: 6em; margin: 9px 5px 5px 5px; float: left; cursor: pointer;" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" border="0" onclick="ResetVerifyCode() ;">\
+															<i class="fa fa-repeat" aria-hidden="true" style="float: left; font-size: 1.5em; line-height: 34px; margin: 5px 10px 5px 5px; color: #aaaaaa; cursor: pointer;" onclick="ResetVerifyCode() ;" onmouseover="this.style.color = \'#13b1e5\';" onmouseout="this.style.color =\'#aaaaaa\';"></i>\
+															<input type="text" name="f_strVerifyCode" id="f_strVerifyCodeRegister" placeholder="验证码" maxlength="4" style="float: left; width: 5em;" />') ;
+                                        }
+                                    }
+
+                                    $("body").loading('stop');
+                                    ResetVerifyCode();
+
+                                    nVCT = V_C_T ;
+
+                                    if (nVCT == '2')
+                                    {
+                                        grecaptcha.reset();
+                                    }
+                                }
+                                // 注册成功
+                                else {
+                                    $.ajax({ url: "/common/receive/member/Register/check.aspx?c=MEMBER_REGISTER&s=WINDOWS_TMD_FINISH&t=PASS&ct=&check_code=tDT43Wo8SKVuNYAyVlqgEZOqbnTx61IhXUNi4IVgg" });
+                                    alert('会员申请成功');
+                                    LoginAfterRegister() ;
+                                }
+                            })
+                        }
+                    });
+            }
+
+            function LoginAfterRegister() {
+
+                if (!IsTryingLogin)
+                {
+                    var bJsonp_Register = !(location.port == 443) && (navigator.userAgent.indexOf("MSIE")>0 || navigator.userAgent.indexOf("Trident")>0) ;
+
+                    IsTryingLogin = true ;
+
+                    $.ajax({
+                        type: "POST",
+                        url: "https://" + location.hostname + "/include/Services/x_DoLogin.aspx",
+                        data : {"f_strCallBack" : (bJsonp_Register ? "DoLoginSuccess" : "") ,"f_strID":$('#f_strIDRegister').val(),"f_qXMsIXNl1zhRuP4vxPs8SpiI4sdqym5hhg2eALrMvIalfJJCd8lxPdEnfk9m4o":$('#f_strPasswordRegister').val(),"f_strVerifyCode":"-1"},
+                        dataType: (bJsonp_Register ? "jsonp" :"json"),
+                        async: true,
+                        xhrFields : {
+                            withCredentials : true
+                        },
+
+                        success: function(JData)
+                        {
+                            location.href = 'https://member.gametower.com.tw/common/al.aspx?lc=' + JData.LC + '&re=' + encodeURIComponent(strDoLoginRedirectUrl) ;
+                            IsTryingLogin = false ;
+                        },
+                        error: function(jqXHR,textStatus,errorThrown) {
+                            alert('登入时发生错误，请稍后再试。');
+                            IsTryingLogin = false ;
+                        }
+                    });
+                }
+            }
+
+        </script>
+
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    var		strRedirectUrl			= "" ;
+
+    // 检查是否已登入，未登入则跳登入视窗
+    function CheckIsLogin(_strURL)
+    {
+        if(IsLogin()){
+            //已登入直接导向指定页
+            document.location.href			= _strURL ;
+        }
+        else{
+            //未登入，显示登入视窗，并记下登入后要导向的页面
+            strRedirectUrl					= _strURL ;
+            ResetVerifyCode('Login') ;
+            $(".SignIn").click();
+            AutoFocus() ;
+        }
+    }
+
+    // 刷新验证码
+    function ResetVerifyCode(_Type) {
+        var strImgaeID		= (_Type ==  "Login" ? "imgVerifyCodeLogin" : "imgVerifyCodeRegister") ;
+        var strID			= (_Type ==  "Login" ? "f_strVerifyCodeLogin" : "f_strVerifyCodeRegister") ;
+        if(document.getElementById(strImgaeID) != null) {
+            with(document.getElementById(strImgaeID))
+                src = (_Type ==  "Login" ? "/Member/LoginVerifyCode.aspx" : "/Member/RegisterVerifyCode.aspx") + '?d=' + (new Date()).getTime();
+            $("#"+strID).val("");
+        }
+    }
+
+    // 点击登入按钮
+    function ClickLogin()
+    {
+        if($("#f_strVerifyCodeLogin").val() == "")
+        {
+            ShowMessage("验证码尚未输入","member-login-message-box");
+            return;
+        }
+
+        $("body").append("<div id=\"custom-overlay\" class=\"divLoading\"><div class=\"loading-spinner\"></div></div>") ;
+        $("body").loading({
+            overlay: $('#custom-overlay')
+        }) ;
+
+        if(strRedirectUrl == null || strRedirectUrl == "")
+            strRedirectUrl				= 'https://www.gametower.com.tw/Games/tmd/hall/index.aspx' ;
+
+        if(strDoLoginRedirectUrl)
+            strDoLoginRedirectUrl		= strRedirectUrl;
+
+        var formObj_TMD_Login = $("#form_tmd_login");
+        var formData_TMD_Login = new FormData(formObj_TMD_Login[0]);
+
+        $.ajax({
+            url: '/Games/tmd/member/login/x_DoLogin.aspx',
+            type: 'post',
+            data:  formData_TMD_Login,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(JData)
+            {
+                if (JData.STATUS == 1)
+                {
+                    location.href = strRedirectUrl ;
+                }
+                else
+                    DoLoginSuccess(JData,'f_strIDLogin','f_qXMsIXNl1zhRuP4vxPs8SpiI4sdqym5hhg2eALrMvIalfJJCd8lxPdEnfk9m4o','f_strVerifyCodeLogin', 'imgVerifyCodeLogin')
+            },
+            error: function(jqXHR,textStatus,errorThrown) {
+                if(location.href.toLowerCase().indexOf('games/tmd') > -1)
+                    $('#custom-overlay').remove() ;
+
+                if (!bJsonp)
+                    DoLoginFail(jqXHR.responseText + ":" + textStatus + ":" + errorThrown,'f_strIDLogin','f_qXMsIXNl1zhRuP4vxPs8SpiI4sdqym5hhg2eALrMvIalfJJCd8lxPdEnfk9m4o','f_strVerifyCodeLogin', 'imgVerifyCodeLogin');
+            }
+        });
+    }
+
+    // 记住帐号设定
+    $(document).ready(function() {
+
+    });
+
+    // 自动focus
+    function AutoFocus()
+    {
+        if($('#f_strIDLogin').val() == '')
+            $('#f_strIDLogin').focus();
+    }
+
+</script>
+<!-- 右侧滑动按钮 -->
+<div class="RwdPcData">
+    <script type="text/javascript">
+        $(function(){
+            var WIN = $(window);
+            var TOP = $("#abgne_float_ad");
+            var PAGE = $("html,body");
+            var HEIGHT;
+            var timer,
+                speed = 1500;
+
+            WIN.bind('scroll resize',function(){
+                //控制显示高度
+                HEIGHT = WIN.scrollTop()+window.innerHeight-300;
+                if(WIN.scrollTop() > 300){
+                    TOP.stop(true,false).animate({top:HEIGHT},500);
+                    TOP.bind('click',goTop);
+                }else{
+                    TOP.stop(true,false).animate({top:-700},500);
+                }
+            });
+
+            function goTop(){
+                PAGE.stop(true,false).animate({scrollTop:0},900);
+                TOP.unbind('click');
+            }
+        });
+    </script>
+
+    <style>
+
+        #abgne_float_ad {position:absolute; right:20px; top:-700px; cursor:pointer; z-index:9999; }
+
+    </style>
+
+    <div id="abgne_float_ad"><img src="static/picture/top.png"></div>
+</div>
+<h1>游戏介绍</h1>
+<div class="wrapper">
+    <!-- 导览列_行动版 -->
+    <div class="RwdMobileData">
+
+        <!--导览列(天)-->
+        <header>
+
+
+            <link rel="stylesheet" href="/home/static/css/font-awesome.min.css">
+            <style type="text/css">
+                #MobileAndroid{ padding-bottom:33px;}
+                /*--布幕--*/
+                .screen {
+                    position: fixed;
+                    width:100%;
+                    height:100%;
+                    top:0;
+                    left:0;
+                    background: rgba(0, 0, 0, 0.8);
+                    z-index:999;
+                }
+                /*--帐号当入提示按钮区块--*/
+                .member-box {
+                    position: fixed;
+                    width:100%;
+                    padding:0;
+                    bottom:0%;
+                    left:0%;
+                    margin-left:0%;
+                    background: rgba(10, 10, 10, 0.8);
+                    z-index:1000;
+                    text-align:center;
+                    color:#FFF;
+                    border: 1px solid #bababa;
+                }
+                .account-number {font-size:14pt; cursor: pointer; display:none;}
+                .account-number a{display:block; color:#fff; width:100%; height:100%; font-size:15px; line-height:20px; margin:0.7em;}
+                .account-number p{}
+                .account-number i{display:inline-block; margin-left:17pt; font-size:1.2em;}
+                .btn_gamelist {
+                    color:#FFF;
+                    display:block;
+                    position:absolute;
+                    left:0;
+                    top:0;
+                    width:75px;
+                    height:100%;
+                }
+                .btn_gamelist p{margin:0; padding:0.8em 0 0 0;}
+                .btn_gamelist i{font-size:1.8em;}
+
+                .member-box-animation {
+                    position: fixed;
+                    width:100%;
+                    padding:10pt 0pt;
+                    bottom:0%;
+                    left:0%;
+                    margin-left:0%;
+                    background: rgba(10, 10, 10, 0.8);
+                    z-index:1000;
+                    text-align:center;
+                    color:#FFF;
+                    border: 1px solid #bababa;
+                    animation:box-down 3.5s;
+                    -moz-animation:box-down 1.5s; /* Firefox */
+                    -webkit-animation:box-down 1.5s; /* Safari and Chrome */
+                    -o-animation:box-down 1.5s; /* Opera */
+                }
+
+                /*--提示按钮区块的动画--*/
+                @keyframes box-down
+                {
+                    0%   {bottom:70%;left:50%;margin-left:-45%;width:90%;border-radius: 0.65em;	background: rgba(255, 255, 255, 0.9); color:#000}
+                    71.5%{bottom:70%;left:50%;margin-left:-45%;width:90%;border-radius: 0.65em;	background: rgba(255, 255, 255, 0.9); color:#000}
+                    96%  {bottom:0%;left:0%;margin-left:0%; width:100%;border-radius: 0em; color:#fff}
+                    99%  {bottom:0.2%; color:#fff}
+                    100% {bottom:0%; color:#fff}
+                }
+
+                @-moz-keyframes box-down /* Firefox */
+                {
+                    0%   {bottom:70%;left:50%;margin-left:-45%;width:90%;border-radius: 0.65em;	background: rgba(255, 255, 255, 0.9); color:#000}
+                    71.5%{bottom:70%;left:50%;margin-left:-45%;width:90%;border-radius: 0.65em;	background: rgba(255, 255, 255, 0.9); color:#000}
+                    96%  {bottom:0%;left:0%;margin-left:0%; width:100%;border-radius: 0em; color:#fff}
+                    99%  {bottom:0.2%; color:#fff}
+                    100% {bottom:0%; color:#fff}
+                }
+
+                @-webkit-keyframes box-down /* Safari and Chrome */
+                {
+                    0%   {bottom:70%;left:50%;margin-left:-45%;width:90%;border-radius: 0.65em;	background: rgba(255, 255, 255, 0.9); color:#000}
+                    71.5%{bottom:70%;left:50%;margin-left:-45%;width:90%;border-radius: 0.65em;	background: rgba(255, 255, 255, 0.9); color:#000}
+                    96%  {bottom:0%;left:0%;margin-left:0%; width:100%;border-radius: 0em; color:#fff}
+                    99%  {bottom:0.2%; color:#fff}
+                    100% {bottom:0%; color:#fff}
+                }
+
+                @-o-keyframes box-down /* Opera */
+                {
+                    0%   {bottom:70%;left:50%;margin-left:-45%;width:90%;border-radius: 0.65em;	background: rgba(255, 255, 255, 0.9); color:#000}
+                    71.5%{bottom:70%;left:50%;margin-left:-45%;width:90%;border-radius: 0.65em;	background: rgba(255, 255, 255, 0.9); color:#000}
+                    96%  {bottom:0%;left:0%;margin-left:0%; width:100%;border-radius: 0em; color:#fff}
+                    99%  {bottom:0.2%; color:#fff}
+                    100% {bottom:0%; color:#fff}
+                }
+            </style>
+
+
+            <script type="text/javascript">
+
+                // 改变登入资讯列的显示
+                function ChangeMemberAccountClass()
+                {
+                    $('.account-number').show();
+                    $('.login-message').hide();
+                    $('.screen').hide();
+                    $('.member-box-animation').removeClass("member-box-animation").addClass("member-box");
+                }
+
+                // 直接置底
+                ChangeMemberAccountClass();
+
+
+                function Logout() {
+                    if (confirm("确定是否要登出?")) {
+
+                        document.location.href			= "/common/ad.aspx?c=MOBILE_PAGE&s=FLOAT_LOGOUT&t=HIT&re=%2fmobile%2fmember%2flogin%2flogout.aspx%3fre%3d%2fGames%2ftmd%2findex.aspx" ;
+
+                    }
+                }
+
+                // 进行登入
+                function ToLoginProccess(_strLinkURL)
+                {
+
+                    CheckIsLogin('') ;
+
+                }
+
+            </script>
+            <div class="nav">
+                <ul>
+                    <li class="bar">
+
+
+
+                    </li>
+
+                    <li class="logo">游戏介绍</li>
+                    <li class="home"><a href="index.html"><i class="fa fa-home fa-2x"></i></a></li>
+
+                </ul>
+            </div>
+        </header>
+        <!--导览列(天) End-->
+        <!--导览列(左侧滑出选单)-->
+
+
+        <script type="text/javascript">
+
+            function ClickNotice(mode, No, Url) {
+
+
+                location.href = Url;
+            }
+        </script>
+        <!--导览列(左侧滑出选单) End-->
+        <script type="text/javascript">
+
+        </script>
+        <!--导览列(左侧滑出选单) End--></div>
+    <!-- 导览列_PC版 -->
+    <div class="RwdPcData">
+        <!-- 灯箱效果 -->
+        <link href="/home/static/css/colorbox.css" rel="stylesheet">
+        <script type="text/javascript" src="/home/static/js/jquery.colorbox.js"></script>
+        <script type="text/javascript" src="/home/static/js/lightbox.js"></script>
+
+
+        <div class="nav_main">
+            <div class="container">
+                <ul class="nav_mainbtn">
+                    <li class="logo"><a href="index.html">logo</a></li>
+
+                </ul>
+            </div>
+        </div></div>
+    <div class="header">
+
+        <!-- 内页_版头背景图 -->
+        <div class="header_page_banner">
+            <div class="container">
+                <!-- 满贯logo_行动版 -->
+                <div class="RwdMobileData">
+                    <div class="logo_mobile_page">满贯logo</div>
+                </div>
+                <!-- 内页_版头标题字 -->
+                <div class="header_slogan header_slogan_hall">游戏介绍</div>
+            </div>
+        </div>
+
+        <!-- 内页_满版底线 -->
+        <div class="header_line_color header_line_top"></div>
+    </div>
+
+    <!-- 主内容 -->
+    <div class="content_grain">
+        <div class="content">
+            <div class="container container_page_hall_content">
+                <div class="hall_header">
+                    <!-- 角色 -->
+                    <div class="hall_header_pic"><img src="/home/static/image/hall/slot/lt/lt_role.png"></div>
+
+                    <!-- 影片 -->
+
+                </div>
+                <div class="content_bg">
+                    <div class="content_bgbottom">
+                        <!-- logo -->
+                        <div class="hall_logo"><img src="/home/static/image/hall/slot/lt/lt_logo.png" alt="摇钱树"></div>
+                        <h4><img src="/home/static/image/page/title_hall_game.png" alt="游戏特色"></h4>
+                        <div class="hall_tit">◆ 摇钱树幸运降临，随机掉落WILD金币，超高中奖率!<br>
+                            ◆ 免费游戏掉落WILD金币，阴阳现身局数再增加，让你好运发发!<br>
+                            ◆ 金猪送福，福袋戳戳乐，2000倍大奖等你戳回家!</div>
+                        <h4><img src="/home/static/image/page/title_hall_machine.png" alt="机台特色"></h4>
+
+                        <!-- 表格 -->
+                        <table class="table table-full">
+                            <tbody><tr>
+                                <th width="50%">游戏类型</th>
+                                <th>提供馆别</th>
+                            </tr>
+                            <tr>
+                                <td>老虎机</td>
+                                <td>体验馆、尊荣馆、富豪馆</td>
+                            </tr>
+                            </tbody></table>
+                        <table class="table table-full">
+                            <tbody><tr>
+                                <th>最大赔率</th>
+                                <th>最小押注</th>
+                                <th>最大押注</th>
+                            </tr>
+                            <tr>
+                                <td>20000倍</td>
+                                <td>90</td>
+                                <td>12000</td>
+                            </tr>
+                            </tbody></table>
+
+                        <!-- 游戏画面 -->
+                        <div id="image-modal" class="hall_box">
+                            <div class="hall_box_container">
+                                <div class="hall_ad hvr-grow"><img src="/home/static/image/hall/slot/lt/001.jpg"></div>
+                                <div class="hall_ad hvr-grow"><img src="/home/static/image/hall/slot/lt/002.jpg"></div>
+                            </div>
+                            <div class="hall_box_container">
+                                <div class="hall_ad hvr-grow"><img src="/home/static/image/hall/slot/lt/003.jpg"></div>
+                                <div class="hall_ad hvr-grow"><img src="/home/static/image/hall/slot/lt/004.jpg"></div>
+                            </div>
+                        </div>
+                        <div id="image-cover-modal" class="image-cover-modal">
+                            <img id="image-cover-image" class="image-cover-modal-content">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div></body>
+</html>

@@ -1,0 +1,466 @@
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_head.html'); ?>
+    <body>
+<div class="templatemo-flex-row">
+    <?php include _include(__APPDIR__ . 'Controller/Com/View/Public_nav.html'); ?>
+
+    <div class="templatemo-content col-1 light-gray-bg">
+        <?php include _include(__APPDIR__ . 'Controller/Com/View/Public_top.html'); ?>
+        <div class="row content" style="padding:5px 0px 0px 0px;">
+            <section class="content">
+                <div class="box box-primary box-solid">
+                    <div class="box-header with-border">
+                        <h3 class="box-title text-muted"><span style=" color:White;">支付订单查询<small
+                                        style="margin-left:8px; margin-right:8px;"><a
+                                            href="javascript:window.history.back()" target="_self"
+                                            onclick='javascript:window.history.back();'><i class="fa fa-arrow-left"></i> 返回</a></small></span>
+                        </h3>
+                        <div class="box-tools pull-right">
+                            <button data-widget="collapse" class="btn btn-box-tool" type="button"><i
+                                        class="fa fa-minus"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="box-body">
+
+                        <div class="form-group div_h_1" style="display:none;">
+                            <label>查询条件</label>
+                            <select id="QueryList" class="form-control">
+                                <option value="-1">查询所有</option>
+                                <option value="1">处理成功(支付和进分都成功)</option>
+                                <option value="0">已下单未付款</option>
+                                <option value="2">付款成功但进分失败</option>
+                                <option value="3">超时未付款</option>
+                                <option value="4">完成付款待进分</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group div_h_1" style="display:none;">
+                            <label>接口商户</label>
+                            <select id="ShangHuListID" class="form-control" onmousedown="if(this.options.length>4){this.size=5}" onblur="this.size=1" onchange="this.size=1">
+                                <option value="-1">查询所有</option>
+                                <?php foreach ($payment as $pay){ ?>
+                                    <option value="<?=$pay['ID']?>"><?=$pay['ID']?> - <?=$pay['Name']?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+
+                        <div class="form-group div_h_1" style="display:none;">
+                            <label>支付通道</label>
+                            <select id="PayChannelID" class="form-control">
+                                <option value="-1">查询所有</option>
+                                <option value="10">微信</option>
+                                <option value="20">支付宝</option>
+                                <option value="30">银联</option>
+                                <option value="40">信用卡</option>
+                                <option value="50">云闪付</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>会员ID</label>
+                            <input type="text" class="form-control" id="txt_UserName" maxlength="17"
+                                   placeholder="选填项,需要按会员查询时填会员帐号">
+                        </div>
+
+                        <div class="form-group div_h_1" style="display:none;">
+                            <label>开始日期</label>
+                            <input type="text" class="form-control" id="txt_StartDateTime" maxlength="10"
+                                   onClick="WdatePicker();">
+                        </div>
+
+                        <div class="bootstrap-timepicker div_h_1" id="begin_tp" style="display:none;">
+                            <div class="bootstrap-timepicker-widget dropdown-menu">
+                                <table>
+                                    <tbody>
+                                    <tr>
+                                        <td><a data-action="incrementHour" href="#"><i
+                                                        class="glyphicon glyphicon-chevron-up"></i></a></td>
+                                        <td class="separator">&nbsp;</td>
+                                        <td><a data-action="incrementMinute" href="#"><i
+                                                        class="glyphicon glyphicon-chevron-up"></i></a></td>
+                                        <td class="separator">&nbsp;</td>
+                                        <td class="meridian-column"><a data-action="toggleMeridian" href="#"><i
+                                                        class="glyphicon glyphicon-chevron-up"></i></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="bootstrap-timepicker-hour">09</span></td>
+                                        <td class="separator">:</td>
+                                        <td><span class="bootstrap-timepicker-minute">00</span></td>
+                                        <td class="separator">&nbsp;</td>
+                                        <td><span class="bootstrap-timepicker-meridian">AM</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><a data-action="decrementHour" href="#"><i
+                                                        class="glyphicon glyphicon-chevron-down"></i></a></td>
+                                        <td class="separator"></td>
+                                        <td><a data-action="decrementMinute" href="#"><i
+                                                        class="glyphicon glyphicon-chevron-down"></i></a></td>
+                                        <td class="separator">&nbsp;</td>
+                                        <td><a data-action="toggleMeridian" href="#"><i
+                                                        class="glyphicon glyphicon-chevron-down"></i></a></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="form-group">
+                                <label class="text-aqua"> - 时间</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control timepicker" id="txt_StartDateTime_HM">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-clock-o"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group div_h_1" style="display:none;">
+                            <label>结束日期</label>
+                            <input type="text" class="form-control" id="txt_EndDateTime" maxlength="10"
+                                   onClick="WdatePicker();">
+                        </div>
+
+                        <div class="bootstrap-timepicker div_h_1" id="end_tp" style="display:none;">
+                            <div class="bootstrap-timepicker-widget dropdown-menu">
+                                <table>
+                                    <tbody>
+                                    <tr>
+                                        <td><a data-action="incrementHour" href="#"><i
+                                                        class="glyphicon glyphicon-chevron-up"></i></a></td>
+                                        <td class="separator">&nbsp;</td>
+                                        <td><a data-action="incrementMinute" href="#"><i
+                                                        class="glyphicon glyphicon-chevron-up"></i></a></td>
+                                        <td class="separator">&nbsp;</td>
+                                        <td class="meridian-column"><a data-action="toggleMeridian" href="#"><i
+                                                        class="glyphicon glyphicon-chevron-up"></i></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="bootstrap-timepicker-hour">09</span></td>
+                                        <td class="separator">:</td>
+                                        <td><span class="bootstrap-timepicker-minute">00</span></td>
+                                        <td class="separator">&nbsp;</td>
+                                        <td><span class="bootstrap-timepicker-meridian">AM</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><a data-action="decrementHour" href="#"><i
+                                                        class="glyphicon glyphicon-chevron-down"></i></a></td>
+                                        <td class="separator"></td>
+                                        <td><a data-action="decrementMinute" href="#"><i
+                                                        class="glyphicon glyphicon-chevron-down"></i></a></td>
+                                        <td class="separator">&nbsp;</td>
+                                        <td><a data-action="toggleMeridian" href="#"><i
+                                                        class="glyphicon glyphicon-chevron-down"></i></a></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="form-group">
+                                <label class="text-aqua"> - 时间</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control timepicker" ID="txt_EndDateTime_HM">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-clock-o"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="box-footer">
+                        <button type="button" class="btn btn-primary" id="Button_OK">确定</button>
+                    </div>
+                    <div class="box-body no-padding" style="display:block;display:none;" id="show_total">
+                        <ul class="nav nav-pills nav-stacked">
+                            <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> 查询笔数：<span id="td_totalSumData"
+                                                                                                class="text-bold"></span></a>
+                            </li>
+                            <li class="normalTotal"><a href="#"><i class="fa fa-circle-o text-green"></i> 成功支付：<span
+                                            id="td_total_Success_Sum" class="text-bold"></span></a></li>
+                            <li class="normalTotal"><a href="#"><i class="fa fa-circle-o text-yellow"></i> 失败笔数：<span
+                                            id="td_totalFailData" class="text-bold"></span></a></li>
+                            <li class="normalTotal"><a href="#"><i class="fa fa-circle-o text-red"></i> 失败总额：<span
+                                            id="td_total_Fail_Sum" class="text-bold"></span></a></li>
+                            <li class="totalCurrRow"><a href="#"><i class="fa fa-circle-o text-light-blue"></i>
+                                    累计支付：<span id="td_totalCurrRow" class="text-bold"></span></a></li>
+                        </ul>
+                    </div>
+
+                </div>
+                <!--数据列表-->
+                <div class="box box-primary box-solid" id="tb_list_1" style="display:none;">
+                    <div class="box-header with-border">
+                        <h3 class="box-title text-bold"><span style=" color:White;">详情列表</span></h3>
+                        <div class="box-tools pull-right">
+                            <button data-widget="collapse" class="btn btn-box-tool" type="button"><i
+                                        class="fa fa-minus"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body" style="display: block;padding:0px;">
+                        <div class="table-responsive">
+
+                            <table class="tablesorter table table-hover table-bordered">
+                                <thead>
+                                <tr>
+                                    <th nowrap='nowrap'>序号</th>
+                                    <th nowrap='nowrap'>会员ID</th>
+
+                                    <th nowrap='nowrap'>订单状态</th>
+                                    <th nowrap='nowrap'>是否补单</th>
+                                    <th nowrap='nowrap'>下单金额</th>
+                                    <th nowrap='nowrap'>支付金额</th>
+                                    <th nowrap='nowrap'>支付方式</th>
+                                    <th nowrap='nowrap'>接口商户</th>
+
+                                    <th nowrap='nowrap'>订单号</th>
+                                    <th nowrap='nowrap'>订单时间</th>
+                                    <th nowrap='nowrap'>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tblData"></tbody>
+                            </table>
+
+                        </div>
+                        <!--Pager-->
+                        <div id="Pagination" class="pull-left"></div>
+                    </div>
+                </div>
+            </section>
+            <script src="/res/js/WdatePicker.js" type="text/javascript"></script>
+            <script src="/res/js/jquery-ui.min.js"></script>
+            <script src="/res/js/bootstrap-timepicker.min.js" type="text/javascript"></script>
+            <script src="/res/js/laypage.js" type="text/javascript"></script>
+            <script type="text/javascript">
+                function getDataList(a) {
+                    var b, c, d, e, f;
+                    return $("#tb_list_1,#show_total").hide(),
+                        _totalSuccessSum = 0,
+                        _totalFailData = 0,
+                        _totalFailSum = 0,
+                        _totalCurrRow = 0,
+                        b = a,
+                        _QueryID = $("#QueryList").val(),
+                        _ShangHuListID = $("#ShangHuListID").val(),
+                        _PayType = $("#PayChannelID").val(),
+                        -1 == _QueryID ? ($(".totalCurrRow").hide(), $(".normalTotal").show()) : ($(".normalTotal").hide(), $(".totalCurrRow").show()),
+                        -1 == _PlatformID ? (web_tips("请先选择一个平台."), !1) : $.trim($("#txt_StartDateTime").val()).length <= 0 || $.trim($("#txt_EndDateTime").val()).length <= 0 ? (web_tips("日期时间不能为空."), !1) : (c = $("#txt_StartDateTime").val(), d = $("#txt_StartDateTime_HM").val(), e = $("#txt_EndDateTime").val(), f = $("#txt_EndDateTime_HM").val(), _sDate = c + " " + d, _eDate = e + " " + f, _user = $("#txt_UserName").val(), $.ajax({
+                            url: "../ashx/platOrder/paymentOrder.ashx",
+                            type: "post",
+                            dataType: "json",
+                            data: {
+                                action: "paymentOrder",
+                                PlatformID: _PlatformID,
+                                QueryID: _QueryID,
+                                ShangHuListID: _ShangHuListID,
+                                PayType: _PayType,
+                                sDate: _sDate,
+                                eDate: _eDate,
+                                user: _user,
+                                pageIndex: b + 1,
+                                pageSize: pageSize,
+                                CurDateTime: getCurrDate()
+                            },
+                            success: function (a) {
+                                var c, d;
+                                a.success ? (c = a.total, _totalSuccessSum = a.total_SuccessSum, _totalFailData = a.total_FailData, _totalFailSum = a.total_FailSum, a.total > 0 ? ($("#tb_list_1 tr:gt(0)").remove(), d = "", $.each(a.results,
+                                    function (b) {
+                                        var i, j, k, l, m, n, o, p, q, r, e = a.results[b].ID,
+                                            f = a.results[b].OrderNo,
+                                            g = a.results[b].Account,
+                                            h = parseFloat(a.results[b].RealMoney).toFixed(2);
+                                        switch (_totalCurrRow += Number(a.results[b].RealMoney), i = a.results[b].Status, k = a.results[b].Type, m = a.results[b].PayID, n = "", o = a.results[b].ActionID, q = a.results[b].payChannel, r = "", q) {
+                                            case 1:
+                                                r = "商城 - ";
+                                                break;
+                                            case 2:
+                                                r = "快捷 - ";
+                                                break;
+                                            default:
+                                                r = "未知 - "
+                                        }
+                                        switch (i) {
+                                            case 0:
+                                                j = '<span class="badge bg-gray bg_flag">未付款</span>';
+                                                break;
+                                            case 1:
+                                                j = '<span class="badge bg-green">成功</span>';
+                                                break;
+                                            case 2:
+                                                j = '<span class="badge bg-yellow bg_flag">上级分数不够</span>';
+                                                break;
+                                            case 3:
+                                                j = '<span class="badge bg-red bg_flag">超时未付款</span>';
+                                                break;
+                                            case 4:
+                                                j = '<span class="badge bg-light-blue bg_flag">付款待进分</span>'
+                                        }
+                                        switch (k) {
+                                            case 10:
+                                                l = '<span class="badge bg-gray">微信</span>';
+                                                break;
+                                            case 20:
+                                                l = '<span class="badge bg-gray">支付宝</span>';
+                                                break;
+                                            case 30:
+                                                l = '<span class="badge bg-gray">银联</span>';
+                                                break;
+                                            case 40:
+                                                l = '<span class="badge bg-gray">信用卡</span>';
+                                                break;
+                                            case 50:
+                                                l = '<span class="badge bg-gray">云闪付</span>';
+                                                break;
+
+                                        }
+                                        switch (m) {
+                                            default:
+                                                n = arr_paysuplier[m] ?arr_paysuplier[m]:'未知'
+                                        }
+                                        switch (o) {
+                                            case 0:
+                                                p = '<span class="badge bg-gray">否</span>';
+                                                break;
+                                            case 1:
+                                                p = '<span class="badge bg-light-blue">是</span>'
+                                        }
+                                        d += '<tr class="tr_h">',
+                                            d += "<td>",
+                                            d += a.results[b].Rownum,
+                                            d += "</td>",
+                                            d += "<td>",
+                                            d += g,
+                                            d += "</td>",
+                                            d += "<td>",
+                                            d += j,
+                                            d += "</td>",
+                                            d += "<td>",
+                                            d += p,
+                                            d += "</td>",
+                                            d += '<td><span class="badge bg-gray">',
+                                            d += a.results[b].CostNum,
+                                            d += "</span></td>",
+                                            d += '<td><span class="badge bg-gray">',
+                                            d += h,
+                                            d += "</span></td>",
+                                            d += "<td>",
+                                            d += l,
+                                            d += "</td>",
+                                            d += '<td class="text-left"><span class="badge bg-gray">',
+                                            d += r + n,
+                                            d += "</span></td>",
+                                            d += '<td nowrap="nowrap">',
+                                            d += f,
+                                            d += "</td>",
+                                            d += '<td nowrap="nowrap">',
+                                            d += a.results[b].C_DateTime,
+                                            d += "</td>",
+                                            d += "<td>",
+                                            d += 1 != i ? '<button type="button" class="btn btn-warning btn-xs" title="订单号: ' + f + '" onfocus="this.blur();" onclick=\'onOrderSetScore(this,"' + e + '","' + g + '","' + h + '","' + f + "\");'>进分补单</button>" : "-",
+                                            d += "</td>",
+                                            d += "</tr>"
+                                    }), $("#tblData").append(d), $(".tablesorter").trigger("update"), $("#td_totalSumData").text(c), $("#td_total_Success_Sum").text(parseFloat(_totalSuccessSum).toFixed(2)), $("#td_totalFailData").text(_totalFailData), $("#td_total_Fail_Sum").text(parseFloat(_totalFailSum).toFixed(2)), 1 == _QueryID ? $("#td_totalCurrRow").text(parseFloat(_totalSuccessSum).toFixed(2)) : $("#td_totalCurrRow").text(parseFloat(_totalFailSum).toFixed(2)), $("#tb_list_1,#show_total").show(), layer.close(pagei), laypage({
+                                    cont: "Pagination",
+                                    pages: numPages(c, pageSize),
+                                    skip: !0,
+                                    skin: "molv",
+                                    first: 1,
+                                    last: numPages(c, pageSize),
+                                    prev: "<",
+                                    next: ">",
+                                    curr: b + 1,
+                                    groups: 5,
+                                    jump: function (a, b) {
+                                        b || pageselectCallback(a.curr - 1)
+                                    }
+                                })) : (layer.close(pagei), $("#tb_list_1,#show_total").fadeOut(1e3), web_tips("暂无记录."))) : (layer.close(pagei), $("#tb_list_1,#show_total").fadeOut(1e3), global_Error500 == a.ERROR_TYPE && (parent.location.href = global_e_p_500), global_NoLicense != a.msg ? web_tips("暂无记录.") : parent.location.href = global_jump_login)
+                            },
+                            beforeSend: function () {
+                                $("#Button_OK").attr("disabled", "disabled").text("正在查询"),
+                                    pagei = layer.msg('请稍候..', {icon: 16,shadeClose: !1,shade: 0.01})
+                            },
+                            complete: function () {
+                                $("#Button_OK").removeAttr("disabled").text("确定")
+                            }
+                        }), void 0)
+                }
+
+                function pageselectCallback(a) {
+                    getDataList(a)
+                }
+
+                var pagei, _PlatformID = 1,
+                    pageIndex = 0,
+                    pageSize = 50,
+                    _user = "",
+                    _sDate, _eDate, _totalSuccessSum = 0,
+                    _totalFailData = 0,
+                    _totalFailSum = 0,
+                    _QueryID, _totalCurrRow = 0,
+                    _curr_Info = "1",
+                    arr_paysuplier = <?php echo xn_json_encode(arrlist_key_values($payment,'ID','Name'))?>,
+                    _ShangHuListID,
+                    _PayType;
+                $(function () {
+                    switch ($("#txt_StartDateTime,#txt_EndDateTime").attr("value", getCurrDate()), _curr_Info) {
+                        case "9":
+                        case "10":
+                        case "12":
+                            $(".div_h_1").hide();
+                            break;
+                        default:
+                            $(".div_h_1").show()
+                    }
+                    $(".tablesorter").tablesorter({
+                        headers:
+                            {
+                                0:
+                                    {
+                                        sorter:
+                                            "integer"
+                                    },
+                                1: {
+                                    sorter: !1
+                                },
+                                4: {
+                                    sorter: "currency"
+                                },
+                                8: {
+                                    sorter: !1
+                                },
+                                10: {
+                                    sorter: !1
+                                }
+                            }
+                    }),
+                        $("#txt_UserName").autocomplete({
+                            source: "../ashx/getData/AutoComplete.ashx"
+                        }),
+                        $("#txt_StartDateTime_HM").timepicker({
+                            defaultTime: "00:00:00",
+                            showInputs: !1,
+                            showMeridian: !1,
+                            showSeconds: !0,
+                            minuteStep: 5,
+                            secondStep: 15
+                        }),
+                        $("#txt_EndDateTime_HM").timepicker({
+                            defaultTime: "23:59:59",
+                            showInputs: !1,
+                            showMeridian: !1,
+                            showSeconds: !0,
+                            minuteStep: 5,
+                            secondStep: 15
+                        }),
+                        $("#Button_OK").click(function () {
+                            $("#Pagination").html(""),
+                                getDataList(0)
+                        })
+                });
+            </script>
+
+        </div>
+    </div>
+</div>
+
+
+
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_footjs.html'); ?>

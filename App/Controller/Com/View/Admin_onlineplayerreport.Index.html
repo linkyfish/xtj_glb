@@ -1,0 +1,212 @@
+<?php include _include(__APPDIR__.'Controller/Com/View/Public_head.html');?>
+<body>
+<div class="templatemo-flex-row">
+    <?php include _include(__APPDIR__.'Controller/Com/View/Public_nav.html');?>
+
+    <div class="templatemo-content col-1 light-gray-bg">
+        <?php include _include(__APPDIR__.'Controller/Com/View/Public_top.html');?>
+        <div class="row content" style="padding:5px 0px 0px 0px;">
+
+            <section class="content">
+                <div class="box box-primary box-solid">
+                    <div class="box-header with-border">
+                        <h3 class="box-title text-muted"><span style=" color:White;">数据统计<small
+                                        style="margin-left:8px; margin-right:8px;"><a
+                                            href="javascript:window.history.back()" target="_self"
+                                            onclick='javascript:window.history.back();'><i class="fa fa-arrow-left"></i> 返回</a></small></span>
+                        </h3>
+                        <div class="box-tools pull-right">
+                            <button data-widget="collapse" class="btn btn-box-tool" type="button"><i
+                                        class="fa fa-minus"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+
+                        <div class="form-group">
+                            <label>开始日期</label>
+                            <input type="text" class="form-control" id="txt_StartDateTime" maxlength="10"
+                                   onClick="WdatePicker({minDate:'2019-10-20'});">
+                        </div>
+
+                        <div class="form-group">
+                            <label>结束日期</label>
+                            <input type="text" class="form-control" id="txt_EndDateTime" maxlength="10"
+                                   onClick="WdatePicker({minDate:'2019-10-20'});">
+                        </div>
+
+                    </div>
+
+                    <div class="box-footer">
+                        <button type="button" class="btn btn-primary" id="Button_OK">确定</button>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <section class="col-md-4">
+                        <div class="box box-primary box-solid" id="tb_list_1" style="display: none;padding:0px;">
+                            <div class="box-header with-border click1">
+                                <h3 class="box-title"><span style="color:White;">新增玩家 <i class="fa  fa-angle-down"></i></span>
+                                </h3>
+                            </div>
+                            <div class="box-body" style="padding:0px;">
+                                <div class="table-responsive">
+
+                                    <table class="table table-hover table-bordered" id="data_list">
+                                        <thead>
+                                        <tr>
+                                            <th>日期</th>
+                                            <th>数量</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="tblData"></tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="col-md-4">
+                        <div class="box box-primary box-solid" id="tb_list_2" style="display: none;">
+                            <div class="box-header with-border click2">
+                                <h3 class="box-title"><span style="color:White;">登录游戏 <i class="fa   fa-angle-down"></i></span>
+                                </h3>
+                            </div>
+                            <div class="box-body" style="padding:0px;">
+                                <div class="table-responsive">
+
+                                    <table class="table table-hover table-bordered" id="data_list2">
+                                        <thead>
+                                        <tr>
+                                            <th>日期</th>
+                                            <th>数量</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="tblData2"></tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="col-md-4">
+                        <div class="box box-primary box-solid" id="tb_list_3" style="display: none;">
+                            <div class="box-header with-border click3">
+                                <h3 class="box-title"><span style="color:White;">登录大厅 <i class="fa   fa-angle-down"></i></span>
+                                </h3>
+                            </div>
+                            <div class="box-body" style="padding:0px;">
+                                <div class="table-responsive">
+
+                                    <table class="table table-hover table-bordered" id="data_list3">
+                                        <thead>
+                                        <tr>
+                                            <th>日期</th>
+                                            <th>数量</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="tblData3"></tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                <section class="col-md-4">
+                        <div class="box box-primary box-solid" id="tb_list_4" style="display: none;">
+                            <div class="box-header with-border click4">
+                                <h3 class="box-title"><span style="color:White;">充值人数 <i class="fa   fa-angle-down"></i></span>
+                                </h3>
+                            </div>
+                            <div class="box-body" style="padding:0px;">
+                                <div class="table-responsive">
+
+                                    <table class="table table-hover table-bordered" id="data_list4">
+                                        <thead>
+                                        <tr>
+                                            <th>日期</th>
+                                            <th>数量</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="tblData4"></tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+            </section>
+            <script src="/res/js/WdatePicker.js" type="text/javascript"></script>
+            <script type="text/javascript">
+                function getDataList() {
+                    var b, c;
+                    return $("#tb_list_1,#tb_list_2,#tb_list_3<?php echo $_role['czs'] ? ',#tb_list_4':''?>").hide(), $.trim($("#txt_StartDateTime").val()).length <= 0 || $.trim($("#txt_EndDateTime").val()).length <= 0 ? (web_tips("日期时间不能为空."), !1) : (b = $("#txt_StartDateTime").val(), c = $("#txt_EndDateTime").val(), _sDate = b, _eDate = c, $.ajax({
+                        url: "../ashx/getData/adminReport.ashx",
+                        type: "post",
+                        dataType: "json",
+                        data: {action: "report_onlinePlayer", sDate: _sDate, eDate: _eDate, CurDateTime: getCurrDate()},
+                        success: function (a) {
+                            var b, c, d, e;
+                            a.success ? ($("#tb_list_1 tr:gt(0),#tb_list_2 tr:gt(0),#tb_list_3 tr:gt(0)<?php echo $_role['czs'] ? ',#tb_list_4 tr:gt(0)':''?>").remove(), b = "", $.each(a.r1, function (c) {
+                                b += '<tr class="tr_h">', b += "<td>", b += a.r1[c].mydate, b += "</td>", b += '<td><span class="badge bg-gray">', b += a.r1[c].TotalNum, b += "</span></td>", b += "</tr>"
+                            }), c = "", $.each(a.r2, function (b) {
+                                c += '<tr class="tr_h">', c += "<td>", c += a.r2[b].mydate, c += "</td>", c += '<td><span class="badge bg-gray">', c += a.r2[b].TotalNum, c += "</span></td>", c += "</tr>"
+                            }), d = "", $.each(a.r3, function (b) {
+                                d += '<tr class="tr_h">', d += "<td>", d += a.r3[b].mydate, d += "</td>", d += '<td><span class="badge bg-gray">', d += a.r3[b].TotalNum, d += "</span></td>", d += "</tr>"
+                            }), e = "", $.each(a.r4, function (b) {
+                                e += '<tr class="tr_h">', e += "<td>", e += a.r4[b].mydate, e += "</td>", e += '<td><span class="badge bg-gray">', e += a.r4[b].TotalNum, e += "</span></td>", e += "</tr>"
+                            }), $("#tblData").append(b), $("#tblData2").append(c), $("#tblData3").append(d), $("#tblData4").append(e), $("#tb_list_1,#tb_list_2,#tb_list_3<?php echo $_role['czs'] ? ',#tb_list_4':''?>").show(), layer.close(pagei)) : (layer.close(pagei), $("#tb_list_1,#tb_list_2,#tb_list_3<?php echo $_role['czs'] ? ',#tb_list_4':''?>").fadeOut(1000), global_Error500 == a.ERROR_TYPE && (parent.location.href = global_e_p_500), global_NoLicense != a.msg ? web_tips(a.msg =='操作成功'?"暂无记录":a.msg): parent.location.href = global_jump_login)
+                        },
+                        beforeSend: function () {
+                            $("#Button_OK").attr("disabled", "disabled").text("正在查询"), pagei = layer.msg('请稍候..', {icon: 16,shadeClose: !1,shade: 0.01})
+
+                        },
+                        complete: function () {
+                            $("#Button_OK").removeAttr("disabled").text("确定")
+                        }
+                    }), void 0)
+                }
+
+                function clickInfo(a, b, c, d) {
+
+                    var e = "onClick_DataReport.aspx?sid=" + a + "&sDate=" + b + "&eDate=" + c;
+                    browser.versions.mobile ? !browser.versions.ios && browser.versions.android ? window.open(e, "", "height=0,width=0,top=0,left=0,location=no,menubar=no,resizable=yes,scrollbars=yes,status=yes,titlebar=no,toolbar=no,directories=no") : art.dialog.open(e, {
+                        title: b+' - '+c+' '+ d + " 账号列表",
+                        width: 600,
+                        height: 600,
+                        fixed: !0,
+                        lock: !0,
+                        drag: !0
+                    }) : art.dialog.open(e, {title: d + "账号列表", width: 500, height: 600, fixed: !0, lock: !0, drag: !0})
+                }
+
+                var pagei, _sDate, _eDate;
+                $(function () {
+                    $("#tb_list_1,#tb_list_2,#tb_list_3<?php echo $_role['czs'] ? ',#tb_list_4':''?>").hide(), $("#txt_StartDateTime,#txt_EndDateTime").attr("value", getCurrDate()), $("#Button_OK").click(function () {
+                        getDataList()
+                    }), $(".click1").click(function () {
+                        var a, b;
+                        return $.trim($("#txt_StartDateTime").val()).length <= 0 || $.trim($("#txt_EndDateTime").val()).length <= 0 ? (web_tips("日期时间不能为空."), !1) : (a = $("#txt_StartDateTime").val(), b = $("#txt_EndDateTime").val(), _sDate = a, _eDate = b, clickInfo(1, _sDate, _eDate, "新增玩家"), void 0)
+                    }), $(".click2").click(function () {
+                        var a, b;
+                        return $.trim($("#txt_StartDateTime").val()).length <= 0 || $.trim($("#txt_EndDateTime").val()).length <= 0 ? (web_tips("日期时间不能为空."), !1) : (a = $("#txt_StartDateTime").val(), b = $("#txt_EndDateTime").val(), _sDate = a, _eDate = b, clickInfo(2, _sDate, _eDate, "登录游戏"), void 0)
+                    }), $(".click3").click(function () {
+                        var a, b;
+                        return $.trim($("#txt_StartDateTime").val()).length <= 0 || $.trim($("#txt_EndDateTime").val()).length <= 0 ? (web_tips("日期时间不能为空."), !1) : (a = $("#txt_StartDateTime").val(), b = $("#txt_EndDateTime").val(), _sDate = a, _eDate = b, clickInfo(3, _sDate, _eDate, "登录大厅"), void 0)
+                    }), $(".click4").click(function () {
+                        var a, b;
+                        return $.trim($("#txt_StartDateTime").val()).length <= 0 || $.trim($("#txt_EndDateTime").val()).length <= 0 ? (web_tips("日期时间不能为空."), !1) : (a = $("#txt_StartDateTime").val(), b = $("#txt_EndDateTime").val(), _sDate = a, _eDate = b, clickInfo(4, _sDate, _eDate, "充值玩家"), void 0)
+                    })
+                });
+            </script>
+
+        </div>
+    </div>
+</div>
+
+
+<?php include _include(__APPDIR__.'Controller/Com/View/Public_footjs.html');?>

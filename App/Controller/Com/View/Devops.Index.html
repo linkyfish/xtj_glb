@@ -1,0 +1,399 @@
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_head.html'); ?>
+<body>
+<style>
+    .layui-laydate-content th {
+        font-weight: 400;
+        color: white;
+    !important;
+    }
+
+    .layui-form-label {
+        width: 120px
+    }
+    tbody td{text-align:left}
+    .layui-tab{margin-top:0}
+</style>
+<div class="templatemo-flex-row">
+    <?php include _include(__APPDIR__ . 'Controller/Com/View/Public_nav.html'); ?>
+
+    <div class="templatemo-content col-1 light-gray-bg">
+        <?php include _include(__APPDIR__ . 'Controller/Com/View/Public_top.html'); ?>
+        <div class="row content" style="padding:5px 0px 0px 0px;">
+
+            <section class="content">
+                <div class="box box-primary box-solid">
+                    <div class="box-header with-border">
+                        <h3 class="box-title text-muted"><span style=" color:White;">运维工具<small
+                                        style="margin-left:8px; margin-right:8px;"><a
+                                            href="javascript:window.history.back()" target="_self"
+                                            onclick='javascript:window.history.back();'><i class="fa fa-arrow-left"></i> 返回</a></small></span>
+                        </h3>
+                        <div class="box-tools pull-right">
+                            <button data-widget="collapse" class="btn btn-box-tool" type="button"><i
+                                        class="fa fa-minus"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="box-body">
+
+                        <div class="layui-tab  layui-tab-card" lay-filter="<?php echo $__PRE__?>tab">
+                            <ul class="layui-tab-title">
+                                <li lay-id="app_down" class="layui-this">下载设置</li>
+                                <li lay-id="sms">短信接口</li>
+                                <li lay-id="domain">备用域名切换</li>
+                                <li lay-id="other">其他设置</li>
+                                <li lay-id="game" >服务启停</li>
+                            </ul>
+                            <div class="layui-tab-content" >
+                                <div class="layui-tab-item layui-show">
+                                    <div class="layui-form">
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label">下载页面</label>
+                                            <div class="layui-input-block">
+                                                <input type="radio" value="1" name="downloadPageOpen" title="开启"  <?php if( $downStatus==1){ echo 'checked'; }?> ><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>开启</div></div>
+                                                <input type="radio" value="0" name="downloadPageOpen" title="关闭" <?php if( $downStatus!=1){ echo 'checked'; }?>><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>关闭</div></div>
+                                            </div>
+                                            <div class="layui-input-block">
+                                                <button class="layui-btn"  id="btnDownSet" lay-filter="*">设置</button>
+                                            </div>
+                                            <label class="layui-form-label">下载地址</label>
+                                            <div class="layui-input-block">
+                                                <label class="layui-form-label">IOS安装包</label>
+                                                <input type="text" name="ios_url" id="ios_url" required="" lay-verify="required" placeholder="请输入IOS描述文件下载地址" autocomplete="off" class="layui-input" value=" <?php  echo $iosUrl; ?>">
+                                                <label class="layui-form-label">APK安装包</label>
+                                                <input type="text" name="android_url" id="android_url" required="" lay-verify="required" placeholder="请输入APK文件下载地址" autocomplete="off" class="layui-input" value=" <?php  echo $androidUrl; ?>">
+
+                                            </div>
+                                            <div class="layui-input-block">
+                                                <button class="layui-btn"  id="btnDownUrlSet" lay-filter="*">设置</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-tab-item">
+                                    <div class="layui-form" action="">
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label">验证码:当前设置-<?php echo $commonsms; ?></label>
+                                            <div class="layui-input-block">
+                                                <select id="set_commonsms" >
+                                                    <?php foreach($smsList['common'] as $item){?>
+                                                    <option value="<?php echo $item['Channel'] ?>" <?php if($commonsms==$item['Channel']){ echo 'selected';} ?>><?php echo $item['Name'] ?></option>
+                                                    <?php }?>
+                                                </select>
+                                            </div>
+                                            <div class="layui-input-block"></div>
+                                            <div class="layui-input-block">
+                                                <button class="layui-btn"  lay-filter="*" id="btnCommonSms">确认修改</button>
+                                            </div>
+                                        </div>
+
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label">注册送:当前设置-<?php echo $adsms; ?></label>
+                                            <div class="layui-input-block">
+                                                <select id="set_adsms" >
+                                                    <?php foreach($smsList['promotion'] as $item){?>
+                                                             <option value="<?php echo $item['Channel'] ?>" <?php if($adsms==$item['Channel']){ echo 'selected';} ?>><?php echo $item['Name'] ?></option>
+                                                    <?php }?>
+                                                </select>
+                                            </div>
+                                            <div class="layui-input-block"></div>
+                                            <div class="layui-input-block">
+                                                <button class="layui-btn"  lay-filter="*" id="btnAdSms">确认修改</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-tab-item">
+                                    <form class="layui-form" action="">
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label">提现域名</label>
+                                            <div class="layui-input-block">
+                                                <input type="text" name="ios_url" id="cash_url" required="" lay-verify="required" placeholder="请输入IOS描述文件下载地址" autocomplete="off" class="layui-input" value="<?php  echo $cashUrl; ?>">
+                                            </div>
+                                            <div class="layui-input-block"></div>
+                                            <div class="layui-input-block">
+                                                <button class="layui-btn"  lay-filter="*" onclick="editConfig('CashUrl','cash_url')">确认修改</button>
+                                            </div>
+                                        </div>
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label">注册</label>
+                                            <div class="layui-input-block">
+                                                <input type="text" name="ios_url" id="reg_url" required="" lay-verify="required" placeholder="请输入IOS描述文件下载地址" autocomplete="off" class="layui-input" value=" <?php  echo $regUrl; ?>">
+                                            </div>
+                                            <div class="layui-input-block"></div>
+                                            <div class="layui-input-block">
+                                                <button class="layui-btn" lay-submit="" lay-filter="*" onclick="editConfig('regUrl','reg_url')">确认修改</button>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                </div>
+                                <div class="layui-tab-item">
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label">踢出玩家</label>
+                                            <div class="layui-input-block">
+                                                <input type="text" name="title" id="txtUserName" required="" lay-verify="required" placeholder="请输入玩家ID" autocomplete="off" class="layui-input">
+                                            </div>
+                                        </div>
+                                        <div class="layui-form-item">
+                                            <div class="layui-input-block">
+                                                <button class="layui-btn"  lay-filter="formDemo" id="btnKickUser">立即提交</button>
+                                            </div>
+                                        </div>
+                                </div>
+
+                                <div class="layui-tab-item ">
+                                    <form class="layui-form" action="../../admin/other/cache">
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label">游戏服务</label>
+                                            <div class="layui-input-block">
+                                                <input type="radio" value="1" name="server_status" title="开启" checked><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>开启</div></div>
+                                                <input type="radio" value="0" name="server_status" title="关闭"><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>关闭</div></div>
+                                            </div>
+                                            <div class="layui-input-block">
+                                                <button class="layui-btn" lay-submit="" lay-filter="*">提交操作</button>
+                                            </div>
+                                        </div>
+                                        <label class="layui-form-label">游戏端口</label>
+                                        <div class="layui-form-item">
+                                            <div class="layui-input-block">
+                                                <label class="layui-form-label">百家乐</label>
+                                                <input type="radio" value="1" name="bjl" title="开启" checked><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>开启</div></div>
+                                                <input type="radio" value="0" name="bjl" title="关闭"><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>关闭</div></div>
+                                                <button class="layui-btn" lay-submit="" lay-filter="*">提交操作</button>
+                                            </div>
+                                        </div>
+                                        <div class="layui-form-item">
+                                            <div class="layui-input-block">
+                                                <label class="layui-form-label">黑杰克</label>
+                                                <input type="radio" value="1" name="hjk" title="开启" checked><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>开启</div></div>
+                                                <input type="radio" value="0" name="hjk" title="关闭"><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>关闭</div></div>
+                                                <button class="layui-btn" lay-submit="" lay-filter="*">提交操作</button>
+                                            </div>
+                                        </div>
+                                        <div class="layui-form-item">
+                                            <div class="layui-input-block">
+                                                <label class="layui-form-label">翻牌机</label>
+                                                <input type="radio" value="1" name="fpj" title="开启" checked><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>开启</div></div>
+                                                <input type="radio" value="0" name="fpj" title="关闭"><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>关闭</div></div>
+                                                <button class="layui-btn" lay-submit="" lay-filter="*">提交操作</button>
+                                            </div>
+                                        </div>
+                                        <div class="layui-form-item">
+                                            <div class="layui-input-block">
+                                                <label class="layui-form-label">疯狂捕鱼</label>
+                                                <input type="radio" value="1" name="fkby" title="开启" checked><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>开启</div></div>
+                                                <input type="radio" value="0" name="fkby" title="关闭"><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>关闭</div></div>
+                                                <button class="layui-btn" lay-submit="" lay-filter="*">提交操作</button>
+                                            </div>
+                                        </div>
+                                        <div class="layui-form-item">
+                                            <div class="layui-input-block">
+                                                <label class="layui-form-label">红黑大战</label>
+                                                <input type="radio" value="1" name="hhdz" title="开启" checked><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>开启</div></div>
+                                                <input type="radio" value="0" name="hhdz" title="关闭"><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>关闭</div></div>
+                                                <button class="layui-btn" lay-submit="" lay-filter="*">提交操作</button>
+                                            </div>
+                                        </div>
+                                        <div class="layui-form-item">
+                                            <div class="layui-input-block">
+                                                <label class="layui-form-label">敲金猪</label>
+                                                <input type="radio" value="1" name="qjz" title="开启" checked><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>开启</div></div>
+                                                <input type="radio" value="0" name="qjz" title="关闭"><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>关闭</div></div>
+                                                <button class="layui-btn" lay-submit="" lay-filter="*">提交操作</button>
+                                            </div>
+                                        </div>
+                                        <div class="layui-form-item">
+                                            <div class="layui-input-block">
+                                                <label class="layui-form-label">德州牛仔</label>
+                                                <input type="radio" value="1" name="dznz" title="开启" checked><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>开启</div></div>
+                                                <input type="radio" value="0" name="dznz" title="关闭"><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>关闭</div></div>
+                                                <button class="layui-btn" lay-submit="" lay-filter="*">提交操作</button>
+                                            </div>
+                                        </div>
+                                        <div class="layui-form-item">
+                                            <div class="layui-input-block">
+                                                <label class="layui-form-label">百人牛牛</label>
+                                                <input type="radio" value="1" name="brnn" title="开启" checked><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>开启</div></div>
+                                                <input type="radio" value="0" name="brnn" title="关闭"><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>关闭</div></div>
+                                                <button class="layui-btn" lay-submit="" lay-filter="*">提交操作</button>
+                                            </div>
+                                        </div>
+                                        <div class="layui-form-item">
+                                            <div class="layui-input-block">
+                                                <label class="layui-form-label">疯狂水果</label>
+                                                <input type="radio" value="1" name="fksg" title="开启" checked><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>开启</div></div>
+                                                <input type="radio" value="0" name="fksg" title="关闭"><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>关闭</div></div>
+                                                <button class="layui-btn" lay-submit="" lay-filter="*">提交操作</button>
+                                            </div>
+                                        </div>
+                                        <div class="layui-form-item">
+                                            <div class="layui-input-block">
+                                                <label class="layui-form-label">急速时刻</label>
+                                                <input type="radio" value="1" name="jssk" title="开启" checked><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>开启</div></div>
+                                                <input type="radio" value="0" name="jssk" title="关闭"><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>关闭</div></div>
+                                                <button class="layui-btn" lay-submit="" lay-filter="*">提交操作</button>
+                                            </div>
+                                        </div>
+                                        <div class="layui-form-item">
+                                            <div class="layui-input-block">
+                                                <label class="layui-form-label">魔法宝石</label>
+                                                <input type="radio" value="1" name="mfbs" title="开启" checked><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>开启</div></div>
+                                                <input type="radio" value="0" name="mfbs" title="关闭"><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>关闭</div></div>
+                                                <button class="layui-btn" lay-submit="" lay-filter="*">提交操作</button>
+                                            </div>
+                                        </div>
+                                        <div class="layui-form-item">
+                                            <div class="layui-input-block">
+                                                <label class="layui-form-label">五星红辉</label>
+                                                <input type="radio" value="1" name="wxhh" title="开启" checked><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>开启</div></div>
+                                                <input type="radio" value="0" name="wxhh" title="关闭"><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>关闭</div></div>
+                                                <button class="layui-btn" lay-submit="" lay-filter="*">提交操作</button>
+                                            </div>
+                                        </div>
+                                        <div class="layui-form-item">
+                                            <div class="layui-input-block">
+                                                <label class="layui-form-label">飞禽走兽</label>
+                                                <input type="radio" value="1" name="fqzs" title="开启" checked><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>开启</div></div>
+                                                <input type="radio" value="0" name="fqzs" title="关闭"><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>关闭</div></div>
+                                                <button class="layui-btn" lay-submit="" lay-filter="*">提交操作</button>
+                                            </div>
+                                        </div>
+                                        <div class="layui-form-item">
+                                            <div class="layui-input-block">
+                                                <label class="layui-form-label">拉把机</label>
+                                                <input type="radio" value="1" name="lbj" title="开启" checked><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>开启</div></div>
+                                                <input type="radio" value="0" name="lbj" title="关闭"><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>关闭</div></div>
+                                                <button class="layui-btn" lay-submit="" lay-filter="*">提交操作</button>
+                                            </div>
+                                        </div>
+                                        <div class="layui-form-item">
+                                            <div class="layui-input-block">
+                                                <label class="layui-form-label">海王</label>
+                                                <input type="radio" value="1" name="hw" title="开启" checked><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>开启</div></div>
+                                                <input type="radio" value="0" name="hw" title="关闭"><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>关闭</div></div>
+                                                <button class="layui-btn" lay-submit="" lay-filter="*">提交操作</button>
+                                            </div>
+                                        </div>
+                                        <div class="layui-form-item">
+                                            <div class="layui-input-block">
+                                                <label class="layui-form-label">百鸟朝凤</label>
+                                                <input type="radio" value="1" name="bncf" title="开启" checked><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>开启</div></div>
+                                                <input type="radio" value="0" name="bncf" title="关闭"><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>关闭</div></div>
+                                                <button class="layui-btn" lay-submit="" lay-filter="*">提交操作</button>
+                                            </div>
+                                        </div>
+                                        <div class="layui-form-item">
+                                            <div class="layui-input-block">
+                                                <label class="layui-form-label">捕鸟</label>
+                                                <input type="radio" value="1" name="bn" title="开启" checked><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>开启</div></div>
+                                                <input type="radio" value="0" name="bn" title="关闭"><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>关闭</div></div>
+                                                <button class="layui-btn" lay-submit="" lay-filter="*">提交操作</button>
+                                            </div>
+                                        </div>
+                                        <div class="layui-form-item">
+                                            <div class="layui-input-block">
+                                                <label class="layui-form-label">龙虎</label>
+                                                <input type="radio" value="1" name="lh" title="开启" checked><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>开启</div></div>
+                                                <input type="radio" value="0" name="lh" title="关闭"><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>关闭</div></div>
+                                                <button class="layui-btn" lay-submit="" lay-filter="*">提交操作</button>
+                                            </div>
+                                        </div>
+                                        <div class="layui-form-item">
+                                            <div class="layui-input-block">
+                                                <label class="layui-form-label">转盘</label>
+                                                <input type="radio" value="1" name="zp" title="开启" checked><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>开启</div></div>
+                                                <input type="radio" value="0" name="zp" title="关闭"><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>关闭</div></div>
+                                                <button class="layui-btn" lay-submit="" lay-filter="*">提交操作</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+            </section>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        $("#btnKickUser").on('click',function () {
+            $.trim($("#txtUserName").val()).length <= 0 ? (web_tips("请输入帐号."), !1):(
+                $.ajax({
+                type:'POST',
+                dataType:'json',
+                url: "../../com/Devops.aspx",
+                data:{ action: "kickUser", CurDateTime: rand(),username:$("#txtUserName").val()},
+                success:function (a) {
+                    a.success? swal("操作成功.", "", "success"): swal(a.msg, "", "error");
+                }
+            }));
+        });
+
+        $("#btnDownSet").on('click',function () {
+                $.ajax({
+                    type:'POST',
+                    dataType:'json',
+                    url: "../../com/Devops.aspx",
+                    data:{ action: "downOpenSet", CurDateTime: rand(),status:$("[name=downloadPageOpen]").val()},
+                    success:function (a) {
+                        a.success? swal("操作成功.", "", "success"): swal(a.msg, "", "error");
+                    }
+                });
+        });
+        $("#btnDownUrlSet").on('click',function () {
+            $.ajax({
+                type:'POST',
+                dataType:'json',
+                url: "../../com/Devops.aspx",
+                data:{ action: "editDown", CurDateTime: rand(),ios_url:$("#ios_url").val(),android_url:$("#android_url").val()},
+                success:function (a) {
+                    a.success? swal("操作成功.", "", "success"): swal(a.msg, "", "error");
+                }
+            });
+        })
+        $("#btnAdSms").on('click',function () {
+            $.ajax({
+                type:'POST',
+                dataType:'json',
+                url: "../../com/Devops.aspx",
+                data:{ action: "editSmsChannel", CurDateTime: rand(),sms_type:'adsms',val:$("#set_adsms").val()},
+                success:function (a) {
+                    a.success? swal("操作成功.", "", "success"): swal(a.msg, "", "error");
+                }
+            });
+        })
+        $("#btnCommonSms").on('click',function () {
+            $.ajax({
+                type:'POST',
+                dataType:'json',
+                url: "../../com/Devops.aspx",
+                data:{ action: "editSmsChannel", CurDateTime: rand(),sms_type:'commonsms',val:$("#set_commonsms").val()},
+                success:function (a) {
+                    a.success? swal("操作成功.", "", "success"): swal(a.msg, "", "error");
+                }
+            });
+        })
+    })
+    
+    function editConfig(configName,element) {
+       var  val =  $("#"+element).val();
+        $.ajax({
+            type:'POST',
+            dataType:'json',
+            url: "../../com/Devops.aspx",
+            data:{ action: "editSmsChannel", CurDateTime: rand(),configName:configName,val:val},
+            success:function (a) {
+                console.log(a);
+                //a.success? swal("操作成功.", "", "success"): swal(a.msg, "", "error");
+            }
+        });
+    }
+</script>
+
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_footjs.html'); ?>
+<script src="/js/index.js?ver=<?php echo _CONF('app_v')?>"></script>
+
+

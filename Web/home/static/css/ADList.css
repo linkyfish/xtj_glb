@@ -1,0 +1,11 @@
+.ADList { position:relative;}
+.ADList_banner {overflow: hidden; position:relative; top:0px; left:0px; }
+.ADList_banner ul {list-style:none; margin:0; padding:0; border:0; position:relative; display:inline-block;letter-spacing:-4px;white-space:nowrap;}
+.ADList_banner li {display:inline-block; white-space:nowrap;  *display:inline; *zoom:1}
+.ADList_banner li img { }
+.ADList_number {overflow: hidden;position: absolute; right:0; bottom:5px; }
+.ADList_number ul {list-style: none;margin: 0;padding: 0;margin: 0 auto;padding-top: 10px;}
+.ADList_number li { cursor: pointer;float:left;display: block; font-size:10px; line-height:10px; width:10px; height:10px;list-style:inside none; border-radius:50%;
+			text-align: center;border: 1px solid #ad5102;margin-right: 12px; background:#FFF; color:#FFF; text-shadow:2px 2px 4px rgba(0,0,0,.6);
+			}
+.ADList_number li.click {background:#4A2515;color:#4A2515;text-shadow:2px 2px 4px rgba(255,255,255,.6);}

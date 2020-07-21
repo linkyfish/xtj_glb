@@ -1,0 +1,385 @@
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_head.html'); ?>
+	<body>
+<div class="templatemo-flex-row">
+	<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_nav.html'); ?>
+
+	<div class="templatemo-content col-1 light-gray-bg">
+		<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_top.html'); ?>
+		<div class="row content" style="padding:5px 0px 0px 0px;">
+
+			<section class="content-header sectionHeader">
+				<h1 class="hidden-xs">
+					上下分明细查询
+					<small style="margin-left:8px; margin-right:8px;"><a
+								href="userList.aspx?sid=<?= $agent['username'] ?>"
+								target="_self"
+								onclick='userList.aspx?sid=<?= $agent['username'] ?>;'><i
+									class="fa fa-arrow-left"></i> 返回</a></small>
+				</h1>
+				<ol class="breadcrumb hidden-md hidden-lg hidden-sm">
+					<li>上下分明细查询&nbsp;&nbsp;&nbsp;<a href="userList.aspx?sid=<?= $agent['username'] ?>" target="_self"
+													onclick='userList.aspx?sid=<?= $agent['username'] ?>;'><i
+									class="fa fa-arrow-left"></i> 返回</a></li>
+				</ol>
+			</section>
+			<section class="content">
+				<div class="box box-primary box-solid">
+					<div class="box-header with-border">
+						<h3 class="box-title text-bold text-muted" id="d_tip_2"><span
+									style="color:White;"><?= $agent['username'] ?></span></h3><i
+								class="fa fa-angle-double-right"></i>
+					</div>
+
+					<div class="box-body">
+
+						<div class="form-group" style="display:none;">
+							<label>帐号</label>
+							<input type="text" class="form-control" id="txt_UserName" maxlength="17">
+						</div>
+
+						<div class="form-group">
+							<label>开始日期</label>
+							<input type="text" class="form-control" id="txt_StartDateTime" maxlength="10"
+								   onClick="WdatePicker();">
+						</div>
+
+						<div class="bootstrap-timepicker" id="begin_tp">
+							<div class="bootstrap-timepicker-widget dropdown-menu">
+								<table>
+									<tbody>
+									<tr>
+										<td><a data-action="incrementHour" href="#"><i
+														class="glyphicon glyphicon-chevron-up"></i></a></td>
+										<td class="separator">&nbsp;</td>
+										<td><a data-action="incrementMinute" href="#"><i
+														class="glyphicon glyphicon-chevron-up"></i></a></td>
+										<td class="separator">&nbsp;</td>
+										<td class="meridian-column"><a data-action="toggleMeridian" href="#"><i
+														class="glyphicon glyphicon-chevron-up"></i></a></td>
+									</tr>
+									<tr>
+										<td><span class="bootstrap-timepicker-hour">09</span></td>
+										<td class="separator">:</td>
+										<td><span class="bootstrap-timepicker-minute">00</span></td>
+										<td class="separator">&nbsp;</td>
+										<td><span class="bootstrap-timepicker-meridian">AM</span></td>
+									</tr>
+									<tr>
+										<td><a data-action="decrementHour" href="#"><i
+														class="glyphicon glyphicon-chevron-down"></i></a></td>
+										<td class="separator"></td>
+										<td><a data-action="decrementMinute" href="#"><i
+														class="glyphicon glyphicon-chevron-down"></i></a></td>
+										<td class="separator">&nbsp;</td>
+										<td><a data-action="toggleMeridian" href="#"><i
+														class="glyphicon glyphicon-chevron-down"></i></a></td>
+									</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="form-group">
+								<label class="text-blue"> - 时/分/秒</label>
+								<div class="input-group">
+									<input type="text" class="form-control timepicker" id="txt_StartDateTime_HM">
+									<div class="input-group-addon">
+										<i class="fa fa-clock-o"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label>结束日期</label>
+							<input type="text" class="form-control" id="txt_EndDateTime" maxlength="10"
+								   onClick="WdatePicker();">
+						</div>
+
+						<div class="bootstrap-timepicker" id="end_tp">
+							<div class="bootstrap-timepicker-widget dropdown-menu">
+								<table>
+									<tbody>
+									<tr>
+										<td><a data-action="incrementHour" href="#"><i
+														class="glyphicon glyphicon-chevron-up"></i></a></td>
+										<td class="separator">&nbsp;</td>
+										<td><a data-action="incrementMinute" href="#"><i
+														class="glyphicon glyphicon-chevron-up"></i></a></td>
+										<td class="separator">&nbsp;</td>
+										<td class="meridian-column"><a data-action="toggleMeridian" href="#"><i
+														class="glyphicon glyphicon-chevron-up"></i></a></td>
+									</tr>
+									<tr>
+										<td><span class="bootstrap-timepicker-hour">09</span></td>
+										<td class="separator">:</td>
+										<td><span class="bootstrap-timepicker-minute">00</span></td>
+										<td class="separator">&nbsp;</td>
+										<td><span class="bootstrap-timepicker-meridian">AM</span></td>
+									</tr>
+									<tr>
+										<td><a data-action="decrementHour" href="#"><i
+														class="glyphicon glyphicon-chevron-down"></i></a></td>
+										<td class="separator"></td>
+										<td><a data-action="decrementMinute" href="#"><i
+														class="glyphicon glyphicon-chevron-down"></i></a></td>
+										<td class="separator">&nbsp;</td>
+										<td><a data-action="toggleMeridian" href="#"><i
+														class="glyphicon glyphicon-chevron-down"></i></a></td>
+									</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="form-group">
+								<label class="text-blue"> - 时/分/秒</label>
+								<div class="input-group">
+									<input type="text" class="form-control timepicker" ID="txt_EndDateTime_HM">
+									<div class="input-group-addon">
+										<i class="fa fa-clock-o"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="box-footer">
+						<button type="button" class="btn btn-primary" id="Button_OK">确定</button>
+					</div>
+
+					<div class="box-body no-padding" style="display:block;display:none;" id="show_total">
+						<ul class="nav nav-pills nav-stacked">
+							<li id="t_add"><a href="#"><i class="fa fa-circle-o text-red"></i> 总加分：<span
+											id="td_totalAdd" class="text-bold"></span></a></li>
+							<li id="t_reduce"><a href="#"><i class="fa fa-circle-o text-light-blue"></i> 总减分：<span
+											id="td_totalReduce" class="text-bold"></span></a></li>
+							<li id="t_total"><a href="#"><i class="fa fa-circle-o text-light-green"></i> 总累计：<span
+											id="td_TotalSet" class="text-bold"></span></a></li>
+						</ul>
+					</div>
+				</div>
+				<!--列表 开始-->
+				<div class="box box-primary box-solid" id="box_subList" style="display:none;">
+					<div class="box-header with-border">
+						<h3 class="box-title text-bold"><span style=" color:White;">子帐号列表</span></h3>
+					</div>
+					<div class="box-body" style="display: block; padding:0px;">
+						<div class="table-responsive">
+
+							<table class="table table-hover table-bordered" id="data_list">
+								<thead>
+								<tr>
+									<th>#</th>
+									<th>帐号</th>
+									<th>备注</th>
+									<th>创建日期</th>
+									<th>操作</th>
+								</tr>
+								</thead>
+								<tbody id="tblData1"></tbody>
+							</table>
+
+						</div>
+					</div>
+					<div class="overlay" id="overlay_Log" style="display:none;">
+						<i class="fa fa-refresh fa-spin"></i>
+					</div>
+				</div>
+				<!--列表 结束-->
+
+				<div class="box box-primary box-solid" id="tb_list" style="display:none;">
+					<div class="box-header with-border">
+						<h3 class="box-title text-bold"><span style=" color:White;">数据列表</span></h3>
+						<div class="box-tools pull-right">
+							<button data-widget="collapse" class="btn btn-box-tool" type="button"><i
+										class="fa fa-minus"></i></button>
+						</div>
+					</div>
+					<div class="box-body" style="display: block; padding:0px;">
+						<div class="table-responsive">
+
+							<table class="table table-hover table-bordered">
+								<thead>
+								<tr>
+									<th>序号</th>
+									<th>操作人</th>
+									<th>会员ID</th>
+									<th>设定分数</th>
+									<th>操作IP</th>
+									<th>日期时间</th>
+								</tr>
+								</thead>
+								<tbody id="tblData"></tbody>
+							</table>
+
+						</div>
+						<!--Pager-->
+						<div id="Pagination" class="pull-left"></div>
+					</div>
+				</div>
+			</section>
+			<script src="/res/js/WdatePicker.js" type="text/javascript"></script>
+			<script src="/res/js/laypage.js" type="text/javascript"></script>
+			<script src="/res/js/bootstrap-timepicker.min.js" type="text/javascript"></script>
+			<script type="text/javascript">
+                function getDataList(a) {
+                    var b, c, d, e, f;
+                    return _totalAdd = 0, _totalReduce = 0, _totalScore = 0, _totalReg = 0, _totalXima = 0, b = a, $.trim($("#txt_StartDateTime").val()).length <= 0 || $.trim($("#txt_EndDateTime").val()).length <= 0 ? (web_tips("日期不能为空."), !1) : (c = $("#txt_StartDateTime").val(), d = $("#txt_StartDateTime_HM").val(), e = $("#txt_EndDateTime").val(), f = $("#txt_EndDateTime_HM").val(), _sDate = c + " " + d, _eDate = e + " " + f, $.ajax({
+                        url: "../ashx/report/report.ashx",
+                        type: "post",
+                        dataType: "json",
+                        data: {
+                            action: "report_setscore",
+                            sDate: _sDate,
+                            eDate: _eDate,
+                            user: "<?=$agent['username']?>",
+                            pageIndex: b + 1,
+                            pageSize: pageSize,
+                            CurDateTime: rand()
+                        },
+                        success: function (a) {
+                            var c, d, e;
+                            a.success ? (c = a.total, _totalAdd = Number(a.TotalAdd), _totalReduce = Number(a.TotalReduce), $("#show_total,#tb_list").fadeOut("slow"), a.results.length > 0 ? ($("#tb_list tr:gt(0)").remove(), d = "", e = 0, $.each(a.results, function (b) {
+                                var g, f = parseFloat(a.results[b].ScoreNum).toFixed(2);
+                                e = f, g = Number(a.results[b].Action_Type), _totalScore += Number(e),
+									d += '<tr class="tr_h">',
+									d += "<td>",
+									d += a.results[b].Rownum,
+									d += "</td>",
+									d += "<td>",
+									d += a.results[b].Account,
+									d += "</td>",
+									d += "<td>",
+									d += a.results[b].UserName,
+									d += "</td>";
+                                switch (g) {
+
+                                    case 25:
+                                        _totalReg += Number(e), d += '<td class="text-left"> 注册送：';
+                                        break;
+                                    case 29:
+                                        d += '<td class="text-left"> 申请送：';
+                                        break;
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                    case 5:
+                                    case 6:
+                                    case 8:
+                                    case 9:
+                                    case 10:
+                                    case 17:
+                                    case 35:
+                                        d += '<td class="text-left"> '+_arr[h]+'：';
+                                        break;
+                                    case 36:
+                                        _totalActive += Number(e), d += '<td class="text-left"> 活动送：';
+                                        break;
+                                    case 37:
+                                        d += '<td class="text-left text-red"> 提现：';
+                                        break;
+                                    case 38:
+                                        d += '<td class="text-left text-red"> 取消提现：';
+                                        break;
+                                    case 50:
+                                        _totalActive += Number(e), d += '<td class="text-left"> 短信送：';
+                                        break;
+                                    case 51:
+                                        d += '<td class="text-left text-red"> 手工加：';
+                                        break;
+                                    case 52:
+                                        d += '<td class="text-left"> 减分：';
+                                        break;
+                                    case 61:
+                                        d += '<td class="text-left text-red"> 商城加：';
+                                        break;
+                                    case 71:
+                                        d += '<td class="text-left text-red"> 代理结算：';
+                                        break;
+                                    case 114:
+                                        d += '<td class="text-left"> 活动清零调整：';
+                                        break;
+                                    default:
+                                       e>0? d += '<td class="text-left"> 加分：': d += '<td class="text-left"> 减分：'
+                                }
+
+									d += e, d += "</td>", d += "<td>", d += a.results[b].ActionIP, d += "</td>", d += "<td>", d += a.results[b].C_DateTime, d += "</td>", d += "</tr>"
+                            }), $("#tblData").append(d), $("#td_totalAdd").text(parseFloat(_totalAdd).toFixed(2)), $("#td_totalReduce").text(parseFloat(_totalReduce).toFixed(2)), $("#td_TotalSet").text(parseFloat(_totalAdd + _totalReduce).toFixed(2)), $("#tb_list,#Pagination,#show_total").fadeIn("slow"), layer.close(pagei), laypage({
+                                cont: "Pagination",
+                                pages: numPages(c, pageSize),
+                                skip: !0,
+                                skin: "molv",
+                                first: 1,
+                                last: numPages(c, pageSize),
+                                prev: "<",
+                                next: ">",
+                                curr: b + 1,
+                                groups: 5,
+                                jump: function (a, b) {
+                                    b || pageselectCallback(a.curr - 1)
+                                }
+                            })) : (layer.close(pagei), $("#show_total,#tb_list,#Pagination").hide(), web_tips("暂无记录."))) : (layer.close(pagei), global_Error500 == a.ERROR_TYPE && (parent.location.href = global_e_p_500), global_NoLicense != a.msg ? (web_tips("暂无记录."), $("#show_total,#tb_list,#Pagination").fadeOut(1e3)) : parent.location.href = global_jump_login)
+                        },
+                        beforeSend: function () {
+                            $("#Button_OK").attr("disabled", "disabled").text("正在查询"), pagei = layer.msg('请稍候..', {
+                                icon: 16,
+                                shade: 0.01
+                            })
+                        },
+                        complete: function () {
+                            $("#Button_OK").removeAttr("disabled").text("确定")
+                        }
+                    }), void 0)
+                }
+
+                function pageselectCallback(a) {
+                    getDataList(a)
+                }
+
+                function DefaultGet(a) {
+                    $("#data_list tr:gt(0)").remove(), $.ajax({
+                        url: "../ashx/getData/AccountList.ashx",
+                        type: "post",
+                        dataType: "json",
+                        data: {action: "getSubAccountList2", user: a, CurDateTime: rand()},
+                        success: function (a) {
+                            if (a.success) if (a.results.length > 0) {
+                                var b = "";
+                                $.each(a.results, function (c) {
+                                    var e = a.results[c].Account;
+                                    b += "<tr>", b += "<td>", b += c + 1, b += "</td>", b += "<td>", b += e, b += "</td>", b += "<td>", b += a.results[c].Redme, b += "</td>", b += "<td>", b += a.results[c].C_DateTime, b += "</td>", b += '<td class="text-left">', b += '<button type="button" class="btn btn-warning btn-xs" title="' + e + '" onfocus="this.blur();" onclick=\'onScoreLogForSub(this,"' + e + "\");'>查上下分明细</button>", b += "</td>", b += "</tr>"
+                                }), $("#tblData1").append(b), $("#box_subList").show(), $("#overlay_Log").fadeOut(1e3)
+                            } else $("#box_subList,#overlay_Log").fadeOut(1e3); else $("#box_subList,#overlay_Log").fadeOut(1e3), a.ERROR_TYPE == global_Error500 && (parent.location.href = "../PageError/500.html"), global_NoLicense != a.msg ? web_tips(a.msg) : parent.location.href = "../Login.aspx"
+                        },
+                        beforeSend: function () {
+                            $("#overlay_Log").show()
+                        }
+                    })
+                }
+
+                var _totalAdd = 0, _totalReduce = 0, _totalScore = 0, pagei, pageIndex = 0, pageSize = 50,
+                    _totalReg = 0, _totalXima = 0, _sDate, _eDate, _user = "<?=$agent['username']?>",_arr=<?php echo json_encode($this->MoneyTrans->Type)?>;;
+                $(function () {
+                    $("#txt_StartDateTime,#txt_EndDateTime").attr("value", getCurrDate()), $("#txt_StartDateTime_HM").timepicker({
+                        defaultTime: "00:00:00",
+                        showInputs: !1,
+                        showMeridian: !1,
+                        showSeconds: !0,
+                        minuteStep: 5,
+                        secondStep: 15
+                    }), $("#txt_EndDateTime_HM").timepicker({
+                        defaultTime: "23:59:59",
+                        showInputs: !1,
+                        showMeridian: !1,
+                        showSeconds: !0,
+                        minuteStep: 5,
+                        secondStep: 15
+                    }), $("#Button_OK").click(function () {
+                        $("#Pagination").html(""), getDataList(0)
+                    })
+                });
+
+			</script>
+
+		</div>
+	</div>
+</div>
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_footjs.html'); ?>

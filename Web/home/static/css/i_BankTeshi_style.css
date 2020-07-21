@@ -1,0 +1,64 @@
+#bank_Teshi {
+	margin-left:20px;
+	width:97%;
+	padding:0;
+}
+		#bank_Teshi p {
+			font-size:13px;
+			color: #333333;
+			line-height:24px;
+			margin:0;
+		}
+				#bank_Teshi .Explain_01 { 
+				text-align:center;
+				margin:12px;
+				clear:both;
+				display:block;
+				}
+		#bank_Teshi dt {
+			font-size:15px;
+			color:#0000FF;
+			line-height:28px;
+			letter-spacing:normal;
+		}
+		#bank_Teshi dd {
+			font-size:13px;
+			color: #484848;
+			line-height:24px;
+			padding-left:20px;
+			letter-spacing:normal;
+		}
+		
+		
+
+.Teshi_table {
+	font-size:13px;
+	color:#335993;
+	line-height:26px;
+}
+		.Teshi_table th {
+			background-color: #FFFFCC;
+			text-align:center;
+		}
+		.Teshi_table td {
+			background-color: #FFFFFF;
+			text-align:center;
+		}
+		.Teshi_table .pic {
+			display:block;
+			float:left;
+			margin:5px;
+			width:80px;
+			height:55px;
+		}
+		.Teshi_table p {
+			display:block;
+			margin:5px;
+			text-align:left;
+		}
+		.Teshi_table span {
+			color:#FF0000;
+			font-size:15px;
+			letter-spacing: normal;
+			font-weight:bold;
+		}

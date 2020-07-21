@@ -1,0 +1,74 @@
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_head.html'); ?>
+<body>
+<style>
+    .layui-laydate-content th {
+        font-weight: 400;
+        color: white;
+    !important;
+    }
+
+    .layui-form-label {
+        width: 120px
+    }
+</style>
+<div class="templatemo-flex-row">
+    <?php include _include(__APPDIR__ . 'Controller/Com/View/Public_nav.html'); ?>
+
+    <div class="templatemo-content col-1 light-gray-bg">
+        <?php include _include(__APPDIR__ . 'Controller/Com/View/Public_top.html'); ?>
+        <div class="row content" style="padding:5px 0px 0px 0px;">
+
+            <section class="content">
+                <div class="box box-primary box-solid">
+                    <div class="box-header with-border">
+                        <h3 class="box-title text-muted"><span style=" color:White;">运行管理<small
+                                        style="margin-left:8px; margin-right:8px;"><a
+                                            href="javascript:window.history.back()" target="_self"
+                                            onclick='javascript:window.history.back();'><i class="fa fa-arrow-left"></i> 返回</a></small></span>
+                        </h3>
+                        <div class="box-tools pull-right">
+                            <button data-widget="collapse" class="btn btn-box-tool" type="button"><i
+                                        class="fa fa-minus"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="box-body">
+
+                        <form class="layui-form" action="../../admin/other/cache">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">清理项目</label>
+                                <div class="layui-input-block">
+                                    <input type="checkbox" value="1" name="tmp_clear" title="文件缓存" checked>
+                                    <input type="checkbox" value="1" name="redis_clear" title="Redis缓存" >
+                                </div>
+                            </div>
+
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">进程重载</label>
+                                <div class="layui-input-block">
+                                    <input type="radio" value="0" name="worker_reload" title="不重载" checked>
+                                    <input type="radio" value="2" name="worker_reload" title="所有进程">
+                                    <input type="radio" value="1" name="worker_reload" title="仅Task进程">
+                                </div>
+                                <div class="layui-form-mid layui-word-aux">请勿频繁操作</div>
+                            </div>
+
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <button class="layui-btn" lay-submit lay-filter="*">立即清理</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_footjs.html'); ?>
+<script src="/js/index.js?ver=<?php echo _CONF('app_v')?>"></script>
+<script>
+    form.render();
+</script>
+

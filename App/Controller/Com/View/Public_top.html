@@ -1,0 +1,154 @@
+<style>
+    .sweet-alert{max-height: 50% !important;
+        overflow: scroll !important;}
+</style>
+<div class="templatemo-top-nav-container">
+    <div class="row">
+        <nav class="templatemo-top-nav col-lg-12 col-md-12">
+            <ul style="width:100%;display:block;">
+                <li class="hidden-xs" style="display:none;">
+                    <span class="text-bold m_uid" id='<?php echo $user['id'] ?>'><?php echo $user['username'] ?></span>
+                </li>
+                <li class="li_score"><span class="badge bg-gray" id="n3" title="点击刷新"></span></li>
+                <li class="hidden-xs li_notice"><a href="platformNotice.aspx">平台公告<span
+                                class="badge bg-gray num_notice"></span></a></li>
+                <li><a href="changePassWord.aspx">更改密码</a></li>
+                <?php if( in_array($user['RoleID'],[9,10,11])){ ?>
+                <li><a href="changeSafecode.aspx">更改安全码</a></li>
+                <?php }?>
+                <li><a href="#" onclick='javascript:LogOut();'>退出工具</a></li>
+<!--                <li>-->
+<!--                    <a href="javascript:init_play_mp3()">开启声音提醒</a>-->
+<!--                </li>-->
+                <li><a href="#"><span style="text-transform:none"><?php echo $user['username'] ?></span></a></li>
+                <?php if($user['RoleID']==1||$user['RoleID']==2||$user['RoleID']==9||$user['RoleID']==10||$user['RoleID']==11){ ?>
+                <li><a href="#">总余额：<span id="sumMoney">--</span></a></li>
+                <?php } ?>
+                <li>
+                    <a href="#"><button class="btn btn-success btn-xs" href="#" onclick='web_open("qrcode.aspx?action=cash","提现地址二维码",300,350)'>提现地址</button></a>
+                </li>
+                <?php if($agent['RoleID']==9){ ?>
+                    <li >
+                        <a href="#"><button class="btn btn-warning btn-xs" href="#" onclick='web_open("qrcode.aspx?action=share&code=<?=$agent['username']?>","推广二维码",300,350)'>推广地址</button></a>
+                    </li>
+                <?php } ?>
+
+                <div id="index_ad_info" style="display: none"></div>
+            </ul>
+			<?php if($user['RoleID']!=9){?>
+			<div style="clear:both;display:block;width:100%;padding-top:7px">
+				<strong style="font-weight:600;color: #a90000;text-transform:none"><?php $admin_link=_CONF('admin_link');echo $admin_link?"<a href='{$admin_link}' style=\"font-weight:600;color: #a90000;border-right:none\" target='_blank'>". _CONF('admin_kf')." 下载客服工具</a>": _CONF('admin_kf')?></strong>
+			</div>
+			<?php } ?>
+        </nav>
+    </div>
+</div>
+<script>
+
+    function share1(id) {
+        $.ajax({
+            url: "../../gateway/qrcode/index/agent_id/" + id + "/dwz/1",
+            type: "get",
+            dataType: "json",
+            data: {},
+            success: function (d) {
+                if (d.resp_code == "0000") {
+
+                    $("#mark_share_id").attr("data-content", d.share_url)
+                    $("#mark_share_img").attr("href", d.url)
+                    $("#mark_share_img").show()
+                    $('#mark_share_id').popover('show');
+
+                } else {
+                    alert(d.msg)
+                }
+            },
+            beforeSend: function () {
+
+            },
+            complete: function () {
+
+            }
+        })
+
+
+    }
+
+    //获取公告信息
+    function GetAdInfo() {
+        jQuery.ajax({
+            url: "../ashx/log/ad.ashx",
+            type: "post",
+            dataType: "json",
+            data: {CurDateTime: rand()},
+            success: function (a) {
+                if (a.success) {
+                    if (a.text == "") {
+                        return;
+                    }
+                    $("#index_ad_info").html(a.text);
+
+                    swal({
+                        title: "",
+                        text: $("#index_ad_info").text(),
+                        type: "",
+                        confirmButtonText: "公告确认已读"
+                    });
+                }
+
+
+            },
+            error: function () {
+                window.clearInterval(flag5)
+            }
+        })
+    }
+
+    GetAdInfo();
+    //获取一些统计值
+    function getPlatRank() {
+        jQuery.ajax({
+            url: "../ashx/report/plat_gm_data.ashx",
+            type: "post",
+            dataType: "json",
+            data: {CurDateTime: rand()},
+            success: function (a) {
+                if (a.success) {
+                    if (a.text == "") {
+                        return;
+                    }
+                    $("#sumMoney").html(a.data.money_total_normal);
+                }
+            },
+            error: function () {
+
+            }
+        })
+    }
+    getPlatRank();
+
+
+    function init_play_mp3() {
+            var child = document.getElementById("sound");
+            if (child) {
+                child.pause();
+                document.body.removeChild(child.parentNode);
+            }
+            var div = document.createElement("span");
+            div.style.padding = "0px";
+            div.style.margin = "0px";
+            //div.innerHTML = '<object id="sound" src="'+mp3+'" type="audio/x-wav" autostart="true" loop="false" style="width:0px;height:0px;margin:0px;padding:0px;position:absolute;"></object>';
+            div.innerHTML = '<audio id="sound" src="/res/sound/notify1.mp3" preload style="width:0;height:0;display:none;"></audio>';
+            document.body.appendChild(div);
+            var myAuto = document.getElementById('sound');
+            if(myAuto){
+                myAuto.play();
+            }else{
+                console.log("找不到dom");
+            }
+
+
+
+
+    }
+</script>

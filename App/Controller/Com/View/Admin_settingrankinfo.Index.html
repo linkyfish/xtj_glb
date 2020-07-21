@@ -1,0 +1,115 @@
+<?php include _include(__APPDIR__.'Controller/Com/View/Public_head.html');?>
+<body>
+<div class="templatemo-flex-row">
+    <?php include _include(__APPDIR__.'Controller/Com/View/Public_nav.html');?>
+
+    <div class="templatemo-content col-1 light-gray-bg">
+        <?php include _include(__APPDIR__.'Controller/Com/View/Public_top.html');?>
+        <div class="row content" style="padding:5px 0px 0px 0px;">
+
+            <section class="content">
+
+                <!--列表 开始-->
+                <div class="box box-primary box-solid" id="tb_list">
+                    <div class="box-header with-border">
+                        <h3 class="box-title"><span style=" color:White;">人工充值通道设置<small
+                                        style="margin-left:8px; margin-right:8px;"><a
+                                            href="javascript:window.history.back()" target="_self"
+                                            onclick='javascript:window.history.back();'><i class="fa fa-arrow-left"></i> 返回</a></small></span>
+                        </h3>
+                    </div>
+                    <div class="box-body" style="display: block; padding:0px;">
+                        <div class="table-responsive">
+
+                            <table class="table table-hover table-bordered" id="data_list">
+                                <thead>
+                                <tr>
+                                    <th>序号</th>
+                                    <th>昵称</th>
+                                    <th>外部地址</th>
+                                    <th>QQ</th>
+                                    <th>绿色号</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tblData"></tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                    <div class="overlay" id="overlay_Log" style="display:none;">
+                        <i class="fa fa-refresh fa-spin"></i>
+                    </div>
+                </div>
+                <!--列表 结束-->
+
+            </section>
+            <script src="/res/js/jquery.jeditable.mini.js" type="text/javascript"></script>
+
+
+            <script type="text/javascript">
+                function DefaultGet() {
+                    $("#data_list tr:gt(0)").remove(), $.ajax({
+                        url: "../ashx/log/log.ashx",
+                        type: "post",
+                        dataType: "json",
+                        data: {action: "getRankInfoList", CurDateTime: rand()},
+                        success: function (a) {
+                            if (a.success) if (a.results.length > 0) {
+                                var b = "";
+                                $.each(a.results, function (c) {
+                                    var e = a.results[c].ID;
+                                    b += '<tr id="' + e + '">', b += '<td><span class="badge bg-gray">', b += a.results[c].RankNo, b += "</span></td>", b += '<td nowrap="nowrap" class="editInfo" field="NickName">', b += a.results[c].NickName, b += "</td>",  b += '<td nowrap="nowrap" class="text-left editInfo"  field="Signature">', b += a.results[c].Signature, b += "</td>", b += '<td nowrap="nowrap" class="editInfo"  field="qq">', b += a.results[c].qq, b += "</td>", b += '<td nowrap="nowrap" class="editInfo"  field="WeChatID">', b += a.results[c].WeChatID, b += "</td>", b += "</tr>"
+                                }), $("#tblData").append(b), $("#tb_list").show(), $("#overlay_Log").fadeOut(1000)
+                            } else $("#tb_list").show(), $("#overlay_Log").fadeOut(1000), $("#tblData").append('<tr class="tr_h"><td>-</td><td>-</td><td>-</td><td>暂无数据</td></tr>'); else $("#tb_list,#overlay_Log").fadeOut(1000), a.ERROR_TYPE == global_Error500 && (parent.location.href = "../PageError/500.html"), global_NoLicense != a.msg ? web_tips(a.msg) : parent.location.href = "../Login.aspx"
+                        },
+                        beforeSend: function () {
+                            $("#overlay_Log").show()
+                        },
+                        complete: function () {
+                            bindHandler()
+                        }
+                    })
+                }
+
+                function bindHandler() {
+                    var a;
+                    $(".editInfo").editable("../ashx/system/system.ashx", {
+                        indicator: "<img src='/res/js/plug/jeditable/img/indicator.gif'>",
+                        event: "click",
+                        style: "inherit",
+                        type: "text",
+                        submit: "保存",
+                        width: 150,
+                        cancel: "取消",
+                        cssclass: "setInput",
+                        onsubmit: function (a, b) {
+                            var c = $(b).find("input").val();
+                            return c = $.trim(c)
+                        },
+                        submitdata: function (b) {
+                            return a = b, {
+                                action: "ModifyRankByField",
+                                BeforeValue: a,
+                                id: $(this).parent().attr("id"),
+                                field: $(this).attr("field")
+                            }
+                        },
+                        callback: function (b) {
+                            var d = jQuery.parseJSON(b);
+                            d.success ? ($(this).text(d.NewValue), swal(d.msg, "", "success")) : ($(this).text(a), swal(d.msg, "", "info"))
+                        }
+                    })
+                }
+
+                var _user;
+                $(function () {
+                    DefaultGet()
+                });
+
+            </script>
+
+        </div>
+    </div>
+</div>
+
+<?php include _include(__APPDIR__.'Controller/Com/View/Public_footjs.html');?>

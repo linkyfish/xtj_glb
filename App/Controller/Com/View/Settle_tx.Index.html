@@ -1,0 +1,224 @@
+<?php include _include(__APPDIR__.'Controller/Com/View/Public_head.html');?>
+    <body>
+<style>
+    .layui-laydate-content th {
+        font-weight: 400;
+        color: white;
+    !important;
+    }
+</style>
+<div class="templatemo-flex-row">
+    <?php include _include(__APPDIR__.'Controller/Com/View/Public_nav.html');?>
+
+    <div class="templatemo-content col-1 light-gray-bg">
+        <?php include _include(__APPDIR__.'Controller/Com/View/Public_top.html');?>
+        <div class="row content" style="padding:5px 0px 0px 0px;">
+
+            <section class="content">
+                <div class="box box-primary box-solid">
+                    <div class="box-header with-border">
+                        <h3 class="box-title text-muted"><span style=" color:White;">自助结算<small
+                                        style="margin-left:8px; margin-right:8px;"><a
+                                            href="javascript:window.history.back()" target="_self"
+                                            onclick="javascript:window.history.back();"><i
+                                                class="fa fa-arrow-left"></i> 返回</a></small></span>
+                        </h3>
+                        <?php
+                        if(empty($agentInfo["UserID"])){
+                        ?>
+                            <button type="button" class="btn btn-success " title="" onfocus="this.blur();" onclick="bind_player(<?=$agentInfo["AgentID"] ?>)">绑定收益账户
+                            </button>
+                            <?php
+                        }else{
+                          ?>
+                            <span style="display: block;padding-top: 20px">
+                               上期欠款: <?= $agentInfo["less_money"] ?>元&nbsp;&nbsp;
+                                当前收益账户(id): <?= $userInfo["LoginName"] ?>(<?= $userInfo["ID"] ?>)
+
+                                    </span>
+                            <?php
+                        }
+                        ?>
+
+                    </div>
+
+                    <div class="box-body">
+
+
+                        <div class="table-responsive">
+                            <table class="table table-hover table-bordered" id="data_list">
+                                <thead>
+                                <tr>
+                                    <th>统计日期</th>
+                                    <th>结束日期</th>
+                                    <th>应结算金额</th>
+                                    <th>上期抵扣</th>
+                                    <th>下发状态</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tblData">
+                                <?php
+                                if(!empty($zhangdanList)){
+                                    foreach ($zhangdanList["list"] as $index => $item) {
+
+                                        ?>
+                                        <tr id="<?= $item["id"] ?>">
+
+                                            <td nowrap="nowrap" class="text-left"><?= $item["start_ymd"] ?></td>
+                                            <td nowrap="nowrap" class="text-left"><?= $item["end_ymd"] ?></td>
+
+                                            <td nowrap="nowrap" class="text-left"><?= $item["real_money"] ?></td>
+                                            <td nowrap="nowrap" class="text-left"><?= $item["dikou_money"] ?></td>
+
+                                            <td nowrap="nowrap" class="text-left">
+                                                <?php
+                                                if($item["player_recharge_status"]==0){
+                                                    echo "未下发";
+                                                }else if($item["player_recharge_status"]==1){
+                                                    echo "已下发";
+                                                }
+                                                ?>
+                                            </td>
+
+                                            <td nowrap="nowrap" class="text-left">
+
+                                                <button type="button" class="btn btn-primary btn-xs" title="" onfocus="this.blur();" onclick="dailizongzhang(<?php echo $item["id"] ?>)">查看详情
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <?php
+                                    }}else{
+                                    ?>
+                                    <tr>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+
+                                    </tr>
+                                    <?php
+
+                                }
+                                ?>
+
+
+
+                                </tbody>
+                            </table>
+                        </div>
+
+
+
+                    </div>
+
+
+
+                </div>
+
+
+            </section>
+
+
+        </div>
+    </div>
+</div>
+<script src="/res/js/WdatePicker.js" type="text/javascript"></script>
+
+<script>
+    $(function(){
+        $("#Button_OK").on("click",function(){
+            var start_time=$("#txt_StartDateTime").val();
+            var end_time=$("#txt_EndDateTime").val();
+            if(!start_time){
+                swal("请选择开始日期", "", "info")
+            }
+            if(!end_time){
+                swal("请选择结束日期", "", "info")
+            }
+            $.ajax({
+                url: "../ashx/settle/make_settle.ashx",
+                type: "post",
+                dataType: "json",
+                cache: !1,
+                data: {
+                    start_time:start_time,
+                    end_time:end_time,
+                    rand: rand()
+                },
+                success: function(a) {
+                    a.success ? (alertOk(),location.href="Settle_agent.aspx") : swal(a.msg, "", "info")
+
+                },
+                beforeSend: function() {
+                    alertDoing();
+                    $("#Button_OK").attr("disabled", "disabled").text("正在操作")
+                },
+                complete: function() {
+                    $("#Button_OK").removeAttr("disabled")
+                }
+            })
+        })
+    })
+function bind_player(agentid){
+
+
+        swal({
+            title: "绑定收益玩家账号",
+            type: "input",
+            confirmButtonText: "绑定",
+            cancelButtonText: "取消",
+            showCancelButton: true,
+            closeOnConfirm: false,
+            inputPlaceholder: "请输入要绑定玩家id或者手机号",
+            closeOnConfirm : false
+        }, function(txt) {
+            swal.close()
+            if(txt){
+                $.ajax({
+                    url: "../ashx/settle/bind_agent_player.ashx",
+                    type: "post",
+                    dataType: "json",
+                    cache: !1,
+                    data: {
+                        agent_id:agentid,
+                        player:txt,
+                        rand: rand()
+                    },
+                    success: function(a) {
+                        a.success ? (alertOk(),location.reload()) : swal(a.msg, "", "info")
+
+                    },
+                    beforeSend: function() {
+                        alertDoing();
+
+                    },
+                    complete: function() {
+
+                    }
+                })
+
+            }
+
+
+        });
+
+
+
+    }
+
+
+
+
+
+
+
+
+    function dailizongzhang(id){
+        window.location.href="settle_detail.aspx?id="+id;
+    }
+
+</script>
+<?php include _include(__APPDIR__.'Controller/Com/View/Public_footjs.html');?>

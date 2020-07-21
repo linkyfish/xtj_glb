@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>自助服务</title>
+    <link rel="stylesheet" href="../../layui/css/layui.mobile.css">
+    <link rel="stylesheet" href="../../layui/css/modules/layim/mobile/layim.css?v=2.0" media="all">
+    <script src="../../layui/layui.js"></script>
+</head>
+<body>
+<script src="/res/js/jquery-1.11.3.min.js" type="text/javascript"></script>
+<script src="/js/websocket/websocket.js?ver=<?php echo _CONF('app_v')?>"></script>
+<script src="/js/websocket/chat.js?ver=<?php echo _CONF('app_v')?>"></script>
+<script>
+    var webim = {
+        'server' : 'ws:<?php echo $this->request->_S('HOST') ?>'
+    };
+
+    layui.config({
+        version: '20191223'
+    }).use('mobile', function(){
+        var mobile = layui.mobile,layim = mobile.layim,layer = mobile.layer;
+
+        layim.config({
+            //上传图片接口
+            isNewFriend:false,
+            isfriend:true,
+            isgroup:false,
+            maxLength:400,
+            title:'上分客服',
+            uploadImage: {
+                url: '/upload/image.aspx'
+            }
+
+            //上传文件接口
+            ,uploadFile: {
+                url: '/upload/file.aspx'
+            }
+
+            ,init: {
+                //我的信息
+                mine: {
+                    "username": "<?=$player['nickname']?>" //我的昵称
+                    ,"id": '<?=$player['usrid']?>' //我的ID
+                    ,"avatar": "../../logo.png" //我的头像
+                    ,"sign": "<?=$player['nickname']?>"
+                }
+
+            }
+
+        });
+
+        //创建一个会话
+
+        layim.chat({
+          id: "<?=$agent['id']?>"
+          ,name: "<?=$agent['nickname']?>"
+          ,username: "<?=$agent['nickname']?>"
+          ,type: 'friend' //friend、group等字符，如果是group，则创建的是群聊
+          ,avatar: '../../logo.png'
+        });
+
+
+        // //查看聊天信息
+        // layim.on('detail', function(data){
+        //     //console.log(data); //获取当前会话对象
+        //     layim.panel({
+        //         title: data.username + ' 聊天信息' //标题
+        //         ,tpl: '<div style="padding: 10px;">自定义模版，<a href="http://www.layui.com/doc/modules/layim_mobile.html#ondetail" target="_blank">参考文档</a></div>' //模版
+        //         ,data: { //数据
+        //             test: '么么哒'
+        //         }
+        //     });
+        // });
+        //
+        //
+
+
+        // //监听查看更多记录
+        // layim.on('chatlog', function(data, ul){
+        //     console.log(data);
+        //     layim.panel({
+        //         title: '与 '+ data.username +' 的聊天记录' //标题
+        //         ,tpl: '<div style="padding: 10px;">这里是模版，{{d.data.test}}</div>' //模版
+        //         ,data: { //数据
+        //             test: 'Hello'
+        //         }
+        //     });
+        // });
+
+    });
+</script>
+</body>
+</html>
+

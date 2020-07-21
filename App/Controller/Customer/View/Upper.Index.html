@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>上分客服<?= $Custom['NickName'] ?></title>
+    <link rel="stylesheet" href="../../layui/css/layui.css">
+    <link rel="stylesheet" href="../../layui/css/layui.mobile.css">
+    <link rel="stylesheet" href="../../layui/css/modules/layim/mobile/layim.css?v=2.0" media="all">
+    <script src="../../layui/layui.js"></script>
+    <script src="../../layui/lay/modules/laypage.js"></script>
+    <style>
+      .layim-chat-text.back{background-color:#d2d2d2;}
+      .back:after {border-top-color: #d2d2d2 !important;}
+    </style>
+</head>
+<body>
+<script src="/res/js/jquery-1.11.3.min.js" type="text/javascript"></script>
+<script src="/js/websocket/websocket.js?ver=<?php echo _CONF('app_v') ?>"></script>
+
+
+<textarea title="消息模版" id="LAY_tpl" style="display:none;">
+{{# layui.each(d.data.data, function(index, item){
+  if( item.FromID == <?= $player['usrid'] ?> && item.Type == 2 ){ }}
+    <li class="layim-chat-li layim-chat-mine">
+    <div class="layim-chat-user"><img src="../../logo.png" alt="{{ d.uid || d.id }}"><cite><i>{{ layui.data.date(item.timestamp) }}</i><?= $player['nickname'] ?>(<?= $player['usrid'] ?>)</cite>
+    </cite></div>
+    <div class="layim-chat-text">{{ layui.mobile.layim.content(item.content) }}</div>
+    </li>
+
+  {{# } else { }}
+    <li class="layim-chat-li">
+    <div class="layim-chat-user"><img src="../../logo.png" alt="{{ d.uid || d.id }}"><cite>{{ d.data.mine.username }} <i>{{ layui.data.date(item.timestamp) }}</i></cite>
+        </cite></div>
+
+        {{# if(item.Back==1){ }}
+        <div class="layim-chat-text back"> {{ layui.mobile.layim.content(item.content) }}</div>
+        {{# }else{ }}
+        <div class="layim-chat-text">{{ layui.mobile.layim.content(item.content) }}</div>
+        {{# } }}
+    </li>
+  {{# }
+}); }}
+</textarea>
+
+<script>
+    layui.use(['mobile', 'laypage', 'laytpl'], function () {
+
+        var mobile = layui.mobile, layim = mobile.layim, laytpl = layui.laytpl, layer = mobile.layer, laypage = layui.laypage;
+        var protocolStr = document.location.protocol;
+        if (protocolStr == "http:") {
+            var server = 'ws:<?php echo $this->request->_S('HOST') ?>';
+        } else if (protocolStr == "https:") {
+            var server = 'wss:<?php echo $this->request->_S('HOST') ?>';
+        }
+        if (window.WebSocket || window.MozWebSocket) {
+            ws = new ReconnectingWebSocket(server, null, {maxReconnectAttempts: 10, timeoutInterval: 3000});
+        } else if (webim.flash_websocket) {
+            WEB_SOCKET_SWF_LOCATION = "/static/websocket/WebSocketMain.swf";
+            $.getScript("/static/websocket/swfobject.js", function () {
+                ws = new WebSocket(server);
+            });
+        }
+
+        function sendMsg(action, post) {
+            var msg = {};
+            msg.action = action;
+            msg.post = post || {};
+            ws.send(JSON.stringify(msg));
+        }
+
+        ws.onopen = function (e) {
+            //连接成功
+            sendMsg('login', {usrid: "<?=$player['usrid']?>", kfid: "<?=$agent['id']?>", way: 1});
+        };
+
+        //有消息到来时触发
+        ws.onmessage = function (e) {
+            console.log(e);
+            var message = JSON.parse(e.data);
+            var code = message.action;
+            if (code == 'GetMsg') {
+                layim.getMessage({
+                    username: "<?=$Custom['NickName']?>"
+                    , avatar: "../../logo.png"
+                    , id: Number(message.id)
+                    , type: "kefu"
+                    , cid: Number(message.cid)
+                    , isback:0
+                    , content: message.msg
+                });
+            } else if (code == 'GetBack') {
+                layim.getMessage({
+                    username: "<?=$Custom['NickName']?>"
+                    , avatar: "../../logo.png"
+                    , id: Number(message.id)
+                    , type: "kefu"
+                    , cid: Number(message.cid)
+                    , isback:1
+                    , content: '信息已撤回'
+                });
+            } else {
+                //layer.msg(message.msg)
+            }
+        };
+        layim.on('sendMessage', function (res) {
+            var mine = res.mine; //包含我发送的消息及我的信息
+            var to = res.to;
+            console.log(mine,to);
+            sendMsg('playermsg', {from: mine.id, to: to.id, username: mine.username, msg: mine.content, cid: mine.cid});
+        })
+
+        layim.config({
+            //上传图片接口
+            isNewFriend: false,
+            isfriend: false,
+            isgroup: false,
+            maxLength: 400,
+            title: '上分客服<?=$Custom['NickName']?>',
+            copyright: true,
+            uploadImage: {
+                url: '../../customer/upload/image.aspx?usrid=<?=$player['usrid']?>'
+            }
+
+            , init: {
+                //我的信息
+                mine: {
+                    "username": "<?=$player['nickname']?>" //我的昵称
+                    , "id": "<?=$player['usrid']?>"
+                    , "avatar": "../../logo.png" //我的头像
+                    , "sign": "<?=$player['nickname']?>"
+                }
+            }
+            , chatLog: '../../customer/msglog.aspx'//聊天记录页面地址，若不开启，剔除该项即可
+        });
+
+        //创建一个会话
+
+        layim.chat({
+            id: "<?=$agent['id']?>"
+            , username: "<?=$Custom['NickName']?>"
+            , type: 'kefu' //friend、group等字符，如果是group，则创建的是群聊
+            , avatar: '../../logo.png'
+        });
+
+
+        $('.layui-unselect.layui-layim-tab').hide()
+        // //查看聊天信息
+
+        layim.on('chatChange', function(data){
+            //alert(1243);
+        });
+
+        //监听查看更多记录
+        layim.on('chatlog', function (data, ul) {
+
+           layim.panel({
+                title: '与 ' + data.username + ' 的聊天记录' //标题
+                , tpl: '<div class="layim-chat-main" style="bottom:0"><ul id="LAY_view_'+data.id+'"></ul><div style="text-align:center;clear:both;"><div id="LAY_page_'+data.id+'" style="margin: 0 auto;"></div></div></div>'
+
+            });
+
+            function get_msg(page) {
+                $.post('../../customer/upper/player_log',{usrid:<?=$player['usrid']?>,agent_id:data.id,page:page,size:10},function (e) {
+                    var html = laytpl(LAY_tpl.value).render({
+                        data: {data:e.results,mine:data}
+                    });
+                    $('#LAY_view_'+data.id).html(html);
+                    if(page==1){
+                        laypage.render({
+                            elem: 'LAY_page_'+data.id
+                            ,count: e.total
+                            ,prev:'<'
+                            ,next:'>'
+                            ,groups:1
+                            ,jump: function(obj, first){
+                                //首次不执行
+                                if(!first){
+                                    get_msg(obj.curr)
+                                }
+                            }
+                        });
+                    }
+
+                })
+            }
+            get_msg(1);
+        });
+
+
+    });
+
+</script>
+</body>
+</html>
+
+
+
+

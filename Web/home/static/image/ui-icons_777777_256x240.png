@@ -1,0 +1,362 @@
+
+
+<!-- 訊息框樣式改版 CSS -->
+<link href="/css/message.css?v=20200214_49" rel="stylesheet" type="text/css" />
+<link href="/css/font-awesome-4.5.0/css/font-awesome.min.css?v=20200214_49" rel="stylesheet" type="text/css" />
+<script language="JavaScript" ></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-1933265-19"></script>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('set', { 'user_id': 'null' });
+	gtag('set', { 'dimension1': 'null' });
+
+	gtag('config', 'UA-1933265-19');
+	gtag('config', 'UA-1933265-37', {'linker': {'domains': ['http://www.gametower.com.tw','https://member.gametower.com.tw']}});
+</script>
+
+<script language="JavaScript">
+
+</script>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>gametower遊戲官方網站 - 錯誤說明</title>
+		<style type="text/css">
+	<!--
+		.small		{ font-size:12px; line-height:20px; text-decoration:none; }
+		.small-en	{ font-size:9pt; line-height:15pt; font-family:"Arial"; text-decoration: none }
+		.small-v	{ font-size:9pt; line-height:16px; font-family:"verdana"; text-decoration: none }
+		.small-n	{ font-size:7pt; font-family:"Arial"; letter-spacing:1; text-decoration: none }
+		A:hover 	{ color:"#FF4F00"; text-decoration: underline }
+		a { font-family: "新細明體", "細明體";	text-decoration: none;	}
+		.type-10pt {	font-family: "新細明體", "細明體";  font-size: 10pt;	color: #474747}
+		.type-12px {	font-family: "新細明體", "細明體";  font-size: 12px;}
+	-->
+	</style>
+
+	<style type="text/css" id="defaultPopStyle">
+	<!--
+	.cPopText	{ background-color: #EFFFEF; color:#6F8F6F; border: 1px solid; font-color: #000000; font-size: 12px; padding-right: 6px; padding-left: 6px; height: 20px; padding-top: 4px; padding-bottom: 2px; filter: Alpha(Opacity=0) }
+	-->
+	</style> 
+	<link href="/include/i_style.css" rel="stylesheet" type="text/css">
+</head>
+<body bgcolor="#F7F3F7" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+	
+<script language="JavaScript" src="/include/General.js"></script>
+
+<style type="text/css">
+.GT_WebTop_Member {
+	font-family: "新細明體", "細明體";
+	font-size: 11px;
+	line-height: 29px;
+	color: #ffffff;
+}
+a.GT_WebTop_Member{
+	text-decoration: none;
+}
+a.GT_WebTop_Member:hover {
+	text-decoration: none;
+	color: #3E3520;
+	
+}
+.GT_WebTop_Top_menu {
+	font-family: "新細明體", "細明體";
+	font-size: 12px;
+	line-height: 29px;
+	color: #ffffff;
+}
+a.GT_WebTop_Top_menu {	
+	text-decoration: none;
+}
+a.GT_WebTop_Top_menu:hover {
+	text-decoration: none;
+	color: #3E3520;
+}
+
+#GT_WebTop_nav table td{margin:0;padding:0}
+#GT_WebTop_nav input{margin:0;padding:0}
+#GT_WebTop_nav from{margin:0;padding:0}
+
+/*站內搜尋用*/
+.GT_searchtextarea {border: 1px solid #b6c7b6; font-size: 12px; height: 18px; color: #333333; background-color: #eaeeea;	background-image: url(/Graphics/include/WebTop/Logo_25wht.gif); background-repeat: no-repeat; background-position: left top;}
+
+/*.png  {tmp:expression(setPng(this));} 20110819怡如取消*/
+
+img.block{border:0; display:block;}/*20110819怡如修改屬性*/
+
+/*遊戲選單*/
+#GT_GameMenu { font-size: 12px; height: 18px; scrollbar-DarkShadow-Color:#FFFFFF;scrollbar-Track-Color:#E3E3E3; scrollbar-Face-Color:#CCCCCC; scrollbar-Shadow-Color:#999999; scrollbar-Highlight-Color:#FFFFFF; scrollbar-3dLight-Color:#999999; scrollbar-Arrow-Color:#FFFFFF;}
+/* 類別1的顏色 */
+#GT_GameMenu .CategoryGrp1	{	color: #006633;}
+#GT_GameMenu .Category1		{	color: #006633;}
+/* 類別2的顏色 */
+#GT_GameMenu .CategoryGrp2	{	color: #330099;}
+#GT_GameMenu .Category2		{	color: #330099;}
+/* 類別3的顏色 */
+#GT_GameMenu .CategoryGrp3	{	color: #FF6600;}
+#GT_GameMenu .Category3		{	color: #FF6600;}
+/* 類別4的顏色 */
+#GT_GameMenu .CategoryGrp4	{	color: #0066FF;}
+#GT_GameMenu .Category4		{	color: #0066FF;}
+/* 類別5的顏色 */
+#GT_GameMenu .CategoryGrp5	{	color: #993366;}
+#GT_GameMenu .Category5		{	color: #993366;}
+</style>
+
+<script src="/include/FixPng.js"></script>
+
+<script>
+function WebTop_JumpMenu(targ,selObj,restore){ //v3.0
+  eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
+  if (restore) selObj.selectedIndex=0;
+}
+</script>
+<!-- ------------------# Web Top Begin #-------------------- -->
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0" background="/Graphics/include/WebTop/bg.gif">
+  <tr>
+    <td>
+    	<table width="1002" border="0" cellpadding="0" cellspacing="0" background="/Graphics/include/WebTop/bg.gif" height="29">
+			<tr>
+				<td>
+					<table width="100%" border="0" cellpadding="0" cellspacing="0" class="GT_WebTop_Top_menu">
+						<tr>
+							<td width="100" align="center" valign="top"><a href="https://www.gametower.com.tw" target="_self" class="btnmove"><img src="/Graphics/include/WebTop/GTlogo.png" width="83" height="23" alt="gametower遊戲官方網站 - http://www.gametower.com.tw" class="block" style="margin-top:2px;"/></a></td>
+
+							<td width="180" class="GT_WebTop_Member" align="center"><a href="/Member/Register.aspx?re=/common/error/404b.aspx" class="GT_WebTop_Top_menu">加入會員</a> | <a href="/Member/Login.aspx?en=&re=http%3a%2f%2fwww.gametower.com.tw%2fcommon%2ferror%2f404b.aspx%3f404%3bhttp%3a%2f%2fwww.gametower.com.tw%3a80%2finclude%2fmail%2fimages%2fui-icons_777777_256x240.png" class="GT_WebTop_Top_menu">會員登入</a></td>
+
+							<td align="center" class="skipparser"><a href="/Member/index.aspx" target="_self" class="GT_WebTop_Top_menu">會員特區</a></td>
+							<td width="1"><img src="/Graphics/include/WebTop/beeline.png" width="1" height="15" class="block" /></td>
+							<td align="center"><a href="/Bank/" target="_self" class="GT_WebTop_Top_menu">點數 / 儲值</a></td>
+
+							<td width="1"><img src="/Graphics/include/WebTop/beeline.png" width="1" height="15" class="block" /></td>
+							<td align="center"><a href="/Download/" target="_self" class="GT_WebTop_Top_menu">下載專區</a></td>
+
+							<td width="1"><img src="/Graphics/include/WebTop/beeline.png" width="1" height="15" class="block" /></td>
+							<td align="center"><a href="/Services/Customer/" target="_self" class="GT_WebTop_Top_menu">客服中心</a></td>
+
+							<td width="1"><img src="/Graphics/include/WebTop/beeline.png" width="1" height="15" class="block" /></td>
+							<td align="center"><a href="/Prize/" target="_self" class="GT_WebTop_Top_menu">領獎中心</a></td>
+
+						</tr>
+					</table>
+				</td>
+				<td align="right" id="GT_WebTop_nav">
+					<table border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td align="center" valign="top" class="skipparser">
+								<select name="GameMenu" onchange="WebTop_JumpMenu('parent',this,1)" id="GT_GameMenu" style="font-size:11px;height:19px;">
+<option value="#">> 前往各遊戲 >></option>
+<option class="CategoryGrp1" value="https://www.gametower.com.tw/">△gametower遊戲官網首頁</option>
+<option class="Category1" value="https://www.gametower.com.tw/News/">　├最新消息佈告</option>
+<option class="Category1" value="https://www.gametower.com.tw/Games/">　└全部遊戲列表</option>
+<option class="CategoryGrp2" value="https://www.gametower.com.tw/games/?online">△人氣遊戲</option>
+<option class="Category2" value="http://www.gametower.com.tw/games/god">　├封神 online</option>
+<option class="Category2" value="https://www.gametower.com.tw/games/god2/">　├封神２仙界傳</option>
+<option class="Category2" value="https://www.gametower.com.tw/games/we5/">　└唯舞獨尊online</option>
+<option class="CategoryGrp3" value="https://www.gametower.com.tw/">△熱門遊戲</option>
+<option class="Category3" value="https://www.gametower.com.tw/games/freeplay/mj/star31/">　├明星3缺1 online</option>
+<option class="Category3" value="https://www.gametower.com.tw/games/freeplay/club/">　├競技館</option>
+<option class="Category3" value="https://www.gametower.com.tw/games/freeplay/club/cmj/">　│　├競技麻將</option>
+<option class="Category3" value="https://www.gametower.com.tw/games/freeplay/club/cbig2/">　│　├競技撲克</option>
+<option class="Category3" value="https://www.gametower.com.tw/games/freeplay/club/cth/">　│　└競技淘金</option>
+<option class="Category3" value="https://www.gametower.com.tw/games/freeplay/gold/tmd">　└滿貫大亨</option>
+<option class="CategoryGrp5" value="https://www.gametower.com.tw/games/?mobile">△行動遊戲</option>
+<option class="CategoryGrp5" value="https://www.gametower.com.tw/games/mobile/i371/">　├行動版明星3缺1</option>
+<option class="CategoryGrp5" value="https://www.gametower.com.tw/games/mobile/icmj/">　├行動版競技麻將</option>
+<option class="CategoryGrp5" value="https://www.gametower.com.tw/games/mobile/fish/">　├開心捕魚</option>
+<option class="CategoryGrp5" value="https://www.gametower.com.tw/games/mobile/greatqueen/">　├女王</option>
+<option class="CategoryGrp5" value="https://www.gametower.com.tw/games/mobile/WEDOAPP/">　├唯舞獨尊M</option>
+<option class="CategoryGrp5" value="https://www.gametower.com.tw/games/mobile/queentwo">　└女王2 - 美人天下</option>
+</select>
+							</td>
+						</tr>
+					</table>
+				</td>
+				<form action="https://www.google.com.tw/cse" id="cse-search-box" target="google_window" method="get">
+				<input type="hidden" name="cx" value="partner-pub-9995681859459336:uivo0n-vi85" />
+				<input type="hidden" name="ie" value="utf-8" />
+				<td width="75" align="right" valign="top">
+					<label for="sbi" style="display: none">輸入您的搜尋字詞</label>
+					<input type="text" name="q" size="8" maxlength="200" value="" id="sbi" style="height:17px;margin-top:4px; " />
+					<label for="sbb" style="display: none">提交搜尋表單</label>
+				</td>
+				<td valign="top" style="padding-top:4px;padding-left:3px;">
+					<input name="sa" type="image" id="sbb" value="站內搜尋" src="/Graphics/include/WebTop/btn_search.png" width="53" height="19"/>
+				</td>
+				</form>
+			</tr>
+		</table>
+    </td>
+  </tr>
+</table>
+<!-- -------------------# Web Top End #--------------------- -->
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#F7F3F7">
+	<tr>
+		<td colspan="2">
+
+<!-- ------------------# Page Top Begin #-------------------- -->
+<style type="text/css">
+<!-- 
+	select{font-family:新細明體; font-size: 9pt; font-color: #505050}
+-->
+</style>
+
+<script language="JavaScript" type="text/JavaScript">
+<!--
+
+function MM_jumpMenu(targ,selObj,restore){ //v3.0
+  eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
+  if (restore) selObj.selectedIndex=0;
+}
+//-->
+</script>
+
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td valign="top">
+				<table width="100%" border="0" cellpadding="0" cellspacing="0" background="/images/page_28.gif">
+					<tr>
+						<td>
+							<table width="100%" border="0" cellpadding="0" cellspacing="0">
+								<tr>
+									<td class="header_space" width="1" background="/images/page/page_24.gif"><img src="/images/space.gif" width="1" height="1"></td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+					<tr>
+						<td height="13">
+							<table width="100%" height="26" border="0" cellpadding="0" cellspacing="0" background="/images/page_28.gif">
+								<tr>
+									<td>&nbsp;&nbsp;<a href="/"><img src="/images/page/ico_Home.gif" width="39" height="13" align="absmiddle" border="0" style="display:inline-block"></a>&nbsp;
+									‧網頁不存在</td>
+									<td align="right" width="5" background="/images/page/page_sp.gif" style="background-position:top right">&nbsp;</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+</table>
+
+<!-- -------------------# Page Top End #--------------------- --></td>
+	</tr>
+	<tr>
+		<td>
+			<table width="768" height="300" border="0" cellpadding="0" cellspacing="0" background="/images/page/bg.gif">
+				<tr>
+					<td height="350" align="center"><table width="673"  border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td><img src="/images/WebMessage/Error404_02.gif" width="415" height="120"><img src="/images/WebMessage/Error404_01.gif" width="258" height="150"></td>
+							</tr>
+						<tr>
+							<td><a href="javascript:history.go(-2)"><img src="/images/WebMessage/Error404_04.gif" width="415" height="127" border="0"></a><img src="/images/WebMessage/Error404_03.gif" width="258" height="127"></td>
+							</tr>
+						</table>
+					<p>&nbsp;</p></td>
+				</tr>
+			</table>
+		</td>
+	    <td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+<!-- ------------------# Page Botton Begin #-------------------- -->
+<style type="text/css">
+.Ftable {
+	border: 0;
+	font-family: "·s2OcuAe", "2OcuAe";
+	font-size: 10pt;
+	line-height: 14pt;
+	font-weight: normal;
+	color: #333333;
+}
+.Ftable a{
+	color: #333333;
+}
+.Ftable .levelnote p{
+	-webkit-text-size-adjust:none; 
+	font-size:11px; 
+	color:#333;
+}
+</style>
+
+<table width="100%" cellpadding="0" cellspacing="0" class="Ftable">
+	<tr style="background-color:#D9D9D9; height:3px;">
+		<td class="footer_space" style="background-color: #D9D9D9;"></td>
+	</tr>
+	<tr>
+  		<td>
+  			<table width="100%" height="100%" cellpadding="3" cellspacing="0" class="Ftable">
+				<tr>
+					<td style="height: 25px; text-align: center; background-color: #EBEBEB;" class="copyright">&nbsp;&nbsp;&nbsp;&nbsp;
+						<a href="/CROP/about/about_01.aspx">關於我們</a> | 
+						<a href="/CROP/contract.aspx">使用者合約</a> | 
+						<a href="/CROP/privacy.aspx">隱私權保護</a> | 
+						<a href="/CROP/cooperation.aspx">合作提案</a> | 
+						<a href="/CROP/Sitemap.aspx">網站導覽</a> | 
+						<a href="/CROP/contact.aspx">聯絡我們</a> | 
+						<a href="/Services/Customer/Guide/security/index.aspx">	網頁安全說明</a>
+						 <span style="color:#EBEBEB";>(C)</span>
+					</td>
+				</tr>
+				<tr>
+					<td style="padding-top:3px; text-align: center;  background-color: #D9D9D9;">
+						<table cellspacing="0" cellpadding="0" style="display: inline-block;">
+							<tr>
+								<td style="text-align: center;">
+									
+<table  border="0" cellspacing="0" cellpadding="0">
+	<tr>
+		<td><a href="/index.aspx"><img src="/images/page/Footer_GT_logo.png" style="display:block; float:left; border:0;"></a></td>
+		<td><a href="http://www.igs.com.tw" target="_blank"><img src="/images/page/IgS.gif" class="copyright_IGS_logo" style="border:0;"></a></td>
+	</tr>
+</table>
+
+									<a href="/Services/Customer/BugReport/index.aspx" class="member_font_blue" style="font-size:13px; text-decoration:underline;">客戶問題回報</a> | <a href="https://www.gametower.com.tw/mobile/index.aspx" class="member_font_blue" style="font-size:13px; text-decoration:underline;">行動版官網</a>
+
+								</td>
+								<td style="text-align: left;"><img src="/Graphics/images/grade/level_0.jpg" class="level0">
+									<img src="/Graphics/images/grade/level_6.jpg"  class="level6">
+									<img src="/Graphics/images/grade/level_12.jpg" class="level12">
+									<img src="/Graphics/images/grade/level_15.jpg" class="level15">
+									<img src="/Graphics/images/grade/level_18.jpg" class="level18" >
+								</td>
+							</tr>
+						</table>
+						<div class="levelnote">
+							<p>本遊戲為免費使用，遊戲內另提供購買虛擬遊戲幣、物品等付費服務。請注意遊戲時間，避免沉迷。</p>
+							<p>本遊戲提供之機會中獎商品，消費者購買或參加活動不代表即可獲得特定商品。</p>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td style="text-align: center; background-color: #D9D9D9; padding:0; padding-bottom:3px" class="service">
+						<span color=#333333>客戶服務專線：02-22996858　客戶服務傳真：02-22996996　客戶服務信箱：<a href="mailto:service@support.gametower.com.tw"><span color="#333333">service@support.gametower.com.tw</span></a></span>
+					</td>
+				</tr>
+				<tr>
+					<td style="text-align: center;  background-color: #D9D9D9;">&nbsp;</td>
+				</tr>
+			</table>
+		</td>
+  	</tr>
+	<tr>
+  		<td></td>
+  	</tr>
+</table>
+
+<!-- -------------------# Page Botton End #--------------------- --></td>
+	</tr>
+</table>
+</body>
+</html>

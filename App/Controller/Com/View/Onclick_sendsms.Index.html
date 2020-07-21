@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.01, user-scalable=no">
+    <title></title>
+    <link rel="stylesheet" href="/res/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/res/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/res/css/AdminLTE.css">
+    <link rel="stylesheet" href="/res/css/page.css">
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="table-responsive">
+
+                <table class="table table-bordered table-condensed">
+                    <tbody>
+                    <tr>
+                        <td>
+                            <?php foreach ($send_sms as $k=>$v){ ?>
+                                <input type="radio" name="optionsRadios" value="<?php echo $v?>" <?php echo $k==0 ? 'checked':''?>> <?php echo $v?>元
+                            <?php } ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button type="button" class="btn btn-primary btn-block" id="Button_OK">确定</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button type="button" class="btn btn-default btn-block msg" style="display:none" ></button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+
+</html>
+
+<script src="/res/js/jquery-1.11.3.min.js" type="text/javascript"></script>
+<script src="/res/js/js-cn.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+    var Flag = "<%=Flag %>",
+        iFlag = "<%=iFlag %>",
+        user = GetQueryString("sid"),
+        _rbl_value = 0;
+    $(function() {
+        0 == iFlag ? ($(".msg").text(Flag), $("#Button_OK").attr("disabled", "disabled")) : $("#Button_OK").click(function() {
+            _rbl_value = $("input:radio[name=optionsRadios]:checked").val(),
+                $.ajax({
+                    url: "../ashx/account/account.ashx",
+                    type: "post",
+                    dataType: "json",
+                    data: {
+                        action: "SetSMSInfo_Num",
+                        user: user,
+                        setNum: _rbl_value,
+                        CurDateTime: rand()
+                    },
+                    success: function(a) {
+                        a.success ? $(".msg").removeClass('bg-red').addClass('bg-green').show().text("操作成功.") : $(".msg").removeClass('bg-green').addClass('bg-red').show().text(a.msg)
+                    },
+                    beforeSend: function() {
+                        $("#Button_OK").attr("disabled", "disabled").text("正在提交")
+                    },
+                    complete: function() {
+                        $("#Button_OK").removeAttr("disabled").text("确定")
+                    }
+                })
+        })
+    });
+
+</script>

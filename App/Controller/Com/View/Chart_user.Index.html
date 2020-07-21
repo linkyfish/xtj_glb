@@ -1,0 +1,315 @@
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_head.html'); ?>
+    <body>
+<div class="templatemo-flex-row">
+    <?php include _include(__APPDIR__ . 'Controller/Com/View/Public_nav.html'); ?>
+
+    <div class="templatemo-content col-1 light-gray-bg">
+        <?php include _include(__APPDIR__ . 'Controller/Com/View/Public_top.html'); ?>
+        <div class="row content" style="padding:5px 0px 0px 0px;">
+            <section class="content-header sectionHeader">
+                <h1 class="hidden-xs">
+                    曲线
+                    <small style="margin-left:8px; margin-right:8px;"><a href="userList.aspx?sid=<?=$parent['username']?>"
+                                                                         target="_self"
+                                                                         onclick='userList.aspx?sid=<?=$parent['username']?>;'><i
+                                    class="fa fa-arrow-left"></i> 返回</a></small>
+                </h1>
+                <ol class="breadcrumb hidden-md hidden-lg hidden-sm">
+                    <li>曲线&nbsp;&nbsp;&nbsp;<a href="userList.aspx?sid=<?=$parent['username']?>" target="_self"
+                                               onclick='userList.aspx?sid=<?=$parent['username']?>;'><i
+                                    class="fa fa-arrow-left"></i> 返回</a></li>
+                </ol>
+            </section>
+            <section class="content">
+
+
+                <div class="box box-primary box-solid">
+                    <div class="box-header with-border">
+                        <h3 class="box-title text-bold text-muted" id="d_tip_2"><span
+                                    style="color:White;"><?php echo $agent['username'] ?></span>
+                        </h3><i class="fa fa-angle-double-right"></i>
+                        <div class="box-tools pull-right">
+                            <button data-widget="collapse" class="btn btn-box-tool" type="button"><i
+                                        class="fa fa-minus"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="box-body">
+
+                        <div class="form-group" style="display:none;">
+                            <label>查询类型</label>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="optionsRadios" id="radio1" value="1" checked> 单人游戏
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="optionsRadios" id="radio2" value="2"> 真人游戏
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>开始日期</label>
+                            <input type="text" class="form-control" id="txt_StartDateTime" maxlength="10"
+                                   onClick="WdatePicker();">
+                        </div>
+                        <div class="form-group">
+                            <label>结束日期</label>
+                            <input type="text" class="form-control" id="txt_EndDateTime" maxlength="10"
+                                   onClick="WdatePicker();">
+                        </div>
+                    </div>
+
+                    <div class="box-footer">
+                        <button type="button" class="btn btn-primary" id="Button_OK">确定</button>
+                    </div>
+
+                    <div class="box-body" id="q1" style="display:none;">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered">
+                                <tbody>
+                                <tr>
+                                    <td nowrap='nowrap' class="text-left cal_1">游戏的总压住：<span class="badge bg-aqua td_totalGameBet"></span></td>
+                                    <td nowrap='nowrap' class="text-left cal_1">系统的总压住：<span class="badge bg-aqua td_totalPokerGameBet"></span></td>
+                                </tr>
+                                <tr>
+                                    <td nowrap='nowrap' class="text-left">游戏的总萤分：<span class="badge bg-red td_totalGameWin"></span></td>
+                                    <td nowrap='nowrap' class="text-left">系统的总抽水：<span class="badge bg-red td_totalPokerGamePump"></span></td>
+                                </tr>
+                                <tr>
+                                    <td nowrap='nowrap' class="text-left cal_1">游戏总收易率：<span class="badge bg-blue td_totalGameYield"></span></td>
+                                    <td nowrap='nowrap' class="text-left cal_1">系统总收易率：<span class="badge bg-blue td_totalPokerGameYield"></span></td>
+                                </tr>
+                                <tr>
+                                    <td nowrap='nowrap' class="text-left">所有的总累计：<span class="badge bg-gray td_totalAllWin"></span></td>
+                                    <td nowrap='nowrap' class="text-left">系统总胜负量：<span class="badge bg-gray td_totalPokerGameWin"></span></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box box-primary box-solid" id="div_chartContainer" style="display:none;">
+                    <div class="box-header with-border">
+						<i class="fa fa-bar-chart"></i>
+						<h3 class="box-title"><span style="color:White;">曲线</span></h3>
+                        <div class="box-tools pull-right">
+                            <button data-widget="collapse" class="btn btn-box-tool" type="button"><i class="fa fa-minus"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="table-responsive">
+                            <table class="table" id="chart_tb">
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <div id="graph"></div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box box-primary box-solid" id="tb_list" style="display:none;">
+                    <div class="box-header with-border">
+                        <h3 class="box-title text-bold"><span style="color:White;">详情列表</span></h3>
+                        <div class="box-tools pull-right">
+                            <button data-widget="collapse" class="btn btn-box-tool" type="button"><i class="fa fa-minus"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body" style="display: block; padding:0px;">
+                        <div class="table-responsive">
+
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                <tr>
+                                    <th nowrap='nowrap' class="td_date">日期时间</th>
+                                    <th nowrap='nowrap' class="cal_1">游戏压住</th>
+                                    <th nowrap='nowrap' class="td_win">游戏萤分</th>
+                                    <th nowrap='nowrap' class="cal_1">游戏收易率</th>
+                                    <th nowrap='nowrap' class="cal_1">系统压住</th>
+                                    <th nowrap='nowrap' class="td_pk_win">系统胜负量</th>
+                                    <th nowrap='nowrap' class="td_pk_pump">系统抽水</th>
+<!--                                    <th nowrap='nowrap' class="cal_1">系统收易率</th>-->
+                                </tr>
+                                </thead>
+                                <tbody id="tblData"></tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <script src="/res/js/jscharts.js" type="text/javascript"></script>
+
+            <script src="/res/js/WdatePicker.js" type="text/javascript"></script>
+            <script src="/res/js/xdate.js" type="text/javascript"></script>
+
+            <script type="text/javascript">
+                var _actionType = "<?=$UTYPE?>", _totalNum = 0, _totalGameBet = 0, _totalGameWin = 0,
+                    _totalGameYield = 0, _totalPokerGameBet = 0, _totalPokerGameWin = 0, _totalPokerGamePump = 0,
+                    _totalPokerGameYield = 0, _totalAllWin = 0, chatData_Arr, _rbl_value = 0, pagei;
+                $(function () {
+                    $("#txt_StartDateTime").attr("value", getFirstDay());
+                    $("#txt_EndDateTime").attr("value", getLastDay());
+                    $("#Button_OK").click(function () {
+                        chatData_Arr = new Array;
+                        $("#tb_list,#div_chartContainer").fadeOut("fast");
+                        _totalGameBet = 0;
+                        _totalGameWin = 0;
+                        _totalGameYield = 0;
+                        _totalPokerGameBet = 0;
+                        _totalPokerGameWin = 0;
+                        _totalPokerGamePump = 0;
+                        _totalPokerGameYield = 0;
+                        _totalAllWin = 0;
+                        _totalNum = 0;
+                        _rbl_value = $("input:radio[name=optionsRadios]:checked").val();
+                        if ($.trim($("#txt_StartDateTime").val()).length <= 0 || $.trim($("#txt_EndDateTime").val()).length <= 0) {
+                            web_tips("日期不能为空.");
+                            return false
+                        } else {
+                            var t = $("#txt_StartDateTime").val();
+                            var e = $("#txt_EndDateTime").val();
+                            $.ajax({
+                                url: "../ashx/chart/chart.ashx",
+                                type: "post",
+                                dataType: "json",
+                                data: {
+                                    action: "chat",
+                                    sDate: t,
+                                    eDate: e,
+                                    type: "AgentChart",
+                                    user: "<?=$agent['username']?>",
+                                    rbl: _rbl_value,
+                                    CurDateTime: rand()
+                                },
+                                success: function (t) {
+                                    if (t.success) {
+                                        $("#tb_list,#q1").fadeOut("slow");
+                                        if (1 == t.ViewTYPE) {
+                                            $(".cal_1").hide()
+                                        } else {
+                                            $(".cal_1").show()
+                                        }
+                                        if (t.results.length > 0) {
+                                            _totalNum = t.results.length;
+                                            for (var e = 0; e < t.results.length; e++) {
+                                                chatData_Arr[e] = new Array;
+                                                for (var a = 0; a < 2; a++) {
+                                                    chatData_Arr[e][a] = 0
+                                                }
+                                            }
+                                            $("#tb_list tr:gt(0)").remove();
+                                            var l = "";
+                                            $.each(t.results, function (e, a) {
+                                                _totalGameBet += Number(t.results[e].Game_Bet);
+                                                _totalGameWin += Number(t.results[e].Game_Win);
+                                                _totalPokerGameBet += Number(t.results[e].Poker_Bet);
+                                                _totalPokerGameWin += Number(t.results[e].Poker_Win);
+                                                _totalPokerGamePump += Number(t.results[e].Poker_Pump);
+                                                var o = 0;
+                                                o = Number(t.results[e].Game_Win) + Number(t.results[e].Poker_Pump);
+                                                chatData_Arr[e][0] = e + 1;
+                                                chatData_Arr[e][1] = parseFloat(o).toFixed(2) * 1;
+                                                l += "<tr>";
+                                                l += "<td>";
+                                                l += t.results[e].mydate;
+                                                l += "</td>";
+                                                if (0 == t.ViewTYPE) {
+                                                    l += "<td>";
+                                                    l += parseFloat(t.results[e].Game_Bet).toFixed(2);
+                                                    l += "</td>"
+                                                }
+                                                l += "<td>";
+                                                l += parseFloat(t.results[e].Game_Win).toFixed(2);
+                                                l += "</td>";
+                                                if (0 == t.ViewTYPE) {
+                                                    l += "<td>";
+                                                    l += parseFloat(t.results[e].Game_yield).toFixed(2);
+                                                    l += "</td>"
+                                                }
+                                                if (0 == t.ViewTYPE) {
+                                                    l += "<td>";
+                                                    l += parseFloat(t.results[e].Poker_Bet).toFixed(2);
+                                                    l += "</td>"
+                                                }
+                                                l += "<td>";
+                                                l += parseFloat(t.results[e].Poker_Win).toFixed(2);
+                                                l += "</td>";
+                                                l += "<td>";
+                                                l += parseFloat(t.results[e].Poker_Pump).toFixed(2);
+                                                l += "</td>";
+                                                // if (0 == t.ViewTYPE) {
+                                                //     l += "<td>";
+                                                //     l += parseFloat(t.results[e].Poker_yield).toFixed(2);
+                                                //     l += "</td>"
+                                                // }
+                                                l += "</tr>"
+                                            });
+                                            $("#tblData").append(l);
+                                            _totalAllWin = parseFloat(_totalGameWin + _totalPokerGamePump).toFixed(2);
+                                            $(".td_totalGameBet").text(parseFloat(_totalGameBet).toFixed(2));
+                                            $(".td_totalGameWin").text(parseFloat(_totalGameWin).toFixed(2));
+                                            $(".td_totalPokerGameBet").text(parseFloat(_totalPokerGameBet).toFixed(2));
+                                            $(".td_totalPokerGamePump").text(parseFloat(_totalPokerGamePump).toFixed(2));
+                                            $(".td_totalPokerGameWin").text(parseFloat(_totalPokerGameWin).toFixed(2));
+                                            $(".td_totalAllWin").text(parseFloat(_totalAllWin).toFixed(2));
+                                            if (Number(_totalGameWin) == 0 || Number(_totalGameBet) == 0) {
+                                                $(".td_totalGameYield").text("0.00")
+                                            } else {
+                                                _totalGameYield = Number(_totalGameWin) / Number(_totalGameBet) * 100;
+                                                $(".td_totalGameYield").text(parseFloat(_totalGameYield).toFixed(2))
+                                            }
+                                            if (Number(_totalPokerGameWin) == 0 || Number(_totalPokerGameBet) == 0) {
+                                                $(".td_totalPokerGameYield").text("0.00")
+                                            } else {
+                                                _totalPokerGameYield = Number(_totalPokerGameWin) / Number(_totalPokerGameBet) * 100;
+                                                $(".td_totalPokerGameYield").text(parseFloat(_totalPokerGameYield).toFixed(2))
+                                            }
+                                            drawChart_Line(chatData_Arr, _totalNum);
+                                            $("#div_chartContainer").fadeIn("fast");
+                                            $("#tb_list,#q1").fadeIn("slow");
+                                            layer.close(pagei)
+                                        } else {
+                                            layer.close(pagei);
+                                            web_tips("暂无数据.");
+                                            $("#tb_list,#q1").fadeOut(1000)
+                                        }
+                                    } else {
+                                        layer.close(pagei);
+                                        if (global_Error500 == t.ERROR_TYPE) {
+                                            parent.location.href = global_e_p_500
+                                        }
+                                        if (global_NoLicense != t.msg) {
+                                            web_tips("暂无数据.");
+                                            $("#tb_list,#q1").fadeOut(1000)
+                                        } else {
+                                            parent.location.href = global_jump_login
+                                        }
+                                    }
+                                },
+                                beforeSend: function () {
+                                    $("#Button_OK").attr("disabled", "disabled").text("正在查询");
+                                    pagei = layer.msg('请稍候..', {icon: 16,shade: 0.01})
+                                },
+                                complete: function () {
+                                    $("#Button_OK").removeAttr("disabled").text("确定")
+                                }
+                            })
+                        }
+                    })
+                });
+
+            </script>
+
+        </div>
+    </div>
+</div>
+
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_footjs.html'); ?>

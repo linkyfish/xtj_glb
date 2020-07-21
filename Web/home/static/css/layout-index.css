@@ -1,0 +1,58 @@
+
+table {	font-family: "新細明體", "細明體";	font-size: 13px;	line-height: 19px;	color: #333333;	letter-spacing: 1px;	font-weight:normal;}
+a {	text-decoration: none;	color: #666666;}
+
+
+#gt{ }
+#article{ position: relative; width:100%; height:2080px; text-align:center; }
+
+
+#section_main{ position: relative; width:1280px; margin:0 auto; }
+#header{ position: relative; display:block; width:1280px; margin:0 auto; }
+
+
+#banner{ position:absolute; display:block; width:100%; height:530px; margin-top:83px; z-index:3; border-top:2px solid #FFF; }
+
+
+#content{ position:relative; display:block; width:1200px; margin:0 auto; top:540px; text-align:center; }
+
+
+#member{ width:100%; font-size:16px; line-height:24px; text-align:right; float:right; }
+
+
+#news{ position:relative; display:block; width:40%; height:335px; float:left; }
+#news table { line-height:27px; }
+
+
+#hotGame{ position:relative; display:block; width:58%; height:335px; float:right; text-align:left; }
+
+
+.title{ width:100%; background:url(../image/contentLine.jpg) repeat-x bottom center; text-align:left; margin-bottom:18px; }
+
+
+#more a{ position:absolute; display:block; width:58px; height:16px; top:11px; right:5px; background:url(../image/btnMore.png) no-repeat top center; }
+
+
+#chessPokerGame{ position:relative; display:block; width:100%; height:310px; float:left; }
+
+.indent01{ padding-left:42px; }
+
+
+#popGame{ position:relative; display:block; width:760px; height:320px; float:left; margin-right:30px; }
+#popGame .box01 {  margin: 2px 12px 30px 12px;}
+
+#w5DanceGame{ position:relative; display:block; height:320px; float:left; }
+#w5DanceGame .box03 {  margin: 2px 12px 30px 12px;}
+
+.indent02{ padding-right:47px; }
+
+
+#moreGame{ position:relative; display:block; width:100%; float:left; }
+#moreGame table{ margin:0 auto; padding-bottom:20px; }
+.text01{ color:#666; font-size:16px; font-weight:bold; line-height:24px; }
+
+
+#actionInformation{ position:relative; display:block; width:100%; float:left; margin-bottom:12px; }
+#activityAD{ position: absolute; display:block; width:100%; margin-right:55px; }
+#ActionADList{ list-style-position:inside; list-style-type:none; display:block; padding:0px; margin:0px; *margin-left:0px; }
+#ActionADList li{ float:left; padding:0px 12px; }

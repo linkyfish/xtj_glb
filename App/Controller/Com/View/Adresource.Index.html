@@ -1,0 +1,182 @@
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_head.html'); ?>
+<style>
+    .layui-table-view .layui-table .layui-table-cell{text-align: left}
+    .detail-box{padding:10px}
+    .layui-table-main .layui-table-cell{min-height: 60px;}
+	.layui-layer-content{padding:10px!important;}
+</style>
+<body>
+<div class="templatemo-flex-row">
+    <?php include _include(__APPDIR__ . 'Controller/Com/View/Public_nav.html'); ?>
+    <div class="templatemo-content col-1 light-gray-bg">
+        <?php include _include(__APPDIR__ . 'Controller/Com/View/Public_top.html'); ?>
+        <div class="row content" style="padding:5px 0px 0px 0px;">
+
+            <section class="content-header sectionHeader">
+                <h1 class="hidden-xs">
+                    推广素材
+                    <small style="margin-left:8px; margin-right:8px;">
+                        <a href="javascript:window.history.back()" target="_self"
+                           onclick="javascript:window.history.back();"><i class="fa fa-arrow-left"></i> 返回</a></small>
+                </h1>
+            </section>
+            <section class="content">
+                <div class="detail" style="background:#FFF">
+
+
+                    <div class="box-body">
+                        <table class="layui-hide" id="<?php echo $__PRE__?>table" lay-filter="<?php echo $__PRE__?>table"></table>
+                    </div>
+
+
+                    <?php if($isadmin){?>
+						<div style="padding:0 0 10px 10px;height:240px" class="layui-upload">
+							<div style="float:left;width:220px;height:220px;display: block" class="layui-upload-list">
+								<img style="width:220px;height:220px" class="layui-upload-img" id="demo1">
+								<p id="demoText"></p>
+							</div>
+							<button style="margin-left:10px;margin-top:10px" type="button" class="layui-btn" id="test1">上传素材</button>
+						</div>
+					<?php } ?>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+</div>
+
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_footjs.html'); ?>
+<script>
+    function htmlspecialchars_decode(str) {
+         str = str.replace(/\\/g, "");
+         str = str.replace(/&amp;/g, '&');
+         str = str.replace(/&lt;/g, '<');
+         str = str.replace(/&gt;/g, '>');
+         str = str.replace(/&quot;/g, "'");
+        return str;
+    }
+
+    var  <?php echo $__PRE__?>table = table.render({
+        elem: '#<?php echo $__PRE__?>table'
+        ,url:'../../com/Adresource/more'
+        ,page: true
+        ,height: 'full-200'
+        ,limit:10
+        ,limits: [10,50,100,200]
+        ,cols: [[
+
+            {field:'src', title:'图片', width:80,align:"center", templet:function (d) {
+                    return  '<img src="'+d.src+'" style="width:60px;height:60px"/>';
+                }}
+            ,{field:'note', title:'图片备注', minWidth:200}
+                ,{field:'src', title:'下载', minWidth:60,minHeight:60,templet:function (d) {
+                        return  '<a href="'+d.src+'" target="_blank" style="width:60px;height:60px">点击下载</a>';
+                    }}
+
+                <?php if($isadmin){?>
+        		,{field:'times', title:'时间', width:200,templet:function (d) {
+                	return d.times
+            	}
+            	}
+            	,{field:'id', title:'操作', width:200,templet:function (d) {
+                    return  '<button lay-event="del"  class="btn btn-warning btn-xs">删除</button>';
+                    }
+                }
+            	<?php } ?>
+        ]]
+        ,response: {
+            statusCode: "0000"
+        }
+        ,parseData: function(res){
+            return {
+                "code": res.resp_code,
+                "msg": res.msg,
+                "count": res.total,
+                "data": res.results
+            };
+        }
+    });
+
+    table.on('tool(<?php echo $__PRE__?>table)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+        var data = obj.data; //获得当前行数据
+        var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+        var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
+
+         if(layEvent === 'del'){ //删除
+            layer.confirm('真的删除行么', function(index){
+				$.post("../../com/Adresource/delete",{id:data.id,CurDateTime:rand()},function (e) {
+                    if(e.success){
+						layer.msg('删除成功');
+                        obj.del();
+						<?php echo $__PRE__?>table.reload();
+                    }
+                    layer.close(index);
+                });
+            });
+        }
+    });
+	<?php if($isadmin){ ?>
+    var upload = layui.upload,layer=layui.layer;
+
+    var uploadInst = upload.render({
+        elem: '#test1'
+        ,url: '../../com/qrcode/upload.aspx' //改成您自己的上传接口
+        ,before: function(obj){
+            //预读本地文件示例，不支持ie8
+            obj.preview(function(index, file, result){
+                $('#demo1').attr('src', result); //图片链接（base64）
+            });
+        }
+        ,done: function(res){
+            //如果上传失败
+            if(res.resp_code != "0000"){
+                return layer.msg('上传失败');
+            }
+            layer.prompt({
+                formType: 2,
+                value: res.data.filename,
+                title: '请填写素材描述',
+                area: ['300px', '120px']
+            }, function(value, index, elem){
+					if(value==""){
+						return layer.msg('描述必须填写');
+					}
+
+                    var jload = layer.load(1);
+                    $.post('../../com/Adresource/add', {content: value, images:res.data.src }, function (e) {
+                        if(e.resp_code=='0000'){
+                            layer.msg('提交成功');
+                            setTimeout(function () {
+								<?php echo $__PRE__?>table.reload();
+                                layer.close(jload);
+                            }, 1500)
+                        }else{
+                            layer.msg(e.msg,{icon:2,anim: 6})
+                            setTimeout(function () {
+                                layer.close(jload);
+                            }, 1500)
+                        }
+                        layer.close(index);
+                        $('#demoText').html("");
+                        $('#demo1').attr('src', "");
+
+                    })
+            });
+
+
+        }
+        ,error: function(){
+            //演示失败状态，并实现重传
+            var demoText = $('#demoText');
+            demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+            demoText.find('.demo-reload').on('click', function(){
+                uploadInst.upload();
+            });
+        }
+    });
+
+
+	<?php }?>
+</script>

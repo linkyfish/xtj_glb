@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.01, user-scalable=no">
+    <title>单局详情</title>
+    <link rel="stylesheet" href="/res/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/res/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/res/css/AdminLTE.css">
+    <link rel="stylesheet" href="/res/css/page.css">
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover table-condensed">
+                    <tbody>
+                    <tr>
+                        <td class="text-right">玩家ID：</td>
+                        <td>
+                            <span class="badge bg-green"><?php echo $isadmin ? $player["openid"] . '(' . $player['usrid'] . ')' : $player['usrid']; ?></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-right">游戏ID：</td>
+                        <td><span class="badge bg-green"><?php echo $gamename . '(' . $GameId . ')'; ?></span></td>
+                    </tr>
+                    <tr>
+                        <td class="text-right">游戏记录对应的时间：</td>
+                        <td><span class="badge bg-green"><?php echo $gamelog[0]["times"]; ?></span></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <table class="table table-bordered table-hover table-condensed">
+                    <tbody>
+                    <?php if($NoteInfo){ ?>
+                    <tr>
+                        <td class="text-center">当局游戏玩家下箸</td>
+                    </tr>
+                    <tr><td><span class="badge bg-green"><?php echo $datailRecord["NoteInfo"]; ?></span></td></tr>
+                    <?php } ?>
+                    <tr> <td class="text-center">当局开讲结果</td></tr>
+                    <tr>
+                        <td><span class="badge bg-green"><?php echo $datailRecord["ResultInfo"]; ?></span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

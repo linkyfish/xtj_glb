@@ -1,0 +1,134 @@
+<?php include _include(__APPDIR__.'Controller/Com/View/Public_head.html');?>
+    <body>
+<style>
+    .layui-laydate-content th {
+        font-weight: 400;
+        color: white;
+    !important;
+    }
+</style>
+<div class="templatemo-flex-row">
+    <?php include _include(__APPDIR__.'Controller/Com/View/Public_nav.html');?>
+
+    <div class="templatemo-content col-1 light-gray-bg">
+        <?php include _include(__APPDIR__.'Controller/Com/View/Public_top.html');?>
+        <div class="row content" style="padding:5px 0px 0px 0px;">
+
+            <section class="content">
+                <div class="box box-primary box-solid">
+                    <div class="box-header with-border">
+                        <h3 class="box-title text-muted"><span style=" color:White;"><?= $agentDetails[0]["start_ymd"]."~".$agentDetails[0]["end_ymd"] ?>  代理总账<small
+                                        style="margin-left:8px; margin-right:8px;"><a
+                                            href="javascript:window.history.back()" target="_self"
+                                            onclick="javascript:window.history.back();"><i
+                                                class="fa fa-arrow-left"></i> 返回</a></small></span>
+                        </h3>
+
+                        <h3 class="box-title text-bold">
+                      </br>
+                            <span class="badge bg-aqua" id="td_TotalAllSet" title="总数据=(输萤数据+对战抽水-注册送-活动送)">总数据：<?= $agentCurrent["total_money"] ?></span>
+                            <span class="badge bg-aqua" id="td_totalAllRateWin" title="战成数据=(总数据 * 自己的占成)">占成数据：<?= $agentCurrent["rate_money"] ?></span>
+                            <span class="badge bg-aqua" id="td_HeJiFengCheng" title="分成数据=(管理数据总和)">分成数据：<?= $agentCurrent["share_money"] ?></span>
+                            <span class="badge bg-aqua" id="td_shijiData" title="实际数据=(占成数据 - 分成数据)">实际数据：<?= $agentCurrent["sys_money"] ?></span>
+                        </h3>
+
+
+                    </div>
+
+                    <div class="box-body">
+
+
+                        <div class="table-responsive">
+                            <table class="table table-hover table-bordered" id="data_list">
+                                <thead>
+                                <tr>
+
+                                    <th>代理id(账号)</th>
+                                    <th>占成比例</th>
+                                    <th>游戏压住</th>
+                                    <th>输萤数据</th>
+                                    <th>对战压住</th>
+                                    <th>对战数据</th>
+                                    <th>对战抽水</th>
+                                    <th>注册送</th>
+                                    <th>申请送</th>
+                                    <th>系统送</th>
+                                    <th>活动送</th>
+                                    <th>管理数据</th>
+
+                                </tr>
+                                </thead>
+                                <tbody id="tblData">
+                                <?php
+                                if(!empty($agentDetails)){
+                                    foreach ($agentDetails as $index => $item) {
+                                        ?>
+                                        <tr >
+
+
+                                            <td nowrap="nowrap" class="text-left">   <?= $item["agent_id"]."(".$mapAgentBasicInfo[$item["agent_id"]]["Account"] .")"?>     </td>
+                                            <td nowrap="nowrap" class="text-left"><?= $item["ServiceFee"] ?>%</td>
+                                            <td nowrap="nowrap" class="text-left"><?= $item["game_bat"] ?></td>
+                                            <td nowrap="nowrap" class="text-left"><?= $item["game_alllost"] ?></td>
+                                            <td nowrap="nowrap" class="text-left"><?= $item["battle_bat"] ?></td>
+                                            <td nowrap="nowrap" class="text-left"><?= $item["battle_alllost"] ?></td>
+                                            <td nowrap="nowrap" class="text-left"><?= $item["battle_fax"] ?></td>
+                                            <td nowrap="nowrap" class="text-left"><?= $item["reg_song"] ?></td>
+                                            <td nowrap="nowrap" class="text-left"><?= $item["apply_song"] ?></td>
+                                            <td nowrap="nowrap" class="text-left"><?= $item["sys_song"] ?></td>
+                                            <td nowrap="nowrap" class="text-left"><?= $item["huodong_song"] ?></td>
+                                            <td nowrap="nowrap" class="text-left"><?= $item["manage_data"] ?></td>
+
+
+                                        </tr>
+                                        <?php
+                                    }}else{
+                                    ?>
+                                    <tr>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>-</td>
+
+                                    </tr>
+                                    <?php
+
+                                }
+                                ?>
+
+
+
+                                </tbody>
+                            </table>
+                        </div>
+
+
+
+                    </div>
+
+
+
+                </div>
+
+
+            </section>
+
+
+        </div>
+    </div>
+</div>
+<script src="/res/js/WdatePicker.js" type="text/javascript"></script>
+
+<script>
+
+</script>
+<?php include _include(__APPDIR__.'Controller/Com/View/Public_footjs.html');?>

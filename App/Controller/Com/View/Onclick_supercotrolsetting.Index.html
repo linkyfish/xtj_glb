@@ -1,0 +1,152 @@
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_head.html'); ?>
+<body>
+<style>
+    .layui-laydate-content th {
+        font-weight: 400;
+        color: white;
+    !important;
+    }
+
+    .layui-form-label {
+        width: 120px
+    }
+    tbody td{text-align:left}
+    .layui-tab{margin-top:0}
+</style>
+<div class="templatemo-flex-row">
+    <?php include _include(__APPDIR__ . 'Controller/Com/View/Public_nav.html'); ?>
+
+    <div class="templatemo-content col-1 light-gray-bg">
+        <?php include _include(__APPDIR__ . 'Controller/Com/View/Public_top.html'); ?>
+        <div class="row content" style="padding:5px 0px 0px 0px;">
+
+            <section class="content">
+                <div class="box box-primary box-solid">
+                    <div class="box-header with-border">
+                        <h3 class="box-title text-muted"><span style=" color:White;">玩家【<?php echo $sid; ?>】黑白名单配置</span><small
+                                style="margin-left:8px; margin-right:8px;"><a
+                                href="javascript:window.history.back()" target="_self"
+                                onclick='javascript:window.history.back();'><i class="fa fa-arrow-left"></i> 返回</a></small></span>
+                        </h3>
+                        <div class="box-tools pull-right">
+                            <button data-widget="collapse" class="btn btn-box-tool" type="button"><i
+                                    class="fa fa-minus"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="box-body">
+                        <form style="margin-top:10px" class="layui-form layui-form-pane" lay-size="sm" lay-filter="<?php echo $__PRE__ ?>search_form">
+                            <span>玩家总上分: <b class="badge bg-gray" > <?php echo $total_uppoints; ?></b> 玩家总提现:<b class="badge bg-green"><?php echo $total_cash; ?> </b> 当前书萤:<b class="badge bg-red"><?php echo $total_win; ?></b> 状态:<b class="btn btn-default btn-xs"> <?php if($total_win <0){echo '玩家萤分中';}else{echo '玩家输分中';} ?> </b>超控值:<?php echo $total_win; ?> </span>
+                                    <br/><br/>
+                                    <span>下限</span>
+                                    <input class="layui-input" name="username" id="txtStartVal" placeholder="下限" autocomplete="off">
+                                    <br/>
+                                    <span>上限</span>
+                                    <input class="layui-input" name="username" id="txtEndVal" placeholder="上限" autocomplete="off">
+                                      <br/>
+                                    <span>标识</span>
+                                    <input class="layui-input" name="username" id="txtCode" placeholder="标识" autocomplete="off">
+                                     <br/>
+                                    <span>概率</span>
+                                    <input class="layui-input" name="username" id="txtVal" placeholder="概率" autocomplete="off">
+                                    <br/>
+                                    <button type="button" id="btn_OK" class="layui-btn layui-btn-normal">添加新设置</button>
+
+                            </div>
+                        </form>
+                        <div class="layui-tab layui-tab-brief" lay-filter="<?php echo $__PRE__?>tab">
+                            <div class="layui-tab-content" style="padding:5px 0" lay-filter="<?php echo $__PRE__?>table" id="<?php echo $__PRE__?>table">
+
+                            </div>
+                        </div>
+
+                    </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_footjs.html'); ?>
+<script src="/js/index.js?ver=<?php echo _CONF('app_v')?>"></script>
+<script>
+
+    element.on('tab(<?php echo $__PRE__?>tab)', function(data){
+        var id = $(this).attr('lay-id');
+    <?php echo $__PRE__?>table.reload({
+            where: {type:id}
+        });
+    });
+
+    var  <?php echo $__PRE__?>table = table.render({
+        elem: '#<?php echo $__PRE__?>table'
+        , url: '../../com/com_NameList.aspx'
+        ,page:false
+        ,where: {action: 'superItemSettingList',user:<?php echo $sid ?>}
+        ,height: 'full-220'
+        ,cols: [[
+            {field:'start_val', title:'下限', minWidth:80, edit: 'text'}
+            ,{field:'end_val', title:'上限', minWidth:80, edit: 'text'}
+            ,{field:'control_val', title:'控制值', width:80, edit: 'text'}
+            ,{field:'code', title:'标识', minWidth:80, edit: 'text'}
+            ,{field:'action', title:'操作', minWidth:80, }
+
+        ]]
+        ,response: {
+            statusCode: "0000"
+        }
+        ,parseData: function(res){
+            return {
+                "code": res.resp_code,
+                "msg": res.msg,
+                "data": res.results
+            };
+        }
+    });
+
+    table.on('edit(<?php echo $__PRE__?>table)', function(obj){
+        $.xpost('../../com/com_NameList.aspx',{action: 'supuercontrol_edit',id:obj.data.id,value:obj.value,field:obj.field},function (e) {
+            if(e.resp_code=='0000'){
+                layer.msg(e.msg);
+            }else{
+                layer.msg(e.msg,{icon:2,anim:6});
+            }
+        })
+    });
+
+    element.tabChange('<?php echo $__PRE__?>tab', 'system');
+    form.render();
+
+    $("#btn_OK").click(function () {
+        if ($.trim($("#txtStartVal").val()).length <= 0 )return swal("下限值不能为空.", "", "info"), !1;
+        if ($.trim($("#txtEndVal").val()).length <= 0 )return swal("上限值不能为空.", "", "info"), !1;
+        if ($.trim($("#txtVal").val()).length <= 0 )return swal("加成值不能为空.", "", "info"), !1;
+        if ($.trim($("#txtCode").val()).length <= 0 )return swal("标识名称不能为空.", "", "info"), !1;
+
+        $.ajax({
+            url: "../../com/com_NameList.aspx",
+            type: "post",
+            dataType: "json",
+            data: {
+                action: "supuercontrol_itemadd",
+                start_val: $("#txtStartVal").val(),
+                end_val: $("#txtEndVal").val(),
+                code: $("#txtCode").val(),
+                val: $("#txtVal").val(),
+                user: <?php echo $sid; ?>,
+                CurDateTime: rand()
+            },
+            success: function (a) {
+                a.success ? (swal(a.msg, "", "success"), $("#txt_MarqText,#txt_Title").val(""), window.location.reload()) : (a.ERROR_TYPE == global_Error500 && (parent.location.href = "../PageError/500.html"), global_NoLicense != a.msg ? swal(a.msg, "", "info") : parent.location.href = "../Login.aspx")
+            },
+            beforeSend: function () {
+                $("#Button_OK").attr("disabled", "disabled").text("正在提交")
+            },
+            complete: function () {
+                $("#Button_OK").removeAttr("disabled").text("确定")
+            }
+        })
+    })
+
+</script>
+

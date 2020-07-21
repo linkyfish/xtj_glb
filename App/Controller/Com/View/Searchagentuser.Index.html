@@ -1,0 +1,497 @@
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_head.html'); ?>
+    <link href="/res/css/jquery-ui.min.css" rel="stylesheet" type="text/css">
+    <body>
+
+<div class="templatemo-flex-row">
+    <?php include _include(__APPDIR__ . 'Controller/Com/View/Public_nav.html'); ?>
+
+    <div class="templatemo-content col-1 light-gray-bg">
+        <?php include _include(__APPDIR__ . 'Controller/Com/View/Public_top.html'); ?>
+        <div class="row content" style="padding:5px 0px 0px 0px;">
+
+            <section class="content-header sectionHeader">
+                <h1 class="hidden-xs">
+                    搜索帐号
+                    <small style="margin-left:8px; margin-right:8px;">
+                        <a href="javascript:window.history.back()" target="_self" onclick='javascript:window.history.back();'><i class="fa fa-arrow-left"></i> 返回</a></small>
+                </h1>
+                <ol class="breadcrumb hidden-md hidden-lg hidden-sm">
+                    <li>搜索帐号&nbsp;&nbsp;&nbsp;<a href="javascript:window.history.back()" target="_self" onclick='javascript:window.history.back();'><i class="fa fa-arrow-left"></i> 返回</a></li>
+                </ol>
+            </section>
+            <section class="content">
+                <div class="box box-primary">
+
+                    <div class="box-body">
+                        <div class="input-group input-group-lg">
+                            <input type="text" id="txt_UserName" maxlength="17" class="form-control text-bold text-blue">
+                            <span class="input-group-btn">
+							<button type="button" id="Button_OK1" class="btn btn-info btn-flat search_btn">搜索玩家</button>
+                </span>
+                        </div>
+                    </div>
+
+                    <div class="box-body" id="tb_list_1" style="display:none;padding:0px;">
+                        <div class="table-responsive">
+
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th nowrap='nowrap' id="th_infoID" style="display:none;">帐号ID</th>
+                                    <th nowrap='nowrap'>帐号</th>
+                                    <th nowrap='nowrap'>等级</th>
+                                    <th nowrap='nowrap'>在线</th>
+                                    <th nowrap='nowrap'>推广人</th>
+                                    <th nowrap='nowrap'>推列表</th>
+                                    <th nowrap='nowrap'>总押注</th>
+                                    <th nowrap='nowrap'>累计邀请</th>
+                                    <th nowrap='nowrap'>已提奖励</th>
+                                    <th nowrap='nowrap'>累计总奖励</th>
+                                    <th nowrap='nowrap'>未提奖励</th>
+                                    <th nowrap='nowrap'>总上下分</th>
+                                    <th nowrap='nowrap'>总萤分</th>
+                                    <th nowrap='nowrap'>当前余额</th>
+                                    <th nowrap='nowrap'>系统总萤分</th>
+                                    <th nowrap='nowrap'>系统总抽水</th>
+                                    <th nowrap='nowrap'>备注</th>
+                                    <th nowrap='nowrap' class="col_1">绿色号</th>
+                                    <th nowrap='nowrap'>操作</th>
+                                    <th nowrap='nowrap' class="col_1">银行卡信息</th>
+                                    <?php if($isadmin){ ?>
+                                    <th nowrap='nowrap' >名字</th>
+                                    <?php } ?>
+                                    <th nowrap='nowrap' class="col_1">电话</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tblData_1">
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box box-primary box-solid" id="tb_list_2" style="display:none;">
+                    <div class="box-header with-border">
+                        <h3 class="box-title text-bold" id="d_tip_1" style=" color:White;"></h3><i
+                                class="fa fa-angle-double-right"></i>
+                        <div class="box-tools pull-right">
+                            <button data-widget="collapse" class="btn btn-box-tool" type="button"><i
+                                        class="fa fa-minus"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body" style="display: block;padding:0px;">
+                        <div class="table-responsive">
+
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                <tr>
+                                    <th nowrap='nowrap'>帐号</th>
+                                    <th nowrap='nowrap'>是否扩展号</th>
+                                    <th nowrap='nowrap'>占成比例%</th>
+
+                                    <th nowrap='nowrap'>备注</th>
+                                    <th nowrap='nowrap' class="col_1">绿色号</th>
+                                    <th nowrap='nowrap'>操作</th>
+                                    <th nowrap='nowrap' class="col_1">银行卡号</th>
+                                    <th nowrap='nowrap' class="col_1">开户行信息</th>
+                                    <th nowrap='nowrap' class="col_1">名字</th>
+                                    <th nowrap='nowrap' class="col_1">电话</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tblData_2">
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box box-primary box-solid" id="tb_list_3" style="display:none;">
+                    <div class="box-header with-border">
+                        <h3 class="box-title text-bold" id="d_tip_2" style=" color:White;"></h3><i
+                                class="fa fa-angle-double-right"></i>
+                        <div class="box-tools pull-right">
+                            <button data-widget="collapse" class="btn btn-box-tool" type="button"><i
+                                        class="fa fa-minus"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body" style="display: block;padding:0px;">
+                        <div class="table-responsive">
+
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                <tr>
+                                    <th nowrap='nowrap'>帐号</th>
+                                    <th nowrap='nowrap'>是否扩展号</th>
+                                    <th nowrap='nowrap' >占成比例%</th>
+
+                                    <th nowrap='nowrap'>备注</th>
+                                    <th nowrap='nowrap' class="col_1">绿色号</th>
+                                    <th nowrap='nowrap'>操作</th>
+                                    <th nowrap='nowrap' class="col_1">银行卡号</th>
+                                    <th nowrap='nowrap' class="col_1">开户行信息</th>
+                                    <th nowrap='nowrap' class="col_1">名字</th>
+                                    <th nowrap='nowrap' class="col_1">电话</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tblData_3">
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+            <script src="/res/js/jquery-ui.min.js"></script>
+            <script src="/res/js/jquery.jeditable.mini.js" type="text/javascript"></script>
+
+            <script type="text/javascript">
+                function doSearch(a, b) {
+                    $.ajax({
+                        url: "../ashx/account/account.ashx",
+                        type: "post",
+                        dataType: "json",
+                        data: {
+                            action: "getSearchAgentUserInfo",
+                            userName: a,
+                            type: b,
+                            CurDateTime: rand()
+                        },
+                        success: function (a) {
+                            var b, c, d, e;
+                            if (a.success) if (a.results.length > 0) switch ($("#tb_list_1 tr:gt(0),#tb_list_2 tr:gt(0),#tb_list_3 tr:gt(0)").remove(), b = a.InfoID, c = "", d = "", a.UserTYPE) {
+                                case "player":
+                                    $("#tb_list_3").hide(),
+                                        $.each(a.results,
+                                            function (d) {
+                                                var p, q, r, s, f = a.results[d].Account,
+                                                    g = a.results[d].Status,
+                                                    h = parseFloat(a.results[d].TotalScore).toFixed(2),
+                                                    i = parseFloat(a.results[d].TotalWin).toFixed(2),
+                                                    j = parseFloat(a.results[d].PokerWin).toFixed(2),
+                                                    k = parseFloat(a.results[d].PokerPump).toFixed(2),
+                                                    l = parseFloat(a.results[d].TotalB0).toFixed(2),
+                                                    m = parseFloat(a.results[d].TotalB1).toFixed(2),
+                                                    n = Number(l) + Number(m),
+                                                    o = Number(i);// + Number(j);
+                                                var lev = 0;
+                                                //p = o >= 200000 && o >= 6000000 ? "<span class='badge bg-red'>V4</span>" : o >= 100000 && n >= 3000000 ? "<span class='badge bg-red'>V3</span>" : o >= 50000 && n >= 1500000 ? "<span class='badge bg-red'>V2</span>" : o >= 30000 && n >= 50000 ? "<span class='badge bg-red'>V1</span>" : "<span class='badge bg-red'>V0</span>",
+                                                if(o>30000&&0<50000) lev=1;
+                                                if(o>50000&&0<100000) lev=2;
+                                                if(o>100000&&0<150000) lev=3;
+                                                if(o>150000&&0<200000) lev=4;
+                                                if(o>=200000 ) lev=5;
+                                                p = '<span class="badge bg-red">V'+lev+'</span>';
+                                                isNaN(h) && (h = 0),
+                                                isNaN(i) && (i = 0),
+                                                isNaN(j) && (j = 0),
+                                                isNaN(k) && (k = 0),
+                                                    r = 0 == parseInt(b) % 3 ? 3 : parseInt(b) % 3,
+                                                    s = 0 == parseInt(b) % 5 ? 5 : parseInt(b) % 5,
+                                                    q = 99999 == a.results[d].Online && 99999 == a.results[d].DisOnlineDay ? "<span class='badge bg-gray'>No</span>" : 99999 == a.results[d].Online && 99999 != a.results[d].DisOnlineDay ?  "<span class='badge bg-light-blue'> 离线: " + a.results[d].DisOnlineDay + " 小时</span>" : "<span class='badge bg-green'>在线</span>",
+                                                    c += '<tr class="tr_h_1" id="player_' + f + '">',
+                                                "true" == _page_info && (c += "<td nowrap='nowrap'>", c += b + " - " + r + " - " + s, c += "</td>"),
+                                                    c += '<td><a href="playerlist.aspx?sid='+a.results[d].Account+'" target="_self"><span class="text-red" id="p_uid" >',
+                                                    c += f + (f == a.results[d].idx ? "" : "(" + a.results[d].idx + ")"),
+                                                    c += "</span></a></td>",
+                                                    c += "<td>",
+                                                    c += p,
+                                                    c += "</td>",
+                                                    c += "<td>",
+                                                    c += q,
+                                                    c += "</td>",
+                                                    c += "<td>",
+                                                    c +=a.results[d].isUserAgent==1?'<a href="playerlist.aspx?sid=' + a.results[d].Agent+'">'+a.results[d].Agent+'</a>':a.results[d].Agent,
+                                                    c += "</td>",
+                                                    c += '<td>',
+                                                    c += '<a href="playerlist.aspx?sid=' + f+'">推广列表</a>',
+                                                    c += "</td>",
+                                                    c += "<td>",
+                                                    c += a.results[d].TotalBet,
+                                                    c += "</td>",
+                                                    c += '<td><span class="badge bg-gray">',
+                                                    c += a.results[d].Reg_User,
+                                                    c += "</span></td>",
+                                                    c += '<td><span class="badge bg-gray">',
+                                                    c += parseFloat(a.results[d].Get_Reward).toFixed(2),
+                                                    c += "</span></td>",
+                                                    c += '<td><span class="badge bg-gray">',
+                                                    c += parseFloat(a.results[d].Total_Reward).toFixed(2),
+                                                    c += "</span></td>",
+
+                                                    c += '<td><span class="badge bg-gray">',
+                                                    c += parseFloat(a.results[d].Cur_Reward).toFixed(2),
+                                                    c += "</span></td>",
+                                                    c += '<td><span class="badge bg-gray">',
+                                                    c += h,
+                                                    c += "</span></td>",
+                                                    c += '<td><span class="badge bg-gray">',
+                                                    c += i,
+                                                    c += "</span></td>",
+                                                    c += '<td><span class="badge bg-gray">',
+                                                    c += parseFloat(a.results[d].MoneyNum).toFixed(2),
+                                                    c += "</span></td>",
+                                                    c += '<td><span class="badge bg-gray">',
+                                                    c += "0.00",
+                                                    c += "</span></td>",
+                                                    c += '<td><span class="badge bg-gray">',
+                                                    c += k,
+                                                    c += "</span></td>",
+                                                    c += '<td nowrap="nowrap" class="text-left    <?php if($_role['xgbz']){ echo "editNoteInfo";  }?>"    field="Redme" >',
+                                                    c += a.results[d].Redme,
+                                                    c += "</td>",
+                                                    c += '<td nowrap=\'nowrap\' class="col_1 editInfo" field="wechatID" >',
+                                                    c += a.results[d].wechatID,
+                                                    c += "</td>",
+                                                    c += '<td nowrap="nowrap" class="text-left">';
+                                                if(1 == parseInt("<?=$_role['reg']?>")){
+                                                    if(0==parseInt(a.results[d].RegGive)){
+                                                        c += '<button type="button" class="btn btn-warning btn-xs" title="' + f + '" onfocus="this.blur();" onclick=\'onRegSong(this,"' + f + '","' + a.results[d].idx + '");\'>注册送</button>'
+                                                    }else if(1==parseInt(a.results[d].RegGive)){
+                                                        c += '<button type="button" class="btn btn-success btn-xs" title="' + f + '" onfocus="this.blur();" >已赠送</button>'
+                                                    }else if(2==parseInt(a.results[d].RegGive)){
+                                                        c += '<button type="button" class="btn btn-default btn-xs" title="' + f + '" onfocus="this.blur();" >已忽略</button>'
+                                                    }
+                                                }
+                                                1 == parseInt("<?=$_role['fz']?>") && (c += '<button type="button" class="btn btn-warning btn-xs" title="' + f + '" onfocus="this.blur();" onclick=\'onScore(this,"' + f + '","setServerScore");\'>进分</button>'),
+                                                    c += '<button type="button" class="btn btn-warning btn-xs" title="' + f + '" onfocus="this.blur();" onclick=\'onScoreLog(this,"' + f + "\");'>进分记录</button>",
+                                                //1 == parseInt("<?=$_role['bj']?>") && (c += '<button type="button" class="btn btn-warning btn-xs" title="' + f + '" onfocus="this.blur();" onclick=\'onEdit(this,"' + f + "\");'>编辑</button>"),
+                                                    c += '<button type="button" class="btn btn-warning btn-xs" title="' + f + '" onfocus="this.blur();" onclick=\'onReport(this,"' + f + '","ServerReport");\'>查账</button>',
+                                                    c += '<button type="button" class="btn btn-warning btn-xs" title="' + f + '" onfocus="this.blur();" onclick=\'onGameLog(this,"' + f + "\");'>游戏记录</button>",
+                                                <?php if($_role['tr']){ ?>
+                                                    c += '<button type="button" class="btn btn-warning btn-xs" title="' + f + '" onfocus="this.blur();" onclick=\'onQuiteGame(this,"' + f + "\");'>踢出游戏</button>",
+                                                <?php } ?><?php if($_role['jy']){ ?>
+                                                    c += "1" == g ? '<button type="button" class="btn btn-warning btn-xs" title="' + f + '" onfocus="this.blur();" onclick=\'onDisable(this,"-' + f + "\");'>禁用</button>" : '<button type="button" class="btn btn-danger btn-xs" title="' + f + '" onfocus="this.blur();" onclick=\'onDisable(this,"-' + f + "\");'>解禁</button>",
+                                                <?php } ?><?php if($_role['gm']){ ?>
+                                                    //c += '<button type="button" class="btn btn-warning btn-xs" title="' + f + '" onfocus="this.blur();" onclick=\'onBonusLog(this,"' + f + "\");'>彩金记录</button>",
+                                                    c += '<button type="button" class="btn btn-warning btn-xs" title="' + f + '" onfocus="this.blur();" onclick=\'onChangeUserPwd(this,"☆ ' + f + "\");'>修改密码</button>",
+                                                <?php } ?>
+                                                    c += '<!--button type="button" class="btn btn-warning btn-xs <?php echo empty($_role['gn']) ? 'col_1':'a';?>" title="' + f + '" onfocus="this.blur();" onclick=\'onSendSms(this,"' + f + "\");'>发送短信</button!-->",
+                                                    c +="<button class=\"btn btn-success btn-xs\" href=\"#\" onclick='web_open(\"qrcode.aspx?action=shareuseragent&code="+a.results[d].idx+"\",\"推广二维码\",300,350)'>推广地址</button>",
+
+                                            c += "</td>",
+                                            c += "<td nowrap='nowrap' class=\"col_1\">",
+                                            c += '<span class="text-sm editInfo1" field="BankCardID" style="display: block;">',
+                                            c += ClearAllSpace(a.results[d].BankCardID),
+                                            c += "</span>",
+                                            c += '<span class="text-sm editInfo1" field="BankAddress" style="display: block;">',
+                                            c += a.results[d].BankAddress,
+                                            c += "</span>",
+                                            c += "</td>",
+                                                <?php if($isadmin){ ?>
+                                                c += '<td nowrap=\'nowrap\' class="editInfo" field="Name" >',
+                                            c += a.results[d].Name,
+                                            c += "</td>",
+    <?php } ?>
+                                            c += '<td nowrap=\'nowrap\' class="col_1 editInfo" field="Tel" >',
+                                            c += a.results[d].Tel,
+                                            c += "</td>",
+                                            c += "</tr>"
+                            }
+                        ),
+                        $("#tblData_1").append(c),
+                                <?php if( $_role['xgbz']){ ?>
+                                    whenMouseOver(".editNoteInfo", "双击可编辑"),
+                                    $('.editNoteInfo').editable("../ashx/editField/editField.ashx", {
+                                        indicator: "<img src='../res/js/plug/jeditable/img/indicator.gif'>",
+                                        event: "dblclick",
+                                        style: "inherit",
+                                        type: "text",
+                                        submit: "保存",
+                                        width: 120,
+                                        cancel: "取消",
+                                        cssclass: "setInput",
+                                        onsubmit: function (a, b) {
+                                            var c = $(b).find("input").val();
+                                            return c = $.trim(c),
+                                                c.length <= 0 ? (swal("输入不能为空.", "", "info"), !1) : void 0
+                                        },
+                                        submitdata: function (b) {
+                                            return a = b,
+                                                {
+                                                    action: "ModifyUserInfo",
+                                                    BeforeValue: a,
+                                                    id: $(this).parent().attr("id"),
+                                                    field: $(this).attr("field")
+                                                }
+                                        },
+                                        callback: function (b) {
+                                            var d = jQuery.parseJSON(b);
+                                            d.success ? ($(this).text(d.NewValue), swal(d.msg, "", "success")) : ($(this).text(a), swal(d.msg, "", "info"))
+                                        }
+                                    }),
+
+                                <?php }?>
+                        e = !1,
+                        $.each(a.upListArr,
+                            function (b) {
+                                var f = a.upListArr[b].Account,
+                                    g = a.upListArr[b].Status,
+                                    h = a.upListArr[b].IsPromotion;
+                                    $("#p_uid").text() != f && (e = !0, d += '<tr class="tr_h" id="' + f + '">', d += "<td>", 1 == parseInt("<?=$_role['gn']?>") ? (d += '<a href="playerlist.aspx?sid=' + f + '" target="_self"><span class="text-red">', d += f, d += "</span></a>") : d += f,
+                                    d += "</td>", 1 == h ? (d += '<td><span class="badge bg-light-blue">', d += "Yes</span></td>") : (d += '<td><span class="badge bg-gray">', d += "No</span></td>"),
+                                        d += '<td nowrap=\'nowrap\' class="editInfo" field="UserShareRate">', d += a.upListArr[b].UserShareRate, d += "</td>", d += '<td nowrap=\'nowrap\' class="text-left editInfo" field="Redme" >', d += a.upListArr[b].Redme, d += "</td>", d += '<td nowrap=\'nowrap\' class="editInfo col_1" field="wechatID" >', d += a.upListArr[b].wechatID, d += "</td>", d += '<td nowrap="nowrap" class="text-left">', 1 == h ? (d += '<button type="button" class="btn btn-primary btn-xs sd" title="' + f + '" onfocus="this.blur();" onclick=\'onOpenCloseSetting(this,"' + f + "\");'>功能设定</button>", d += '<button type="button" class="btn btn-primary btn-xs sd" title="' + f + '" onfocus="this.blur();" onclick=\'onRegSongSeting(this,"' + f + "\");'>注册送设定</button>", d += '<!--button type="button" class="btn btn-primary btn-xs sd" title="' + f + '" onfocus="this.blur();" onclick=\'onSMSSongSeting(this,"' + f + "\");'>短信送设定</button!-->", d += '<button type="button" class="btn btn-warning btn-xs" title="' + f + '" onfocus="this.blur();" onclick=\'onTotal(this,"' + f + "\");'>统计</button>") : (d += '<button type="button" class="btn btn-primary btn-xs" title="' + f + '" onfocus="this.blur();" onclick=\'onAddAgentSetting(this,"' + f + "\");'>功能设定</button>", d += '<button type="button" class="btn btn-primary btn-xs" title="' + f + '" onfocus="this.blur();" onclick=\'onRegSongSeting(this,"' + f + "\");'>注册送设定</button>", d += '<!--button type="button" class="btn btn-primary btn-xs" title="' + f + '" onfocus="this.blur();" onclick=\'onSMSSongSeting(this,"' + f + "\");'>短信送设定</button!-->", d += '<button type="button" class="btn btn-warning btn-xs" title="' + f + '" onfocus="this.blur();" onclick=\'onTotal(this,"' + f + "\");'>统计</button>"), 1 == parseInt("<?=$_role['bj']?>") && (d += '<button type="button" class="btn btn-warning btn-xs" title="' + f + '" onfocus="this.blur();" onclick=\'onEdit(this,"' + f + "\");'>编辑</button>"), d += '<button type="button" class="btn btn-warning btn-xs" title="' + f + '" onfocus="this.blur();" onclick=\'onReport(this,"' + f + '","AgentReport");\'>查账</button>', d += '<button type="button" class="btn btn-warning btn-xs" title="' + f + '" onfocus="this.blur();" onclick=\'onChat(this,"' + f + '","AgentChart");\'>曲线</button>', 1 == parseInt("<?=$_role['jy']?>") && (d += "1" == g ? '<button type="button" class="btn btn-warning btn-xs" title="' + f + '" onfocus="this.blur();" onclick=\'onDisable(this,"' + f + "\");'>禁用</button>" : '<button type="button" class="btn btn-danger btn-xs" title="' + f + '" onfocus="this.blur();" onclick=\'onDisable(this,"' + f + "\");'>解禁</button>" <?php if($_role['gm']){ ?>,d += '<button type="button" class="btn btn-warning btn-xs" title="' + f + '" onfocus="this.blur();" onclick=\'onChangeUserPwd(this,"' + f + "\");'>修改密码</button>"<?php } ?> ),c += '<!--button type="button" class="btn btn-warning btn-xs <?php echo empty($_role['gn']) ? 'col_1':'a';?>" title="' + f + '" onfocus="this.blur();" onclick=\'onSendSms(this,"' + f + "\");'>发送短信</button!-->", d += "</td>", d += '<td nowrap=\'nowrap\' class="col_1 editInfo" field="BankCardID" >', d += ClearAllSpace(a.upListArr[b].BankCardID), d += "</td>", d += '<td nowrap=\'nowrap\' class="col_1 editInfo" field="BankAddress" >', d += a.upListArr[b].BankAddress, d += "</td>", d += '<td nowrap=\'nowrap\' class="editInfo col_1" field="Name" >', d += a.upListArr[b].Name, d += "</td>", d += '<td nowrap=\'nowrap\' class="editInfo col_1" field="Tel" >', d += a.upListArr[b].Tel, d += "</td>", d += "</tr>")
+                            }),
+                    "true" == _page_info && $("#th_infoID").show(),
+                        e ? ($("#tblData_2").append(d), $("#d_tip_1").html(a.results[0].Account + "上级推广人"), $("#tb_list_1,#tb_list_2").fadeIn("slow")) : $("#tb_list_1").fadeIn("slow"),
+                        layer.close(pagei);
+                    break;
+                case "agent":
+                    $("#tb_list_1,#tb_list_2").hide(),
+                        $.each(a.upListArr,
+                            function (b) {
+                                var e = a.upListArr[b].Account,
+                                    f = a.upListArr[b].Status,
+                                    g = a.upListArr[b].IsPromotion;
+                                d += '<tr class="tr_h" id="' + e + '">',
+                                    d += "<td>",
+                                    1 == parseInt("<?=$_role['gn']?>") ? (d += '<a href="playerlist.aspx?sid=' + e + '" target="_self"><span class="text-red">', d += e, d += "</span></a>") : d += e,
+                                    d += "</td>",
+                                    1 == g ? (d += '<td><span class="badge bg-light-blue">', d += "Yes</span></td>") : (d += '<td><span class="badge bg-gray">', d += "No</span></td>"),
+                                    d += '<td nowrap=\'nowrap\' class="editInfo"  field="UserShareRate">',
+                                    d += a.upListArr[b].UserShareRate,
+                                    d += "</td>",
+                                    d += '<td nowrap=\'nowrap\' class="text-left editInfo" field="Redme" >',
+                                    d += a.upListArr[b].Redme,
+                                    d += "</td>",
+                                    d += '<td nowrap=\'nowrap\' class="col_1 editInfo" field="wechatID" >',
+                                    d += a.upListArr[b].wechatID,
+                                    d += "</td>",
+                                    d += '<td nowrap="nowrap" class="text-left">',
+                                    1 == g ? (d += '<button type="button" class="btn btn-primary btn-xs sd" title="' + e + '" onfocus="this.blur();" onclick=\'onOpenCloseSetting(this,"' + e + "\");'>功能设定</button>", d += '<button type="button" class="btn btn-primary btn-xs sd" title="' + e + '" onfocus="this.blur();" onclick=\'onRegSongSeting(this,"' + e + "\");'>注册送设定</button>", d += '<!--button type="button" class="btn btn-primary btn-xs sd" title="' + e + '" onfocus="this.blur();" onclick=\'onSMSSongSeting(this,"' + e + "\");'>短信送设定</button!-->", d += '<button type="button" class="btn btn-warning btn-xs" title="' + e + '" onfocus="this.blur();" onclick=\'onTotal(this,"' + e + "\");'>统计</button>") : (d += '<button type="button" class="btn btn-primary btn-xs" title="' + e + '" onfocus="this.blur();" onclick=\'onAddAgentSetting(this,"' + e + "\");'>功能设定</button>", d += '<button type="button" class="btn btn-primary btn-xs" title="' + e + '" onfocus="this.blur();" onclick=\'onRegSongSeting(this,"' + e + "\");'>注册送设定</button>", d += '<!--button type="button" class="btn btn-primary btn-xs" title="' + e + '" onfocus="this.blur();" onclick=\'onSMSSongSeting(this,"' + e + "\");'>短信送设定</button!-->", d += '<button type="button" class="btn btn-warning btn-xs" title="' + e + '" onfocus="this.blur();" onclick=\'onTotal(this,"' + e + "\");'>统计</button>"),
+                                1 == parseInt("<?=$_role['bj']?>") && (d += '<button type="button" class="btn btn-warning btn-xs" title="' + e + '" onfocus="this.blur();" onclick=\'onEdit(this,"' + e + "\");'>编辑</button>"),
+                                    d += '<button type="button" class="btn btn-warning btn-xs" title="' + e + '" onfocus="this.blur();" onclick=\'onReport(this,"' + e + '","AgentReport");\'>查账</button>',
+                                    d += '<button type="button" class="btn btn-warning btn-xs" title="' + e + '" onfocus="this.blur();" onclick=\'onChat(this,"' + e + '","AgentChart");\'>曲线</button>',
+                                <?php if($_role['jy']){ ?>
+                                    d += "1" == f ? '<button type="button" class="btn btn-warning btn-xs" title="' + e + '" onfocus="this.blur();" onclick=\'onDisable(this,"' + e + "\");'>禁用</button>" : '<button type="button" class="btn btn-danger btn-xs" title="' + e + '" onfocus="this.blur();" onclick=\'onDisable(this,"' + e + "\");'>解禁</button>",
+                                <?php } ?><?php if($_role['gm']){ ?>
+                                    d += '<button type="button" class="btn btn-warning btn-xs" title="' + e + '" onfocus="this.blur();" onclick=\'onChangeUserPwd(this,"' + e + "\");'>修改密码</button>",
+                                        d += '<button type="button" class="btn btn-warning btn-xs" title="' + e + '" onfocus="this.blur();" onclick=\'onChangeAgentSafecode(this,"' + e + "\");'>修改安全码</button>",
+                                <?php } ?>
+                                    d += '<!--button type="button" class="btn btn-warning btn-xs <?php echo empty($_role['gn']) ? 'col_1':'a';?>" title="' + f + '" onfocus="this.blur();" onclick=\'onSendSms(this,"' + f + "\");'>发送短信</button!-->",
+                                1 == g && (d +="<button class=\"btn btn-success btn-xs\" href=\"#\" onclick='web_open(\"qrcode.aspx?action=share&code="+e+"\",\"推广二维码\",300,350)'>推广地址</button>")
+
+                                d += "</td>",
+                                    d += '<td nowrap=\'nowrap\' class="col_1 editInfo" field="BankCardID" >',
+                                    d += ClearAllSpace(a.upListArr[b].BankCardID),
+                                    d += "</td>",
+                                    d += '<td nowrap=\'nowrap\' class="col_1 editInfo" field="BankAddress" >',
+                                    d += a.upListArr[b].BankAddress,
+                                    d += "</td>",
+                                    d += '<td nowrap=\'nowrap\' class="col_1 editInfo" field="Name" >',
+                                    d += a.upListArr[b].Name,
+                                    d += "</td>",
+                                    d += '<td nowrap=\'nowrap\' class="col_1 editInfo" field="Tel" >',
+                                    d += a.upListArr[b].Tel,
+                                    d += "</td>",
+                                    d += "</tr>"
+                            }),
+                        $("#d_tip_2").html(a.upListArr[0].Account + " 上级推广人"),
+                        $("#tblData_3").append(d),
+                        $("#tb_list_3").fadeIn("slow"),
+                        layer.close(pagei)
+                }
+
+                else
+                layer.close(pagei),
+                    $("#tb_list_1,#tb_list_2,#tb_list_3").fadeOut("slow"),
+                    web_tips("暂无数据.");
+                else
+                layer.close(pagei),
+                    $("#tb_list_1,#tb_list_2,#tb_list_3").fadeOut("slow"),
+                global_Error500 == a.ERROR_TYPE && (parent.location.href = global_e_p_500),
+                    global_NoLicense != a.msg ? web_tips("无此帐号.") : parent.location.href = global_jump_login
+                },
+                beforeSend: function () {
+
+                        pagei = layer.msg('请稍候..', {icon: 16,shade: 0.01})
+                }
+                ,
+                complete: function () {
+                    <?php if($_role['bj']){ ?>
+                    bindEdit(),
+                    <?php } ?>
+                        $("#Button_OK").removeAttr("disabled")
+
+                    <?php if(!$_role['gn']){ ?>
+                        $('#tb_list_2,#tb_list_3').find('button').removeAttr('onclick');
+                    <?php } ?>
+                    <?php if(!$_role['sd']){ ?>
+                        $('#tb_list_2 .sd,#tb_list_3 .sd').removeAttr('onclick');
+                    <?php } ?>
+                }
+                })
+                }
+                <?php if($_role['bj']|| $_role['xgbz']){ ?>
+                function bindEdit() {
+                    var editClass = '.editInfo ';
+                    1 == parseInt("<?=$col_1?>") ? $(".col_1").show() : $(".col_1").hide(),
+                        whenMouseOver(".editInfo", "双击可编辑"),
+                        whenMouseOver(".editInfo1", "双击可编辑");
+                    var a;
+
+                    $(editClass).editable("../ashx/editField/editField.ashx", {
+                        indicator: "<img src='../res/js/plug/jeditable/img/indicator.gif'>",
+                        event: "dblclick",
+                        style: "inherit",
+                        type: "text",
+                        submit: "保存",
+                        width: 120,
+                        cancel: "取消",
+                        cssclass: "setInput",
+                        onsubmit: function (a, b) {
+                            var c = $(b).find("input").val();
+                            return c = $.trim(c),
+                                c.length <= 0 ? (swal("输入不能为空.", "", "info"), !1) : void 0
+                        },
+                        submitdata: function (b) {
+                            return a = b,
+                                {
+                                    action: "ModifyUserInfo",
+                                    BeforeValue: a,
+                                    id: $(this).parent().attr("id"),
+                                    field: $(this).attr("field")
+                                }
+                        },
+                        callback: function (b) {
+                            var d = jQuery.parseJSON(b);
+                            d.success ? ($(this).text(d.NewValue), swal(d.msg, "", "success")) : ($(this).text(a), swal(d.msg, "", "info"))
+                        }
+                    });
+                }
+                <?php } ?>
+
+
+
+
+                var pagei, _key = GetQueryString("key"),
+                    _page_info = "false";
+                $(function () {
+                    _key && "undefined" != typeof _key && 0 != _key && 0 !== _key.length && ($("#txt_UserName").val(_key), doSearch(_key)),
+                        // $("#txt_UserName").autocomplete({
+                        //     source: "../ashx/getData/AutoComplete.ashx"
+                        // }),
+                        $("input").keydown(function (a) {
+                            13 == a.keyCode && $('.search_btn').eq(0).click();//$("#Button_OK").click()
+                        }),
+
+
+                        $("#Button_OK").click(function () {
+                            return $("#tb_list_1,#tb_list_2,#tb_list_3").fadeOut("slow"),
+                                $.trim($("#txt_UserName").val()).length <= 0 ? (web_tips("请输入帐号."), void 0) : (doSearch($("#txt_UserName").val(), 0), void 0)
+                        })
+                    $("#Button_OK1").click(function () {
+                        return $("#tb_list_1,#tb_list_2,#tb_list_3").fadeOut("slow"),
+                            $.trim($("#txt_UserName").val()).length <= 0 ? (web_tips("请输入帐号."), void 0) : (doSearch($("#txt_UserName").val(), 1), void 0)
+                    })
+                });
+            </script>
+
+        </div>
+    </div>
+</div>
+
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_footjs.html'); ?>

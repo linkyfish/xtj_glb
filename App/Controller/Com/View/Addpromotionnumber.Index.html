@@ -1,0 +1,171 @@
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_head.html'); ?>
+    <body>
+<div class="templatemo-flex-row">
+    <?php include _include(__APPDIR__ . 'Controller/Com/View/Public_nav.html'); ?>
+
+    <div class="templatemo-content col-1 light-gray-bg">
+        <?php include _include(__APPDIR__ . 'Controller/Com/View/Public_top.html'); ?>
+        <div class="row content" style="padding:5px 0px 0px 0px;">
+            <section class="content">
+                <div class="box box-primary box-solid">
+                    <div class="box-header with-border">
+                        <h3 class="box-title text-muted"><span style=" color:White;">新增扩展号</span>
+                            <small><a href="userList.aspx?sid=<?=$agent['username']?>" target="_self"
+                                      style="margin-left:8px; margin-right:8px;"
+                                      onclick='userList.aspx?sid=<?=$agent['username']?>'><i class="fa fa-arrow-left"></i>
+                                    返回</a></small>
+                        </h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label>上级管理</label>
+                            <p><span class="badge bg-gray" id="agent" style="font-size:1em;"><?=$agent['username']?></span></p>
+                        </div>
+
+                        <div class="form-group" id="agentID" style="display:none;">
+                            <label>扩展号</label>
+                            <input type="text" class="form-control" id="txt_UserName" maxlength="6">
+                            <p id="p1"></p>
+                        </div>
+
+                        <div class="form-group" id="playerID" style="display:none;">
+                            <label>帐号</label>
+                            <p><span class=" text-green text-bold" id="s_playerID" style="font-size:1.5em;"></span></p>
+                        </div>
+
+                        <div class="form-group">
+                            <label>密码</label>
+                            <input type="text" class="form-control" id="txt_Password" maxlength="15">
+                            <p id="p2"></p>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>占成比例</label>
+                            <input type="text" class="form-control" id="txt_ShareRate" value="<?=$agent['share_rate']-2<0?0:$agent['share_rate']-2?>" maxlength="3">
+                            <p class="help-block">比例必须是正整数.</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label>绿色号</label>
+                            <input type="text" class="form-control" id="txt_wechatID" maxlength="30">
+                        </div>
+
+                        <div class="form-group">
+                            <label>银行卡号</label>
+                            <input type="text" class="form-control text-bold text-red" id="txt_BankCardID"
+                                   maxlength="35">
+                        </div>
+
+                        <div class="form-group">
+                            <label>开户行信息</label>
+                            <input type="text" class="form-control" id="txt_BankAddress" maxlength="100">
+                            <p class="help-block">格式: 建行-四川省成都市青羊区XXX支行</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label>名字</label>
+                            <input type="text" class="form-control" id="txt_Name" maxlength="20">
+                        </div>
+
+                        <div class="form-group">
+                            <label>电话</label>
+                            <input type="text" class="form-control" id="txt_Tel" maxlength="20">
+                        </div>
+
+                        <div class="form-group">
+                            <label>备注</label>
+                            <textarea rows="2" class="form-control" id="txt_Memo"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="box-footer">
+                        <button type="button" class="btn btn-primary" id="Button_OK">确定</button>
+                        <button type="button" class="btn btn-default" style=" margin-left:15px;" id="Button_Cancel">取消
+                        </button>
+                    </div>
+
+                </div>
+            </section>
+
+
+            <script type="text/javascript">
+                var _user, _setScoreFlag = "1", _sMaxRate = "<?=$agent['share_rate']?>";
+                $(function () {
+                    $("#agentID").show(), $("#playerID").hide(), $("#txt_ShareRate").attr("placeholder", "设定值不能超过:" + _sMaxRate),  $("#Button_OK").click(function () {
+                        _user = $("#txt_UserName").val(), $("#txt_UserName,#txt_Password").trigger("blur");
+                        var a = $(".has-warning").length;
+                        return a ? !1 : $.trim($("#txt_ShareRate").val()).length > 0 && !checkNum_FFINT($("#txt_ShareRate").val()) ? (web_tips("占成比例格式有误,必须是正整数."), !1) : ($.ajax({
+                            url: "../ashx/account/account.ashx",
+                            type: "post",
+                            dataType: "json",
+                            data: {
+                                action: "addPromoUser",
+                                agent: $("#agent").text(),
+                                userName: _user,
+                                PassWd: $("#txt_Password").val(),
+                                Name: $("#txt_Name").val(),
+                                Tel: $("#txt_Tel").val(),
+                                Memo: $("#txt_Memo").val(),
+                                weChatID: $("#txt_wechatID").val(),
+                                BankCardID: $("#txt_BankCardID").val(),
+                                BankAddress: $("#txt_BankAddress").val(),
+                                CurDateTime: rand(),
+                                ShareRate: $("#txt_ShareRate").val()
+                            },
+                            success: function (a) {
+                                if (a.success) web_dialog("操作成功."); else if (a.ERROR_TYPE == global_Error500) parent.location.href = global_e_p_500; else if (global_NoLicense != a.msg) switch (a.type) {
+                                    case 0:
+                                    case 1:
+                                        web_dialog("操作失败,请重试.");
+                                        break;
+                                    case 2:
+                                        web_dialog("操作失败,已存在该帐号."), $(".box-body div:eq(1)").removeClass().addClass("form-group has-warning"), $("#p1").removeClass().addClass("help-block").text("已存在该帐号");
+                                        break;
+                                    case 3:
+                                        web_dialog("密码格式不正确,请确认.");
+                                        break;
+                                    case 4:
+                                        web_dialog("占成比例不能大于上级.");
+                                        break;
+                                    case 5:
+                                        web_dialog("扩展号数量已到上限.")
+                                } else parent.location.href = global_jump_login
+                            },
+                            beforeSend: function () {
+                                $("#Button_OK").attr("disabled", "disabled").text("正在提交")
+                            },
+                            complete: function () {
+                                $("#Button_OK").removeAttr("disabled").text("确定")
+                            }
+                        }), void 0)
+                    }), $("#txt_UserName").focus(function () {
+                        $("#p1").removeClass().addClass("help-block").text("扩展号请设定6位,数字或字母均可.")
+                    }), $("#txt_UserName").blur(function () {
+                        checkTgh($.trim($(this).val())) ? $(".box-body div:eq(1)").removeClass().addClass("form-group has-success") : ($(".box-body div:eq(1)").removeClass().addClass("form-group has-warning"), $("#p1").removeClass().addClass("help-block").text("扩展号请设定6位,数字或字母均可."))
+                    }), $("#txt_UserName").change(function () {
+                        checkTgh($.trim($(this).val())) ? $.ajax({
+                            url: "../ashx/account/account.ashx",
+                            type: "post",
+                            dataType: "json",
+                            data: {action: "checkUser", userName: $("#txt_UserName").val()},
+                            success: function (a) {
+                                a.success ? $(".box-body div:eq(1)").removeClass().addClass("form-group has-success") : (global_Error500 == a.ERROR_TYPE && (parent.location.href = global_e_p_500), global_NoLicense != a.msg ? ($(".box-body div:eq(1)").removeClass().addClass("form-group has-warning"), $("#p1").removeClass().addClass("help-block").text("扩展号已存在,请更换.")) : parent.location.href = global_jump_login)
+                            }
+                        }) : ($(".box-body div:eq(1)").removeClass().addClass("form-group has-warning"), $("#p1").removeClass().addClass("help-block").text("扩展号格式有误."))
+                    }), $("#txt_Password").focus(function () {
+                        $("#p2").removeClass().addClass("help-block").text("密码最少6位,必须是数字和字母组合.字母须有大小写,不能有连续3位以上的数字.")
+                    }), $("#txt_Password").blur(function () {
+                        checkPassWord($.trim($(this).val())) ? $(".box-body div:eq(3)").removeClass().addClass("form-group has-success") : ($(".box-body div:eq(3)").removeClass().addClass("form-group has-warning"), $("#p2").removeClass().addClass("help-block").text("密码最少6位,必须是数字和字母组合.字母须有大小写,不能有连续3位以上的数字."))
+                    }), $("#Button_Cancel").click(function () {
+                        $("#p1,#p2").removeClass().text(""), 1 == _setScoreFlag ? $("#txt_UserName,#txt_Password,#txt_Name,#txt_Tel,#txt_Memo,#txt_wechatID,#txt_BankCardID,#txt_BankAddress,#txt_SongNum,#txt_ShareRate").val("") : $("#txt_UserName,#txt_Password,#txt_Name,#txt_Tel,#txt_Memo,#txt_wechatID,#txt_BankCardID,#txt_BankAddress,#txt_SongNum,#txt_ShareRate").val(""), $(".box-body div:odd").removeClass().addClass("form-group")
+                    })
+                });
+            </script>
+
+        </div>
+    </div>
+</div>
+
+
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_footjs.html'); ?>

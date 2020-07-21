@@ -1,0 +1,22 @@
+<div class="templatemo-sidebar">
+	<header class="templatemo-site-header">
+		<h1>后台面板</h1>
+		<em style="font-size:8px;color:#333;display:block;width:100%">当前IP：<input style="background:#F3F3F3;border:none;width:120px;" value="<?php echo $this->request->get_client_ip()?>"></em>
+	</header>
+	<div class="mobile-menu-icon" style="width:30px;">
+		<i class="fa fa-bars"></i>
+	</div>
+
+	<nav class="templatemo-left-nav">
+		<ul>
+			<?php $rule= ['com_ApplyScore'];?>
+			<?php foreach ($this->nav as $vo) {
+				if($vo['Node']=='com_ApplyScore' && !$user['is_req_give']){
+					continue;
+				}
+				?>
+				<li class="<?php echo $vo['Css']?>"><a <?php if ($vo['IsClick']==1) { ?>href="#" onclick='<?php echo  $vo['Node']?>'<?php }else{ ?>href="<?php echo  $vo['Node']?>.aspx"<?php } ?> ><i class="<?php echo  $vo['Icon']?>"></i><?php echo  $vo['NodeName']?><?php echo  $vo['Lable']?></a></li>
+			<?php } ?>
+		</ul>
+	</nav>
+</div>

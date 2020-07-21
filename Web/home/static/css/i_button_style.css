@@ -1,0 +1,141 @@
+
+
+button{overflow:visible;border:none;white-space: nowrap;}
+
+
+button.btn_back{
+background:none;
+margin:0px;
+padding:1px 5px 0px 25px;
+cursor:pointer;
+border:solid #333333 1px; 
+background:url(../image/back_bg.gif) no-repeat left center #E1E1E1; 
+height:22px;
+font:13px/1.5em "新細明體", "細明體", Verdana; color:#333333;
+
+}
+
+
+button.btn_next{
+background:none;
+margin:0px;
+padding:1px 5px 0px 25px;
+cursor:pointer;
+border:solid #333333 1px; 
+background:url(../image/next_bg.gif) no-repeat left center #E1E1E1; 
+height:22px;
+font:13px/1.5em "新細明體", "細明體", Verdana; color:#333333;
+}
+
+
+button.btn_pre{
+background:none;
+margin:0px;
+padding:1px 5px 0px 25px;
+cursor:pointer;
+border:solid #333333 1px; 
+background:url(../image/pre_bg.gif) no-repeat left center #E1E1E1; 
+height:22px;
+font:13px/1.5em "新細明體", "細明體", Verdana; color:#333333;
+}
+
+
+button.btn_sure{
+background:none;
+margin:0px;
+padding:1px 5px 0px 25px;
+cursor:pointer;
+border:solid #333333 1px; 
+background:url(../image/sure_bg.gif) no-repeat left center #E1E1E1;
+height:22px;
+font:13px/1.5em  "新細明體", "細明體", Verdana; color:#333333;
+}
+
+
+button.btn_makesure{
+background:none;
+margin:0px;
+padding:1px 5px 0px 38px;
+cursor:pointer;
+border:solid #333333 1px; 
+background:url(../image/makesure_bg.gif) no-repeat left center #E1E1E1;
+height:22px;
+font:13px/1.5em  "新細明體", "細明體", Verdana; color:#333333;}
+
+
+
+
+
+button.btn_sure_big{
+background:none;
+margin:0px;
+padding:4px 10px 0px 36px;
+cursor:pointer;
+border:solid #333333 1px; 
+background:url(../image/sure_bg_big.gif) no-repeat left center #E1E1E1;
+height:34px;
+font:15px/1.7em  "新細明體", "細明體", Verdana; color:#333333;
+}
+
+
+button.btn_confirm_big{
+background:none;
+margin:0px;
+padding:4px 10px 0px 36px;
+cursor:pointer;
+border:solid #333333 1px; 
+background:url(../image/confirm_bg_big.gif) no-repeat left center #E1E1E1;
+height:34px;
+font:15px/1.7em  "新細明體", "細明體", Verdana; color:#333333;
+}
+
+
+
+
+button.btn_ture{
+background:none;
+margin:0px;
+padding:1px 5px 0px 25px;
+cursor:pointer;
+border:solid #333333 1px; 
+background:url(../image/ture_bg.gif) no-repeat left center #E1E1E1;
+height:22px;
+font:13px/1.5em  "新細明體", "細明體", Verdana; color:#333333;
+}
+
+
+button.btn_false{
+background:none;
+margin:0px;
+padding:1px 5px 0px 25px;
+cursor:pointer;
+border:solid #333333 1px; 
+background:url(../image/false_bg.gif) no-repeat left center #E1E1E1;
+height:22px;
+font:13px/1.5em "新細明體", "細明體", Verdana; color:#333333;
+}
+
+a.btn_false{
+background:none;
+margin:0px;
+padding:1px 5px 0px 25px;
+cursor:pointer;
+border:solid #333333 1px; 
+background:url(../image/false_bg.gif) no-repeat left center #E1E1E1;
+height:22px;
+font:13px/1.5em "新細明體", "細明體", Verdana; color:#333333;
+}
+a.btn_false span{
+margin: 10px 0px;
+}
+
+button.btn_vote{
+background:none;
+margin:0px;
+padding:1px 5px 0px 25px;
+cursor:pointer;
+border:solid #333333 1px; 
+background:url(../image/vote_bg.gif) no-repeat left center #E1E1E1;
+height:22px;
+font:13px/1.5em "新細明體", "細明體", Verdana; color:#333333;
+}

@@ -1,0 +1,109 @@
+<?php include _include(__APPDIR__.'Controller/Com/View/Public_head.html');?>
+<body>
+
+<div class="templatemo-flex-row">
+    <?php include _include(__APPDIR__.'Controller/Com/View/Public_nav.html');?>
+
+    <div class="templatemo-content col-1 light-gray-bg">
+        <?php include _include(__APPDIR__.'Controller/Com/View/Public_top.html');?>
+        <div class="row content" style="padding:5px 0px 0px 0px;">
+
+            <section class="content">
+                <div class="box box-primary box-solid">
+                    <div class="box-header with-border">
+                        <h3 class="box-title text-muted"><span style=" color:White;">更改安全码<small
+                                        style="margin-left:8px; margin-right:8px;"><a
+                                            href="javascript:window.history.back()" target="_self"
+                                            onclick='javascript:window.history.back();'><i class="fa fa-arrow-left"></i> 返回</a></small></span>
+                        </h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label>旧安全码</label>
+                            <input type="password" class="form-control" id="txt_oldPassword" maxlength="4">
+                            <p id="p1"></p>
+                        </div>
+                        <div class="form-group">
+                            <label>安全码</label>
+                            <input type="password" class="form-control" id="txt_newPassword" maxlength="4">
+                            <p id="p2"></p>
+                        </div>
+                        <div class="form-group">
+                            <label>确认安全码</label>
+                            <input type="password" class="form-control" id="txt_rePassword" maxlength="4">
+                            <p id="p3"></p>
+                        </div>
+                    </div>
+
+                    <div class="box-footer">
+                        <button type="button" class="btn btn-primary" id="Button_OK">确定</button>
+                        <button type="button" class="btn btn-default" style=" margin-left:15px;" id="Button_Cancel">取消
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <script type="text/javascript">
+                $(function () {
+                    $("#txt_oldPassword").focus(function () {
+                        $("#p1").removeClass().addClass("help-block").text("请输入旧安全码.")
+                    }), $("#txt_oldPassword").blur(function () {
+                        $.trim($(this).val()).length <= 0 ? ($(".box-body div:eq(0)").removeClass().addClass("form-group has-warning"), $("#p1").removeClass().addClass("help-block").text("请输入旧安全码.")) : $(".box-body div:eq(0)").removeClass().addClass("form-group has-success")
+                    }), $("#txt_rePassword").focus(function () {
+                        $("#p3").removeClass().addClass("help-block").text("请确认您的新安全码.")
+                    }), $("#Button_Cancel").click(function () {
+                        $(":input").val(""), $("#p1,#p2,#p3").removeClass().text(""), $(".box-body > div").removeClass().addClass("form-group")
+                    }), $("#Button_OK").click(function () {
+                        $("#txt_oldPassword,#txt_newPassword,#txt_rePassword").trigger("blur");
+                        var a = $(".has-warning").length;
+                        return a ? !1 : ($.ajax({
+                            url: "../ashx/account/account.ashx",
+                            type: "post",
+                            dataType: "json",
+                            data: {
+                                action: "changeSafecode",
+                                oldPassWd: $("#txt_oldPassword").val(),
+                                newPassWd: $("#txt_newPassword").val(),
+                                rePassWd: $("#txt_rePassword").val(),
+                                CurDateTime: rand()
+                            },
+                            success: function (a) {
+                                if (a.success) web_tips("安全码更改成功."), $("#Button_Cancel").click(); else if (global_Error500 == a.ERROR_TYPE && (parent.location.href = global_e_p_500), global_NoLicense != a.msg) switch (a.type) {
+                                    case 1:
+                                        web_tips("旧安全码错误.");
+                                        break;
+                                    case 2:
+                                        web_tips("新安全码不能和旧安全码相同.");
+                                        break;
+                                    case 3:
+                                        web_tips("安全码格式有误.");
+                                        break;
+                                    default:
+                                        web_tips(a.msg?a.msg:"更改失败,请重试.")
+                                } else parent.location.href = global_jump_login
+                            },
+                            beforeSend: function () {
+                                $("#Button_OK").attr("disabled", "disabled").text("请稍后")
+                            },
+                            complete: function () {
+                                $("#Button_OK").removeAttr("disabled").text("确定")
+                            }
+                        }), void 0)
+                    })
+                });
+
+                <?php
+                if($is_first){
+                    ?>
+                swal("为了账户安全,请您务必修改安全码", "修改后可正常使用其他功能", "info")
+                    <?php
+                }
+                ?>
+
+            </script>
+
+        </div>
+    </div>
+</div>
+
+<?php include _include(__APPDIR__.'Controller/Com/View/Public_footjs.html');?>

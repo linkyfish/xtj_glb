@@ -1,0 +1,26 @@
+<script type="text/html" id="<?php echo $__PRE__ ?>table_bar_game">
+	<div>
+		<input style="width:250px" type="text" class="layui-input" id="date_game" placeholder="选择查询时间">
+	</div>
+</script>
+
+<script>
+    laydate.render({
+        elem: '#date_game',range: true
+    });
+    table.render({
+        elem: '#<?php echo $__PRE__?>table_game'
+        , url: '/test/table/demo1.json'
+        , toolbar: '#<?php echo $__PRE__?>table_bar_game' //开启头部工具栏，并为其绑定左侧模板
+        , defaultToolbar: ['exports']
+        , cols: [[ //标题栏
+            {align: 'center',field: 'time', title: '扩展号', width: 200}
+            , {align: 'center',field: 'center3', title: '玩家',width: 160}
+            , {align: 'center',field: 'center1', title: '储值',width: 160}
+            , {align: 'center',field: 'center2', title: '储值额',width: 160}
+            , {align: 'center',field: 'center1', title: '提线',width: 160}
+            , {align: 'center',field: 'center2', title: '提线额',width: 160}
+        ]]
+        , page: false
+    });
+</script>

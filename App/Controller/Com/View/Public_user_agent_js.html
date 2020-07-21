@@ -1,0 +1,29 @@
+<script type="text/html" id="<?php echo $__PRE__ ?>table_bar_agent">
+	<div>
+		<input style="width:250px" type="text" class="layui-input" id="date_agent" placeholder="选择查询时间">
+	</div>
+</script>
+
+<script>
+    laydate.render({
+        elem: '#date_agent',range: true
+    });
+    table.render({
+        elem: '#<?php echo $__PRE__?>table_agent'
+        , url: '/test/table/demo1.json'
+        , toolbar: '#<?php echo $__PRE__?>table_bar_agent' //开启头部工具栏，并为其绑定左侧模板
+        , defaultToolbar: ['exports']
+        , cols: [[ //标题栏
+            {align: 'center',field: 'time', title: '日期', width: 200}
+            , {align: 'center',field: 'center3', title: '代理数',width: 100}
+            , {align: 'center',field: 'center3', title: '新代理',width: 100}
+            , {align: 'center',field: 'center1', title: '会员数',width: 100}
+            , {align: 'center',field: 'center1', title: '新会员',width: 100}
+            , {align: 'center',field: 'center2', title: '储值会员',width: 100}
+            , {align: 'center',field: 'center2', title: '储值金额',width: 100}
+            , {align: 'center',field: 'center2', title: '提线会员',width: 100}
+            , {align: 'center',field: 'center2', title: '提线金额',width: 100}
+        ]]
+        , page: false
+    });
+</script>

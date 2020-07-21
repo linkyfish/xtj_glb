@@ -1,0 +1,155 @@
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_head.html'); ?>
+<body>
+<style>
+    .layui-laydate-content th {
+        font-weight: 400;
+        color: white;
+    !important;
+    }
+
+    tbody td {
+        text-align: left
+    }
+</style>
+<div class="templatemo-flex-row">
+    <?php include _include(__APPDIR__ . 'Controller/Com/View/Public_nav.html'); ?>
+
+    <div class="templatemo-content col-1 light-gray-bg">
+        <?php include _include(__APPDIR__ . 'Controller/Com/View/Public_top.html'); ?>
+        <div class="row content" style="padding:5px 0px 0px 0px;">
+
+
+            <section class="content">
+                <div class="box box-primary box-solid" id="ListFlag" style="">
+                    <div class="box-header with-border">
+                        <h6 class="box-title text-muted" style="color:white">
+                            <span class="hidden-xs hidden-sm text-bold"><?=$agent['username']?> - 自助结算</span>
+
+                        </h6>
+                        <span class="hidden-xs hidden-sm">　｜　</span>
+                        <span class="hidden-xs hidden-sm"><a href="javascript:reloadList();" target="_self" onclick='javascript:reloadList();'><i
+                                        class="fa fa-refresh"></i> 刷新</a></span>
+                        <span style="display: block;padding-top: 20px">
+                               往期抵扣: 0.00元&nbsp;&nbsp;
+                               当前收益账户(id): <?php if($agent['game_user_id']){ ?><?=$agent['username']?>(<?=$agent['game_user_id']?>)<?php }else{ ?>
+                                <button onclick='javascript:lock_player();' class="btn btn-success btn-xs">绑定收益账户</button>
+                            <?php } ?>
+							<div style="font-weight:800;font-size:160%;text-transform:none"><?php echo _CONF('admin_kf')?> <?php $admin_link= _CONF('admin_link'); echo $admin_link?"<a href='{$admin_link}' target='_blank'>下载客服工具</a>":''?></div>
+                        </span>
+                    </div>
+                    <div class="box-body" style="display: block; padding:0px;">
+                        <div class="table-responsive">
+                            <table class="layui-hide" id="<?php echo $__PRE__ ?>table" lay-filter="<?php echo $__PRE__ ?>table"></table>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+
+        </div>
+    </div>
+</div>
+<script type="text/html" id="<?php echo $__PRE__ ?>bar">
+
+    <div class="layui-btn-group">
+        <?php if($agent['game_user_id']){ ?>
+        {{# if(d.Status==0){ }}
+        <a class="layui-btn layui-btn-sm " lay-event="cash">申请提现</a>
+        {{# } }}
+        <?php }else{ ?>
+            <a class="layui-btn layui-btn-sm layui-btn-disabled" >请绑定收益账户</a>
+        <?php } ?>
+    </div>
+</script>
+
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_footjs.html'); ?>
+<script src="/js/index.js?ver=<?php echo _CONF('app_v') ?>"></script>
+<script src="/xtree/xtree.js?ver=<?php echo _CONF('app_v') ?>"></script>
+<script>
+    var <?php echo $__PRE__?>table = table.render({
+        elem: '#<?php echo $__PRE__?>table'
+        , url: '../../com/exchange.aspx'
+        , where:{action:"log"}
+        , page: false
+
+        , cols: [[
+            {type: 'numbers', title: '序号', width: 80, unresize: true}
+            , {field: 'Ymd', title: '结算日期',width: 200}
+            , {field: 'SumNum', title: '总数据',align:'center', width: 140}
+            , {field: 'PoNum', title: '占成数据',align:'center', width: 140}
+            , {field: 'SubNum', title: '分成数据',align:'center', width: 140}
+            , {field: 'RealNum', title: '实际数据',align:'center', width: 140}
+            , {field: 'Sub', title: '往期负账',align:'center', width: 140}
+            , {field: 'Num', title: '实出数据',align:'center', width: 140}
+            , {field: 'Status', title: '结算状态',align:'center', width: 120,templet:function (d) {
+                    return d.Status==2?'已结算':(d.Status==1?'待审核':'待提现');
+                }}
+            , {field: 'Do', title: '操作',align:'center', width: 120,toolbar: "#<?php echo $__PRE__?>bar"}
+            , {field: 'z', title: '',align:'center'}
+        ]]
+
+        , response: {
+            statusCode: "0000"
+        }
+        , parseData: function (res) {
+            return {
+                "code": res.resp_code,
+                "msg": res.msg,
+                "data": res.data
+            };
+        }
+    });
+    <?php if(!$agent['game_user_id']){ ?>
+    function lock_player(){
+        layer.prompt({
+            formType: 0,
+            title: '请填写收益账号'
+        }, function(value, index, elem){
+            $.xpost('../../com/agent_settlement.aspx', {action:'bind',sid:value}, function (e) {
+                if(e.resp_code == '0000'){
+                    layer.close(index);
+                    layer.msg('绑定成功.');
+                    setTimeout(function () {
+                        window.location.reload();
+                    },1500)
+
+                }else{
+                    layer.msg(e.msg,{icon:5,anim:6});
+                }
+            })
+        });
+    }
+    <?php } ?>
+    table.on('tool(<?php echo $__PRE__?>table)', function (obj) {
+        var data = obj.data;
+        var layEvent = obj.event;
+        var tr = obj.tr;
+
+        if (layEvent === 'cash') {
+            layer.confirm('确认申请提现到收益账户?', {icon: 3, title:'提取确认'}, function(index){
+                $.xpost('../../com/agent_settlement.aspx', {action:'cash',ymd:data.Ymd}, function (e) {
+                    if(e.resp_code == '0000'){
+                        layer.close(index);
+                        layer.msg('提交成功.');
+                        setTimeout(function () {
+                            <?php echo $__PRE__?>table.reload();
+                        },1500)
+                    }else{
+                        layer.msg(e.msg,{icon:5,anim:6});
+                    }
+                })
+
+                layer.close(index);
+            });
+
+        }
+    });
+
+    function reloadList() {
+       window.location.reload();
+    }
+
+    form.render();
+</script>
+

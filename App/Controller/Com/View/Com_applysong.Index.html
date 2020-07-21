@@ -1,0 +1,129 @@
+<?php include _include(__APPDIR__.'Controller/Com/View/Public_head.html');?>
+<body>
+<div class="templatemo-flex-row">
+    <?php include _include(__APPDIR__.'Controller/Com/View/Public_nav.html');?>
+
+    <div class="templatemo-content col-1 light-gray-bg">
+        <?php include _include(__APPDIR__.'Controller/Com/View/Public_top.html');?>
+        <div class="row content" style="padding:5px 0px 0px 0px;">
+            <style>
+                .layui-table-view .layui-table .layui-table-cell{text-align:center}
+            </style>
+            <section class="content">
+                <div class="box box-primary box-solid">
+                    <div class="box-header with-border">
+                        <h3 class="box-title text-muted"><span style=" color:White;">审核申请送分<small
+                                        style="margin-left:8px; margin-right:8px;"><a
+                                            href="javascript:window.history.back()" target="_self"
+                                            onclick='javascript:window.history.back();'><i class="fa fa-arrow-left"></i> 返回</a></small></span>
+						</h3>
+						<span class="hidden-xs hidden-sm"><a href="javascript:reloadList();" target="_self" onclick="javascript:reloadList();"><i class="fa fa-refresh"></i> 刷新</a></span>
+                    </div>
+
+                        <table class="layui-hide" id="<?php echo $__PRE__?>table" lay-filter="<?php echo $__PRE__?>table"></table>
+
+                </div>
+
+            </section>
+
+        </div>
+    </div>
+</div>
+
+
+<?php include _include(__APPDIR__.'Controller/Com/View/Public_footjs.html');?>
+
+<script>
+	function reloadList() {
+		<?php echo $__PRE__?>table.reload()
+    }
+
+    function onApplySong(a, b,c) {
+        var d = "onClick_ApplySong.aspx?logid=" + c;
+        browser.versions.mobile ? !browser.versions.ios && browser.versions.android ? window.open(d, "", "height=0,width=0,top=0,left=0,location=no,menubar=no,resizable=yes,scrollbars=yes,status=yes,titlebar=no,toolbar=no,directories=no") : art.dialog.open(d, {
+            title: b + " 申请送审核",
+            width: 500,
+            height: 280,
+            fixed: !0,
+            lock: !0,
+            drag: !0
+        }) : art.dialog.open(d, {
+            title: b + " 申请送审核",
+            width: 500,
+            height: 280,
+            fixed: !0,
+            lock: !0,
+            drag: !0
+        })
+    }
+
+
+    var  <?php echo $__PRE__?>table = table.render({
+        elem: '#<?php echo $__PRE__?>table'
+        ,url:'../../ashx/log/log.ashx'
+        ,where: {action:'AccountApplyog'}
+        ,height: 'full-160'
+        ,limit:10
+        ,limits: [10,50,100,200]
+		,page:true
+        ,cols: [[
+            {type:'numbers', title:'序号', width:60, unresize: true}
+            ,{field:'UserName', title:'玩家账户', width:180}
+            ,{field:'AgentName', title:'申请代理', width:180}
+            ,{field:'Money', title:'申请金额', width:140}
+            ,{field:'ApplyMoney', title:'确认金额', width:140}
+            ,{field:'CreateAT', title:'申请时间', width:160}
+            ,{field:'doit', title:'操作', width:240,templet:function (d) {
+					var e="";
+					if(0==parseInt(d.Status)){
+                        e += '<button type="button" class="btn btn-warning btn-xs" title="' + e + '" onfocus="this.blur();" onclick=\'onApplySong(this,"' + d.UserName + '","' +d.LogID + '");\'>操作</button>'
+                    }else if(1==parseInt(d.Status)){
+                        e += '<button type="button" class="btn btn-success btn-xs" title="' + e + '" onfocus="this.blur();" >已赠送</button>'
+                    }else if(2==parseInt(d.Status)){
+                        e += '<button type="button" class="btn btn-default btn-xs" title="' + e + '" onfocus="this.blur();" >已忽略</button>'
+                    }
+                    return e;
+                }},{field:'d', title:''}
+        ]]
+        ,response: {
+            statusCode: "0000"
+        }
+
+        ,parseData: function(res){
+            return {
+                "code": res.resp_code,
+                "msg": res.msg,
+                "count": res.total,
+                "data": res.results
+            };
+        }
+    });
+
+
+    table.on('tool(<?php echo $__PRE__?>table)', function(obj){
+        var data = obj.data;
+        var layEvent = obj.event;
+        var tr = obj.tr;
+
+        if(layEvent === 'ignore'){
+            layer.confirm('忽略赠送确认！', {icon: 3, title:'忽略赠送确认'}, function(index){
+                $.post('../../com/com_RegScore.aspx',{action:'send',type:2,usrid:data.usrid},function (e) {
+                    layer.close(index);
+                    layer.msg(e.msg)
+                    <?php echo $__PRE__?>table.reload()
+                });
+            });
+        } else if(layEvent === 'send'){
+            layer.confirm('确认赠送玩家<?=$agent['reg_mark']?>元', {icon: 3, title:'赠送确认'}, function(index){
+                $.post('../../com/com_RegScore.aspx',{action:'send',type:1,usrid:data.usrid},function (e) {
+                    layer.close(index);
+                    layer.msg(e.msg)
+                    <?php echo $__PRE__?>table.reload()
+                });
+            });
+        }
+    });
+
+
+</script>
+

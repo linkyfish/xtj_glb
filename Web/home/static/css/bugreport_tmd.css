@@ -1,0 +1,264 @@
+@charset "utf-8";
+*{ margin:0; padding:0; font-size: inherit; line-height: inherit;}
+
+img, object, embed, video{ max-width:100%;}
+
+.ie6 img{ width:100%;}
+
+.container .content { background: rgba(255,255,255,.0); padding-bottom:2em; color:#333}
+.nav_main .container { overflow:inherit}
+.header_page_banner .container { overflow:inherit}
+.header_line_top { position:relative; height:5px; bottom:0;}
+.content .container .box--styleA h3 a{ position:relative; color:#F90}
+.content .container .box--styleA p{ color:#ab875c}
+.box--styleA { border: 1px solid #ab875c;}
+
+
+.box .text_login { text-align:center; text-decoration:none; color:#333333; display:block; height:40px; }
+.box .text_login a{color: #CCC;line-height:30px;}
+.box .text_login span{color: #0066cc;}
+
+
+@media screen and (max-width:350px){
+	p.textaligncenter { margin:0; text-align:left; margin-bottom:20px; }
+	.content_bg_white .button--styleA{border-radius: 7px;}
+	.content_bg_white .button--styleA span{ display:none}
+}
+
+
+.button--styleA { background-color:#ab875c;color:#000;}
+.form--styleA .fileImg--styleA {border: 2px #ab875c solid;}
+.form--styleA .fileImg--styleA ul li { color:#ab875c}
+.color--borderA, .pageNum-button li.active a {border-color: #ab875c;}
+.color--backgroundA, .pageNum-button li.active a { background-color:#ab875c;}
+
+
+body{ background-color:transparent; margin:0; padding:0;  font-family: Arial, Helvetica, sans-serif, 微軟正黑體, 新細明體;}
+.gridContainer{ margin:0 auto; width:100%;}
+
+
+#MobileBankfooter{ display:none;}
+ 
+
+	.wait{padding:2px; width:95%;  margin:0 auto;
+		border: 1px solid #ffffff;
+		-webkit-border-radius: 7px;
+		-webkit-border-radius: 7px;
+		-moz-border-radius: 7px;
+		-moz-border-radius: 7px;
+		border-radius: 7px;
+		border-radius: 7px;
+		-webkit-box-shadow: rgba(20,95,160,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 0px 0;
+		-moz-box-shadow: rgba(20,95,160,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 0px 0;
+		box-shadow: rgba(20,95,160,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 0px 0;
+		text-shadow: #ffffff 0 1px 0;
+		font-size: 10px;
+		font-family: Arial, Helvetica, sans-serif, 微軟正黑體, 新細明體;
+		text-decoration: none;
+		vertical-align: middle;
+		display:block;
+		font-weight:bold;
+		text-align:center;
+		color:#666;		
+		}
+	.button_all{padding:8px 20px; width:95%;  margin:10px auto; 
+		border: 1px solid #ffffff;
+		background: #bbdeff;
+		background: -webkit-gradient(linear, left top, left bottom, from(#f4f4f4), to(#bbdeff));
+		background: -webkit-linear-gradient(top, #f4f4f4, #bbdeff);
+		background: -moz-linear-gradient(top, #f4f4f4, #bbdeff);
+		background: -ms-linear-gradient(top, #f4f4f4, #bbdeff);
+		background: -o-linear-gradient(top, #f4f4f4, #bbdeff);
+		background-image: -ms-linear-gradient(top, #f4f4f4 0%, #bbdeff 100%);
+		-webkit-border-radius: 7px;
+		-webkit-border-radius: 7px;
+		-moz-border-radius: 7px;
+		-moz-border-radius: 7px;
+		border-radius: 7px;
+		border-radius: 7px;
+		-webkit-box-shadow: rgba(20,95,160,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 0px 0;
+		-moz-box-shadow: rgba(20,95,160,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 0px 0;
+		box-shadow: rgba(20,95,160,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 0px 0;
+		text-shadow: #ffffff 0 1px 0;
+		font-size: 10px;
+		font-family: Arial, Helvetica, sans-serif, 微軟正黑體, 新細明體;
+		text-decoration: none;
+		vertical-align: middle;
+		display:block;
+		font-weight:bold;
+		text-align:center;
+		color:#000000;		
+		}
+	.btn_report{
+		padding:8px 20px; width:95%;  margin:10px auto; 
+		border: 1px solid #ffffff;
+		background: #bbdeff;
+		background: -webkit-gradient(linear, left top, left bottom, from(#f4f4f4), to(#bbdeff));
+		background: -webkit-linear-gradient(top, #f4f4f4, #bbdeff);
+		background: -moz-linear-gradient(top, #f4f4f4, #bbdeff);
+		background: -ms-linear-gradient(top, #f4f4f4, #bbdeff);
+		background: -o-linear-gradient(top, #f4f4f4, #bbdeff);
+		background-image: -ms-linear-gradient(top, #f4f4f4 0%, #bbdeff 100%);
+		-webkit-border-radius: 7px;
+		-webkit-border-radius: 7px;
+		-moz-border-radius: 7px;
+		-moz-border-radius: 7px;
+		border-radius: 7px;
+		border-radius: 7px;
+		-webkit-box-shadow: rgba(20,95,160,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 0px 0;
+		-moz-box-shadow: rgba(20,95,160,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 0px 0;
+		box-shadow: rgba(20,95,160,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 0px 0;
+		text-shadow: #ffffff 0 1px 0;
+		font-size: 10px;
+		font-family: Arial, Helvetica, sans-serif, 微軟正黑體, 新細明體;
+		text-decoration: none;
+		vertical-align: middle;
+		display:block;
+		font-weight:bold;
+		text-align:center;
+		color:#000000;		
+		}
+	.btn_report{padding:2px; width:95%;  margin:0 auto; }
+	.button_all:hover{
+		border: 1px solid #2e2e2e;
+		text-shadow: #ffffff 0 1px 0;
+		background: #bbdeff;
+		background: -webkit-gradient(linear, left top, left bottom, from(#f4f4f4), to(#bbdeff));
+		background: -webkit-linear-gradient(top, #bbdeff, #f4f4f4);
+		background: -moz-linear-gradient(top, #bbdeff, #f4f4f4);
+		background: -ms-linear-gradient(top, #bbdeff, #f4f4f4);
+		background: -o-linear-gradient(top, #bbdeff, #f4f4f4);
+		background-image: -ms-linear-gradient(top, #f4f4f4 0%, #bbdeff 100%);
+		color: #474747;
+		}
+	.btn_report:hover{
+		border: 1px solid #2e2e2e;
+		text-shadow: #ffffff 0 1px 0;
+		background: #bbdeff;
+		background: -webkit-gradient(linear, left top, left bottom, from(#f4f4f4), to(#bbdeff));
+		background: -webkit-linear-gradient(top, #bbdeff, #f4f4f4);
+		background: -moz-linear-gradient(top, #bbdeff, #f4f4f4);
+		background: -ms-linear-gradient(top, #bbdeff, #f4f4f4);
+		background: -o-linear-gradient(top, #bbdeff, #f4f4f4);
+		background-image: -ms-linear-gradient(top, #f4f4f4 0%, #bbdeff 100%);
+		color: #474747;
+		}
+	.button_all:visited{ color: #474747;}
+	.btn_report:visited{ color: #474747;}
+
+
+
+	.buttonarrow{display: inline; width:15px; height:15px; padding-left:5px;}
+
+
+
+	.introcontent{ padding:8px; margin:0 5px; width:80%; margin:0 auto;}
+
+
+
+	.tit{
+		width:85%; position:relative;
+		padding:8px;  margin:0 auto;
+		border: 1px solid #9111d2;
+		-webkit-border-bottom-right-radius: 7px;
+		-webkit-border-bottom-left-radius: 7px;
+		-moz-border-bottom-right-radius: 7px;
+		-moz-border-bottom-left-radius: 7px;
+		border-bottom-right-radius: 7px;
+		border-bottom-left-radius: 7px;
+		background: #410d5c;
+		line-height:30px;
+		font-size: 22px;
+		font-family: Arial, Helvetica, sans-serif, 微軟正黑體, 新細明體;
+		font-weight:bold;
+		text-align:center;	
+	    color: #ffffff;
+		}
+
+
+	#close{ position:absolute; top:5px; right:5px;}
+
+
+.maincontainer{
+		padding:10px 10px; width:80%; margin:10px auto; 
+		border: 1px solid  #666666;
+		background: #f0f0f0;
+		
+		-webkit-border-radius: 7px;
+		-moz-border-radius: 7px;
+		border-radius: 7px;
+		-webkit-box-shadow: rgba(20,95,160,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 0px 0;
+		-moz-box-shadow: rgba(20,95,160,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 0px 0;
+		box-shadow: rgba(20,95,160,0.9) 0 1px 2px, inset rgba(255,255,255,0.4) 0 0px 0;
+		font-size: 16px;
+		font-family: Arial, Helvetica, sans-serif, 微軟正黑體, 新細明體;
+		text-decoration: none;
+		vertical-align: middle;
+		display:block;
+		text-align:left;
+		color: #000000;		
+		}
+
+
+
+.text_orage{ color:#F30; font-weight:bold;}
+.text_bold{ font-weight:bold;}
+
+
+.text_form{ 
+		width:93%;
+		padding:2px;
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+		border-radius: 5px;
+		background-color: #fff;
+		border: solid 1px #6489a4;
+		font-size: 14px;
+		color: #55585b;
+	}
+	
+
+#MobileInGamenews #gridContainer clearfix #maincontainer #a_MOBILE_BUG_REPORT table{display:block; 	border-collapse:separate;	border-spacing:5px; }
+#MobileInGamenews #gridContainer clearfix #maincontainer #a_MOBILE_BUG_REPORT table, td {  padding:3px;  font-family: Arial, Helvetica, sans-serif, 微軟正黑體, 新細明體; font-size:10px;}
+#MobileInGamenews #gridContainer clearfix #maincontainer #a_MOBILE_BUG_REPORT #QuestionRecord table{display:block; 	border-collapse:separate;	border-spacing:5px; }
+#MobileInGamenews #gridContainer clearfix #maincontainer #a_MOBILE_BUG_REPORT #QuestionRecord table, td {  padding:3px;  font-family: Arial, Helvetica, sans-serif, 微軟正黑體, 新細明體; vertical-align:middle;  font-size:10px;}
+
+.report_tdbg { background:#bbdeff; padding:5px;}
+
+
+
+@media only screen and (min-width: 481px) {
+.gridContainer{ width:100%; margin:auto;}
+
+.button_all{ font-size: 14px;}
+.btn_report{ font-size: 14px;}
+.text_form{  font-size: 16px;}
+
+
+.tit{font-size: 16px;}
+
+#MobileInGamenews #gridContainer clearfix #maincontainer #a_MOBILE_BUG_REPORT table, td { font-size:14px;}
+#MobileInGamenews #gridContainer clearfix #maincontainer #a_MOBILE_BUG_REPORT #QuestionRecord table, td { font-size:14px;}
+
+
+
+
+@media only screen and (min-width: 769px) {
+.gridContainer{ width:100%;  margin:0 auto;text-align:center;}
+
+.button_all{ font-size: 14px;}
+.btn_report{ font-size: 14px;}
+.text_form{  font-size: 16px;}
+
+.tit{font-size: 16px;}
+
+
+#MobileInGamenews #gridContainer clearfix #maincontainer #a_MOBILE_BUG_REPORT table, td { font-size:14px;}
+#MobileInGamenews #gridContainer clearfix #maincontainer #a_MOBILE_BUG_REPORT #QuestionRecord table, td { font-size:14px;}
+}
+
+@media screen and (max-width:630px){
+
+.button--styleA--flex .btn_bugreport { float: inherit; width:90%;}
+	
+}

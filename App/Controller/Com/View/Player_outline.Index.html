@@ -1,0 +1,128 @@
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_head.html'); ?>
+<body>
+<style>
+	.layui-laydate-content th {
+		font-weight: 400;color: white;!important;
+	}
+
+	.layui-form-label {
+		width: 120px
+	}
+.layui-table-cell{text-align:center}
+	tbody td {
+		text-align: left
+	}
+
+	.layui-tab {
+		margin-top: 0
+	}
+</style>
+<div class="templatemo-flex-row">
+	<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_nav.html'); ?>
+
+	<div class="templatemo-content col-1 light-gray-bg">
+		<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_top.html'); ?>
+		<div class="row content" style="padding:5px 0px 0px 0px;">
+
+			<section class="content">
+				<div class="box box-primary box-solid">
+					<div class="box-header with-border">
+						<h3 class="box-title text-muted"><span style=" color:White;">玩家激活<small
+										style="margin-left:8px; margin-right:8px;"><a
+											href="javascript:window.history.back()" target="_self"
+											onclick='javascript:window.history.back();'><i class="fa fa-arrow-left"></i> 返回</a></small></span>
+						</h3>
+						<div class="box-tools pull-right">
+							<button data-widget="collapse" class="btn btn-box-tool" type="button"><i
+										class="fa fa-minus"></i></button>
+						</div>
+					</div>
+
+					<div class="box-body">
+						<div class="form-group">
+							<label>离线天数</label>
+							<input type="text" class="form-control" id="txt_date" maxlength="17" value="7">
+						</div>
+						<div class="box-footer">
+							<button type="button" class="btn btn-primary" id="Button_OK">确定</button>
+						</div>
+
+						<div class="layui-clear" style="margin-top:10px"></div>
+						<div lay-filter="<?php echo $__PRE__ ?>table_name" id="<?php echo $__PRE__ ?>table_name"></div>
+					</div>
+			</section>
+		</div>
+	</div>
+</div>
+<script type="text/html" id="barDemo">
+	<a class="layui-btn layui-btn-xs" lay-event="addlost">上下分记录</a>
+</script>
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_footjs.html'); ?>
+<script src="/js/index.js?ver=<?php echo _CONF('app_v') ?>"></script>
+<script>
+    var <?php echo $__PRE__?>table_name = table.render({
+        elem: '#<?php echo $__PRE__?>table_name'
+        , url: '../../com/player_outline.aspx'
+        , page: true
+        , where: {action: 'data',day:$('#txt_date').val()}
+        , height: 'full-220'
+        , cols: [[
+            {field: 'Account', title: '玩家ID', width: 160}
+            , {field: 'realname', title: '真实姓名', width: 140}
+            , {field: 'regtime', title: '注册时间', width: 160}
+            , {field: 'offline_time', title: '离开时间', width: 160}
+            , {field: 'offline_day', title: '离开天数', width: 90}
+            , {field: 'total_win', title: '总赢分', width: 160}
+            , {field: 'agent_name', title: '上级管理', width: 120}
+            , {field: 'agent_balance', title: '上级负账', width: 140}
+            , {field: 'do', title: '操作', toolbar: '#barDemo', width:100}
+        ]]
+        , response: {
+            statusCode: "0000"
+        }
+        , parseData: function (res) {
+            return {
+                "code": res.resp_code,
+                "msg": res.msg,
+                "count": res.total,
+                "data": res.results
+            };
+        }
+    });
+
+    form.on('submit(<?php echo $__PRE__?>search_submit)', function (data) {
+
+        return false;
+    });
+    $('#Button_OK').click(function () {
+		<?php echo $__PRE__?>table_name.reload({where: {day:$('#txt_date').val()}});
+    })
+
+    form.render();
+    table.on('tool(<?php echo $__PRE__?>table_name)', function(obj){
+        var data = obj.data; //获得当前行数据
+        var layEvent = obj.event;
+        if(layEvent === 'addlost'){ //查看
+            var d = "onClick_setScore.aspx?sid=" + data.usrid;
+            browser.versions.mobile ? !browser.versions.ios && browser.versions.android ? window.open(d, "", "height=0,width=0,top=0,left=0,location=no,menubar=no,resizable=yes,scrollbars=yes,status=yes,titlebar=no,toolbar=no,directories=no") : art.dialog.open(d, {
+                title: data.Account + " 的进分记录",
+                width: 1024,
+                height: 800,
+                id:'setScore',
+                fixed: !0,
+                lock: !0,
+                drag: !0,
+
+            }) : art.dialog.open(d, {
+                title: data.Account + " 的进分记录",
+                width: 1024,
+                height: 800,
+                id:'setScore',
+                fixed: !0,
+                lock: !0,
+                drag: !0,
+            })
+        }
+    });
+
+</script>

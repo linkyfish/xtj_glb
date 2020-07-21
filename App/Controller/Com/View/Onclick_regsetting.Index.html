@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.01, user-scalable=no">
+    <title></title>
+    <link rel="stylesheet" href="/res/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/res/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/res/css/AdminLTE.css">
+    <link rel="stylesheet" href="/res/css/page.css">
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="table-responsive">
+
+                <table class="table table-bordered table-condensed">
+                    <tbody>
+                    <?php if ($isadmin!=1000 && $user['RoleID']!=11) { ?>
+                        <tr>
+                            <td class="text-right">是否开启注册送：</td>
+                            <td>
+                                <input type="checkbox" name="like" value="0" id="checkBox-Song"
+                                       title="选定表示开启此功能,玩家注册时将赠送设定的分数">
+                            </td>
+                        </tr>
+                    <?php } else { ?>
+                        <tr>
+                            <td class="text-right">是否开启注册送：</td>
+                            <td>
+                                <?php if ($agent['is_reg_give']) { ?>
+                                    <span class="badge bg-green text-bold">开启</span>
+                                <?php } else { ?>
+                                    关闭
+                                <?php } ?>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                    <tr>
+                        <td class="text-right">注册时的送分值：</td>
+                        <td>
+                            <span class="badge bg-gray text-bold" id="txt_SongNum"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-right">最多可设定个数：</td>
+                        <td>
+                            <span class="badge bg-green text-bold" id="txt_MaxTimes"></span><span class="loading"
+                                                                                                  style="display:none;"><img
+                                        alt="Loading..." src="/res/image/loading_1.gif" align="absmiddle"
+                                        style="margin-left:10px;"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-right">当前注册送个数：</td>
+                        <td>
+                            <span class="badge bg-red text-bold" id="txt_CurrTimes"></span><span class="loading"
+                                                                                                 style="display:none;"><img
+                                        alt="Loading..." src="/res/image/loading_1.gif" align="absmiddle"
+                                        style="margin-left:10px;"></span>
+                        </td>
+                    </tr>
+                    <?php if($agent['RoleID']!=9){ ?>
+                    <tr>
+                        <td class="text-right">已经分拨的个数：</td>
+                        <td>
+                            <span class="badge bg-light-blue text-bold"><?php echo $agent['reg_give_num']; ?></span><span
+                                    class="loading"
+                                    style="display:none;"><img
+                                        alt="Loading..." src="/res/image/loading_1.gif" align="absmiddle"
+                                        style="margin-left:10px;"></span>
+                        </td>
+                    </tr>
+                    <?php }else{ ?>
+                    <tr>
+                        <td class="text-right">已经送出的个数：</td>
+                        <td>
+                            <span class="badge bg-light-blue text-bold"><?php echo $agent['reg_give_num'] ?></span><span
+                                    class="loading"
+                                    style="display:none;"><img
+                                        alt="Loading..." src="/res/image/loading_1.gif" align="absmiddle"
+                                        style="margin-left:10px;"></span>
+                        </td>
+                    </tr>
+                    <?php } ?>
+
+                    <?php if ($isadmin!=1000 && $user['RoleID']!=11) { ?>
+                        <tr>
+                            <td class="text-right">设定注册送个数：</td>
+                            <td>
+                                <input type="text" class="form-control" id="txt_SongTimes" maxlength="7"
+                                       placeholder="如：100 或 -100,若不设定可不输入。">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="direct-chat-text bg-red msg" style="display:none;">
+                                </div>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-primary" id="Button_OK">确定</button>
+                                <button type="button" class="btn btn-default" id="Button_Ref">刷新</button>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
+
+<script src="/res/js/jquery-1.11.3.min.js" type="text/javascript"></script>
+<script src="/res/js/js-cn.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+    function doGetDefault() {
+        $("#txt_SongNum").text(_songNum), $("#txt_CurrTimes").text(_songTimes), $("#txt_MaxTimes").text(_maxTimes), $("#txt_OverTimes").text(_overTimes), "1" == _setSongFlag && $("input:checkbox").eq(0).prop("checked", "checked")
+    }
+
+    var _user = "<?php echo $agent['username']?>", _setSongFlag = "<?php echo $agent['is_reg_give']?>",
+        _songNum = "<?php echo calculate($agent['reg_mark'])?>", _songTimes = "<?php echo $agent['reg_set']?>",
+        _maxTimes = "<?php echo $parent['reg_set']?>", _overTimes = "<?php echo $agent['reg_give_num']?>";
+    $(function () {
+        doGetDefault(), $("#Button_Ref").click(function () {
+            window.location.reload(), $("#txt_SongTimes").val(""), $(".msg").hide(), $(".loading").show().fadeOut(3e3)
+        }), $("#Button_OK").click(function () {
+            if ($("#checkBox-Song").is(":checked")) {
+                if (_setSongFlag = "1", $.trim($("#txt_SongTimes").val()).length > 0 && !checkNum_ZFINT($("#txt_SongTimes").val())) return $(".msg").show().text("注册送个数格式有误,必须是整数."), !1
+            } else _setSongFlag = "0";
+            $.ajax({
+                url: "../ashx/account/account.ashx",
+                type: "post",
+                dataType: "json",
+                data: {
+                    action: "OnSettingRegSong",
+                    user: _user,
+                    setSongFlag: _setSongFlag,
+                    songTimes: $("#txt_SongTimes").val(),
+                    CurDateTime: rand()
+                },
+                success: function (a) {
+                    a.success ? $(".msg").removeClass('bg-red').addClass('bg-green').show().text("操作成功.") : $(".msg").removeClass('bg-green').addClass('bg-red').show().text(a.msg)
+                },
+                beforeSend: function () {
+                    $("#Button_OK").attr("disabled", "disabled").text("正在提交")
+                },
+                complete: function () {
+                    $("#Button_OK").removeAttr("disabled").text("确定")
+                }
+            })
+        })
+    });
+
+</script>

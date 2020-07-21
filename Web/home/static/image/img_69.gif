@@ -1,0 +1,79 @@
+
+<script language="JavaScript" ></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-1933265-37"></script>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag() { dataLayer.push(arguments); }
+	gtag('js', new Date());
+
+	gtag('set', { 'user_id': 'null' });
+	gtag('set', { 'dimension1': 'null' });
+
+	gtag('config', 'UA-1933265-37', { 'linker': { 'domains': ['http://www.gametower.com.tw', 'https://member.gametower.com.tw'] } });
+</script>
+<script language="JavaScript" src="/include/General.js"></script>
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>gametower遊戲官方網站 - 錯誤說明 / 網頁不存在</title>
+		<style type="text/css">
+	<!--
+		.small		{ font-size:12px; line-height:20px; text-decoration:none; }
+		.small-en	{ font-size:9pt; line-height:15pt; font-family:"Arial"; text-decoration: none }
+		.small-v	{ font-size:9pt; line-height:16px; font-family:"verdana"; text-decoration: none }
+		A:hover 	{ color:"#FF4F00"; text-decoration: underline }
+		a { font-family: "新細明體", "細明體";	text-decoration: none;	}
+		.type-10pt {	font-family: "新細明體", "細明體";  font-size: 10pt;	color: #474747}
+		.input-button {
+	    cursor:hand; 
+	background:none; 
+	border-style:solid; 
+	border-width:0pt;
+	padding:0;
+}
+.step_text_01{
+	font-size: 13px;
+	line-height: 30px;
+	font-weight: bold;
+	color: #000000;
+}
+.png {tmp:expression(setPng(this));}
+	-->
+	</style>
+
+	<style type="text/css" id="defaultPopStyle">
+	<!--
+	.cPopText	{ background-color: #EFFFEF; color:#6F8F6F; border: 1px solid; font-color: #000000; font-size: 12px; padding-right: 6px; padding-left: 6px; height: 20px; padding-top: 4px; padding-bottom: 2px; filter: Alpha(Opacity=0) }
+	-->
+	</style>
+
+	<link href="/include/i_style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body text="#000000" bgcolor="#F7F3F7" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td>
+			<table width="768" height="300" border="0" cellpadding="0" cellspacing="0" background="/images/page/bg.gif">
+				<tr>
+					<td height="350" align="center"><table width="673"  border="0" cellpadding="0" cellspacing="0">
+                    	<tr>
+                    		<td><img src="/images/WebMessage/Error404_02.gif" width="415" height="120"><img src="/images/WebMessage/Error404_01.gif" width="258" height="150"></td>
+                    		</tr>
+                    	<tr>
+                    		<td><a href="javascript:history.back()"><img src="/images/WebMessage/Error404_04.gif" width="415" height="127" border="0"></a><img src="/images/WebMessage/Error404_03.gif" width="258" height="127"></td>
+                    		</tr>
+                    	</table>
+					<p>&nbsp;</p></td>
+				</tr>
+			</table>
+		</td>
+	    <td>&nbsp;</td>
+	</tr>
+</table>
+
+</body>
+</html>

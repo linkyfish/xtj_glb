@@ -1,0 +1,391 @@
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_head.html'); ?>
+    <body>
+<div class="templatemo-flex-row">
+    <?php include _include(__APPDIR__ . 'Controller/Com/View/Public_nav.html'); ?>
+
+    <div class="templatemo-content col-1 light-gray-bg">
+        <?php include _include(__APPDIR__ . 'Controller/Com/View/Public_top.html'); ?>
+        <div class="row content" style="padding:5px 0px 0px 0px;">
+            <section class="content-header sectionHeader">
+                <h1 class="hidden-xs">
+                    上下分明细查询
+                    <small style="margin-left:8px; margin-right:8px;"><a href="userList.aspx?sid=<?=$agent['username']?>"
+                                                                         target="_self"
+                                                                         onclick='userList.aspx?sid=<?=$agent['username']?>;'><i
+                                    class="fa fa-arrow-left"></i> 返回</a></small>
+                </h1>
+                <ol class="breadcrumb hidden-md hidden-lg hidden-sm">
+                    <li>上下分明细查询&nbsp;&nbsp;&nbsp;<a href="userList.aspx?sid=<?=$agent['username']?>" target="_self"
+                                                    onclick='userList.aspx?sid=<?=$agent['username']?>;'><i
+                                    class="fa fa-arrow-left"></i> 返回</a></li>
+                </ol>
+            </section>
+            <section class="content">
+                <div class="box box-primary box-solid">
+                    <div class="box-header with-border">
+                        <h3 class="box-title text-bold text-muted" id="d_tip_2"><span style="color:White;">子帐号查询</span>
+                        </h3><i class="fa fa-angle-double-right"></i>
+                    </div>
+
+                    <div class="box-body">
+
+                        <div class="form-group">
+                            <label>开始日期</label>
+                            <input type="text" class="form-control" id="txt_StartDateTime" maxlength="10"
+                                   onClick="WdatePicker();">
+                        </div>
+
+                        <div class="form-group">
+                            <label>结束日期</label>
+                            <input type="text" class="form-control" id="txt_EndDateTime" maxlength="10"
+                                   onClick="WdatePicker();">
+                        </div>
+
+                    </div>
+
+                    <div class="box-footer">
+                        <button type="button" class="btn btn-primary" id="Button_OK">确定</button>
+                    </div>
+
+                    <div class="box-body" id="q1" style=" display:none;">
+                        <div class="table-responsive">
+
+                            <table class="table table-striped table-bordered">
+                                <tbody>
+                                <tr>
+                                    <td nowrap='nowrap' class="text-left">充值订单：<span class="badge bg-aqua v_1"></span>
+                                    </td>
+                                    <td nowrap='nowrap' class="text-left">兑换总额：<span class="badge bg-aqua v_2"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td nowrap='nowrap' class="text-left">人工充值：<span class="badge bg-aqua v_3"></span>
+                                    </td>
+                                    <td nowrap='nowrap' class="text-left">商城充值：<span class="badge bg-aqua v_4"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td nowrap='nowrap' title="子账户总减分" class="text-left">人工减分：<span class="badge bg-aqua v_9"></span>
+                                    </td>
+                                    <td nowrap='nowrap' title="下分" class="text-left">人工提线：<span class="badge bg-aqua v_10"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td nowrap='nowrap' class="text-left">注册送：<span class="badge bg-blue v_5"></span>
+                                    </td>
+                                    <td nowrap='nowrap' class="text-left">活动送：<span class="badge bg-blue v_6"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td nowrap='nowrap' class="text-left">申请送：<span class="badge bg-gray v_7"></span>
+                                    </td>
+                                    <td nowrap='nowrap' class="text-left">系统送：<span class="badge bg-gray v_8"></span>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="box box-primary box-solid" id="tb_list" style="display:none;">
+                    <div class="box-header with-border">
+                        <h3 class="box-title text-bold">
+                            <span style=" color:White;">数据列表</span>
+                            <span class="badge bg-aqua" id="td_TotalInNum" title="所有上分金额+所有送"></span>
+                            <span class="badge bg-aqua" id="td_TotalOutNum" title="所有下分金额"></span>
+                            <span class="badge bg-aqua" id="td_TotalInOut" title="充值总累计 - 兑换总额"></span>
+							<span class="badge bg-aqua" id="td_TotalOutAgent" title="结算大款"></span>
+
+						</h3>
+                        <div class="box-tools pull-right">
+                            <button data-widget="collapse" class="btn btn-box-tool" type="button"><i
+                                        class="fa fa-minus"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body" style="display: block; padding:0px;">
+                        <div class="table-responsive">
+
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                <tr>
+                                    <th nowrap='nowrap'>序号</th>
+                                    <th nowrap='nowrap'>帐号</th>
+                                    <th nowrap='nowrap'>备注</th>
+                                    <th nowrap='nowrap'>商城充值</th>
+                                    <th nowrap='nowrap'>手工充值</th>
+                                    <th nowrap='nowrap'>结算大款</th>
+                                    <th nowrap='nowrap'>取消订单</th>
+                                    <th nowrap='nowrap'>人工减分</th>
+                                    <th nowrap='nowrap'>人工提线</th>
+                                    <th nowrap='nowrap'>小计</th>
+                                    <th nowrap='nowrap'>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tblData"></tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <script src="/res/js/WdatePicker.js" type="text/javascript"></script>
+            <script src="/res/js/laypage.js" type="text/javascript"></script>
+            <script src="/res/js/xdate.js" type="text/javascript"></script>
+            <script type="text/javascript">
+
+                var pagei, _sDate, _eDate, v1 = 0, v2 = 0, v3 = 0, v4 = 0, v5 = 0, v6 = 0, v7 = 0, v8 = 0, v9 = 0,
+                    v10 = 0, v11 = 0, v12 = 0, v13 = 0, _totalIn = 0, _totalOut = 0;
+                $(function () {
+                    $("#txt_StartDateTime").attr("value", getFirstDay()), $("#txt_EndDateTime").attr("value", getLastDay()), $("#Button_OK").click(function () {
+                        var a, b;
+                        return v1 = 0, v2 = 0, v3 = 0, v4 = 0, v5 = 0, v6 = 0, v7 = 0, v8 = 0, v9 = 0, v10 = 0, v11 = 0, v12 = 0, v13 = 0, _totalIn = 0, _totalOut = 0, $.trim($("#txt_StartDateTime").val()).length <= 0 || $.trim($("#txt_EndDateTime").val()).length <= 0 ? (web_tips("日期不能为空."), !1) : (a = $("#txt_StartDateTime").val(), b = $("#txt_EndDateTime").val(), _sDate = a, _eDate = b, $.ajax({
+                            url: "../ashx/report/report.ashx",
+                            type: "post",
+                            dataType: "json",
+                            data: {
+                                action: "report_setscoreIndex",
+                                sDate: _sDate,
+                                eDate: _eDate,
+                                user: "<?php echo  $agent['username']?>",
+                                CurDateTime: rand()
+                            },
+                            success: function (a) {
+                                var b, c;
+                                a.success ? ($("#q1,#tb_list").fadeOut("slow"), a.results.length > 0 ? ($("#tb_list tr:gt(0)").remove(), b = "", $.each(a.results, function (c) {
+                                    var e, f, g;
+
+                                    v1 += Number(a.results[c].sgcz),
+                                        v2 += Number(a.results[c].sccz),
+                                        v3 += Number(a.results[c].rgdh),
+                                        v4 += Number(a.results[c].sgdh),
+                                        v5 += Number(a.results[c].total_reg),
+                                        v6 += Number(a.results[c].total_active),
+                                        v7 += Number(a.results[c].total_apply),
+                                        v8 += Number(a.results[c].total_plat),
+                                        v9 += Number(a.results[c].total_agent),
+                                        e = 0,
+                                        e = Number(a.results[c].sgcz) + Number(a.results[c].sccz),
+                                        f = 0,
+                                        f = Number(a.results[c].rgdh) +  Number(a.results[c].sgdh),
+                                        g = 0,
+                                        g = Number(e) - Number(f) + Number(a.results[c].total_reg) + Number(a.results[c].total_active) + Number(a.results[c].total_apply) + Number(a.results[c].total_plat),
+                                        b += '<tr class="tr_h">',
+                                        b += "<td nowrap='nowrap'>",
+                                        b += c + 1,
+                                        b += "</td>",
+                                        b += "<td nowrap='nowrap'>",
+                                        b += a.results[c].Account,
+                                        b += "</td>",
+                                        b += "<td nowrap='nowrap'>",
+                                        b += a.results[c].Redme,
+                                        b += "</td>",
+                                        b += "<td nowrap='nowrap'>",
+                                        b += parseFloat(a.results[c].sccz).toFixed(2),
+                                        b += "</td>",
+                                        b += "<td nowrap='nowrap'>",
+                                        b += parseFloat(a.results[c].sgcz).toFixed(2),
+                                        b += "</td>",
+                                         b += "<td nowrap='nowrap'>",
+                                        b += parseFloat(a.results[c].total_agent).toFixed(2),
+                                        b += "</td>",
+                                        b += "<td nowrap='nowrap'>",
+                                        b +=0,
+                                        b += "</td>",
+                                        b += "<td nowrap='nowrap'>",
+                                        b += a.results[c].rgdh,
+                                        b += "</td>",
+                                        b += "<td nowrap='nowrap'>",
+                                        b += a.results[c].sgdh,
+                                        b += "</td>",
+                                        b += "<td nowrap='nowrap'>",
+                                        b += parseFloat(g).toFixed(2),
+                                        b += "</td>",
+                                        b += "<td nowrap='nowrap'>";
+										if(a.results[c].Account!='商城上分'){
+                                        b += '<a href="report_ShowSetScoreDetailSubUser.aspx?sid=' + a.results[c].Account + '" target="_blank" title="' + a.results[c].Account + '">',
+                                        b += "点击查询明细"
+                                        b += "</a>";
+                                        }else{
+                                            b += '<a href="admin_Payment_OrderList.aspx" target="_blank" title="' + a.results[c].Account + '">',
+                                                b += "点击查询明细"
+                                            b += "</a>";
+										}
+                                        b += "</td>",
+                                        b += "</tr>"
+                                }), $("#tblData").append(b),
+
+                                    _totalIn = Number(v1) + Number(v2)  + Number(v5) + Number(v6) + Number(v7) + Number(v8),
+                                    _totalOut = Number(v3) + Number(v4) ,
+                                    c = Number(_totalIn) - Number(_totalOut),
+                                    $("#td_TotalInNum").text("充值总累计：" + parseFloat(_totalIn).toFixed(2)),
+                                    $("#td_TotalOutAgent").text("结算大款：" + parseFloat(v9).toFixed(2)),
+                                    $("#td_TotalOutNum").text("兑换总额：" + parseFloat(_totalOut).toFixed(2)),
+                                    $("#td_TotalInOut").text("总计：" + parseFloat(c).toFixed(2)),
+                                    $(".v_1").text(parseFloat(Number(v1 + v2)).toFixed(2)),
+                                    $(".v_2").text(parseFloat(Number(v3 + v4)).toFixed(2)),
+                                    $(".v_3").text(parseFloat(v1).toFixed(2)),
+                                    $(".v_4").text(parseFloat(v2).toFixed(2)),
+                                    $(".v_5").text(parseFloat(v5).toFixed(2)),
+                                    $(".v_6").text(parseFloat(v6).toFixed(2)),
+                                    $(".v_9").text(parseFloat(v3).toFixed(2)),
+                                    $(".v_10").text(parseFloat(v4).toFixed(2)),
+                                    $(".v_7").text(parseFloat(v7).toFixed(2)),
+                                    $(".v_8").text(parseFloat(v8).toFixed(2)),
+                                    $("#tb_list,#q1").fadeIn("slow"), layer.close(pagei)) : (layer.close(pagei), $("#q1,#tb_list").hide(), web_tips(a.msg =='操作成功'?"暂无记录":a.msg))) : (layer.close(pagei), global_Error500 == a.ERROR_TYPE && (parent.location.href = global_e_p_500), global_NoLicense != a.msg ? (web_tips(a.msg =='操作成功'?"暂无记录":a.msg), $("#q1,#tb_list").fadeOut(1000)) : parent.location.href = global_jump_login)
+                            },
+                            beforeSend: function () {
+                                $("#Button_OK").attr("disabled", "disabled").text("正在查询"), pagei = layer.msg('请稍候..', {icon: 16,shade: 0.01})
+                            },
+                            complete: function () {
+                                $("#Button_OK").removeAttr("disabled").text("确定")
+                            }
+                        }), void 0)
+                    })
+                });
+
+
+//
+//                 var pagei, _sDate, _eDate, v1 = 0, v2 = 0, v3 = 0, v4 = 0, v5 = 0, v6 = 0, v7 = 0, v8 = 0, v9 = 0,
+//                     v10 = 0, v11 = 0, v12 = 0, v13 = 0, _totalIn = 0, _totalOut = 0;
+//                 $(function () {
+//                     $("#txt_StartDateTime").attr("value", getFirstDay()), $("#txt_EndDateTime").attr("value", getLastDay()), $("#Button_OK").click(function () {
+//                         var a, b;
+//                         return v1 = 0,
+// v2 = 0,
+// v3 = 0,
+// v4 = 0,
+// v5 = 0,
+// v6 = 0,
+// v7 = 0,
+// v8 = 0,
+// v9 = 0,
+// v10 = 0,
+// v11 = 0,
+// v12 = 0,
+// v13 = 0,
+// _totalIn = 0,
+// _totalOut = 0,
+// $.trim($("#txt_StartDateTime").val()).length <= 0 || $.trim($("#txt_EndDateTime").val()).length <= 0 ? (web_tips("日期不能为空."),
+// !1) : (a = $("#txt_StartDateTime").val(),
+// b = $("#txt_EndDateTime").val(),
+// _sDate = a,
+// _eDate = b,
+// $.ajax({
+//                             url: "../ashx/report/report.ashx",
+//                             type: "post",
+//                             dataType: "json",
+//                             data: {action: "report_setscoreIndex",
+// sDate: _sDate,
+// eDate: _eDate,
+// CurDateTime: rand()},
+//                             success: function (a) {
+//                                 var b,
+// c;
+//                                 a.success ? ($("#q1,#tb_list").fadeOut("slow"),
+// a.results.length > 0 ? ($("#tb_list tr:gt(0)").remove(),
+// b = "",
+// $.each(a.results,
+// function (c) {
+//                                     var f,
+// e = a.results[c].SubUser;
+//                                     v1 += Number(a.results[c].TotalPay),
+// v2 += Number(a.results[c].TotalTransfer_Success),
+// v3 += Number(a.results[c].TotalAddMoney_SubUser),
+// v4 += Number(a.results[c].TotalTransfer_Cancel),
+// v9 += 0,
+// v10 += Number(a.results[c].Total_Cash_Rengong),
+// v11 += Number(a.results[c].TotalReduceMoney_SubUser),
+// v12 += Number(a.results[c].Total_Cash_Cancel),
+// v13 += Number(a.results[c].Total_Cash_Disable),
+// f = 0,
+// f = Number(a.results[c].TotalPay) + Number(a.results[c].TotalTransfer_Success) + Number(a.results[c].TotalAddMoney_SubUser) + Number(a.results[c].TotalTransfer_Cancel) - -1 * Number(a.results[c].Total_Cash_Rengong) - -1 * Number(a.results[c].TotalReduceMoney_SubUser) - Number(a.results[c].Total_Cash_Cancel) - Number(a.results[c].Total_Cash_Disable),
+// b += '<tr class="tr_h">',
+// b += "<td nowrap='nowrap'>",
+// b += c + 1,
+// b += "</td>",
+// b += "<td nowrap='nowrap'>",
+// b += e,
+// b += "</td>",
+// b += "<td nowrap='nowrap'>",
+// b += a.results[c].Redme,
+// b += "</td>",
+// b += "<td nowrap='nowrap'>",
+// b += parseFloat(a.results[c].TotalPay).toFixed(2),
+// b += "</td>",
+// b += "<td nowrap='nowrap'>",
+// b += parseFloat(a.results[c].TotalTransfer_Success).toFixed(2),
+// b += "</td>",
+// b += "<td nowrap='nowrap'>",
+// b += parseFloat(a.results[c].TotalAddMoney_SubUser).toFixed(2),
+// b += "</td>",
+// b += "<td nowrap='nowrap'>",
+// b += parseFloat(a.results[c].TotalTransfer_Cancel).toFixed(2),
+// b += "</td>",
+// b += "<td nowrap='nowrap'>",
+// b += "0.00",
+// b += "</td>",
+// b += "<td nowrap='nowrap'>",
+// b += parseFloat(a.results[c].Total_Cash_Rengong).toFixed(2),
+// b += "</td>",
+// /*b += "<td nowrap='nowrap'>",
+// b += parseFloat(-1 * Number(a.results[c].TotalReduceMoney_SubUser)).toFixed(2),
+// b += "</td>",*/ b += "<td nowrap='nowrap'>",
+// b += parseFloat(a.results[c].Total_Cash_Cancel).toFixed(2),
+// b += "</td>",
+// b += "<td nowrap='nowrap'>",
+// b += parseFloat(a.results[c].Total_Cash_Disable).toFixed(2),
+// b += "</td>",
+// b += "<td nowrap='nowrap'>",
+// b += parseFloat(f).toFixed(2),
+// b += "</td>",
+// b += "<td nowrap='nowrap'>",
+// b += '<a href="report_ShowSetScoreDetailSubUser.aspx?sid=' + e + '" target="_blank" title="' + e + '">',
+// b += "点击查询明细",
+// b += "</a>",
+// b += "</td>",
+// b += "</tr>"
+//                                 }),
+// $("#tblData").append(b),
+// v11 = -1 * Number(v11),
+// _totalIn = Number(v1) + Number(v2) + Number(v3),
+// _totalOut = Number(v10) + Number(v11) + Number(v12),
+// c = Number(_totalIn) - Number(_totalOut),
+// $("#td_TotalInNum").text("充值总累计：" + parseFloat(_totalIn).toFixed(2)),
+// $("#td_TotalOutNum").text("兑换总额：" + parseFloat(_totalOut).toFixed(2)),
+// $("#td_TotalInOut").text("总计：" + parseFloat(c).toFixed(2)),
+// $(".v_1").text(parseFloat(v1).toFixed(2)),
+// $(".v_2").text(parseFloat(v2).toFixed(2)),
+// $(".v_3").text(parseFloat(v3).toFixed(2)),
+// $(".v_4").text(parseFloat(v4).toFixed(2)),
+// $(".v_9").text(parseFloat(v9).toFixed(2)),
+// $(".v_10").text(parseFloat(v10).toFixed(2)),
+// $(".v_11").text(parseFloat(v11).toFixed(2)),
+// $(".v_12").text(parseFloat(v12).toFixed(2)),
+// $(".v_13").text(parseFloat(v13).toFixed(2)),
+// $("#tb_list,#q1").fadeIn("slow"),
+// layer.close(pagei)) : (layer.close(pagei),
+// $("#q1,#tb_list").hide(),
+// web_tips("暂无记录."))) : (layer.close(pagei),
+// global_Error500 == a.ERROR_TYPE && (parent.location.href = global_e_p_500),
+// global_NoLicense != a.msg ? (web_tips("暂无记录."),
+// $("#q1,#tb_list").fadeOut(1e3)) : parent.location.href = global_jump_login)
+//                             },
+//                             beforeSend: function () {
+//                                 $("#Button_OK").attr("disabled",
+// "disabled").text("正在查询"),
+// pagei = layer.msg('请稍候..', {icon: 16,shade: 0.01})
+//                             },
+//                             complete: function () {
+//                                 $("#Button_OK").removeAttr("disabled").text("确定")
+//                             }
+//                         }), void 0)
+//                     })
+//                 });
+            </script>
+
+        </div>
+    </div>
+</div>
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_footjs.html'); ?>

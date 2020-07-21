@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>自助服务</title>
+    <link href="/res/css/bootstrap.min.css?ver=<?php echo _CONF('app_v')?>" rel="stylesheet">
+    <link href="/res/css/AdminLTE.min.css?ver=<?php echo _CONF('app_v')?>" rel="stylesheet">
+    <link href="/res/css/sweetalert.css?ver=<?php echo _CONF('app_v')?>" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js?ver=<?php echo _CONF('app_v')?>"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js?ver=<?php echo _CONF('app_v')?>"></script>
+    <![endif]-->
+    <style type="text/css">
+        * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -ms-box-sizing: border-box;
+            -o-box-sizing: border-box;
+            box-sizing: border-box
+        }
+
+        html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden
+        }
+
+        body {
+            width: 100%;
+            height: 100%;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .form2 {
+            display: none
+        }
+    </style>
+</head>
+<body>
+<body class="hold-transition register-page">
+<div class="register-box" style="width:400px;max-width:98%;background-color:#00c0ef">
+    <div class="register-logo" style="padding-top:15px;margin-bottom:15px">
+       自助提现
+    </div>
+    <input type="password" style="display:none"/>
+    <div class="register-box-body">
+        <!--p class="login-box-msg">如有疑问请<a href="<?php echo _CONF('CashKf365Url')?>">联系客服</a></p!-->
+        <div id="checkok">
+            <div class="form-group has-feedback form2">
+                <label>账户余额:</label>
+                <input autoComplete="off" id="hsmoney" readonly type="text" class="form-control" placeholder="账户余额">
+                <span class="glyphicon glyphicon-usd form-control-feedback"></span>
+            </div>
+
+            <div class="form-group has-feedback form2">
+                <label>提现金额:&nbsp;<span style="color: green;font-size: small">提现手续费3%</span> </label>
+                <input autoComplete="new-password" id="money" name="money" type="text" class="form-control"
+                       placeholder="提现金额 需大于100且为50的倍数">
+                <span class="glyphicon glyphicon-usd form-control-feedback"></span>
+            </div>
+
+
+            <div class="form-group has-feedback form2">
+                <label>持卡人:</label>
+                <input id="bankName" name="bankName"  autoComplete="new-password" type="text" class="form-control"
+                       placeholder="请输入持卡人">
+                <span class="glyphicon glyphicon-leaf form-control-feedback"></span>
+            </div>
+
+            <div class="form-group has-feedback form2">
+                <label>开户银行名称:</label>
+                <input id="bankSon" name="bankSon"  type="text" class="form-control"
+                       placeholder="请输入开户银行">
+                <span class="glyphicon glyphicon-map-marker form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback form2">
+                <label>开户行信息:</label>
+                <input id="bankAddress" name="bankAddress"  type="text" class="form-control"
+                       placeholder="请输入开户银行的 省、市、县(区)">
+                <span class="glyphicon glyphicon-map-marker form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback form2">
+                <label>银行卡号:</label>
+                <input id="bankno"
+                       onkeyup="this.value=this.value.replace(/\D/g,'').replace(/....(?!$)/g,'$& ')"
+                       onafterpaste="this.value=this.value.replace(/\D/g,'')" type="text"
+                       name="bankno" autoComplete="new-password" type="text" class="form-control"
+                       placeholder="请输入你的银行卡号">
+                <span class="glyphicon glyphicon-credit-card form-control-feedback"></span>
+            </div>
+
+            <div class="row form2">
+                <div class="col-xs-8"></div>
+                <div class="col-xs-4">
+                    <button id="checkcash" type="button" class="btn btn-primary btn-block btn-flat">申请提现</button>
+                </div>
+            </div>
+        </div>
+         <div id="check">
+            <div class="form-group has-feedback form1">
+                <label>游戏账户:</label>
+                <input autoComplete="off" id="account" name="account" type="text" class="form-control"
+                       placeholder="游戏账户">
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            </div>
+
+            <div class="form-group has-feedback form1">
+                <label>提现安全码:</label>
+                <input autoComplete="new-password" id="safecode" name="safecode" type="password" class="form-control"
+                       placeholder="提现安全码">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+
+            <div class="row form1">
+                <div class="col-xs-8"></div>
+                <div class="col-xs-4">
+                    <button id="checkbtn" type="button" class="btn btn-primary btn-block btn-flat">确认</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.form-box -->
+    <div class="box box-solid">
+        <div class="box-header with-border">
+            <i class="fa fa-text-width"></i>
+            <h3 class="box-title">温馨提示</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <dl>
+                <dt style="color: green; font-weight: bold ">>提示:提现手续费为金额的 <span style="color: red">3%</span></dt>
+                <dt>1、第一次提现,请先到游戏大厅点击【信息】,完善个人【姓名】和【银行密码】</dt>
+                <dd>&nbsp;</dd>
+                <dt>2、小型银行或区域银行,需要提供开户行,如:北京银行、虹口支行、深圳农村商业银行龙城和兴支行</dt>
+                <dd>&nbsp;</dd>
+                <dt>3、提交后,大型银行大致15分钟到账,若未到账请联系客服</dt>
+                <dd>&nbsp;</dd>
+                <dt>4、提交后,小型银行或区域银行大致24小时到账,若未到账请联系客服</dt>
+                <dd>&nbsp;</dd>
+                <dt>5、如果游戏账号存在问题,或其它异常问题,游戏币将会在24小时内原路返回申请的游戏账号</dt>
+
+                <dd></dd>
+            </dl>
+        </div>
+        <!-- /.box-body -->
+    </div>
+</div>
+<!-- /.register-box -->
+</body>
+</html>
+<script type="text/javascript" src="/res/js/jquery-1.11.3.min.js?ver=<?php echo _CONF('app_v')?>"></script>
+<script type="text/javascript" src="/res/js/sweetalert.min.js?ver=<?php echo _CONF('app_v')?>"></script>
+<script type="text/javascript">
+    var chips = 0;
+    var account, safecode;
+    $('#checkbtn').click(function () {
+        account = $('#account').val();
+        safecode = $('#safecode').val();
+        $.post('../../', {account: account, safecode: safecode}, function (e) {
+            if (e.resp_code == '0000') {
+                swal('账户余额：' + e.chips, "", "success");
+                chips = e.chips;
+                chips = e.chips;
+                $('#hsmoney').val(e.chips);
+                if(e.bankUser){
+                    $('#bankName').val(e.bankUser).attr('readonly','readonly');
+                    $('#bankno').val(e.bankcard);
+                    $('#bankSon').val(e.bankSon);
+                    $('#bankAddress').val(e.bankAddress);
+                }
+                $('.form2').show();
+                $('.form1').hide();
+            } else {
+                swal(e.msg, "", "info")
+            }
+        })
+    })
+	var iscache = false;
+    $('#checkcash').click(function () {
+        /*
+        if(iscache==true){
+            swal('正在提交请稍候！！', "", "info")
+            return false;
+		}
+        iscache=true;
+        */
+
+        var money = $("#money").val();
+        var bankName = $("#bankName").val();
+        var bankSon = $("#bankSon").val();
+        var bankno = $("#bankno").val();
+        var bankAddress = $("#bankAddress").val();
+        if (Number(money) < 100 || Number(money) % 50 > 0) {
+            swal('提现的金额小于100或不是50的倍数！', "", "info")
+            return false;
+        }
+        if (Number(money) > Number(chips)) {
+            swal('余额不足！', "", "info")
+            return false;
+        }
+        $(this).hide();
+        swal('正在提交请稍候！！', "", "info")
+        $.post('../../', {
+            action: "confirm",
+            account: account,
+            safecode: safecode,
+            money: money,
+            bankNo: bankno.replace(/\s/g, ""),
+            bankName: bankName,
+            bankAddress: bankAddress,
+            bankSon: bankSon
+        }, function (r) {
+            if (r.resp_code == '0000') {
+                money = parseInt(chips) - parseInt(money);
+                $("#hsmoney").val(money);
+                swal('提现发起成功.', "", "success");
+				setTimeout(function () {
+                    window.location.reload();
+                },1500)
+
+            } else {
+                iscache=false;
+                $('#checkcash').show();
+                swal(r.msg, "", "error");
+            }
+        });
+    })
+</script>
+

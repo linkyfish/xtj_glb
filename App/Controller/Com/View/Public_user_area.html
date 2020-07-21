@@ -1,0 +1,31 @@
+<div class="layui-row layui-col-space10">
+	<div class="layui-col-xs12 layui-col-sm6 layui-col-md6">
+		<div class="layui-card">
+			<div class="layui-card-header">在线玩家区域分布</div>
+			<div class="layui-card-body layui-text">
+				<div id="<?php echo $__PRE__?>ol_area" style="height:450px;width:100%"></div>
+			</div>
+		</div>
+	</div>
+	<div class="layui-col-xs12 layui-col-sm6 layui-col-md6">
+		<div class="layui-card">
+			<div class="layui-card-header">在线玩家游戏分布</div>
+			<div class="layui-card-body layui-text">
+				<div id="<?php echo $__PRE__?>ol_game" style="height:450px;width:100%"></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="layui-row layui-col-space10">
+		<div class="layui-col-xs12 layui-col-sm12 layui-col-md12">
+			<div class="layui-card">
+				<div class="layui-card-header">在线时段</div>
+				<div class="layui-card-body layui-text" style="padding:5px 0;overflow-x:auto">
+					<table id="<?php echo $__PRE__?>table_stat_time" lay-filter="<?php echo $__PRE__?>table_stat_time" ></table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+

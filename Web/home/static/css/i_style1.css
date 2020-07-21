@@ -1,0 +1,214 @@
+@import url("i_reset1.css");
+@import url("i_GTrank1.css");
+@import url("i_button_style.css"); 
+@import url("i_Bank_style1.css");
+
+
+.guidebar {
+	font-family: "新細明體", "細明體";
+	font-size: 13px;
+	color: #474747;
+	text-decoration: none;
+}
+table {
+	font-family: "新細明體", "細明體";
+	font-size: 13px;
+	line-height: 19px;
+	color: #333333;
+	letter-spacing: 1px;
+	font-weight:normal;
+}
+.tablebigtitle {
+	font-family: "新細明體", "細明體";
+	font-size: 16px;
+	font-weight: bold;
+	color: #8D2323;
+	letter-spacing: 2pt;
+}
+
+.avatarimg {
+	border: 1px solid #999999;
+}
+a {
+	text-decoration: none;
+	color: #666666;
+}
+.menutype {
+	font-family: "新細明體", "細明體";
+	font-size: 13px;
+	color: #666666;
+}
+.textareaborder {
+	border: 1px solid #808080;
+	height: 14pt;
+	color: #333333;
+
+}
+.type9pt {
+	font-family: "新細明體", "細明體";
+	font-size: 12px;
+}
+.tablebg {
+	background-color: #FFFFFF;
+}
+.tableoverbg {
+	background-color: #F6F6F6;
+}
+.Value_o {
+	color: #ff902e;
+	font-size: 12px;
+}
+.Value_green2 {
+	font-size: 12px;
+	color: 3C6500;
+}
+.Value_table {
+	background-image: url(../image/img_69.jpg);
+	font-size: 12px;
+	color: #3C6500;
+}
+
+
+
+a:hover {
+	color: #990000;
+	text-decoration: underline;
+}
+.point {
+	color: #CC3333;
+}
+
+.ContainLink {
+	color: #ED560E;
+	list-style-type: square;
+	font-size: 13px;
+}
+.Value_green {
+	font-size: 12px;
+	color: 5D7F14;
+}
+
+.type12pt {
+	font-family: "新細明體", "細明體";
+	font-size: 16px;
+}
+.type15px {
+	font-family: "新細明體", "細明體";
+	font-size: 15px;
+}
+.type1px {
+	font-family: "新細明體", "細明體";
+	font-size: 1px;
+	line-height: 0px;
+}
+.slogan_Main {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	line-height: normal;
+	font-weight: bold;
+	color: #0099CC;
+	text-decoration: none;
+}
+.slogan_Sub {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	line-height: 18px;
+	font-weight: bold;
+	color: #684624;
+	text-decoration: none;
+}
+.slogan_content {
+
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	line-height: 18px;
+	font-weight: normal;
+	color: #848457;
+	text-decoration: none;
+	}
+
+.outline {
+	border: 1px solid #999999;
+}
+a.btnmove {}
+a.btnmove:hover {
+	position:relative;
+	top:1px;
+	left:1px;}
+	
+.ContainLink_pure {
+
+	color: #669900;
+	list-style-type: square;
+	font-size: 13px;
+}
+.smallfont {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	font-weight: normal;
+	color: #333333;
+	line-height: 15px;
+}
+
+a.smallfont {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	font-weight: normal;
+	color: #0066CC;
+	line-height: 15px;
+}
+.type13px {
+
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 13px;
+}
+
+.card_9pt {
+	font-size: 9pt;
+	color: #CC0000;
+	letter-spacing: normal;
+}
+
+
+a.add {
+color:#4E7CA7;
+text-decoration:none;}
+a.add:hover {
+color:#cc3300;
+text-decoration:none;}
+
+img{border:0;}
+
+.png  {tmp:expression(setPng(this));}
+
+
+.member_font_gray{
+font-size:13px;
+line-height:22px;
+color:#464646;
+letter-spacing:normal;
+		}
+.member_font_red{
+font-size:13px; line-height:22px; color: #CC0000; letter-spacing:normal;
+		}
+.member_font_blue{
+font-size:13px;
+line-height:22px;
+color: #0033CC;
+letter-spacing:normal;
+		}
+.member_font_white{
+font-size:12px;
+line-height:25px;
+color: #FFFFFF;
+letter-spacing:normal;
+		}
+.btn_img{filter: gray;}
+
+.input-button {
+cursor:hand; 
+background:none; 
+border-style:solid; 
+border-width:0pt;
+margin:0; padding:0;
+			}

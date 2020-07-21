@@ -1,0 +1,48 @@
+<script type="text/html" id="<?php echo $__PRE__ ?>table_bar_history">
+	<div>
+		<input style="width:200px" type="text" class="layui-input" id="<?php echo $__PRE__?>_date_history_input" placeholder="选择查询时间">
+	</div>
+</script>
+
+<script>
+	var date_history;
+ var  <?php echo $__PRE__ ?>table_bar_history =  table.render({
+        elem: '#<?php echo $__PRE__?>table_history'
+        , url: '../../com/stat/history.aspx'
+        , toolbar: '#<?php echo $__PRE__?>table_bar_history' //开启头部工具栏，并为其绑定左侧模板
+        , defaultToolbar: ['exports']
+        , cols: [[ //标题栏
+            {align: 'center',field: 'ymd', title: '日 期', width: 120, rowspan: 2}
+            , {align: 'center', title: '第一天', colspan: 3}
+            , {align: 'center', title: '第二天', colspan: 3}
+            , {align: 'center', title: '第三天', colspan: 3}
+            , {align: 'center',field: 'pay_on_3', title: '第四天',width: 80, rowspan: 2}
+            , {align: 'center',field: 'pay_on_4', title: '第五天',width: 80, rowspan: 2}
+            , {align: 'center',field: 'pay_on_5', title: '第六天',width: 80, rowspan: 2}
+            , {align: 'center',field: 'pay_on_6', title: '第七天',width: 80, rowspan: 2}
+        ], [
+           	{align: 'center',field: 'num', title: '注册', width: 60}, {align: 'center',field: 'pay_num', title: '首冲', width: 60}, {align: 'center',field: 'pay_money', title: '分数', width: 100},
+			{align: 'center',field: 'pay_on_1', title: '上线', width: 60}, {align: 'pay_num_1',field: 'pay_num_1', title: '珫直', width: 60}, {align: 'center',field: 'pay_money_1', title: '分数', width: 100},
+			{align: 'center',field: 'pay_on_2', title: '上线', width: 60}, {align: 'pay_num_2',field: 'pay_num_2', title: '珫直', width: 60}, {align: 'center',field: 'pay_money_2', title: '分数', width: 100},
+        ]]
+        ,page:false
+        ,response: {statusCode: "0000"}
+        ,parseData: function(res){
+            return {
+                "code": res.resp_code,
+                "msg": res.msg,
+                "data": res.data
+            };
+        },done:function () {
+         laydate.render({
+             elem: '#<?php echo $__PRE__?>_date_history_input',value:date_history
+             ,done: function(value, date, endDate){
+                 date_history=new Date(value.replace(new RegExp("\-","g"),'/'));
+				 <?php echo $__PRE__ ?>table_bar_history.reload({
+                     where:{ymd:value}
+                 })
+             }
+         });
+     }
+    });
+</script>

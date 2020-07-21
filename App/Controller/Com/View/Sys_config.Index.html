@@ -1,0 +1,108 @@
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_head.html'); ?>
+<body>
+<style>
+    .layui-laydate-content th {
+        font-weight: 400;
+        color: white;
+    !important;
+    }
+
+    .layui-form-label {
+        width: 120px
+    }
+    tbody td{text-align:left}
+    .layui-tab{margin-top:0}
+</style>
+<div class="templatemo-flex-row">
+    <?php include _include(__APPDIR__ . 'Controller/Com/View/Public_nav.html'); ?>
+
+    <div class="templatemo-content col-1 light-gray-bg">
+        <?php include _include(__APPDIR__ . 'Controller/Com/View/Public_top.html'); ?>
+        <div class="row content" style="padding:5px 0px 0px 0px;">
+
+            <section class="content">
+                <div class="box box-primary box-solid">
+                    <div class="box-header with-border">
+                        <h3 class="box-title text-muted"><span style=" color:White;">系统变量<small
+                                        style="margin-left:8px; margin-right:8px;"><a
+                                            href="javascript:window.history.back()" target="_self"
+                                            onclick='javascript:window.history.back();'><i class="fa fa-arrow-left"></i> 返回</a></small></span>
+                        </h3>
+                        <div class="box-tools pull-right">
+                            <button data-widget="collapse" class="btn btn-box-tool" type="button"><i
+                                        class="fa fa-minus"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="box-body">
+
+                        <div class="layui-tab layui-tab-brief" lay-filter="<?php echo $__PRE__?>tab">
+                            <ul class="layui-tab-title">
+                                    <?php
+                                        foreach($types as $item)
+                                        {
+                                            echo '<li lay-id="'.$item['type'].'">'.$item['name'].'</li>';
+                                        }
+                                    ?>
+                            </ul>
+                            <div class="layui-tab-content" style="padding:5px 0" lay-filter="<?php echo $__PRE__?>table" id="<?php echo $__PRE__?>table">
+
+                            </div>
+                        </div>
+
+                    </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_footjs.html'); ?>
+<script src="/js/index.js?ver=<?php echo _CONF('app_v')?>"></script>
+<script>
+
+    element.on('tab(<?php echo $__PRE__?>tab)', function(data){
+        var id = $(this).attr('lay-id');
+        <?php echo $__PRE__?>table.reload({
+            where: {type:id}
+        });
+    });
+
+
+    var  <?php echo $__PRE__?>table = table.render({
+        elem: '#<?php echo $__PRE__?>table'
+        ,url:'../../com/sys_config.aspx'
+        ,page:false
+        ,where: {action: 'config'}
+        ,height: 'full-220'
+        ,cols: [[
+            {field:'name', title:'名称', width:280}
+            ,{field:'val', title:'内容', minWidth:300, edit: 'text'}
+            ,{field:'note', title:'简介', width:280}
+        ]]
+        ,response: {
+            statusCode: "0000"
+        }
+        ,parseData: function(res){
+            return {
+                "code": res.resp_code,
+                "msg": res.msg,
+                "data": res.results
+            };
+        }
+    });
+
+    table.on('edit(<?php echo $__PRE__?>table)', function(obj){
+        $.xpost('../../com/sys_config.aspx',{action: 'edit',id:obj.data.id,value:obj.value},function (e) {
+            if(e.resp_code=='0000'){
+                layer.msg(e.msg);
+            }else{
+                layer.msg(e.msg,{icon:2,anim:6});
+            }
+        })
+    });
+
+    element.tabChange('<?php echo $__PRE__?>tab', 'system');
+    form.render();
+</script>
+

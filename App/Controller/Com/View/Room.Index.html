@@ -1,0 +1,192 @@
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_head.html'); ?>
+    <body>
+<style>
+    .layui-laydate-content th {
+        font-weight: 400;
+        color: white;
+    !important;
+    }
+</style>
+<div class="templatemo-flex-row">
+    <?php include _include(__APPDIR__ . 'Controller/Com/View/Public_nav.html'); ?>
+
+    <div class="templatemo-content col-1 light-gray-bg">
+        <?php include _include(__APPDIR__ . 'Controller/Com/View/Public_top.html'); ?>
+        <div class="row content" style="padding:5px 0px 0px 0px;">
+
+            <section class="content">
+                <div class="box box-primary box-solid">
+                    <div class="box-header with-border">
+                        <h3 class="box-title text-muted"><span style="color:White;">奖池管理
+                                <small style="margin-left:8px; margin-right:8px;">
+                                    <a href="javascript:window.history.back()" target="_self" onclick="javascript:window.history.back();"><i class="fa fa-arrow-left"></i> 返回</a>
+                                </small>
+                                 <small><a href="###" target="_self" onclick='javascript:reloadList();'><i class="fa fa-refresh"></i>刷新</a></small>
+                                 <small style="margin-left:8px; margin-right:8px;color:White;">　｜　</small>
+                                <small style="margin-left:8px; margin-right:8px;color:White;">总奖池</small>
+                                <small style="margin-left:8px; margin-right:8px;color:white;" id="bank"></small>
+                                <small style="margin-left:8px; margin-right:8px;color:White;">　｜　</small>
+                                <small style="margin-left:8px; margin-right:8px;color:White;">总收益</small>
+                                <small style="margin-left:8px; margin-right:8px;color:white;" id="brokerage"></small>
+                                <small style="margin-left:8px; margin-right:8px;color:White;">　｜　</small>
+                                <small style="margin-left:8px; margin-right:8px;color:White;">VIP奖池</small>
+                                <small style="margin-left:8px; margin-right:8px;color:white;" id="jackport"></small>
+                            </span>
+                        </h3>
+                    </div>
+                    <div class="box-body" style="height: 800px; overflow: scroll">
+                            <table class="table table-hover table-bordered "  id="data_list">
+                                <thead >
+                                <tr>
+                                    <th>游戏ID</th>
+                                    <th>游戏名称</th>
+                                    <th>拉巴大客池|百人奖池</th>
+                                    <th>拉巴小客池|拉把池</th>
+                                    <th>系统放水额</th>
+                                    <th>大客大鱼池</th>
+                                    <!--<th>(大鱼池|大客|百人)库存线</th>-->
+                                    <th>大客小鱼池</th>
+                                    <!--<th>(小鱼池|小客)库存线</th>-->
+                                   <th>小客大鱼池</th>
+                                   <th>小客小鱼池</th>
+                                   <th>收益</th>
+                                   <th>VIP奖池</th>
+                               </tr>
+                               </thead>
+                               <tbody id="tblData" ></tbody>
+                           </table>
+                   </div>
+                   <div class="box-footer">
+
+                   </div>
+
+               </div>
+
+
+           </section>
+
+
+       </div>
+   </div>
+</div>
+<script src="/res/js/jquery.jeditable.mini.js" type="text/javascript"></script>
+<script>
+
+
+   function getDataList() {
+       $("#data_list tr:gt(0)").remove();
+       $.ajax({
+           url: "../ashx/log/log.ashx",
+           type: "post",
+           dataType: "json",
+           data: {action: "room", CurDateTime: rand()},
+           success: function (a) {
+               var  d;
+               a.success ? (a.results.length > 0 ? ( d = "", $.each(a.results,
+                   function (b) {
+                           d += '<tr class="tr_h" id="' + a.results[b]["roomID"] + '">',
+                               d += '<td nowrap=\'nowrap\' field="roomID">',
+                               d += a.results[b]["roomID"],
+                               d += "</td>",
+                               d += '<td nowrap=\'nowrap\' field="title">',
+                               d += a.results[b]["remark"],
+                               d += "</td>",
+                               d += '<td nowrap=\'nowrap\' class="editInfo" field="bank">',
+                               d += a.results[b]["bank"],
+                               d += "</td>",
+                               d += '<td nowrap=\'nowrap\' class="editInfo" field="bigBank" title="大鱼奖池">',
+                               d += a.results[b]["bigBank"],
+                               d += "</td>",
+                               d += '<td nowrap=\'nowrap\' class="editInfo" field="systemStock">',
+                               d += a.results[b]["systemStock"],
+                               d += "</td>",
+                               d += '<td nowrap=\'nowrap\' class="editInfo" field="bigBank" title="大鱼奖池">',
+                               d += a.results[b]["bigBank"],
+                               d += "</td>",
+
+                               d += '<td nowrap=\'nowrap\' class="editInfo" field="smallBank" title="小鱼奖池">',
+                               d += a.results[b]["smallBank"],
+                               d += "</td>",
+
+                               d += '<td nowrap=\'nowrap\' class="editInfo" field="smallUserBigBank" title="小客户大鱼奖池">',
+                               d += a.results[b]["smallUserBigBank"],
+                               d += "</td>",
+                               d += '<td nowrap=\'nowrap\' class="editInfo" field="smallUserSmallBank" title="小客户小鱼奖池">',
+                               d += a.results[b]["smallUserSmallBank"],
+                               d += "</td>",
+                               d += '<td nowrap=\'nowrap\'  field="brokerage">',
+                               d += a.results[b]["brokerage"],
+                               d += "</td>",
+                               d += '<td nowrap=\'nowrap\' class="editInfo" field="jackport">',
+                               d += a.results[b]["jackport"],
+                               d += "</td>",
+                               d += "</tr>";
+
+
+                   }),
+                   $("#bank").text( parseFloat(a.bank).toFixed(2)),
+                   $("#brokerage").text(parseFloat(a.brokerage).toFixed(2)),
+                   $("#jackport").text(parseFloat(a.jackport).toFixed(2)),
+                   $("#tblData").append(d)) : web_tips(a.msg =='操作成功'?"暂无记录":a.msg)) : ($("#tb_list_1").fadeOut(1000), global_Error500 == a.ERROR_TYPE && (parent.location.href = global_e_p_500), global_NoLicense != a.msg ? web_tips(a.msg) : parent.location.href = global_jump_login)
+           },
+           beforeSend: function () {
+           },
+           complete: function () {
+               <?php if($isadmin){ ?>
+               bindEdit()
+               <?php } ?>
+           }
+       })
+   }
+
+   function reloadList() {
+       getDataList(0)
+   }
+   <?php if($isadmin){ ?>
+
+   function bindEdit() {
+       whenMouseOver(".editInfo", "双击可编辑");
+       var a;
+       $(".editInfo").editable("../ashx/editField/editField.ashx", {
+           indicator: "<img src='../res/js/plug/jeditable/img/indicator.gif'>",
+           event: "dblclick",
+           style: "inherit",
+           type: "text",
+           submit: "保存",
+           width: 120,
+           cancel: "取消",
+           cssclass: "setInput",
+           onsubmit: function (a, b) {
+               var c = $(b).find("input").val();
+               return c = $.trim(c),
+                   c.length <= 0 ? (swal("输入不能为空.", "", "info"), !1) : void 0
+           },
+           submitdata: function (b) {
+               return a = b,
+                   {
+                       action: "room",
+                       BeforeValue: a,
+                       id: $(this).parent().attr("id"),
+                       field: $(this).attr("field")
+                   }
+           },
+           callback: function (b) {
+               var d = jQuery.parseJSON(b);
+               d.success ? ($(this).text(d.NewValue), swal(d.msg, "", "success")) : ($(this).text(a), swal(d.msg, "", "info"))
+           }
+       })
+   }
+
+   <?php } ?>
+
+
+   var pagei;
+   $(function () {
+        getDataList(0);
+   });
+
+
+   </script>
+
+
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_footjs.html'); ?>

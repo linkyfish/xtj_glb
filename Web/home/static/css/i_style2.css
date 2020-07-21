@@ -1,0 +1,141 @@
+table {
+	font-family: "新細明體", "細明體";
+	font-size: 13px;
+	line-height: 18px;
+	color: #333333;
+	letter-spacing: 1pt;
+}
+
+.InputText {
+	font-family: "新細明體", "細明體";
+	color: #666666;
+	height: 18px;
+	background-color: #E7E7E7;
+}
+
+.newsdate {
+	font-family: "Arial", "Helvetica", "sans-serif";
+	font-size: 13px;
+}
+
+.tabletitle {
+	font-family: "新細明體", "細明體";
+	font-size: 13px;
+	font-weight: bold;
+	color: #8D2323;
+	letter-spacing: 2pt;
+}
+.tablebigtitle {
+	font-family: "新細明體", "細明體";
+	font-size: 16px;
+	font-weight: bold;
+	color: #8D2323;
+	letter-spacing: 2pt;
+}
+
+.type11pt {
+	font-family: "新細明體", "細明體";
+	font-size: 13px;
+}
+.type1px {
+	font-family: "新細明體", "細明體";
+	font-size: 1px;
+	line-height: 0px;
+}
+
+.tablebg {
+	background-color: #FFFFFF;
+}
+
+.tableoverbg {
+	background-color: #F6F6F6;
+}
+
+a {
+	text-decoration: none;
+	color: #333333;
+}
+
+a:hover {
+	color: #CC3300;
+	text-decoration: underline;
+}
+
+.bTitle {
+	font-family: "新細明體", "細明體";
+	font-weight: bold;
+	color: #048AC4;
+	line-height: 20px;
+	font-size: 13px;
+}
+
+.point {
+	color: #990000;
+}
+
+.mTitle {
+	font-weight: bold;
+	line-height: 18px;
+	color: #666666;
+}
+
+.ContainLink {
+	color: #ED560E;
+	list-style-type: square;
+	font-size: 13px;
+}
+
+.sTitle {
+	color: #FF6600;
+}
+
+.ssTitle {
+	text-decoration: underline;
+	color: #009900;
+}
+
+.images {
+	border-top: 1px double #F7F7F7;
+	border-right: thin double #F7F7F7;
+	border-bottom: thin double #F7F7F7;
+	border-left: thin double #F7F7F7;
+}
+ul {
+	line-height: 18pt;
+}
+.sLi {
+	font-size: 8pt;
+	font-weight: normal;
+	color: #FF9900;
+}
+.slogan_Main {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	line-height: normal;
+	font-weight: bold;
+	color: #0099CC;
+	text-decoration: none;
+}
+.slogan_Sub {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	line-height: 20px;
+	font-weight: bold;
+	color: #684624;
+	text-decoration: none;
+}
+.slogan_content {
+
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	line-height: 16px;
+	font-weight: normal;
+	color: #848457;
+	text-decoration: none;
+}
+a.add {
+color:#4E7CA7;
+text-decoration:none;}
+a.add:hover {
+color:#cc3300;
+text-decoration:none;}

@@ -1,0 +1,254 @@
+
+
+
+
+#GTrank_black { background:#FFF; padding:3px; margin:5px;}
+#GTrank_black table#rank_page{
+width:100%;
+
+border-collapse:collapse;
+font:12px/1.5em "新細明體", "細明體",Verdana;
+background-color:transparent;}
+#GTrank_black table#GT_rank {
+width:100%; 
+border:2px solid #000000;
+border-collapse:collapse;
+font:12px/1.5em "新細明體", "細明體",Verdana;}
+#GTrank_black #rank_page img { display:inline-block; width:9px; height:10px;}
+#GTrank_black #rank_page .rank_title{
+padding:5px;
+text-align:center;
+font:15px/1.3em "新細明體", "細明體",Verdana;
+font-weight:bold;
+color:#FFFF00;
+filter:progid:DXImageTransform.Microsoft.Gradient(startColorStr='#282828', endColorStr='#000000', gradientType='0');
+background-color:#000000;}
+#GTrank_black #rank_page .rank_item{
+padding:5px;
+text-align:left;
+font-weight:bold;}
+#GTrank_black #rank_page .rank_count{
+padding:5px;
+text-align:right;
+font-weight:bold;}
+#GTrank_black #rank_page .rank_page{
+text-align:right; width:75%}
+#GTrank_black table#GT_rank th, #GTrank_black table#GT_rank td{
+padding:2px 5px;
+border:1px dotted #666;
+text-align:center;}
+#GTrank_black table#GT_rank .rank_head{
+background-color:#000000; 
+color:#FFFFFF; 
+font-weight:bold;}
+#GTrank_black table#GT_rank .rank_odd{
+background-color:#fff; }
+
+#GTrank_black table#GT_rank .rank_even{
+background-color:#E7E7E7;}
+
+#GTrank_black .rank_update{
+padding:5px;
+font:12px/1.5em "新細明體", "細明體",Verdana;
+letter-spacing:1px;} 
+#GTrank_black .rank_lasttime{
+color:#934206;}
+#GTrank_black a{
+font:12px/1.5em "新細明體", "細明體",Verdana; color:#787878;}
+#GTrank_black a:hover{
+font:12px/1.5em "新細明體", "細明體",Verdana; color:#990000;}
+
+
+
+#GTrank_red { background:#FFF; padding:3px; margin:5px;}
+#GTrank_red table#rank_page{
+width:100%;
+
+border-collapse:collapse;
+font:12px/1.5em "新細明體", "細明體",Verdana;
+background-color:transparent;}
+#GTrank_red table#GT_rank {
+width:100%; 
+border:2px solid #930010;
+border-collapse:collapse;
+font:12px/1.5em "新細明體", "細明體",Verdana;}
+#GTrank_red #rank_page img {display:inline-block; width:9px; height:10px;}
+#GTrank_red #rank_page .rank_title{
+padding:5px;
+text-align:center;
+font:15px/1.3em "新細明體", "細明體",Verdana;
+font-weight:bold;
+color:#FFFF99;
+filter:progid:DXImageTransform.Microsoft.Gradient(startColorStr='#930010', endColorStr='#650000', gradientType='0');
+background-color:#930010;}
+#GTrank_red #rank_page .rank_item{
+padding:5px;
+text-align:left;
+font-weight:bold;}
+#GTrank_red #rank_page .rank_count{
+padding:5px;
+text-align:right;
+font-weight:bold;}
+#GTrank_red #rank_page .rank_page{
+text-align:right;width:75%}
+#GTrank_red table#GT_rank th, #GTrank_red table#GT_rank td{
+padding:2px 5px;
+border:1px dotted #C7002E;
+text-align:center;}
+#GTrank_red table#GT_rank .rank_head{
+background-color:#930010; 
+color:#FFFFFF; 
+font-weight:bold;}
+#GTrank_red table#GT_rank .rank_odd{
+background-color:#fff; }
+#GTrank_red table#GT_rank .rank_even{
+background-color:#FDD9CE; }
+#GTrank_red .rank_update{
+padding:5px;
+font:12px/1.5em "新細明體", "細明體",Verdana;
+letter-spacing:1px;} 
+#GTrank_red .rank_lasttime{
+color:#575700;}
+#GTrank_red a{
+font:12px/1.5em "新細明體", "細明體",Verdana; color:#787878;}
+#GTrank_red a:hover{
+font:12px/1.5em "新細明體", "細明體",Verdana; color:#990000;}
+
+
+#GTrank_orange { background:#FFF; padding:3px; margin:5px;}
+#GTrank_orange table#rank_page{
+width:100%;
+
+border-collapse:collapse;
+font:12px/1.5em "新細明體", "細明體",Verdana;
+background-color:transparent;}
+#GTrank_orange table#GT_rank {
+width:100%; 
+border:2px solid #FF9900;
+border-collapse:collapse;
+font:12px/1.5em "新細明體", "細明體",Verdana;}
+#GTrank_orange #rank_page img {display:inline-block; width:9px; height:10px;}
+#GTrank_orange #rank_page .rank_title{
+padding:5px;
+text-align:center;
+font:15px/1.3em "新細明體", "細明體",Verdana;
+font-weight:bold;
+color:#fff;
+filter:progid:DXImageTransform.Microsoft.Gradient(startColorStr='#FF9901', endColorStr='#FF6600', gradientType='0');
+background-color:#FF6600;}
+#GTrank_orange #rank_page .rank_item{
+padding:5px;
+text-align:left;
+font-weight:bold;}
+#GTrank_orange #rank_page .rank_count{
+padding:5px;
+text-align:right;
+font-weight:bold;}
+#GTrank_orange #rank_page .rank_page{
+text-align:right; width:75%}
+#GTrank_orange table#GT_rank th, #GTrank_orange table#GT_rank td{
+padding:2px 5px;
+border:1px dotted #FFCC00;
+text-align:center;}
+#GTrank_orange table#GT_rank .rank_head{
+background-color:#FF9900; 
+color:#663300; 
+font-weight:bold;}
+#GTrank_orange table#GT_rank .rank_odd{
+background-color:#fff; }
+#GTrank_orange table#GT_rank .rank_even{
+background-color:#FEEFC0; }
+#GTrank_orange .rank_update{
+padding:5px;
+font:12px/1.5em "新細明體", "細明體",Verdana;
+letter-spacing:1px;} 
+#GTrank_orange .rank_lasttime{
+color:#575700;}
+#GTrank_orange a{
+font:12px/1.5em "新細明體", "細明體",Verdana; color:#787878;}
+#GTrank_orange a:hover{
+font:12px/1.5em "新細明體", "細明體",Verdana; color:#990000;}
+
+
+#GTrank_brown {
+	
+}
+	#GTrank_brown .rank_update{
+		padding:5px;
+		font:12px/1.5em "新細明體", "細明體",Verdana;
+		letter-spacing:1px;
+	} 
+	
+	#GTrank_brown .rank_lasttime{
+		color:#575700;
+	}
+	
+	#GTrank_brown a{
+		font:12px/1.5em "新細明體", "細明體",Verdana; color:#787878;
+	}
+	
+		#GTrank_brown a:hover{
+			font:12px/1.5em "新細明體", "細明體",Verdana; color:#990000;
+		}
+
+	#GTrank_brown table#rank_page{
+		width:100%;
+		
+		border-collapse:collapse;
+		font:12px/1.5em "新細明體", "細明體",Verdana;
+		background-color:transparent;
+	}
+	
+		#GTrank_brown #rank_page .rank_title{
+			padding:5px;
+			text-align:center;
+			font:15px/1.3em "新細明體", "細明體",Verdana;
+			font-weight:bold;
+			color:#fff;
+			filter:progid:DXImageTransform.Microsoft.Gradient(startColorStr='#FF9901', endColorStr='#44290A', gradientType='0');
+			background-color:#44290A;
+		}
+		
+		#GTrank_brown #rank_page .rank_item{
+			padding:5px;
+			text-align:left;
+			font-weight:bold;
+		}
+		
+		#GTrank_brown #rank_page .rank_count{
+			padding:5px;
+			text-align:right;
+			font-weight:bold;
+		}
+		
+		#GTrank_brown #rank_page .rank_page{
+			text-align:right; width:75%
+			
+		}
+	
+	#GTrank_brown table#GT_rank {
+		width:100%; 
+		border:2px solid #44290A;
+		border-collapse:collapse;
+		font:12px/1.5em "新細明體", "細明體",Verdana;
+	}
+		
+		#GTrank_brown table#GT_rank .rank_head{
+			background-color:#44290A; 
+			color:#fff; 
+			font-weight:bold;	
+		}
+		
+		#GTrank_brown table#GT_rank .rank_odd{
+			background-color:#fff;
+		}
+		
+		#GTrank_brown table#GT_rank .rank_even{
+			background-color:#FEEFC0;
+		}
+		
+		#GTrank_brown table#GT_rank th, #GTrank_brown table#GT_rank td{
+			padding:2px 5px;
+			border:1px dotted #43290A;
+			text-align:center;
+		}

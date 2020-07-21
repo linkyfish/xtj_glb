@@ -1,0 +1,7 @@
+.cssNews { font-size: 13px; }
+.cssNews table { border-collapse: collapse; text-align: center; background-color: #FFC; font-size: 13px; }
+.cssNews td { padding: 2px; border: 1px solid #666; }
+.cssNews a:link, .cssNews a:visited, .cssNews a:hover { font-family: "新細明體"; color:#ED560E; text-decoration: none; }
+.cssNews a:hover { color:#003399; }
+.cssNewsTitle { font-weight: bold; background-color: #6CF; }
+.cssNewsSubtitle { font-weight: bold; background-color: #ADF; }

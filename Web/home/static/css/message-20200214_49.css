@@ -1,0 +1,78 @@
+
+
+
+
+
+.message {
+	position:relative;
+	border:1px solid #CCC;
+	border-left:6px solid #CCC;
+	padding:0;
+	padding:0.7em;
+	padding-left:2.5em;
+	font-size:98%;
+	margin:1%;
+	margin-bottom:1em;
+	text-align:left;
+	}
+.message ul,
+.message ol{
+	padding:inherit;
+	padding-top:1em;
+	margin:0;
+	}
+
+.message h1{
+	color: #666;
+	border-bottom:1px solid #d6d6d6;
+	font-size:1.5em;
+	line-height:1.5em;
+	font-weight:normal;
+	padding:0;
+	margin:0;
+	margin-left:1em;
+}
+.message i{
+	color: #999;
+	position:absolute;
+	left:10px;
+	top:10px;
+	font-size:2.5em;
+	width:1.1em;
+	text-align:center;
+	}
+
+.mini {padding: 0.5em; padding-left:0.8em;}
+.mini h1{display:none;}
+.mini i{
+	left:5px;
+	top:50%;
+	font-size:1.4em;
+	margin-top:-0.5em;}
+
+.mini ul,
+.mini ol{
+	padding-left:2.8em;
+	padding-top:0;
+	margin:0;
+	}
+	
+
+.message-primary {border:1px solid #50871f; border-left:6px solid #50871f;}
+.message-primary h1{color: #50871f;}
+.message-primary i{color: #50871f;}
+
+
+.message-secondary {border:1px solid #a0ab40; border-left:6px solid #a0ab40;}
+.message-secondary h1{color: #7b9b18;}
+.message-secondary i{color: #a0ab40;}
+
+
+.message-warning {border:1px solid #ec9b3b; border-left:6px solid #ec9b3b;}
+.message-warning h1{color: #dc720b;}
+.message-warning i{color: #ec9b3b;}
+
+
+.message-danger {border:1px solid #ce3426; border-left:6px solid #ce3426;}
+.message-danger h1{color: #ce3426;}
+.message-danger i{color: #ce3426;}

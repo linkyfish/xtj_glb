@@ -1,1 +1,1 @@
-# xtj_glb
+# GameAdmin

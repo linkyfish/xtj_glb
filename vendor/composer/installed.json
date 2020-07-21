@@ -1,0 +1,286 @@
+[
+    {
+        "name": "codeplex/phpexcel",
+        "version": "1.7.8",
+        "version_normalized": "1.7.8.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/markushausammann/PHPExcel.git",
+            "reference": "6236b1e1513dda38a68a5ac22bbab5fc2b7942fd"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/markushausammann/PHPExcel/zipball/6236b1e1513dda38a68a5ac22bbab5fc2b7942fd",
+            "reference": "6236b1e1513dda38a68a5ac22bbab5fc2b7942fd",
+            "shasum": "",
+            "mirrors": [
+                {
+                    "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                    "preferred": true
+                }
+            ]
+        },
+        "require": {
+            "ext-xml": "*",
+            "php": ">=5.2.0"
+        },
+        "time": "2012-11-21T10:55:52+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "PHPExcel": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "LGPL"
+        ],
+        "authors": [
+            {
+                "name": "Maarten Balliauw",
+                "homepage": "http://blog.maartenballiauw.be"
+            },
+            {
+                "name": "Mark Baker"
+            },
+            {
+                "name": "Erit Tilt"
+            }
+        ],
+        "description": "PHPExcel - OpenXML - Create Excel2007 documents in PHP - Spreadsheet engine",
+        "homepage": "http://phpexcel.codeplex.com",
+        "keywords": [
+            "OpenXML",
+            "excel",
+            "php",
+            "spreadsheet"
+        ],
+        "abandoned": "phpoffice/phpexcel"
+    },
+    {
+        "name": "eaglewu/swoole-ide-helper",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/wudi/swoole-ide-helper.git",
+            "reference": "fceabb51fca645166fdc3d885bb582eb3352335e"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/wudi/swoole-ide-helper/zipball/fceabb51fca645166fdc3d885bb582eb3352335e",
+            "reference": "fceabb51fca645166fdc3d885bb582eb3352335e",
+            "shasum": "",
+            "mirrors": [
+                {
+                    "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                    "preferred": true
+                }
+            ]
+        },
+        "time": "2019-07-18T01:21:48+00:00",
+        "type": "library",
+        "installation-source": "source",
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "eagle",
+                "role": "lead",
+                "email": "eaglewudi@gmail.com"
+            }
+        ],
+        "description": "Swoole IDE Helper, to improve auto-completion",
+        "keywords": [
+            "autocomplete",
+            "codeintel",
+            "helper",
+            "ide",
+            "netbeans",
+            "phpdoc",
+            "phpstorm",
+            "sublime",
+            "swoole"
+        ]
+    },
+    {
+        "name": "itbdw/ip-database",
+        "version": "v2.0.7",
+        "version_normalized": "2.0.7.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/itbdw/ip-database.git",
+            "reference": "134835a851b45d4cccd7ea33215c313de74c6aca"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/itbdw/ip-database/zipball/134835a851b45d4cccd7ea33215c313de74c6aca",
+            "reference": "134835a851b45d4cccd7ea33215c313de74c6aca",
+            "shasum": "",
+            "mirrors": [
+                {
+                    "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                    "preferred": true
+                }
+            ]
+        },
+        "require": {
+            "php": "~5.4|~7.0"
+        },
+        "time": "2019-08-01T03:09:19+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "itbdw\\Ip\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "马秉尧"
+            },
+            {
+                "name": "itbdw",
+                "email": "itbudaoweng@gmail.com",
+                "homepage": "http://github.com/itbdw",
+                "role": "Developer"
+            }
+        ],
+        "description": "IP位置数据库（解析为国家、省、市、县、运营商）",
+        "keywords": [
+            "China",
+            "Chinese",
+            "IP",
+            "database",
+            "location",
+            "位置",
+            "地区",
+            "数据库",
+            "纯真"
+        ]
+    },
+    {
+        "name": "nikic/fast-route",
+        "version": "v1.3.0",
+        "version_normalized": "1.3.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/nikic/FastRoute.git",
+            "reference": "181d480e08d9476e61381e04a71b34dc0432e812"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/nikic/FastRoute/zipball/181d480e08d9476e61381e04a71b34dc0432e812",
+            "reference": "181d480e08d9476e61381e04a71b34dc0432e812",
+            "shasum": "",
+            "mirrors": [
+                {
+                    "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                    "preferred": true
+                }
+            ]
+        },
+        "require": {
+            "php": ">=5.4.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^4.8.35|~5.7"
+        },
+        "time": "2018-02-13T20:26:39+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "FastRoute\\": "src/"
+            },
+            "files": [
+                "src/functions.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Nikita Popov",
+                "email": "nikic@php.net"
+            }
+        ],
+        "description": "Fast request router for PHP",
+        "keywords": [
+            "router",
+            "routing"
+        ]
+    },
+    {
+        "name": "php-ai/php-ml",
+        "version": "0.8.0",
+        "version_normalized": "0.8.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://gitlab.com/php-ai/php-ml.git",
+            "reference": "5e02b893e904761cd7e2415b11778cd421494c07"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://gitlab.com/api/v4/projects/php-ai%2Fphp-ml/repository/archive.zip?sha=5e02b893e904761cd7e2415b11778cd421494c07",
+            "reference": "5e02b893e904761cd7e2415b11778cd421494c07",
+            "shasum": "",
+            "mirrors": [
+                {
+                    "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                    "preferred": true
+                }
+            ]
+        },
+        "require": {
+            "php": "^7.1"
+        },
+        "require-dev": {
+            "phpbench/phpbench": "^0.14.0",
+            "phpstan/phpstan-phpunit": "^0.10",
+            "phpstan/phpstan-shim": "^0.10",
+            "phpstan/phpstan-strict-rules": "^0.10",
+            "phpunit/phpunit": "^7.0.0",
+            "symplify/coding-standard": "^5.1",
+            "symplify/easy-coding-standard": "^5.1"
+        },
+        "time": "2019-03-20T22:22:45+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Phpml\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Arkadiusz Kondas",
+                "email": "arkadiusz.kondas@gmail.com"
+            }
+        ],
+        "description": "PHP-ML - Machine Learning library for PHP",
+        "homepage": "https://github.com/php-ai/php-ml",
+        "keywords": [
+            "Neural network",
+            "artificial intelligence",
+            "computational learning theory",
+            "data science",
+            "feature extraction",
+            "machine learning",
+            "pattern recognition"
+        ]
+    }
+]

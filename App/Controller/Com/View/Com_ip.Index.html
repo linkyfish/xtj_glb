@@ -1,0 +1,169 @@
+<?php include _include(__APPDIR__.'Controller/Com/View/Public_head.html');?>
+<body>
+<div class="templatemo-flex-row">
+    <?php include _include(__APPDIR__.'Controller/Com/View/Public_nav.html');?>
+
+    <div class="templatemo-content col-1 light-gray-bg">
+        <?php include _include(__APPDIR__.'Controller/Com/View/Public_top.html');?>
+        <div class="row content" style="padding:5px 0px 0px 0px;">
+
+                <section class="content">
+                    <div class="box box-primary box-solid">
+                        <div class="box-header with-border">
+                            <h3 class="box-title text-bold text-muted" id="d_tip_2"><span style="color:White;"  >玩家查询</span></h3><i class="fa fa-angle-double-right"></i>
+                        </div>
+
+                        <div class="box-body">
+
+                            <div class="form-group">
+                                <label>查询玩家</label>
+                                <input type="text" class="form-control" id="UserID"  >
+                            </div>
+                        </div>
+
+                        <div class="box-footer">
+                            <button type="button" class="btn btn-primary" id="Button_OK1">同注册IP</button>
+<!--                            <button type="button" class="btn btn-primary" id="Button_OK2">同MAC地址</button>-->
+                            <button type="button" class="btn btn-primary" id="Button_OK3">最后登录IP</button>
+                        </div>
+                    </div>
+
+                    <div class="box box-primary box-solid">
+                        <div class="box-header with-border">
+                            <h3 class="box-title text-bold">
+                                <span style="color:White;">同注册IP</span>
+
+                            </h3>
+                            <div class="box-tools pull-right">
+                                <button data-widget="collapse" class="btn btn-box-tool" type="button"><i class="fa fa-minus"></i></button>
+                            </div>
+                        </div>
+                        <div class="box-body" style="display: block; padding:0px;">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th nowrap='nowrap' class="td_date">注册IP</th>
+                                        <th nowrap='nowrap' class="cal_1">玩家数量</th>
+                                        <th nowrap='nowrap' class="td_pk_pump">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php foreach($RegisterIP as $k =>$v){?>
+                                        <tr>
+                                        <td nowrap='nowrap' class="td_date"><?php echo  $v['regip']?></td>
+                                        <td nowrap='nowrap' class="cal_1"><?php echo  $v['counts']?></td>
+                                        <td nowrap='nowrap' class="td_pk_pump">
+                                            <button type="button" class="btn btn-warning btn-xs" title="<?php echo  $v['regip']?>" onfocus="this.blur();" onclick='onIP("RegisterIP","<?php echo  $v['regip']?>");'>明细</button>
+
+                                        </td></tr>
+                                    <?php } ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--div class="box box-primary box-solid">
+                        <div class="box-header with-border">
+                            <h3 class="box-title text-bold">
+                                <span style="color:White;">同Mac</span>
+
+                            </h3>
+                            <div class="box-tools pull-right">
+                                <button data-widget="collapse" class="btn btn-box-tool" type="button"><i class="fa fa-minus"></i></button>
+                            </div>
+                        </div>
+                        <div class="box-body" style="display: block; padding:0px;">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th nowrap='nowrap' class="td_date">注册IP</th>
+                                        <th nowrap='nowrap' class="cal_1">玩家数量</th>
+                                        <th nowrap='nowrap' class="td_pk_pump">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php foreach($MacAddress as $k =>$v){?>
+                                        <tr>
+                                        <td nowrap='nowrap' class="td_date"><?php echo  $v['MacAddress']?></td>
+                                        <td nowrap='nowrap' class="cal_1"><?php echo  $v['counts']?></td>
+                                        <td nowrap='nowrap' class="td_pk_pump">
+                                            <button type="button" class="btn btn-warning btn-xs" title="<?php echo  $v['MacAddress']?>" onfocus="this.blur();" onclick='onIP("MacAddress","<?php echo  base64_encode($v['MacAddress'])?>");'>明细</button>
+                                        </td></tr>
+                                    <?php } ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div!-->
+                   <div class="box box-primary box-solid">
+                        <div class="box-header with-border">
+                            <h3 class="box-title text-bold">
+                                <span style="color:White;">同登录IP</span>
+
+                            </h3>
+                            <div class="box-tools pull-right">
+                                <button data-widget="collapse" class="btn btn-box-tool" type="button"><i class="fa fa-minus"></i></button>
+                            </div>
+                        </div>
+                        <div class="box-body" style="display: block; padding:0px;">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th nowrap='nowrap' class="td_date">登录IP</th>
+                                        <th nowrap='nowrap' class="cal_1">玩家数量</th>
+                                        <th nowrap='nowrap' class="td_pk_pump">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php foreach($LatestLoginIP as $k =>$v ){ ?>
+                                        <tr>
+                                        <td nowrap='nowrap' class="td_date"><?php echo  $v['last_login_ip']?></td>
+                                        <td nowrap='nowrap' class="cal_1"><?php echo  $v['counts']?></td>
+                                        <td nowrap='nowrap' class="td_pk_pump"><button type="button" class="btn btn-warning btn-xs" title="<?php echo  $v['last_login_ip']?>" onfocus="this.blur();" onclick='onIP("LatestLoginIP","<?php echo  $v['last_login_ip']?>");'>明细</button></td>
+                                        </tr>
+                                    <?php } ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </section>
+            <script type="text/javascript">
+                var uid = $('#UserID'),_sid = GetQueryString("sid");
+                _sid && "undefined" != typeof _sid && 0 != _sid && 0 !== _sid.length && $('#UserID').val(_sid);
+                    $('#Button_OK1').click(function () {
+                        if(uid.val()!=""){
+                            onIP('RegisterIP', uid.val());
+                        }else{
+                            web_tips("请输入玩家ID.")
+                        }
+
+                    })
+                    // $('#Button_OK2').click(function () {
+                    //     if(uid.val()!=""){
+                    //         onIP('MacAddress', uid.val());
+                    //     }else{
+                    //         web_tips("请输入玩家ID.")
+                    //     }
+                    // })
+                    $('#Button_OK3').click(function () {
+                        if(uid.val()!=""){
+                            onIP('LatestLoginIP', uid.val());
+                        }else{
+                            web_tips("请输入玩家ID.")
+                        }
+                    })
+            </script>
+
+        </div>
+    </div>
+</div>
+
+
+<?php include _include(__APPDIR__.'Controller/Com/View/Public_footjs.html');?>

@@ -1,0 +1,235 @@
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_head.html'); ?>
+    <body>
+<style>
+    .layui-laydate-content th {
+        font-weight: 400;
+        color: white;
+    !important;
+    }
+</style>
+<div class="templatemo-flex-row">
+    <?php include _include(__APPDIR__ . 'Controller/Com/View/Public_nav.html'); ?>
+
+    <div class="templatemo-content col-1 light-gray-bg">
+        <?php include _include(__APPDIR__ . 'Controller/Com/View/Public_top.html'); ?>
+        <div class="row content" style="padding:5px 0px 0px 0px;">
+
+            <section class="content">
+                <div class="box box-primary box-solid">
+                    <div class="box-header with-border">
+                        <h3 class="box-title text-muted"><span style=" color:White;">商城客服
+                                <small style="margin-left:8px; margin-right:8px;">
+                                    <a href="javascript:window.history.back()" target="_self" onclick="javascript:window.history.back();"><i
+                                                class="fa fa-arrow-left"></i> 返回</a>
+                                    <span class="hidden-xs hidden-sm">　｜　</span>
+                                        <a href="com_custom_edit.aspx" target="_self"><i class="fa glyphicon glyphicon-plus"></i> 新增排名</a>
+                                </small>
+                            </span>
+                        </h3>
+                    </div>
+
+                    <div class="box-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-bordered" id="data_list">
+                                <thead>
+                                <tr>
+                                    <th>排名</th>
+                                    <th>昵称</th>
+                                    <th>分数</th>
+                                    <th>客服线</th>
+                                    <th>头像</th>
+                                    <th>上传头像</th>
+                                    <th>绑定客服号</th>
+                                    <th>微信号</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tblData"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="box-footer">
+
+                    </div>
+
+                </div>
+
+
+            </section>
+
+
+        </div>
+    </div>
+</div>
+<script src="/res/js/jquery.jeditable.mini.js" type="text/javascript"></script>
+<script>
+
+
+    function getDataList() {
+        $("#data_list tr:gt(0)").remove();
+        $.ajax({
+            url: "../ashx/log/log.ashx",
+            type: "post",
+            dataType: "json",
+            data: {action: "custom", CurDateTime: rand()},
+            success: function (a) {
+                var  d;
+                a.success ? (a.results.length > 0 ? ( d = "", $.each(a.results,
+                    function (b) {
+                            var f =a.results[b]["Status"],e=a.results[b]["ID"];
+//ID,groupid,RankNo,NickName,head_img,MoneyNum,Signature,WeChatID,UserName
+                            d += '<tr class="tr_h" id="' + a.results[b]["ID"] + '">',
+                                d += '<td nowrap=\'nowrap\' class="editInfo" field="RankNo">',
+                                d += a.results[b]["RankNo"],
+                                d += "</td>",
+                                 d += '<td nowrap=\'nowrap\' class="editInfo" field="NickName">',
+                                d += a.results[b]["NickName"],
+                                d += "</td>",
+                                d += '<td nowrap=\'nowrap\' class="editInfo" field="MoneyNum">',
+                                d += a.results[b]["MoneyNum"],
+                                d += "</td>",
+                                d += '<td nowrap=\'nowrap\' class="editInfo" field="Signature">',
+                                d += a.results[b]["Signature"],
+                                d += "</td>",
+                                d += '<td nowrap=\'nowrap\' class="editInfo" field="head_img">',
+                                d +='<img style="width: 120px ; height:70px" src="'+ a.results[b]["head_img"]+'"   id="picurl-'+a.results[b]["ID"]+'">';
+                                d += "</td>",
+                                d += '<td class="text-left " >';
+                                d +=' <button type="button" class="layui-btn uploadImg"  data-img-id="'+a.results[b]["ID"]+'">更换头像</button>';
+                                d +='    <div class="layui-upload-list">';
+                                d +=' <img class="layui-upload-img">';
+                                d +=' <p id="demoText"></p>';
+                                d +='<input type="hidden" name="picurl" id="picurl" >';
+                                d +='</div>';
+
+                                d += "</td>",
+                                d += '<td nowrap=\'nowrap\' class="editInfo_A_1" field="Passwd">',
+                                d += a.results[b]["Passwd"],
+                                d += "</td>",
+                                d += '<td nowrap=\'nowrap\' class="editInfo" field="WeChatID">',
+                                d += a.results[b]["WeChatID"],
+                                d += "</td>",
+                                d += '<td nowrap=\'nowrap\'>',
+                                d += 1 == f ? '<button type="button" class="btn btn-warning btn-xs" title="' + e + '" onfocus="this.blur();" onclick=\'onDisableC(this,"' + e + "\");'>禁用</button>" : '<button type="button" class="btn btn-danger btn-xs" title="' + e + '" onfocus="this.blur();" onclick=\'onDisableC(this,"' + e + "\");'>解禁</button>",
+                                d += "</td>",
+                                d += "</tr>";
+                    }),
+                    //$("#td_currMoney").text("萤分: " + parseFloat(_currMoney).toFixed(2)),
+                    $("#tblData").append(d)) : web_tips(a.msg =='操作成功'?"暂无记录":a.msg)) : ($("#tb_list_1").fadeOut(1000), global_Error500 == a.ERROR_TYPE && (parent.location.href = global_e_p_500), global_NoLicense != a.msg ? web_tips(a.msg) : parent.location.href = global_jump_login)
+                //图片上传
+                var uploadInst = upload.render({
+                    elem: '.uploadImg'
+                    ,url: "../../com/custom.aspx?action=uploadCustomImg"
+                    , before: function (obj) {
+                        this.data.id = this.item[0].getAttribute('data-img-id') ;
+                    }
+                    , done: function (res) {
+                        //如果上传失败
+                        if (res.code > 0) {
+                            return layer.msg('上传失败');
+                        }
+                        //上传成功
+                        $("#picurl").val(res.data.src);
+                        $("#picurl-"+res.data.id).attr('src',res.data.src);
+                    }
+                    , error: function () {
+                        //演示失败状态，并实现重传
+                        var demoText = $('#demoText');
+                        demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                        demoText.find('.demo-reload').on('click', function () {
+                            uploadInst.upload();
+                        });
+                    }
+                });
+            },
+            beforeSend: function () {
+            },
+            complete: function () {
+                <?php if($isadmin){ ?>
+                bindEdit()
+                <?php } ?>
+            }
+        })
+    }
+    <?php if($isadmin){ ?>
+
+    function bindEdit() {
+        whenMouseOver(".editInfo", "双击可编辑");
+        whenMouseOver(".editInfo_A_1", "双击可编辑");
+        var a;
+        $(".editInfo").editable("../ashx/editField/editField.ashx", {
+            indicator: "<img src='../res/js/plug/jeditable/img/indicator.gif'>",
+            event: "dblclick",
+            style: "inherit",
+            type: "text",
+            submit: "保存",
+            width: 120,
+            cancel: "取消",
+            cssclass: "setInput",
+            onsubmit: function (a, b) {
+                var c = $(b).find("input").val();
+                return c = $.trim(c)
+            },
+            submitdata: function (b) {
+                return a = b,
+                    {
+                        action: "edit_custom",
+                        BeforeValue: a,
+                        id: $(this).parent().attr("id"),
+                        field: $(this).attr("field")
+                    }
+            },
+            callback: function (b) {
+                var d = jQuery.parseJSON(b);
+                d.success ? ($(this).text(d.NewValue), swal(d.msg, "", "success")) : ($(this).text(a), swal(d.msg, "", "info"))
+            }
+        });
+
+        $(".editInfo_A_1").editable("../ashx/editField/editField.ashx", {
+            indicator: "<img src='../res/js/plug/jeditable/img/indicator.gif'>",
+            onblur: "ignore",
+            data: '<?php echo xn_json_encode($custorm)?>',
+            event: "click",
+            style: "inherit",
+            type: "select",
+            submit: "保存",
+            width: 300,
+            cancel: "取消",
+            cssclass: "setInput",
+            onsubmit: function(a, b) {
+                var c = $(b).find("select").val();
+                return c = $.trim(c),
+                    c.length <= 0 ? (swal("选择不能为空.", "", "info"), !1) : void 0
+            },
+            submitdata: function(b) {
+                return a = b,
+                    {
+                        action: "edit_custom",
+                        BeforeValue: a,
+                        id: $(this).parent().attr("id"),
+                        field: $(this).attr("field"),
+                        selectText: $(this).find("option:selected").text(),
+                        selectValue: $(this).find("option:selected").attr("value")
+                    }
+            },
+            callback: function(b) {
+                var d = jQuery.parseJSON(b);
+                d.success ? ($(this).text(d.NewValue), swal(d.msg, "", "success")) : ($(this).text(a), swal(d.msg, "", "info"))
+            }
+        })
+
+
+    }
+
+    <?php } ?>
+
+
+    var pagei;
+    $(function () {
+         getDataList(0)
+    });
+    </script>
+
+
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_footjs.html'); ?>

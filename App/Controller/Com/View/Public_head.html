@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <title>后台管理中心</title>
+    <!--link rel="stylesheet" href="/res/css/global.css?ver=<?php echo _CONF('app_v')?>" media="all"!-->
+    <link rel="stylesheet" href="/layui/css/layui.css?ver=<?php echo _CONF('app_v')?>" media="all">
+
+    <link rel="stylesheet" href="/res/css/font-awesome.min.css?ver=<?php echo _CONF('app_v')?>">
+    <link rel="stylesheet" href="/res/css/bootstrap.min.css?ver=<?php echo _CONF('app_v')?>">
+    <link rel="stylesheet" href="/res/css/bootstrap-timepicker.min.css?ver=<?php echo _CONF('app_v')?>">
+    <link rel="stylesheet" href="/res/css/templatemo-style.css?ver=<?php echo _CONF('app_v')?>">
+    <link rel="stylesheet" href="/res/css/AdminLTE.min.css?ver=<?php echo _CONF('app_v')?>">
+    <link rel="stylesheet" href="/res/css/skin-blue.min.css?ver=<?php echo _CONF('app_v')?>">
+    <link rel="stylesheet" href="/res/css/sweetalert.css?ver=<?php echo _CONF('app_v')?>">
+    <link rel="stylesheet" href="/res/css/black.css?ver=<?php echo _CONF('app_v')?>">
+
+    <!--[if lt IE 9]>
+    <script src="/res/js/ie8-responsive-file-warning.js?ver=<?php echo _CONF('app_v')?>"></script><![endif]-->
+    <script src="/res/js/ie-emulation-modes-warning.js?ver=<?php echo _CONF('app_v')?>"></script>
+    <script src="/res/js/artDialog.js?ver=<?php echo _CONF('app_v')?>"></script>
+    <script src="/res/js/jquery-1.11.3.min.js?ver=<?php echo _CONF('app_v')?>"></script>
+    <script src="/res/js/bootstrap.min.js?ver=<?php echo _CONF('app_v')?>"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="/res/js/app.min.js?ver=<?php echo _CONF('app_v')?>"></script>
+    <script src="/res/js/ie10-viewport-bug-workaround.js?ver=<?php echo _CONF('app_v')?>"></script>
+
+    <script src="/res/js/js-cn.js?ver=<?php echo _CONF('app_v')?>"></script>
+    <script src="/res/js/iframeTools.source.js?ver=<?php echo _CONF('app_v')?>" type="text/javascript"></script>
+    <script src="/res/js/sweetalert.min.js?ver=<?php echo _CONF('app_v')?>" type="text/javascript"></script>
+    <script src="/res/js/templatemo-script.js?ver=<?php echo _CONF('app_v')?>" type="text/javascript"></script>
+    <!--[if lt IE 9]>
+    <script src="/res/js/html5shiv.min.js?ver=<?php echo _CONF('app_v')?>"></script>
+    <script src="/res/js/respond.min.js?ver=<?php echo _CONF('app_v')?>"></script>
+    <![endif]-->
+
+    <link href="/res/css/page.css?ver=<?php echo _CONF('app_v')?>" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/res/js/plug/tableSort/tableSort.css?ver=<?php echo _CONF('app_v')?>" />
+    <script src="/res/js/plug/tableSort/jquery.tablesorter.min.js?ver=<?php echo _CONF('app_v')?>" type="text/javascript"></script>
+	<script>
+		var app_v = <?php echo _CONF('app_v')?>;
+	</script>
+    <style type="text/css">
+        #sumMoney{margin-left:8px;}
+        .setInput input {
+            font-size: 12px;
+            height: 18px;
+            line-height: 18px;
+            width: 120px;
+            border: 1px solid #4682B4;
+            background-color: #FFFFE0;
+            font-family: Consolas;
+        }
+        .col_1 {
+            display: none;
+        }
+        .sectionHeader {
+            padding-top: 5px;
+        }
+
+        .li_score {
+            border-right: 2px solid #c5c5c5;
+            display: block;
+            padding: 0 20px 0 0;
+            cursor: pointer;
+        }
+        .layui-table, .layui-table-view{margin-top:0}
+    </style>
+    <script>
+        $(function () {
+            CheckLogin();
+        });
+    </script>
+    <link type="text/css" rel="stylesheet" href="/res/css/laypage.css?ver=<?php echo _CONF('app_v')?>" id="laypagecss">
+</head>

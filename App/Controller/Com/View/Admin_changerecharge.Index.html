@@ -1,0 +1,385 @@
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_head.html'); ?>
+<body>
+<div class="templatemo-flex-row">
+    <?php include _include(__APPDIR__ . 'Controller/Com/View/Public_nav.html'); ?>
+
+    <div class="templatemo-content col-1 light-gray-bg">
+        <?php include _include(__APPDIR__ . 'Controller/Com/View/Public_top.html'); ?>
+        <div class="row content" style="padding:5px 0px 0px 0px;">
+
+            <section class="content">
+                <div class="row">
+                    <section class="col-md-6">
+                        <div class="box box-primary box-solid" id="tb_list_1" style="padding:0px;">
+                            <div class="box-header with-border">
+                                <h3 class="box-title"><span style="color:White;">商城通道<small style="margin-left:8px; margin-right:8px;"><a href="javascript:window.history.back()" target="_self" onclick='javascript:window.history.back();'><i class="fa fa-arrow-left"></i> 返回</a></small></span></h3>
+                            </div>
+                            <div class="box-body" style="padding:0px;">
+                                <div class="table-responsive">
+
+                                    <table class="table table-bordered table-striped" id="data_list">
+                                        <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>支付方式</th>
+                                            <th>当前设定</th>
+                                            <th>停用/启用</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="tblData">
+                                        <tr class="tr_h" id="A_10">
+                                            <td><span class="badge bg-gray">1</span></td>
+                                            <td>微　信</td>
+                                            <td class="editInfo_A_10" field="paySupplier">-</td>
+                                            <td><button id="bt_A_10" type="button" class="btn btn-success btn-xs" onfocus="this.blur();" onclick='onOpenRechargeInfo(this,10);'>-</button></td>
+                                        </tr>
+                                        <tr class="tr_h" id="A_20">
+                                            <td><span class="badge bg-gray">2</span></td>
+                                            <td>支付宝</td>
+                                            <td class="editInfo_A_20" field="paySupplier">-</td>
+                                            <td><button id="bt_A_20"  type="button" class="btn btn-success btn-xs" onfocus="this.blur();" onclick='onOpenRechargeInfo(this,20);'>-</button></td>
+                                        </tr>
+                                        <tr class="tr_h" id="A_30">
+                                            <td><span class="badge bg-gray">3</span></td>
+                                            <td>银  联</td>
+                                            <td class="editInfo_A_30" field="paySupplier">-</td>
+                                            <td><button id="bt_A_30"  type="button" class="btn btn-success btn-xs" onfocus="this.blur();" onclick='onOpenRechargeInfo(this,30);'>-</button></td>
+                                        </tr>
+                                        <tr class="tr_h" id="A_40">
+                                            <td><span class="badge bg-gray">4</span></td>
+                                            <td>信用卡</td>
+                                            <td class="editInfo_A_40" field="paySupplier">-</td>
+                                            <td><button id="bt_A_40"  type="button" class="btn btn-success btn-xs" onfocus="this.blur();" onclick='onOpenRechargeInfo(this,40);'>-</button></td>
+                                        </tr>
+                                        <tr class="tr_h" id="A_50">
+                                            <td><span class="badge bg-gray">5</span></td>
+                                            <td>云闪付</td>
+                                            <td class="editInfo_A_50" field="paySupplier">-</td>
+                                            <td><button id="bt_A_50"  type="button" class="btn btn-success btn-xs" onfocus="this.blur();" onclick='onOpenRechargeInfo(this,50);'>-</button></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+
+
+                <div class="row" >
+                    <section class="col-md-6">
+                        <div class="box box-primary box-solid" id="set_num_1" style="padding:0px;">
+                            <div class="box-header with-border">
+                                <h3 class="box-title"><span style="color:White;">商城通道金额设定</span></h3>
+                            </div>
+                            <!--这里是第一排 -->
+                            <table class="table table-bordered table-striped" id="data_num_1">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>支付方式</th>
+                                    <th>当前设定</th>
+                                    <th>提交</th>
+                                </tr>
+                                </thead>
+                                <tbody id="num_1">
+                                <tr class="tr_h">
+                                    <td><span class="badge bg-gray">1</span></td>
+                                    <td>微信</td>
+                                    <td ><input type="text" style="width:380px" id="price10" value="<?=$$payconfig[0]['Price']?>" onkeyup="value=value.replace(/[^\w\.,]/ig,'')"></input></td>
+                                    <td><button id="bt_num_1"  type="button" class="btn btn-success btn-xs" onclick='SetMoneyMb("price10");'>设定</button></td>
+                                </tr>
+
+                                <tr class="tr_h">
+                                    <td><span class="badge bg-gray">2</span></td>
+                                    <td>支付宝</td>
+                                    <td><input type="text"  style="width:380px" id="price20" value="<?=$$payconfig[1]['Price']?>" onkeyup="value=value.replace(/[^\w\.,]/ig,'')"></input></td>
+                                    <td><button id="bt_num_1"  type="button" class="btn btn-success btn-xs" onclick='SetMoneyMb("price20");'>设定</button></td>
+                                </tr>
+
+                                <tr class="tr_h">
+                                    <td><span class="badge bg-gray">3</span></td>
+                                    <td>银联</td>
+                                    <td><input type="text" style="width:380px" id="price30" onkeyup="value=value.replace(/[^\w\.,]/ig,'')"></input></td>
+                                    <td><button id="bt_num_1"  type="button" class="btn btn-success btn-xs" onclick='SetMoneyMb("price30");'>设定</button></td>
+                                </tr>
+
+                                <tr class="tr_h">
+                                    <td><span class="badge bg-gray">4</span></td>
+                                    <td>信用卡</td>
+                                    <td><input type="text" style="width:380px" id="price40" onkeyup="value=value.replace(/[^\w\.,]/ig,'')"></input></td>
+                                    <td><button id="bt_num_1"  type="button" class="btn btn-success btn-xs" onclick='SetMoneyMb("price40");'>设定</button></td>
+                                </tr>
+                                <tr class="tr_h">
+                                    <td><span class="badge bg-gray">5</span></td>
+                                    <td>云闪付</td>
+                                    <td><input type="text" style="width:380px" id="price50" value="<?=$$payconfig[4]['Price']?>" onkeyup="value=value.replace(/[^\w\.,]/ig,'')"></input></td>
+                                    <td><button id="bt_num_1"  type="button" class="btn btn-success btn-xs" onclick='SetMoneyMb("price50");'>设定</button></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <!--end-->
+                        </div>
+                    </section>
+
+                </div>
+
+            </section>
+
+            <script src="/res/js/jquery.jeditable.mini.js" type="text/javascript"></script>
+
+            <script type="text/javascript">
+
+                function SetMoneyMb(a){
+                    var dd=document.getElementById(a).value;
+                    $.ajax({
+                        url: "../ashx/system/system.ashx",
+                        type: "post",
+                        dataType: "json",
+                        data: {
+                            action: "setMoneyMb",
+                            keyvalue:dd,
+                            keytype:a,
+                            CurDateTime: rand()
+                        },
+                        success: function(a) {
+                            a.success ? swal("操作成功.", "", "success") : swal(a.msg, "", "info")
+                        }
+                    })
+                }
+
+
+                function LoadDefaultInfo() {
+                    $.ajax({
+                        url: "../ashx/system/system.ashx",
+                        type: "post",
+                        dataType: "json",
+                        data: {
+                            action: "GetCurrentChangeRechargeInfo",
+                            CurDateTime: rand()
+                        },
+                        success: function(a) {
+                            a.success ? (a.results.length > 0 && $.each(a.results,
+                                function(b) {
+                                    var e = a.results[b].payType,
+                                        f = a.results[b].paySupplier,
+                                        h = a.results[b].Price,
+                                        g = a.results[b].status;
+                                    document.getElementById('price'+e).value =h;
+                                    $(".editInfo_A_"+e).text(arr_paysuplier[f])
+                                    "1" == g ? $("#bt_A_"+e).removeClass().addClass("btn btn-success btn-xs").text("使用中") : $("#bt_A_"+e).removeClass().addClass("btn btn-default btn-xs").text("已停用")
+
+                                }), layer.close(pagei)) : (layer.close(pagei), web_tips("获取列表信息失败,请刷新重试."))
+                        },
+                        beforeSend: function() {
+                            pagei = layer.msg('请稍候..', {icon: 16,shade: 0.01})
+                        }
+                    })
+                }
+                function reloadList() {
+                    //LoadMoneySet(),
+                    LoadDefaultInfo()
+                }
+                function bindHandler() {
+                    var a;
+                    $(".editInfo_A_10").editable("../ashx/system/system.ashx", {
+                        indicator: "<img src='../res/js/plug/jeditable/img/indicator.gif'>",
+                        onblur: "ignore",
+                        data: '<?php echo xn_json_encode($pay10)?>',
+                        event: "click",
+                        style: "inherit",
+                        type: "select",
+                        submit: "保存",
+                        width: 300,
+                        cancel: "取消",
+                        cssclass: "setInput",
+                        onsubmit: function(a, b) {
+                            var c = $(b).find("select").val();
+                            return c = $.trim(c),
+                                c.length <= 0 ? (swal("选择不能为空.", "", "info"), !1) :SetMoneyMb("price10"), void 0
+                        },
+                        submitdata: function(b) {
+                            return a = b,
+                                {
+                                    action: "ChangeRechargeID",
+                                    BeforeValue: a,
+                                    id: $(this).parent().attr("id"),
+                                    field: $(this).attr("field"),
+                                    selectText: $(this).find("option:selected").text(),
+                                    selectValue: $(this).find("option:selected").attr("value")
+                                }
+                        },
+                        callback: function(b) {
+                            var d = jQuery.parseJSON(b);
+                            200 == d.status ? ($(this).text(d.NewValue), swal(d.msg, "", "success")) : ($(this).text(a), swal("设定失败,请重试", "", "info"))
+                        }
+                    }),
+                        $(".editInfo_A_20").editable("../ashx/system/system.ashx", {
+                            indicator: "<img src='../res/js/plug/jeditable/img/indicator.gif'>",
+                            onblur: "ignore",
+                            data: '<?php echo xn_json_encode($pay20)?>',
+                            event: "click",
+                            style: "inherit",
+                            type: "select",
+                            submit: "保存",
+                            width: 300,
+                            cancel: "取消",
+                            cssclass: "setInput",
+                            onsubmit: function(a, b) {
+                                var c = $(b).find("select").val();
+                                return c = $.trim(c),
+                                    c.length <= 0 ? (swal("选择不能为空.", "", "info"), !1) : void 0
+                            },
+                            submitdata: function(b) {
+                                return a = b,
+                                    {
+                                        action: "ChangeRechargeID",
+                                        BeforeValue: a,
+                                        id: $(this).parent().attr("id"),
+                                        field: $(this).attr("field"),
+                                        selectText: $(this).find("option:selected").text(),
+                                        selectValue: $(this).find("option:selected").attr("value")
+                                    }
+                            },
+                            callback: function(b) {
+                                var d = jQuery.parseJSON(b);
+                                200 == d.status ? ($(this).text(d.NewValue), swal(d.msg, "", "success")) : ($(this).text(a), swal("设定失败,请重试", "", "info"))
+                            }
+                        }),
+                        // {'81':'xyzfb0308','52':'xyzfb0526','247':'xyysf0310','55':'wxjpay','78':'啪啪啪','61':'一直付','144':'万汇宝','131':'万易','143':'鑫发','51':'兴业','selected':'2'}
+                        $(".editInfo_A_30").editable("../ashx/system/system.ashx", {
+                            indicator: "<img src='../res/js/plug/jeditable/img/indicator.gif'>",
+                            onblur: "ignore",
+                            data: '<?php echo xn_json_encode($pay30)?>',
+                            event: "click",
+                            style: "inherit",
+                            type: "select",
+                            submit: "保存",
+                            width: 300,
+                            cancel: "取消",
+                            cssclass: "setInput",
+                            onsubmit: function(a, b) {
+                                var c = $(b).find("select").val();
+                                return c = $.trim(c),
+                                    c.length <= 0 ? (swal("选择不能为空.", "", "info"), !1) : void 0
+                            },
+                            submitdata: function(b) {
+                                return a = b,
+                                    {
+                                        action: "ChangeRechargeID",
+                                        BeforeValue: a,
+                                        id: $(this).parent().attr("id"),
+                                        field: $(this).attr("field"),
+                                        selectText: $(this).find("option:selected").text(),
+                                        selectValue: $(this).find("option:selected").attr("value")
+                                    }
+                            },
+                            callback: function(b) {
+                                var d = jQuery.parseJSON(b);
+                                200 == d.status ? ($(this).text(d.NewValue), swal(d.msg, "", "success")) : ($(this).text(a), swal("设定失败,请重试", "", "info"))
+                            }
+                        }),
+                        $(".editInfo_A_40").editable("../ashx/system/system.ashx", {
+                            indicator: "<img src='../res/js/plug/jeditable/img/indicator.gif'>",
+                            onblur: "ignore",
+                            data: '<?php echo xn_json_encode($pay40)?>',
+                            event: "click",
+                            style: "inherit",
+                            type: "select",
+                            submit: "保存",
+                            width: 300,
+                            cancel: "取消",
+                            cssclass: "setInput",
+                            onsubmit: function(a, b) {
+                                var c = $(b).find("select").val();
+                                return c = $.trim(c),
+                                    c.length <= 0 ? (swal("选择不能为空.", "", "info"), !1) : void 0
+                            },
+                            submitdata: function(b) {
+                                return a = b,
+                                    {
+                                        action: "ChangeRechargeID",
+                                        BeforeValue: a,
+                                        id: $(this).parent().attr("id"),
+                                        field: $(this).attr("field"),
+                                        selectText: $(this).find("option:selected").text(),
+                                        selectValue: $(this).find("option:selected").attr("value")
+                                    }
+                            },
+                            callback: function(b) {
+                                var d = jQuery.parseJSON(b);
+                                200 == d.status ? ($(this).text(d.NewValue), swal(d.msg, "", "success")) : ($(this).text(a), swal("设定失败,请重试", "", "info"))
+                            }
+                        }),
+                        $(".editInfo_A_50").editable("../ashx/system/system.ashx", {
+                            indicator: "<img src='../res/js/plug/jeditable/img/indicator.gif'>",
+                            onblur: "ignore",
+                            data: '<?php echo xn_json_encode($pay50)?>',
+                            event: "click",
+                            style: "inherit",
+                            type: "select",
+                            submit: "保存",
+                            width: 300,
+                            cancel: "取消",
+                            cssclass: "setInput",
+                            onsubmit: function(a, b) {
+                                var c = $(b).find("select").val();
+                                return c = $.trim(c),
+                                    c.length <= 0 ? (swal("选择不能为空.", "", "info"), !1) : void 0
+                            },
+                            submitdata: function(b) {
+                                return a = b,
+                                    {
+                                        action: "ChangeRechargeID",
+                                        BeforeValue: a,
+                                        id: $(this).parent().attr("id"),
+                                        field: $(this).attr("field"),
+                                        selectText: $(this).find("option:selected").text(),
+                                        selectValue: $(this).find("option:selected").attr("value")
+                                    }
+                            },
+                            callback: function(b) {
+                                var d = jQuery.parseJSON(b);
+                                200 == d.status ? ($(this).text(d.NewValue), swal(d.msg, "", "success")) : ($(this).text(a), swal("设定失败,请重试", "", "info"))
+                            }
+                        })
+
+
+                }
+                var pagei, arr_paysuplier = <?php echo xn_json_encode($pay)?>,arr_payconfig = <?php echo xn_json_encode($payconfig)?>;
+                $(function() {
+                    LoadDefaultInfo(),
+                        //LoadMoneySet(),
+                        bindHandler()
+                    $(document).on('change','select',function (e) {
+                        var selectval = $(this).val();
+                        var id = $(this).parent().parent().attr('class');
+                        switch (id) {
+                            case 'editInfo_A_10':
+                                $('#price10').val(arr_payconfig[selectval].Price10);
+                                break;
+                            case 'editInfo_A_20':
+                                $('#price20').val(arr_payconfig[selectval].Price20);
+                                break;
+                            case 'editInfo_A_30':
+                                $('#price30').val(arr_payconfig[selectval].Price30);
+                                break;
+                            case 'editInfo_A_40':
+                                $('#price40').val(arr_payconfig[selectval].Price40);
+                                break;
+                            case 'editInfo_A_50':
+                                $('#price50').val(arr_payconfig[selectval].Price50);
+                                break;
+                        }
+                    })
+                });
+
+
+            </script>
+        </div>
+    </div>
+</div>
+
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_footjs.html'); ?>

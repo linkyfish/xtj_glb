@@ -1,0 +1,63 @@
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_head.html'); ?>
+<body>
+<style>
+    .layui-laydate-content th {
+        font-weight: 400;
+        color: white;
+    !important;
+    }
+    tbody td{text-align:left}
+</style>
+<div class="templatemo-flex-row">
+    <?php include _include(__APPDIR__ . 'Controller/Com/View/Public_nav.html'); ?>
+
+    <div class="templatemo-content col-1 light-gray-bg">
+        <?php include _include(__APPDIR__ . 'Controller/Com/View/Public_top.html'); ?>
+        <div class="row content" style="padding:5px 0px 0px 0px;">
+
+            <section class="content">
+				<div class="layui-tab layui-tab-brief" lay-filter="stat_tab">
+					<ul class="layui-tab-title">
+						<li class="layui-this">在线分布</li>
+						<li>注册分布</li>
+<!--						<li>袋里分析</li>-->
+<!--						<li>扩展分析</li>-->
+						<li>留存数据</li>
+						<li>游戏分析</li>
+					</ul>
+					<div class="layui-tab-content">
+						<div class="layui-tab-item layui-show">
+							<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_user_area.html'); ?>
+						</div>
+						<div class="layui-tab-item">
+							<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_user_reg.html'); ?>
+						</div>
+<!--						<div class="layui-tab-item">-->
+<!--							--><?php //include _include(__APPDIR__ . 'Controller/Com/View/Public_user_agent.html'); ?>
+<!--						</div>-->
+<!--						<div class="layui-tab-item">-->
+<!--							--><?php //include _include(__APPDIR__ . 'Controller/Com/View/Public_user_agent_stat.html'); ?>
+<!--						</div>-->
+						<div class="layui-tab-item">
+							<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_user_history.html'); ?>
+						</div>
+						<div class="layui-tab-item">
+							<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_user_game.html'); ?>
+						</div>
+					</div>
+				</div>
+            </section>
+        </div>
+    </div>
+</div>
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_footjs.html'); ?>
+<script src="/js/index.js?ver=<?php echo _CONF('app_v')?>"></script>
+<script src="/js/echarts.min.js?ver=<?php echo _CONF('app_v')?>"></script>
+<script src="/js/china.js?ver=<?php echo _CONF('app_v')?>"></script>
+
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_user_area_js.html'); ?>
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_user_reg_js.html'); ?>
+<?php //include _include(__APPDIR__ . 'Controller/Com/View/Public_user_agent_js.html'); ?>
+<?php //include _include(__APPDIR__ . 'Controller/Com/View/Public_user_agent_stat_js.html'); ?>
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_user_history_js.html'); ?>
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_user_game_js.html'); ?>

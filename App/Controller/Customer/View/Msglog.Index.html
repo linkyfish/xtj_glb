@@ -1,0 +1,82 @@
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>聊天记录</title>
+
+    <link rel="stylesheet" href="../../layui/css/layuicss?ver=<?php echo _CONF('app_v')?>">
+    <style>
+        body .layim-chat-main{height: auto;}
+        .layim-chat-mine .layim-chat-text.back{background-color:#d2d2d2;}
+        .layim-chat-mine .back:after {border-top-color: #d2d2d2 !important;}
+    </style>
+</head>
+<body>
+
+<div class="layim-chat-main">
+    <ul id="LAY_view"></ul>
+</div>
+<div style="text-align:center">
+    <div id="LAY_page" style="margin: 0 auto;"></div>
+</div>
+
+
+<textarea title="消息模版" id="LAY_tpl" style="display:none;">
+{{# layui.each(d.data, function(index, item){
+  if( item.FromID == <?=$agent_id?> && item.Type == 1 ){ }}
+    <li class="layim-chat-mine">  <div class="layim-chat-user"><img src="../../logo.png"><cite>  <i>{{ layui.data.date(item.timestamp) }}</i><?=$user['username']?></cite></div>{{# if(item.Back==1){ }}<div class="layim-chat-text back"> {{ layui.layim.content(item.content) }} </div>{{# }else{ }}<div class="layim-chat-text">{{ layui.layim.content(item.content) }}</div>{{# } }}</li>
+  {{# } else { }}
+    <li><div class="layim-chat-user"><img src="../../logo.png"><cite>{{ item.username }}<i>{{ layui.data.date(item.timestamp) }}</i></cite></div><div class="layim-chat-text">{{ layui.layim.content(item.content) }}</div></li>
+  {{# }
+}); }}
+</textarea>
+
+
+<script src="../../layui/layui.js"></script>
+<script>
+    layui.use(['layim', 'laypage'], function(){
+        var layim = layui.layim
+            ,layer = layui.layer
+            ,laytpl = layui.laytpl
+            ,$ = layui.jquery
+            ,laypage = layui.laypage;
+
+        function get_msg(page) {
+            $.post('../../customer/msglog/log',{id:<?=$id?>,page:page,size:10},function (e) {
+                var html = laytpl(LAY_tpl.value).render({
+                    data: e.results
+                });
+                $('#LAY_view').html(html);
+                if(page==1){
+                    laypage.render({
+                        elem: 'LAY_page'
+                        ,count: e.total
+                        ,groups:3
+                        ,jump: function(obj, first){
+                            //obj包含了当前分页的所有参数，比如：
+                            console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
+                            console.log(obj.limit); //得到每页显示的条数
+
+                            //首次不执行
+                            if(!first){
+                                get_msg(obj.curr)
+                            }
+                        }
+                    });
+                }
+
+            })
+        }
+        get_msg(1);
+
+
+
+
+    });
+</script>
+</body>
+</html>

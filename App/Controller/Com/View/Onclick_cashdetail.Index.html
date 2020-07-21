@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.01, user-scalable=no">
+    <title>Detail</title>
+    <link rel="stylesheet" href="/res/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/res/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/res/css/AdminLTE.css">
+    <link rel="stylesheet" href="/res/css/page.css">
+    <link rel="stylesheet" href="/res/css/laypage.css">
+    <link href="/res/css/bootstrap-timepicker.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/res/css/sweetalert.css">
+	<script>
+        var app_v = <?php echo _CONF('app_v')?>;
+	</script>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="callout callout-danger lead d_tip" style=" display:none; padding:3px;">
+                <h5 class="text-center">此订单已被处理!</h5>
+            </div>
+            <div class="box-body" id="q1">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered">
+                        <tbody>
+                        <tr>
+                            <td nowrap='nowrap' class="text-left">卡主姓名：<span id="AAA"
+                                                                             class="badge bg-gray td_MasterName">-</span>
+                                <button value='copy' onclick="copyvalue('AAA')">copy</button>
+                            </td>
+                            <td nowrap='nowrap' class="text-left">扣费提现：<span id="BBB"
+                                                                             class="badge bg-gray td_CashNum">-</span>
+                                <button value='copy' onclick="copyvalue('BBB')">copy</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td nowrap='nowrap' class="text-left">银行卡号：<span id="CCC"
+                                                                             class="badge bg-gray td_BankNumber">-</span>
+                                <button value='copy' onclick="copyvalue('CCC')">copy</button>
+                            </td>
+                            <td nowrap='nowrap' class="text-left">银行名称：<span id="DDD" class="badge bg-gray td_BankName">-</span>
+                                <button value='copy' onclick="copyvalue('DDD')">copy</button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td nowrap='nowrap' class="text-left">账号类型:<span  class="badge bg-gray ">
+                                    <?php
+                                    if($money_user["id"]){
+                                        echo "代理收益账号";
+                                    }else{
+                                        echo "普通玩家账号";
+                                    }
+                                    ?></span>
+
+                            </td>
+                            <td nowrap='nowrap' class="text-left">上级代理:<span  class="badge bg-gray "><?php echo $this->agent_id_name[$order_user['agent_id']] ?></span></td>
+                        </tr>
+
+						<tr>
+							<td nowrap='nowrap' class="text-left">注册时间：<span class="badge bg-gray"><?php echo $order_user['regtime']?></span></td>
+							<td nowrap='nowrap' class="text-left">上级代理负账:<span  class="badge bg-gray ">
+                                    <?php
+									if(isset($agent["balance"])&&$agent["balance"]<0){
+										echo "<b style='color:red'>".calculate($agent["balance"])."</b>元";
+									}else{
+										echo "无负账";
+									}
+									?>
+                                    </span>
+							</td>
+						</tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="box box-primary box-solid" id="tb_list_2">
+                <div class="box-header with-border">
+                    <h3 class="box-title">
+                        <span style="color: White;">最后20笔进分记录</span></h3>
+                    <div class="box-tools pull-right">
+                        <button data-widget="collapse" class="btn btn-box-tool" type="button">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="box-body" style="display: block; padding: 0px;">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-bordered">
+                            <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>操作人</th>
+                                <th>会员ID</th>
+                                <th>之前分数</th>
+                                <th>设定分数</th>
+                                <th>之后分数</th>
+                                <th>操作IP</th>
+                                <th>日期时间</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tblData_2">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="box box-primary box-solid">
+                <div class="box-header with-border">
+                    <h3 class="box-title text-muted">
+                        <span style="color: White;">游戏记录</span></h3>
+                    <div class="box-tools pull-right">
+                        <button data-widget="collapse" class="btn btn-box-tool" type="button">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="form-group" id="selectGame">
+                        <label class="text-blue">
+                            选择游戏</label>
+                        <select id="select_GameList" class="form-control">
+                            <option value="0">请选择游戏</option>
+                            <?php foreach ($gamelist as $k =>$v){ ?>
+                                <option value="<?php echo  $v['ID'] ?>"><?php echo  $v['Name']?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                    <div class="form-group" id="datetime_begin">
+                        <label class="text-blue">
+                            选择日期</label>
+                        <input type="text" class="form-control" id="txt_StartDateTime" maxlength="10"
+                               onclick="WdatePicker();">
+                    </div>
+                    <div class="bootstrap-timepicker" id="begin_tp">
+                        <div class="bootstrap-timepicker-widget dropdown-menu">
+                            <table>
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <a data-action="incrementHour" href="#"><i
+                                                    class="glyphicon glyphicon-chevron-up"></i>
+                                        </a>
+                                    </td>
+                                    <td class="separator">
+                                        &nbsp;
+                                    </td>
+                                    <td>
+                                        <a data-action="incrementMinute" href="#"><i
+                                                    class="glyphicon glyphicon-chevron-up">
+                                            </i></a>
+                                    </td>
+                                    <td class="separator">
+                                        &nbsp;
+                                    </td>
+                                    <td class="meridian-column">
+                                        <a data-action="toggleMeridian" href="#"><i
+                                                    class="glyphicon glyphicon-chevron-up"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="bootstrap-timepicker-hour">09</span>
+                                    </td>
+                                    <td class="separator">
+                                        :
+                                    </td>
+                                    <td>
+                                        <span class="bootstrap-timepicker-minute">00</span>
+                                    </td>
+                                    <td class="separator">
+                                        &nbsp;
+                                    </td>
+                                    <td>
+                                        <span class="bootstrap-timepicker-meridian">AM</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a data-action="decrementHour" href="#"><i
+                                                    class="glyphicon glyphicon-chevron-down">
+                                            </i></a>
+                                    </td>
+                                    <td class="separator">
+                                    </td>
+                                    <td>
+                                        <a data-action="decrementMinute" href="#"><i
+                                                    class="glyphicon glyphicon-chevron-down">
+                                            </i></a>
+                                    </td>
+                                    <td class="separator">
+                                        &nbsp;
+                                    </td>
+                                    <td>
+                                        <a data-action="toggleMeridian" href="#"><i
+                                                    class="glyphicon glyphicon-chevron-down">
+                                            </i></a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="form-group">
+                            <label class="text-blue">
+                                - 开始时间</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control timepicker" id="txt_StartDateTime_HM">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-clock-o"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bootstrap-timepicker" id="end_tp">
+                        <div class="bootstrap-timepicker-widget dropdown-menu">
+                            <table>
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <a data-action="incrementHour" href="#"><i
+                                                    class="glyphicon glyphicon-chevron-up"></i>
+                                        </a>
+                                    </td>
+                                    <td class="separator">
+                                        &nbsp;
+                                    </td>
+                                    <td>
+                                        <a data-action="incrementMinute" href="#"><i
+                                                    class="glyphicon glyphicon-chevron-up">
+                                            </i></a>
+                                    </td>
+                                    <td class="separator">
+                                        &nbsp;
+                                    </td>
+                                    <td class="meridian-column">
+                                        <a data-action="toggleMeridian" href="#"><i
+                                                    class="glyphicon glyphicon-chevron-up"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="bootstrap-timepicker-hour">09</span>
+                                    </td>
+                                    <td class="separator">
+                                        :
+                                    </td>
+                                    <td>
+                                        <span class="bootstrap-timepicker-minute">00</span>
+                                    </td>
+                                    <td class="separator">
+                                        &nbsp;
+                                    </td>
+                                    <td>
+                                        <span class="bootstrap-timepicker-meridian">AM</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a data-action="decrementHour" href="#"><i
+                                                    class="glyphicon glyphicon-chevron-down">
+                                            </i></a>
+                                    </td>
+                                    <td class="separator">
+                                    </td>
+                                    <td>
+                                        <a data-action="decrementMinute" href="#"><i
+                                                    class="glyphicon glyphicon-chevron-down">
+                                            </i></a>
+                                    </td>
+                                    <td class="separator">
+                                        &nbsp;
+                                    </td>
+                                    <td>
+                                        <a data-action="toggleMeridian" href="#"><i
+                                                    class="glyphicon glyphicon-chevron-down">
+                                            </i></a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="form-group">
+                            <label class="text-blue">
+                                - 结束时间</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control timepicker" id="txt_EndDateTime_HM">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-clock-o"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-footer">
+                    <button type="button" class="btn btn-primary" id="bt_gameLog">游戏记录</button>
+                    <button style="float: right;" type="button" class="btn btn-info" id="bt_rengong">人工打款</button>
+					<button type="button" style="margin-left:36px" class="btn btn-danger" id="bt_cancel">取消订单</button>
+ 					<button type="button" style="margin-left:36px" class="btn btn-warning" id="bt_ok">系统打款</button>
+					<button type="button" style="float: right;margin-right:16px" class="btn btn-default" id="bt_disable">禁用</button>
+                </div>
+
+            </div>
+            <span style="color:green;" id="exec_result"></span>
+            <!--游戏记录列表 开始-->
+
+<!--            <div class="table-responsive">-->
+<!--                <div class="container" id="show_more_hour" style="display: none;">-->
+<!--                    <div class="row">-->
+<!--                        <div class="span4">-->
+<!--                            <div class="tabbable">-->
+<!--                                <ul class="nav nav-tabs" id="detail_tab_title">-->
+<!---->
+<!---->
+<!---->
+<!--                                </ul>-->
+<!--                                <div class="tab-content" id="detail_tab_content">-->
+<!---->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+
+
+            <div class="box box-primary box-solid" id="tb_list_1" style="display: none;">
+
+                <div class="box-body" style="display: block; padding: 0px;">
+                    <div class="table-responsive" id="data_gameLog">
+                        <table class="table table-hover table-bordered" >
+                            <thead>
+                            <tr>
+                                <th>游戏名称</th>
+                                <th>桌子ID</th>
+                                <th>压住</th>
+                                <th>萤分</th>
+                                <th>开始金额</th>
+                                <th>结束金额</th>
+                                <th>日期时间</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tblData" style="height:300px;overflow-y:auto"> </tbody>
+                        </table>
+                    </div>
+                    <!--Pager-->
+                    <div id="pager_gameLogList" class="pull-left"></div>
+                    <div class="overlay" id="overlay_gameLog" style="display:none;">
+                        <i class="fa fa-refresh fa-spin"></i>
+                    </div>
+                </div>
+                <!--游戏记录列表 结束-->
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script src="/layui/layui.all.js?ver=<?php echo _CONF('app_v')?>"></script>
+<script src="/res/js/jquery-1.11.3.min.js"></script>
+<script src="/res/js/bootstrap.min.js"></script>
+<script src="/res/js/app.min.js"></script>
+<script src="/res/js/js-cn.js?ver=<?php echo _CONF('app_v')?>"></script>
+<script src="/res/js/WdatePicker.js" type="text/javascript"></script>
+<script src="/res/js/bootstrap-timepicker.min.js" type="text/javascript"></script>
+<script src="/res/js/laypage.js" type="text/javascript"></script>
+<script src="/res/js/sweetalert.min.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+    var is_init_show=true;
+    function GetGameLogList(a) {
+        $("#exec_result").html(" ");
+        $("#show_more_hour").hide();
+        $("#data_gameLog").hide(), $("#data_gameLog tr:gt(0)").remove();
+        var b = a;
+        ////_currMoney = Number(a.currMoney), $("#td_currMoney").text("余额: " + parseFloat(_currMoney).toFixed(2))
+        _currMoney = 0, _gameID = $("#select_GameList").val(), $.ajax({
+            url: "../ashx/log/log.ashx",
+            type: "post",
+            dataType: "json",
+            timeout: 20000,
+            data: {
+                action: "playerBetLog",
+                sGameID: _gameID,
+                sDate: _sDate,
+                eDate: _eDate,
+                user: _sid,
+                pageIndex: b + 1,
+                pageSize: pageSize2,
+                CurDateTime: rand()
+            },
+            success: function (a) {
+                var c, d,cc;
+                a.success ? (c = a.total, a.results.length > 0 ? (
+                    $("#data_gameLog tr:gt(0)").remove(), d = "", $.each(a.results,
+                        function (b) {
+                            if(cc==undefined){
+                                cc=a.results[b]["EndBlance"];
+                            }
+                            var e, f, g, h, i, j;
+                            if(a.results[b].GameID!=0){
+                                j=parseFloat(Number(a.results[b]["EndBlance"])-Number(a.results[b]["BeginBlance"])).toFixed(2);
+                                h = Number(a.results[b]["TotalBet"]);
+                                h = isNaN(h) ? 0:h;
+                                i=parseFloat(Number(a.results[b]["TotalWin"])-h).toFixed(2);
+
+                                d += a.results[b].RecordIndex!=0 ? '<tr class="tr_h click"  UserId='+a.results[b].UserID+' GameId='+a.results[b].GameID+' RecordIndex='+a.results[b].RecordIndex+' PlayTime='+a.results[b].PlayTime+'>': '<tr class="tr_h">',
+                                    d += "<td>",
+                                    d += a.results[b]["GameName"],
+                                    d += "</td>",
+                                    d += '<td><span class="">',
+                                    d += a.results[b]["tableID"],
+                                    d += "</span></td>",
+                                    d += '<td><span class="">',
+                                    d += a.results[b]["TotalBet"],
+                                    d += "</span></td>",
+                                    d += j==i ? '<td><span class="'+j+' '+i+'">' : '<td><span class="text-red '+j+' '+i+'">',
+                                    d += a.results[b]["TotalWin"],
+                                    d += "</span></td>",
+                                    d += '<td><span class="">',
+                                    d += a.results[b]["BeginBlance"],
+                                    d += "</span></td>",
+                                    d += a.results[b]["EndBlance"]!=cc ? '<td><span class="text-red '+a.results[b]["EndBlance"]+' '+cc+'">':'<td><span class="'+a.results[b]["EndBlance"]+' '+cc+'">',
+                                    d += a.results[b]["EndBlance"],
+                                    d += "</span></td>",
+                                    d += "<td>",
+                                    d += a.results[b]["PlayTime"],
+                                    d += "</td>",
+
+                                    d += "</tr>";
+                            }else{
+                                /**
+                                 1 => '免费领取',
+                                 2 => '绑定账号',
+                                 3 => '任务领取',
+                                 4 => '连续登陆',
+                                 5 => '救济金',
+                                 6 => '升级奖励',
+                                 7 => '银行取钱',
+                                 8 => '敲金猪',
+                                 9 => '转盘奖励',
+                                 25 => '注册送',
+                                 29 => '申请送',
+                                 35 => '系统送',
+                                 36 => '活动送',
+                                 37 => '申请提现',
+                                 38 => '取消提现',
+                                 39 => '禁用提现',
+                                 50 => '短信送',
+                                 51 => '手工上分',
+                                 52 => '手工减分',
+                                 53 => '手工减银行分',
+                                 61 => '商城上分',
+                                 114 => '活动清零'
+                                 *
+                                 */
+
+                                switch (Number(a.results[b]["style"])) {
+                                    case 37:
+                                    case 38:
+                                    case 52:
+                                    case 51:
+                                    case 61:
+                                    case 71:
+                                    case 7:
+                                        d += '<tr class="tr_h text-red">'
+                                        break;
+                                    default:
+                                        d += '<tr class="tr_h text-red" >'
+                                }
+
+                                d += '<td colspan="4" class="tr_h "><span class="">',
+                                    d += _arr[a.results[b]["style"]] ? _arr[a.results[b]["style"]]:a.results[b]["GameName"],
+                                    d+=':',
+                                    d += a.results[b]["TotalWin"],
+                                    d += "</span></td>",
+                                    d += '<td><span class="">',
+                                    d += a.results[b]["BeginBlance"],
+                                    d += "</span></td>",
+                                    d += a.results[b]["EndBlance"]!=cc ? '<td><span class="text-red '+a.results[b]["EndBlance"]+' '+cc+'">':'<td><span class="'+a.results[b]["EndBlance"]+' '+cc+'">',
+                                    d += a.results[b]["EndBlance"],
+                                    d += "</span></td>",
+                                    d += "<td>",
+                                    d += a.results[b]["PlayTime"],
+                                    d += "</td>",
+                                    d += "</tr>";
+
+                            }
+                            cc=a.results[b]["BeginBlance"];
+
+                        }),
+
+                     $("#tblData").append(d), $("#data_gameLog,#t_currMoney").show(), layer.close(pagei),$("#overlay_gameLog").fadeOut(1000), laypage({
+                    cont: "pager_gameLogList",
+                    pages: numPages(c, pageSize2),
+                    skip: !0,
+                    skin: "molv",
+                    first: 1,
+                    last: numPages(c, pageSize2),
+                    prev: "<",
+                    next: ">",
+                    curr: b + 1,
+                    groups: 5,
+                    jump: function (a, b) {
+                        b || pageselectCallback(a.curr - 1)
+                    }
+                })) : ($("#tb_list_1").fadeOut(1000), web_tips(a.msg =='操作成功'?"暂无记录":a.msg), layer.close(pagei))) : ($("#tb_list_1").fadeOut(1000), layer.close(pagei), global_Error500 == a.ERROR_TYPE && (parent.location.href = global_e_p_500), global_NoLicense != a.msg ? web_tips(a.msg) : parent.location.href = global_jump_login)
+            },
+            beforeSend: function () {
+                $("#bt_gameLog").attr("disabled", "disabled").text("正在查询"), pagei =layer.msg('请稍候..', {icon: 16,shade: 0.01})
+            },
+
+            complete: function (XMLHttpRequest, status) {
+                $("#bt_gameLog").removeAttr("disabled").text("游戏记录")
+                layer.close(pagei);
+            }, error:function(){
+                layer.close(pagei);
+            }
+        })
+    }
+
+    function LastScoreLog(a) {
+        return $("#tb_list_2").hide(), $.trim(a).length <= 0 ? !1 : ($.ajax({
+            url: "../ashx/log/log.ashx",
+            type: "post",
+            dataType: "json",
+            data: {action: "Last20ScoreLog", user: a, CurDateTime: getCurrDate()},
+            success: function (a) {
+                var b, c;
+                a.success ? a.results.length > 0 ? ($("#tb_list_2 tr:gt(0)").remove(), b = "", c = 0,
+
+                    $.each(a.results, function (d) {
+                        var i, f = parseFloat(a.results[d].AfterNum).toFixed(2),
+                            g = parseFloat(a.results[d].ScoreNum).toFixed(2), h = a.results[d].Action_Type;
+                            b += '<tr class="tr_h">', b += "<td>", b += a.results[d].Rownum, b += "</td>", b += "<td>", b += a.results[d].Account, b += "</td>", b += "<td>", b += a.results[d].UserName, b += "</td>", Number(f - g).toFixed(2) <= 0 ? (b += "<td>0.00", b += "</td>") : (b += "<td>", b += parseFloat(f - g).toFixed(2), b += "</td>"), i = parseFloat(a.results[d].ScoreNum).toFixed(2);
+                            switch (h) {
+                                case 25:
+                                    b += '<td class="text-left"> 注册送：';
+                                    break;
+                                case 29:
+                                    b += '<td class="text-left"> 申请送：';
+                                    break;
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 8:
+                                case 9:
+                                case 10:
+                                case 17:
+                                case 35:
+                                    b += '<td class="text-left"> ' + _arr[h] + '：';
+                                    break;
+                                case 36:
+                                    b += '<td class="text-left"> 活动送：';
+                                    break;
+                                case 37:
+                                    b += '<td class="text-left text-red"> 提现：';
+                                    break;
+                                case 38:
+                                    b += '<td class="text-left text-red"> 取消提现：';
+                                    break;
+                                case 50:
+                                    b += '<td class="text-left"> 短信送：';
+                                    break;
+                                case 51:
+                                    b += '<td class="text-left text-red"> 手工加：';
+                                    break;
+                                case 52:
+                                    b += '<td class="text-left"> 减分：';
+                                    break;
+                                case 61:
+                                    b += '<td class="text-left text-red"> 商城加：';
+                                    break;
+                                case 71:
+                                    b += '<td class="text-left text-red"> 代理结算：';
+                                    break;
+                                case 114:
+                                    b += '<td class="text-left"> 活动清零调整：';
+                                    break;
+                                default:
+                                    a.results[d].ScoreNum > 0 ? b += '<td class="text-left"> 加分：' : b += '<td class="text-left"> 减分：';
+                            }
+                    b += parseFloat(a.results[d].ScoreNum).toFixed(2), b += "</td>", b += "<td>", b += parseFloat(a.results[d].AfterNum).toFixed(2), b += "</td>", b += "<td>", b += a.results[d].ActionIP, b += "</td>", b += "<td>", b += a.results[d].C_DateTime, b += "</td>", b += "</tr>"
+                }), $("#tblData_2").append(b), $("#tb_list_2").show(), layer.close(pagei)) : (layer.close(pagei), $("#tb_list_2").fadeOut(1000), $("#tb_list_2 tr:gt(0)").remove(), $("#tblData_2").append('<tr class="tr_h"><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>暂无记录</td></tr>')) : (layer.close(pagei), $("#tb_list_2").fadeOut(1000), global_Error500 == a.ERROR_TYPE && (parent.location.href = global_e_p_500), global_NoLicense != a.msg ? ($("#tb_list_2 tr:gt(0)").remove(), $("#tblData_2").append('<tr class="tr_h"><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>暂无记录</td></tr>')) : parent.location.href = global_jump_login)
+            }
+        }), void 0)
+    }
+
+
+    function pageselectCallback(a) {
+        GetGameLogList(a)
+    }
+
+    function GetUserCashInfo(a, c) {
+        return $.trim(a).length <= 0 ? !1 : ($.ajax({
+            url: "../ashx/platOrder/accountCashOrder.ashx",
+            type: "post",
+            dataType: "json",
+            data: {action: "GetUserOrderInfo", DataID: a, User: c, CurDateTime: getCurrDate()},
+            success: function (a) {
+                a.success && a.results.length > 0 && $.each(a.results, function (b) {
+                    $(".td_MasterName").text(a.results[b].BankOwner), $(".td_CashNum").text(parseFloat(a.results[b].RealCashNum).toFixed(2)), $(".td_BankNumber").text(a.results[b].BankNum), $(".td_BankName").text(a.results[b].BankName);
+                    var d = a.results[b].OrderStatus;
+                    d > 10 && ($(".d_tip").show(), $("#bt_ok,#bt_rengong,#bt_cancel,#bt_disable").attr("disabled", "disabled"))
+                })
+            }
+        }), void 0)
+    }
+
+    var pagei, _user, _sDate, _arr, _LogDataStr, _gameID, _eDate, _sid = GetQueryString("sid"),
+        _id = GetQueryString("id"), _currMoney = 0, _LogDataType = 0, pageSize2 = 20,_arr=<?php echo json_encode($this->MoneyTrans->Type)?>;;
+    $(function () {
+        if ($("#txt_StartDateTime").attr("value", getCurrDate()), $("#txt_StartDateTime_HM").timepicker({
+            defaultTime: "00:00:00",
+            showInputs: !1,
+            showMeridian: !1,
+            showSeconds: !0,
+            minuteStep: 5,
+            secondStep: 15
+        }), $("#txt_EndDateTime_HM").timepicker({
+            defaultTime: "23:59:59",
+            showInputs: !1,
+            showMeridian: !1,
+            showSeconds: !0,
+            minuteStep: 5,
+            secondStep: 15
+        }), _sid && "undefined" != typeof _sid && 0 != _sid && 0 !== _sid.length && (_user = _sid, LastScoreLog(_user), _id && "undefined" != typeof _id && 0 != _id && 0 !== _id.length)) {
+            var a = _id;
+            GetUserCashInfo(a, _user)
+			setInterval(function () {
+                GetUserCashInfo(a,_user);
+            },3000);
+        }
+        $("#bt_ok").click(function () {
+            onCashPass(_id,_sid)
+        }), $("#bt_rengong").click(function () {
+            onRenGongCaoZuo(_id,_sid)
+        }), $("#bt_cancel").click(function () {
+            onCancelCashOrder(_id,_sid)
+        }), $("#bt_disable").click(function () {
+            onDisCashOrder(_id,_sid)
+        }), $("#bt_gameLog").click(function () {
+            var a, b, c, d;
+            return $("#pager_gameLogList").html(""), $.trim($("#txt_StartDateTime").val()).length <= 0 || $.trim($("#txt_StartDateTime_HM").val()).length <= 0 || $.trim($("#txt_EndDateTime_HM").val()).length <= 0 ? (web_tips("日期时间不能为空."), !1) : (a = $("#txt_StartDateTime").val(), b = $("#txt_StartDateTime_HM").val(), c = $("#txt_StartDateTime").val(), d = $("#txt_EndDateTime_HM").val(), _sDate = a + " " + b, _eDate = c + " " + d, $("#pager_gameLogList").html(""), GetGameLogList(0), $("#tb_list_1").fadeIn(1000), void 0)
+        })
+    });
+</script>
+<script type="text/javascript">
+
+
+
+    function copyvalue(idvalue) {
+        const range = document.createRange();
+        range.selectNode(document.getElementById(idvalue));
+        const selection = window.getSelection();
+        if (selection.rangeCount > 0)
+            selection.removeAllRanges();
+        selection.addRange(range);
+        document.execCommand('copy');
+        layer.msg('复制成功', {
+            icon: 1,
+            time: 1500
+        })
+    }
+
+
+    function request_log_game(start_time,end_time,i,is_shoudong){
+        $("#sel_txt_"+i).html("正在查询。。。")
+        $("#sel_btn_"+i).hide();
+        $.ajax({
+            url: "../ashx/log/log.ashx",
+            type: "post",
+            dataType: "json",
+            data: {
+                action: "playerBetLog2",
+                sGameID: $('#select_GameList').val(),
+                sDate: start_time,
+                eDate: end_time,
+                user: _sid,
+                CurDateTime: rand()
+            },
+            timeout: 15000,
+            success: function (t) {
+                if (t.success) {
+                    $("#game_record_"+i).html('<div class="box box-primary box-solid" id="tb_list_'+i+'" >\n' +
+                        '                        <div class="box-header with-border">\n' +
+                        '                            <h3 class="box-title text-bold">\n' +
+                        '                                <span style="color:White;">详情列表</span>\n' +
+                        '\n' +
+                        '                            </h3>\n' +
+                        '                            <div class="box-tools pull-right">\n' +
+                        '                                <button data-widget="collapse" class="btn btn-box-tool" type="button"><i class="fa fa-minus"></i></button>\n' +
+                        '                            </div>\n' +
+                        '                        </div>\n' +
+                        '                        <div class="box-body" style="display: block; padding:0px;">\n' +
+                        '                            <div class="table-responsive">\n' +
+                        '                                <table class="table table-hover table-bordered">\n' +
+                        '                                    <thead>\n' +
+                        '                                    <tr>\n' +
+                        '                                        <th>玩家id</th>\n' +
+                        '                                        <th>游戏名称</th>\n' +
+                        '                                        <th>房间号</th>\n' +
+                        '                                        <th>总压</th>\n' +
+                        '                                        <th>总萤</th>\n' +
+                        '                                        <th>总输</th>\n' +
+                        '                                        <th>抽水</th>\n' +
+                        '                                        <th>本局游戏结束后身上的余额</th>\n' +
+                        '                                        <th>游戏时间</th>\n' +
+                        '                                        <th>代理ID</th>\n' +
+                        '                                    </tr>\n' +
+                        '                                    </thead>\n' +
+                        '                                    <tbody id="tblData_'+i+'"></tbody>\n' +
+                        '                                </table>\n' +
+                        '                            </div>\n' +
+                        '                        </div>\n' +
+                        '                    </div>')
+
+                    if (t.results.length > 0) {
+
+                        var e = "";
+                        $.each(t.results,
+                            function (a, l) {
+                                if(t.results[a].DeskStation=='next_row'){
+                                    e +="<tr>" +
+                                        "<td></td>" +
+                                        "<td></td>" +
+                                        "<td></td>" +
+                                        "<td></td>" +
+                                        "<td></td>" +
+                                        "<td></td>" +
+                                        "<td></td>" +
+                                        "<td></td>" +
+                                        "<td></td>" +
+                                        "<td></td>" +
+                                        "</tr>"
+                                    return true;
+                                }
+                                e += '<tr  id="-1" UserId='+t.results[a].UserID+' GameId='+t.results[a].GameID+' RecordIndex='+t.results[a].RecordIndex+' PlayTime='+t.results[a].PlayTime+'>',
+                                    e += "<td>";
+                                e += t.results[a].UserID;
+                                e += "</td>";
+                                e += "<td>";
+                                e += t.results[a].GameName;
+                                e += "</td>";
+                                e += "<td>";
+                                e += t.results[a].RoomID;
+                                e += "</td>";
+                                e += "<td>";
+                                e += t.results[a].TotalBet;
+                                e += "</td>";
+                                e += "<td>";
+                                e += t.results[a].TotalWin;
+                                e += "</td>";
+                                e += "<td>";
+                                e += t.results[a].TotalLoss ;
+                                e += "</td>";
+                                e += "<td>";
+                                e += t.results[a].Tax ;
+                                e += "</td>";
+                                e += "<td>";
+                                e += t.results[a].WalletMoney ;
+                                e += "</td>";
+                                e += "<td>";
+                                e += t.results[a].GameTime;
+                                e += "</td>";
+                                e += "<td>";
+                                e += t.results[a].AgentID;
+                                e += "</td>";
+                                e += "</tr>"
+                            });
+
+                        $("#tblData_"+i).append(e);
+                        if(is_init_show){
+                            $("#li_"+i).children().trigger("click")
+                            is_init_show=false;
+                        }
+                        layer.close(pagei)
+                    } else {
+
+                        $("#li_"+i).remove();
+                        $("#game_record_"+i).remove();
+                        if(is_shoudong){
+                            $("#exec_result").html("查询完成。该时段玩家没有游戏记录 ");
+                        }
+
+
+                        setTimeout(function(){
+                            $("#exec_result").html(" ");
+                        },4000)
+                        layer.close(pagei);
+
+                        // web_tips("暂无记录.")
+                    }
+                } else {
+                    layer.close(pagei);
+                    if (global_Error500 == t.ERROR_TYPE) {
+                        parent.location.href = global_e_p_500
+                    }
+                    if (global_NoLicense != t.msg) {
+                        //web_tips("暂无记录.");
+                        $("#tb_list").fadeOut(1000)
+                    } else {
+                        parent.location.href = global_jump_login
+                    }
+                }
+            },
+            complete:function (XMLHttpRequest, status) {
+                if (status == 'timeout'){
+                    $("#sel_txt_"+i).html("查询超时，请点击下方按钮重新查询该时段数据。。。")
+                    $("#sel_btn_"+i).show()
+                }else{
+                    $("#Button_OK").removeAttr("disabled").text("确定");
+
+                }
+
+            },
+            error:function(){
+                $("#sel_txt_"+i).html("查询超时，请点击下方按钮重新查询。。。")
+                $("#sel_btn_"+i).show()
+            },
+            beforeSend:function(){
+
+                // web_tips("正在查询"+o.start_time+"~"+o.end_time+"...")
+            }
+
+        })
+    }
+
+
+</script>
+

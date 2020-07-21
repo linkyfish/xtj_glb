@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.01, user-scalable=yes">
+    <title>Show Bet Info</title>
+    <link rel="stylesheet" href="/res/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/res/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/res/css/AdminLTE.css">
+    <link rel="stylesheet" href="/res/css/page.css" />
+    <script src="/res/js/jquery-1.11.3.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $.ajax({
+            url: "/ashx/common/CheckLogin.ashx",
+            type: "post",
+            dataType: "json",
+            data: { "action": "CheckLogin" },
+            success: function(result) {
+                if (!result.success) {
+                    parent.location.href = "../Login.aspx";
+                }
+            }
+        });
+    </script>
+</head>
+<?php
+$PrizeIndex=[
+   0=>'狮子',1=>'熊猫',2=>'猴子',3=>'兔子',4=>'狮子',5=>'熊猫',6=>'猴子',7=>'兔子',8=>'狮子',9=>'熊猫',10=>'猴子',11=>'兔子'
+];
+?>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <tbody>
+                    <tr>
+                        <td class="text-left">游戏名称: <span class="badge bg-yellow"><?php echo $game['GameName']?></span</td>
+                    </tr>
+                    <tr>
+                        <td class="text-left">日期时间: <span class="badge bg-yellow"><?php echo date('Y-m-d H:i:s',$PlayTime) ?></span></td>
+                    </tr>
+                    <tr>
+                        <td class="text-center"> <?php echo $PrizeIndex[$record['data']['General']['PrizeIndex']]?> </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div class="tb_info" style="text-align:center">
+                    <table border="1" cellspacing="1" cellpadding="1" class="tb_List" style="width:98%;margin:auto" >
+                        <tr>
+                            <td style="width:32px; background-color:#D4D4D4;">信息</td>
+                            <td style="width:32px; background-color:Red;"><?php echo $PrizeIndex[0]?></td>
+                            <td style="width:32px; background-color:Red;"><?php echo $PrizeIndex[1]?></td>
+                            <td style="width:32px; background-color:Red;"><?php echo $PrizeIndex[2]?></td>
+                            <td style="width:32px; background-color:Red;"><?php echo $PrizeIndex[3]?></td>
+                        </tr>
+
+                        <tr>
+                            <td>
+<!--                                <div class="text-danger text-sm text-blue">赔率:</div>-->
+                                <div class="text-danger text-sm text-green">压住:</div>
+                                <div class="text-danger text-sm text-red">萤分:</div>
+                            </td>
+
+                            <td>
+<!--                                <div class="text-danger text-sm text-blue">46</div>-->
+                                <div class="text-danger text-sm text-green"><?php echo $this->calculate($record['data']['Player']['AreaNotedMoney0'])?></div>
+                                <div class="text-danger text-sm text-red"><?php echo $this->calculate($record['data']['Player']['AreaWinMoney0'])?></div>
+                            </td>
+
+                            <td>
+<!--                                <div class="text-danger text-sm text-blue">23</div>-->
+                                <div class="text-danger text-sm text-green"><?php echo $this->calculate($record['data']['Player']['AreaNotedMoney1'])?></div>
+                                <div class="text-danger text-sm text-red"><?php echo $this->calculate($record['data']['Player']['AreaWinMoney1'])?></div>
+                            </td>
+
+                            <td>
+<!--                                <div class="text-danger text-sm text-blue">13</div>-->
+                                <div class="text-danger text-sm text-green"><?php echo $this->calculate($record['data']['Player']['AreaNotedMoney2'])?></div>
+                                <div class="text-danger text-sm text-red"><?php echo $this->calculate($record['data']['Player']['AreaWinMoney2'])?></div>
+                            </td>
+
+                            <td>
+<!--                                <div class="text-danger text-sm text-blue">8</div>-->
+                                <div class="text-danger text-sm text-green"><?php echo $this->calculate($record['data']['Player']['AreaNotedMoney3'])?></div>
+                                <div class="text-danger text-sm text-red"><?php echo $this->calculate($record['data']['Player']['AreaWinMoney3'])?></div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="width:32px; background-color:#D4D4D4;">信息</td>
+                            <td style="width:32px; background-color:Red;"><?php echo $PrizeIndex[4]?></td>
+                            <td style="width:32px; background-color:Red;"><?php echo $PrizeIndex[5]?></td>
+                            <td style="width:32px; background-color:Red;"><?php echo $PrizeIndex[6]?></td>
+                            <td style="width:32px; background-color:Red;"><?php echo $PrizeIndex[7]?></td>
+                        </tr>
+
+                        <tr>
+                            <td>
+<!--                                <div class="text-danger text-sm text-blue">赔率:</div>-->
+                                <div class="text-danger text-sm text-green">压住:</div>
+                                <div class="text-danger text-sm text-red">萤分:</div>
+                            </td>
+
+                            <td>
+<!--                                <div class="text-danger text-sm text-blue">46</div>-->
+                                <div class="text-danger text-sm text-green"><?php echo $this->calculate($record['data']['Player']['AreaNotedMoney4'])?></div>
+                                <div class="text-danger text-sm text-red"><?php echo $this->calculate($record['data']['Player']['AreaWinMoney4'])?></div>
+                            </td>
+
+                            <td>
+<!--                                <div class="text-danger text-sm text-blue">23</div>-->
+                                <div class="text-danger text-sm text-green"><?php echo $this->calculate($record['data']['Player']['AreaNotedMoney5'])?></div>
+                                <div class="text-danger text-sm text-red"><?php echo $this->calculate($record['data']['Player']['AreaWinMoney5'])?></div>
+                            </td>
+
+                            <td>
+<!--                                <div class="text-danger text-sm text-blue">13</div>-->
+                                <div class="text-danger text-sm text-green"><?php echo $this->calculate($record['data']['Player']['AreaNotedMoney6'])?></div>
+                                <div class="text-danger text-sm text-red"><?php echo $this->calculate($record['data']['Player']['AreaWinMoney6'])?></div>
+                            </td>
+
+                            <td>
+<!--                                <div class="text-danger text-sm text-blue">8</div>-->
+                                <div class="text-danger text-sm text-green"><?php echo $this->calculate($record['data']['Player']['AreaNotedMoney7'])?></div>
+                                <div class="text-danger text-sm text-red"><?php echo $this->calculate($record['data']['Player']['AreaWinMoney7'])?></div>
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td style="width:32px; background-color:#D4D4D4;">信息</td>
+                            <td style="width:32px; background-color:Red;"><?php echo $PrizeIndex[8]?></td>
+                            <td style="width:32px; background-color:Red;"><?php echo $PrizeIndex[9]?></td>
+                            <td style="width:32px; background-color:Red;"><?php echo $PrizeIndex[10]?></td>
+                            <td style="width:32px; background-color:Red;"><?php echo $PrizeIndex[11]?></td>
+                        </tr>
+
+                        <tr>
+                            <td>
+<!--                                <div class="text-danger text-sm text-blue">赔率:</div>-->
+                                <div class="text-danger text-sm text-green">压住:</div>
+                                <div class="text-danger text-sm text-red">萤分:</div>
+                            </td>
+
+                            <td>
+<!--                                <div class="text-danger text-sm text-blue">46</div>-->
+                                <div class="text-danger text-sm text-green"><?php echo $this->calculate($record['data']['Player']['AreaNotedMoney8'])?></div>
+                                <div class="text-danger text-sm text-red"><?php echo $this->calculate($record['data']['Player']['AreaWinMoney8'])?></div>
+                            </td>
+
+                            <td>
+<!--                                <div class="text-danger text-sm text-blue">23</div>-->
+                                <div class="text-danger text-sm text-green"><?php echo $this->calculate($record['data']['Player']['AreaNotedMoney9'])?></div>
+                                <div class="text-danger text-sm text-red"><?php echo $this->calculate($record['data']['Player']['AreaWinMoney9'])?></div>
+                            </td>
+
+                            <td>
+<!--                                <div class="text-danger text-sm text-blue">13</div>-->
+                                <div class="text-danger text-sm text-green"><?php echo $this->calculate($record['data']['Player']['AreaNotedMoney10'])?></div>
+                                <div class="text-danger text-sm text-red"><?php echo $this->calculate($record['data']['Player']['AreaWinMoney10'])?></div>
+                            </td>
+
+                            <td>
+<!--                                <div class="text-danger text-sm text-blue">8</div>-->
+                                <div class="text-danger text-sm text-green"><?php echo $this->calculate($record['data']['Player']['AreaNotedMoney11'])?></div>
+                                <div class="text-danger text-sm text-red"><?php echo $this->calculate($record['data']['Player']['AreaWinMoney11'])?></div>
+                            </td>
+                        </tr>
+
+
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

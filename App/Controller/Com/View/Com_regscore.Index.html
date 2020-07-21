@@ -1,0 +1,106 @@
+<?php include _include(__APPDIR__.'Controller/Com/View/Public_head.html');?>
+<body>
+<div class="templatemo-flex-row">
+    <?php include _include(__APPDIR__.'Controller/Com/View/Public_nav.html');?>
+
+    <div class="templatemo-content col-1 light-gray-bg">
+        <?php include _include(__APPDIR__.'Controller/Com/View/Public_top.html');?>
+        <div class="row content" style="padding:5px 0px 0px 0px;">
+            <style>
+                .layui-table-view .layui-table .layui-table-cell{text-align:center}
+            </style>
+            <section class="content">
+                <div class="box box-primary box-solid">
+                    <div class="box-header with-border">
+                        <h3 class="box-title text-muted"><span style=" color:White;">注册送分(剩余:<?=$agent['reg_set']?>,已送:<?=$agent['reg_give_num']?>)<small
+                                        style="margin-left:8px; margin-right:8px;"><a
+                                            href="javascript:window.history.back()" target="_self"
+                                            onclick='javascript:window.history.back();'><i class="fa fa-arrow-left"></i> 返回</a></small></span>
+                        </h3>
+                    </div>
+
+
+                        <table class="layui-hide" id="<?php echo $__PRE__?>table" lay-filter="<?php echo $__PRE__?>table"></table>
+
+                </div>
+
+            </section>
+
+        </div>
+    </div>
+</div>
+
+
+<?php include _include(__APPDIR__.'Controller/Com/View/Public_footjs.html');?>
+
+<script>
+    var  <?php echo $__PRE__?>table = table.render({
+        elem: '#<?php echo $__PRE__?>table'
+        ,url:'../../com/com_RegScore.aspx'
+
+        ,where: {action:'new_player'}
+        ,height: 'full-160'
+        ,cols: [[
+            {field:'usrid', title:'玩家短号', width:160, unresize: true}
+            ,{field:'openid', title:'玩家账户', minWidth:120}
+            ,{field:'regtime', title:'注册时间', minWidth:160}
+            ,{field:'doit', title:'操作', width:240,templet:function (d) {
+					var e;
+                    e="";
+					if(0==parseInt(d.reg_give)){
+                        e += '<button type="button" class="btn btn-warning btn-xs" title="' + e + '" onfocus="this.blur();" onclick=\'onRegSong(this,"' + d.openid + '","' +d.usrid + '");\'>注册送</button>'
+                    }else if(1==parseInt(d.reg_give)){
+                        e += '<button type="button" class="btn btn-success btn-xs" title="' + e + '" onfocus="this.blur();" >已赠送</button>'
+                    }else if(2==parseInt(d.reg_give)){
+                        e += '<button type="button" class="btn btn-default btn-xs" title="' + e + '" onfocus="this.blur();" >已忽略</button>'
+                    }
+                    return e;
+                }},{field:'d', title:''}
+        ]]
+        ,response: {
+            statusCode: "0000"
+        }
+        ,parseData: function(res){
+            return {
+                "code": res.resp_code,
+                "msg": res.msg,
+                "data": res.data
+            };
+        }
+    });
+
+
+    table.on('tool(<?php echo $__PRE__?>table)', function(obj){
+        var data = obj.data;
+        var layEvent = obj.event;
+        var tr = obj.tr;
+
+        var is_reg_give = <?=$agent['is_reg_give']?>;
+        var reg_set = <?=$agent['reg_set']?>;
+        if(reg_set<1||is_reg_give!=1){
+            layer.msg('尚未开启注册送');
+            return false;
+        }
+        if(layEvent === 'ignore'){
+            layer.confirm('忽略赠送以后不能再赠送哦！', {icon: 3, title:'忽略注册送确认'}, function(index){
+                $.post('../../com/com_RegScore.aspx',{action:'send',type:2,usrid:data.usrid},function (e) {
+                    layer.close(index);
+                    layer.msg(e.msg)
+                    <?php echo $__PRE__?>table.reload()
+                });
+            });
+        } else if(layEvent === 'send'){
+            layer.confirm('赠送玩家<?=$agent['reg_mark']?>元', {icon: 3, title:'赠送确认'}, function(index){
+                $.post('../../com/com_RegScore.aspx',{action:'send',type:1,usrid:data.usrid},function (e) {
+                    layer.close(index);
+                    layer.msg(e.msg)
+
+                    <?php echo $__PRE__?>table.reload()
+                });
+            });
+        }
+    });
+
+
+</script>
+

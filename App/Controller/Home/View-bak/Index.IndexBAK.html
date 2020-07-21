@@ -1,0 +1,1014 @@
+
+
+<!DOCTYPE HTML>
+
+<html>
+<head>
+
+
+    <!-- 讯息框样式改版 CSS -->
+    <link href="/home/static/css/message-20200214_49.css" rel="stylesheet" type="text/css">
+    <link href="/home/static/css/font-awesome.min-20200214_49.css" rel="stylesheet" type="text/css">
+    <!-- meta整合资讯 -->
+    <!-- OG:Tag 是 Open Graph Tag 的简称，一开始是 Facebook 提出的规范，再网页 HTML 标头 <head> 中描述这个资源希望被抓取的资讯，如果有了这些资讯，机器人就不需要解析整份网页，也能够显示最适合的缩图与文字标题等等。 -->
+
+    <meta charset="utf-8"><!-- 指定网页编码 -->
+    <meta http-equiv="imagetoolbar" content="no"><!-- 可关掉网页图片左上方储存影像按钮的工具列。 -->
+    <meta name="robots" content="ALL"><!-- 搜寻引擎的小蜘蛛可以索引本页，且可跟踪该页连结。 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><!-- 给iphone，在行动版时画面不准许缩放 -->
+    <meta name="keyword" content=",">
+    <meta name="Description" content="">
+    <link rel="image_src" href="/home/static/image/logo.png">
+
+    <!-- 製作者 -->
+    <meta name="copyright" content=""><!-- 版权宣告 -->
+    <meta name="description" content="">
+
+    <title>官方网站 - 官方网站
+    </title>
+    <script type="text/javascript" src="/home/static/js/jquery-1.8.3.min.js"></script>
+    <!-- 共用样式 -->
+    <link href="/home/static/css/master.css" rel="stylesheet" type="text/css">
+    <!-- 页面样式 -->
+    <link href="/home/static/css/style.css" rel="stylesheet" type="text/css">
+    <!-- RWD -->
+    <link rel="stylesheet" media="(max-width:812px)" href="/home/static/css/rwd.css">
+</head>
+<body>
+<!-- 登入及注册 -->
+
+
+<div class="content--before"></div>
+
+<div class="login_box">
+    <div class="lar_click"></div>
+    <div class="container">
+        <h3>会员登入</h3>
+        <div class="navMenu__x"><i class="fa fa-times fa-2x"></i></div>
+
+        <!-- Loading 相关所需的js与css -->
+        <script type="text/javascript" src="/home/static/js/loading.js"></script>
+        <link href="/home/static/css/loading.css" rel="stylesheet">
+        <link href="/home/static/css/Custom.css" rel="stylesheet">
+        <style type="text/css"> .lwionmiswzyulohmgwwdru0 {/*display: none;*/ /*display: none;*/  display: none; /*display: none;*/ }  .lwionmiswzyulohmgwwdru1 {/*display: none;*/ display: none;}  .lwionmiswzyulohmgwwdru2 {/*display: none;*/ display: none; /*display: none;*/ }  .lwionmiswzyulohmgwwdru3 {/*display: none;*/}  .lwionmiswzyulohmgwwdru4 {/*display: none;*/ display: none; /*display: none;*/ }  .lwionmiswzyulohmgwwdru5 {/*display: none;*/ display: none;}  .lwionmiswzyulohmgwwdru6 {/*display: none;*/ /*display: none;*/  display: none; /*display: none;*/ }  .lwionmiswzyulohmgwwdru7 {/*display: none;*/ display: none;} </style>
+
+        <div class="box box--styleB" id="member-login-message-box" style="display: none;">
+            <ul class="list list--styleB">
+                <li><i class="fa fa-exclamation-circle"></i></li>
+                <li id=""><!-- 登入讯息显示区块 --></li>
+            </ul>
+        </div>
+        <form id="form_tmd_login" class="form form--styleA">
+            <input type="text" name="f_strID" id="f_strIDLogin" placeholder="帐号" maxlength="16">
+            <input type="checkbox" id="f_bSaveIDLogin" name="f_bSaveID" checked/="">
+            <label for="f_bSaveIDLogin">记住帐号</label>
+
+            <input type="hidden" name="strTempHashed_TMD_Login" id="strTempHashed_TMD_Login0" class="lwionmiswzyulohmgwwdru0">
+
+            <input type="hidden" name="strTempHashed_TMD_Login" id="strTempHashed_TMD_Login1" class="lwionmiswzyulohmgwwdru1">
+
+            <input type="hidden" name="strTempHashed_TMD_Login" id="strTempHashed_TMD_Login2" class="lwionmiswzyulohmgwwdru2">
+
+            <input type="hidden" name="strTempHashed_TMD_Login" id="strTempHashed_TMD_Login3" class="lwionmiswzyulohmgwwdru3">
+
+            <input type="hidden" name="strTempHashed_TMD_Login" id="strTempHashed_TMD_Login4" class="lwionmiswzyulohmgwwdru4">
+
+            <input type="hidden" name="strTempHashed_TMD_Login" id="strTempHashed_TMD_Login5" class="lwionmiswzyulohmgwwdru5">
+
+            <input type="hidden" name="strTempHashed_TMD_Login" id="strTempHashed_TMD_Login6" class="lwionmiswzyulohmgwwdru6">
+
+            <input type="hidden" name="strTempHashed_TMD_Login" id="strTempHashed_TMD_Login7" class="lwionmiswzyulohmgwwdru7">
+
+            <input type="hidden" name="f_0nu9CHXzCLUrakTmtKR799NRObUKmZKx7U8Tls021UNcpPrLbNvr28D7qcQOP" id="f_0nu9CHXzCLUrakTmtKR799NRObUKmZKx7U8Tls021UNcpPrLbNvr28D7qcQOP" value="" placeholder="密码" maxlength="14" class="lwionmiswzyulohmgwwdru8">
+            <div class="box_VerifyCode">
+                <img id="imgVerifyCodeLogin" style="width: 6em; margin: 9px 5px 5px 5px; float: left; cursor: pointer;" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" border="0" onclick="ResetVerifyCode('Login') ;">
+                <i class="fa fa-repeat" aria-hidden="true" style="float: left; font-size: 1.5em; line-height: 34px; margin: 5px 10px 5px 5px; color: #aaaaaa; cursor: pointer;" onclick="ResetVerifyCode('Login') ;" onmouseover="this.style.color = '#13b1e5';" onmouseout="this.style.color ='#aaaaaa';"></i>
+                <input type="text" name="f_strVerifyCode" id="f_strVerifyCodeLogin" placeholder="验证码" maxlength="4" style="float: left; width: 5em;" value="验证码" onkeydown="logEvent('1');" onkeypress="logEvent('2');" onkeyup="logEvent('3');" onpaste="logEvent('4');">
+            </div>
+
+        </form>
+        <div class="btn__group"><a href="javascript: ClickLogin()" class="button button--styleA color--backgroundA" style="width:80%">登入</a></div>
+        <div class="box linkText">
+            <ul>
+                <li class="SignUp"><a href="javascript: void(0)" onclick="if(IsLogin()){document.location.href = '/games/tmd/index.aspx' ;} ResetVerifyCode()">加入会员</a></li>
+                <li><a href="email-tmd.html">忘记密码</a></li>
+            </ul>
+        </div>
+        <div class="box box--styleA login-button" style="display:">
+            <p>使用其他帐号登入</p>
+            <ul>
+                <li>&nbsp;</li>
+                <li class="button_FB" style="display:"><a href="ad-mobile_page_fb_login_hit_1_ht1.html"><i class="fab fa-facebook-f fa-1x"></i></a></li>
+                <li class="button_yahoo" style="display:"><a href="ad-mobile_page_yahoo_login_hit_11.html"><i class="fab fa-yahoo fa-1x"></i></a></li>
+                <li class="button_google" style="display:"><a href="ad-mobile_page_google_login_hit_1.html"><i class="fab fa-google-plus-g fa-1x"></i></a></li>
+                <li class="button_msn" style="display:"><a href="ad-mobile_page_msn_login_hit_1_h1.html"><i class="fab fa-windows fa-1x"></i></a></li>
+                <li class="button_line" style="display:"><a href="ad-mobile_page_line_login_hit_1_1.html"><i class="fab fa-line fa-2x"></i></a></li>
+                <li>&nbsp;</li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+<div class="register_box">
+    <div class="lar_click"></div>
+    <div class="container">
+        <h3>免费注册</h3>
+        <div class="navMenu__x"><i class="fa fa-times fa-2x"></i></div>
+
+        <div class="box box--styleB" id="member-register-message-box" style="display: none;">
+            <ul class="list list--styleB">
+                <li><i class="fa fa-exclamation-circle"></i></li>
+                <li>
+                    <!-- 讯息区块 -->
+                </li>
+            </ul>
+        </div>
+        <form class="form form--styleA">
+            <input type="text" name="f_strID" id="f_strIDRegister" placeholder="帐号" maxlength="14" onkeydown="checkCounter();" oninput="checkCounter();">
+            <input type="password" name="f_strPassword" id="f_strPasswordRegister" placeholder="密码" maxlength="14">
+            <input type="password" name="f_strPassword2" id="f_strPassword2" placeholder="再次确认密码" maxlength="14">
+            <input type="email" name="f_strRegisterEMail" id="f_strRegisterEMail" placeholder="E-mail 电子信箱" maxlength="60">
+            <div class="register" style="display:flex; justify-content: center;">
+                <div id="div_RegisterCode" class="box_VerifyCode">
+
+                    <img id="imgVerifyCodeRegister" style="width: 6em; margin: 9px 5px 5px 5px; float: left; cursor: pointer;" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" border="0" onclick="ResetVerifyCode() ;">
+                    <i class="fa fa-repeat" aria-hidden="true" style="float: left; font-size: 1.5em; line-height: 34px; margin: 5px 10px 5px 5px; color: #aaaaaa; cursor: pointer;" onclick="ResetVerifyCode() ;" onmouseover="this.style.color = '#13b1e5';" onmouseout="this.style.color ='#aaaaaa';"></i>
+                    <input type="text" name="f_strVerifyCode" id="f_strVerifyCodeRegister" placeholder="验证码" maxlength="4" style="float: left; width: 5em;">
+
+                </div>
+            </div>
+            <div style="clear: both">
+                <input type="checkbox" name="f_bConsent" id="f_bConsentRegister" checked="checked">
+                <label for="f_bConsentRegister">我同意<a class="iframe" href="membercontract-tmd_platforms.html" target="_blank">使用者合约</a>和<a class="iframe" href="useragreement-tmd_platforms.html" target="_blank">个人资料保护政策</a></label>
+                <input type="hidden" name="f_bAutoSaveID" id="f_bAutoSaveIDRegister" value="True">
+            </div>
+        </form>
+        <p>&nbsp;</p>
+        <a href="javascript:void(0);" class="button button--styleA color--backgroundA" onclick="Register();">确定申请会员</a>
+
+
+
+
+    </div>
+</div>
+
+
+
+<!-- 右侧滑动按钮 -->
+
+<div class="RwdPcData">
+    <style>
+        @import url("/home/static/css/font-awesome.min-20200214_49.css");
+        #abgne_float_ad { position: fixed; width:133px; font-size:12px; text-align:center; padding-bottom:5px;border-radius: 5px; z-index:9999; right:20px; top:25%; display:block;
+            /*border-top-left-radius:     5px;
+            border-top-right-radius:    5px;
+            border-bottom-right-radius: 50% 25px;
+            border-bottom-left-radius:  50% 25px;*/
+            border:1px solid #7c7c7c; color:#FFF;
+            background: #494949; /* Old browsers */
+            background: -moz-linear-gradient(top, #494949 0%, #161616 8%, #3f3f3f 8%, #000000 34%, #000000 99%); /* FF3.6-15 */
+            background: -webkit-linear-gradient(top, #494949 0%,#161616 8%,#3f3f3f 8%,#000000 34%,#000000 99%); /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(to bottom, #494949 0%,#161616 8%,#3f3f3f 8%,#000000 34%,#000000 99%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#494949', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
+        }
+
+        /*标题字*/
+        #abgne_float_ad .slogan { position:relative; line-height:35px; font-size:120%;}
+        #abgne_float_ad .logo_tmd {
+            position:absolute;
+            top:-55px;
+            left:-1px;
+            width:133px;
+            height:60px;
+            border-radius:5px 5px 0 0;
+            border:1px solid #7c7c7c;
+            border-bottom:none;
+            /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+62,494949+90 */
+            background: #000000; /* Old browsers */
+            background: -moz-linear-gradient(top, #000000 62%, #494949 90%); /* FF3.6-15 */
+            background: -webkit-linear-gradient(top, #000000 62%,#494949 90%); /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(to bottom, #000000 62%,#494949 90%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#494949',GradientType=0 ); /* IE6-9 */
+        }
+        #abgne_float_ad .logo_tmd a{
+            position:absolute;
+            top:-45px;
+            left:-17px;
+            display:block;
+            text-indent:-9999px;
+            background-image:url(/home/static/image/logo.png);
+            background-size: 100%;
+            width:164px;
+            height:108px;
+        }
+        #abgne_float_ad a { }
+        #abgne_float_ad a img:hover { -webkit-filter:brightness(1.2); filter:brightness(1.2); }
+
+        #abgne_float_ad .abgne_close_ad { display:block; text-align:right; cursor:pointer; font-size:12px; }
+        #abgne_float_ad .sub_download {
+            /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+33,3a3a3a+100 */
+            background: #000000; /* Old browsers */
+            background: -moz-linear-gradient(top, #000000 33%, #3a3a3a 100%); /* FF3.6-15 */
+            background: -webkit-linear-gradient(top, #000000 33%,#3a3a3a 100%); /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(to bottom, #000000 33%,#3a3a3a 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#3a3a3a',GradientType=0 ); /* IE6-9 */
+        }
+        #abgne_float_ad .sub_download i{ font-size:18px}
+
+        #abgne_float_ad img { border:none; display:block; margin:6px auto; }
+        #abgne_float_ad img.qr_tmd_code { margin:0 auto}
+
+        /*线*/
+        #abgne_float_ad .slide_line{ display:block; width:80%; border-bottom:1px solid #5c5c5c; margin:6px auto; box-shadow:1px 1px 1px #373737; }
+
+        /*回到上方*/
+        #abgne_float_ad .btn_top a { text-decoration:none; color:#FFF; font-size:120%; font-weight:bold; letter-spacing:1px; }
+        #abgne_float_ad .btn_top_arrow { font-size:90%; }
+
+    </style>
+
+    <div id="abgne_float_ad">
+        <div class="slogan">
+            <div class="logo_tmd">
+                <a href="" target="_blank">官方网站</a>
+            </div>
+            手游版立即下载
+        </div>
+
+
+        <img class="qr_tmd_code" src="/home/static/picture/qrcode.png">
+
+
+        <div class="slide_line"></div>
+
+
+        <div class="sub_download">
+            <i class="fa fa-cloud-download"></i> 快速下载
+        </div>
+
+
+        <a href="javascript:;" onclick="opentel()" target="_blank">
+            <img src="/home/static/picture/btn_windows.png">
+        </a>
+
+
+        <a href="download-http3a2f2fi.371.com.tw2.html" onclick="opentel02()" target="_blank">
+            <img src="/home/static/picture/btn_apk.png">
+        </a>
+
+
+        <div class="slide_line"></div>
+
+
+        <div class="slide_btn">
+            <a href="javascript:;" target="_blank"><img src="/home/static/picture/btn_fb.png"></a>
+        </div>
+
+
+        <div class="slide_btn">
+            <a href="friendgifts.html#FriendGift" target="_blank"><img src="/home/static/picture/btn_gift.png"></a>
+        </div>
+
+
+        <div class="btn_top"><a href="javascript:void(0)" class="abgne-gotoheader"><i class="fa fa-chevron-circle-up"></i> TOP </a></div>
+
+    </div>
+    <script type="text/javascript">
+
+    </script>
+</div>
+
+<h1>官方网站</h1>
+<div class="wrapper">
+    <!-- 导览列_行动版 -->
+    <div class="RwdMobileData">
+
+        <!--导览列(天)-->
+        <header>
+
+
+            <link rel="stylesheet" href="/home/static/css/font-awesome.min.css">
+            <style type="text/css">
+                #MobileAndroid{ padding-bottom:33px;}
+                /*--布幕--*/
+                .screen {
+                    position: fixed;
+                    width:100%;
+                    height:100%;
+                    top:0;
+                    left:0;
+                    background: rgba(0, 0, 0, 0.8);
+                    z-index:999;
+                }
+                /*--帐号当入提示按钮区块--*/
+                .member-box {
+                    position: fixed;
+                    width:100%;
+                    padding:0;
+                    bottom:0%;
+                    left:0%;
+                    margin-left:0%;
+                    background: rgba(10, 10, 10, 0.8);
+                    z-index:1000;
+                    text-align:center;
+                    color:#FFF;
+                    border: 1px solid #bababa;
+                }
+                .account-number {font-size:14pt; cursor: pointer; display:none;}
+                .account-number a{display:block; color:#fff; width:100%; height:100%; font-size:15px; line-height:20px; margin:0.7em;}
+                .account-number p{}
+                .account-number i{display:inline-block; margin-left:17pt; font-size:1.2em;}
+                .btn_gamelist {
+                    color:#FFF;
+                    display:block;
+                    position:absolute;
+                    left:0;
+                    top:0;
+                    width:75px;
+                    height:100%;
+                }
+                .btn_gamelist p{margin:0; padding:0.8em 0 0 0;}
+                .btn_gamelist i{font-size:1.8em;}
+
+                .member-box-animation {
+                    position: fixed;
+                    width:100%;
+                    padding:10pt 0pt;
+                    bottom:0%;
+                    left:0%;
+                    margin-left:0%;
+                    background: rgba(10, 10, 10, 0.8);
+                    z-index:1000;
+                    text-align:center;
+                    color:#FFF;
+                    border: 1px solid #bababa;
+                    animation:box-down 3.5s;
+                    -moz-animation:box-down 1.5s; /* Firefox */
+                    -webkit-animation:box-down 1.5s; /* Safari and Chrome */
+                    -o-animation:box-down 1.5s; /* Opera */
+                }
+
+                /*--提示按钮区块的动画--*/
+                @keyframes box-down
+                {
+                    0%   {bottom:70%;left:50%;margin-left:-45%;width:90%;border-radius: 0.65em;	background: rgba(255, 255, 255, 0.9); color:#000}
+                    71.5%{bottom:70%;left:50%;margin-left:-45%;width:90%;border-radius: 0.65em;	background: rgba(255, 255, 255, 0.9); color:#000}
+                    96%  {bottom:0%;left:0%;margin-left:0%; width:100%;border-radius: 0em; color:#fff}
+                    99%  {bottom:0.2%; color:#fff}
+                    100% {bottom:0%; color:#fff}
+                }
+
+                @-moz-keyframes box-down /* Firefox */
+                {
+                    0%   {bottom:70%;left:50%;margin-left:-45%;width:90%;border-radius: 0.65em;	background: rgba(255, 255, 255, 0.9); color:#000}
+                    71.5%{bottom:70%;left:50%;margin-left:-45%;width:90%;border-radius: 0.65em;	background: rgba(255, 255, 255, 0.9); color:#000}
+                    96%  {bottom:0%;left:0%;margin-left:0%; width:100%;border-radius: 0em; color:#fff}
+                    99%  {bottom:0.2%; color:#fff}
+                    100% {bottom:0%; color:#fff}
+                }
+
+                @-webkit-keyframes box-down /* Safari and Chrome */
+                {
+                    0%   {bottom:70%;left:50%;margin-left:-45%;width:90%;border-radius: 0.65em;	background: rgba(255, 255, 255, 0.9); color:#000}
+                    71.5%{bottom:70%;left:50%;margin-left:-45%;width:90%;border-radius: 0.65em;	background: rgba(255, 255, 255, 0.9); color:#000}
+                    96%  {bottom:0%;left:0%;margin-left:0%; width:100%;border-radius: 0em; color:#fff}
+                    99%  {bottom:0.2%; color:#fff}
+                    100% {bottom:0%; color:#fff}
+                }
+
+                @-o-keyframes box-down /* Opera */
+                {
+                    0%   {bottom:70%;left:50%;margin-left:-45%;width:90%;border-radius: 0.65em;	background: rgba(255, 255, 255, 0.9); color:#000}
+                    71.5%{bottom:70%;left:50%;margin-left:-45%;width:90%;border-radius: 0.65em;	background: rgba(255, 255, 255, 0.9); color:#000}
+                    96%  {bottom:0%;left:0%;margin-left:0%; width:100%;border-radius: 0em; color:#fff}
+                    99%  {bottom:0.2%; color:#fff}
+                    100% {bottom:0%; color:#fff}
+                }
+            </style>
+            <!--导览列(天)-->
+            <div>
+                <!--<div class="screen"></div>-->
+
+
+
+            </div>
+
+
+            <div class="nav">
+                <ul>
+                    <li class="bar">
+
+
+
+                    </li>
+
+                    <li class="logo">官方网站</li>
+                    <li class="home"><a href=""><i class="fa fa-home fa-2x"></i></a></li>
+
+                </ul>
+            </div>
+        </header>
+        <!--导览列(天) End-->
+        <!--导览列(左侧滑出选单)-->
+
+
+
+        <!--导览列(左侧滑出选单) End--></div>
+    <!-- 导览列_PC版 -->
+    <div class="RwdPcData">
+        <!-- 灯箱效果 -->
+        <link href="/home/static/css/colorbox.css" rel="stylesheet">
+        <script type="text/javascript" src="/home/static/js/jquery.colorbox.js"></script>
+        <script type="text/javascript" src="/home/static/js/lightbox.js"></script>
+
+        <div class="nav_sub">
+            <div class="container">
+                <ul class="nav_subbtn">
+
+                    <li class="SignUp"><a href="javascript: void(0)" onclick="if(IsLogin()){document.location.href = '/games/tmd/index.aspx' ;} ResetVerifyCode()">免费注册</a></li>
+                    <li class="SignIn"><a href="javascript: void(0)" onclick="CheckIsLogin('');">立即登入</a></li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="nav_main">
+            <div class="container">
+                <ul class="nav_mainbtn">
+                    <li class="logo"><a href="">logo</a></li>
+                    <li class="navBtn01"><a href="/Home/index/index5">游戏介绍</a></li>
+                </ul>
+            </div>
+        </div></div>
+
+    <div class="header">
+        <!-- 满贯logo_行动版 -->
+        <div class="RwdMobileData">
+            <div class="logo_mobile">满贯logo</div>
+        </div>
+
+        <!-- 轮播广告 -->
+
+        <div id="banner_tabs" class="flexslider">
+            <ul class="slides" id="ADList">
+            </ul>
+
+            <!-- 左右键 -->
+            <ul class="flex_direction_nav">
+                <li><a class="flex_prev" href="javascript:;">Previous</a></li>
+                <li><a class="flex_next" href="javascript:;">Next</a></li>
+            </ul>
+
+            <!-- 轮播广告_满版底线 -->
+            <div class="header_line_color header_line_top"></div>
+
+            <!-- 下方点点 -->
+            <div class="flex_control_nav flex_control_paging">
+                <ol id="bannerCtrl">
+                </ol>
+            </div>
+        </div>
+        <script language="JavaScript">
+
+            // 预载最新活动(套广告系统 AREA_ID：GT_BIG_NEW)
+            GT_ShowADs("ADList", "GOLD_TMD_INDEX", GT_AD_COUNTER_TYPE.ALL, "width=100%", "width=100%");
+
+            // 最新活动轮播用
+            function AD_PageFunction(JData) {
+
+                var strBanner	= "";
+                var strNumber	= "";
+
+                for (i = 0 ; i < JData.AD_DATA.length ; i++)
+                {
+                    strBanner += "<li style=\"background-image:url(" + JData.AD_DATA[i].PICTURE_URL + ");" + ((i==0)? "" : "display:none;") + "\" onclick=\"window.open('https://article-agent.gametower.com.tw/common/lib/Advertisement/TransAD.aspx?rn=" + JData.AD_DATA[i].RelationNo +"&ct=HIT&pr=" + encodeURIComponent(JData.AD_DATA[i].LINK_URL) + "','_blank');\"><div class=\"slides_content\"><div class=\"slides_box\">"
+                        +"<div class=\"slides_slogan\"><img src=\"/Games/tmd/images/carouselad/tmd_title.png\" alt=\"Game Event\"></div>"
+                        +"<div class=\"slides_subtitle\">"+JData.AD_DATA[i].DESCRIPTION+"</div>"
+                        +"<div class=\"slides_btn\"><a>立即前往</a></div></div></div></li>";
+                    strNumber += "<li "+((i==0) ? "class=\"active\"" : "")+"><a>"+ (i + 1) +"</a></li>" ;
+                }
+
+                $("#" + JData.TAG_ID + "").html(strBanner);
+                $("#bannerCtrl").html(strNumber);
+
+                /*首页_广告轮拨*/
+                $(function() {
+                    var bannerSlider = new Slider($('#banner_tabs'), {
+                        time: 3500,
+                        delay: 400,
+                        event: 'hover',
+                        auto: true,
+                        mode: 'fade',
+                        controller: $('#bannerCtrl'),
+                        activeControllerCls: 'active'
+                    });
+                    $('#banner_tabs .flex_prev').click(function() {
+                        bannerSlider.prev()
+                    });
+                    $('#banner_tabs .flex_next').click(function() {
+                        bannerSlider.next()
+                    });
+                })
+            }
+            //-->
+        </script>
+
+        <!-- 轮播广告 END -->
+    </div>
+
+    <!-- 主内容 -->
+    <div class="content_grain">
+        <div class="content">
+            <div class="container">
+
+                <!-- 游戏机台 -->
+
+                <h3 class="title_game">游戏机台</h3>
+                <div class="title_game_btn RwdPcData">
+                    <a href="/Home/index/index5">更多游戏 &gt;&gt;</a>
+                </div>
+                <div class="gameicon gameicon_bottom_index">
+                    <!-- 主打游戏 -->
+                    <div class="gameicon_hotgame gameicon_hotgame_size_index">
+                        <div class="gameicon_hotgame_pic gameicon_hotgame_pic_size_index" style="background-image:url(/home/static/image/fishrush_big.png);">
+                            <!-- 两颗按钮 -->
+                            <ul style="display:none;">
+                                <li><a href="fishrush.html" target="_blank">游戏介绍</a></li>
+                                <li><a href="javascript:void(0);" onclick="PlayGame(123456)">立即玩</a></li>
+                            </ul>
+                            <!-- 一颗按钮 -->
+                            <ul>
+                                <li><a href="fishrush.html" target="_blank">游戏介绍</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 其他游戏 -->
+                    <div class="gameicon_other gameicon_other_size_index">
+                        <div class="gameicon_other_pic gameicon_other_pic_size_index" style="background-image:url(/home/static/image/chinshihuang.png);">
+                            <!-- 两颗按钮 -->
+                            <ul class="gameicon_other_details" style="display:none;">
+                                <li><a href="chinshihuang.html" target="_blank">游戏介绍</a><br>
+                                <li><a href="javascript:void(0);" onclick="PlayGame(21128301)">立即玩</a></li>
+                            </ul>
+                            <!-- 一颗按钮 -->
+                            <ul class="gameicon_other_details">
+                                <li><a href="chinshihuang.html" target="_blank">游戏介绍</a></li>
+                            </ul>
+                        </div>
+                        <div class="gameicon_other_pic gameicon_other_pic_size_index" style="background-image:url(/home/static/image/fish4.png);">
+                            <!-- 两颗按钮 -->
+                            <ul class="gameicon_other_details" style="display:none;">
+                                <li><a href="fish4.html" target="_blank">游戏介绍</a><br>
+                                <li><a href="javascript:void(0);" onclick="PlayGame()">立即玩</a></li>
+                            </ul>
+                            <!-- 一颗按钮 -->
+                            <ul class="gameicon_other_details">
+                                <li><a href="fish4.html" target="_blank">游戏介绍</a></li>
+                            </ul>
+                        </div>
+                        <div class="gameicon_other_pic gameicon_other_pic_size_index" style="background-image:url(/home/static/image/fivelion.png);">
+                            <!-- 两颗按钮 -->
+                            <ul class="gameicon_other_details" style="display:none;">
+                                <li><a href="fivelion.html" target="_blank">游戏介绍</a><br>
+                                <li><a href="javascript:void(0);" onclick="PlayGame()">立即玩</a></li>
+                            </ul>
+                            <!-- 一颗按钮 -->
+                            <ul class="gameicon_other_details">
+                                <li><a href="fivelion.html" target="_blank">游戏介绍</a></li>
+                            </ul>
+                        </div>
+                        <div class="gameicon_other_pic gameicon_other_pic_size_index" style="background-image:url(/home/static/image/lucky21.png);">
+                            <!-- 两颗按钮 -->
+                            <ul class="gameicon_other_details" style="display:none;">
+                                <li><a href="lucky21.html" target="_blank">游戏介绍</a><br>
+                                <li><a href="javascript:void(0);" onclick="PlayGame()">立即玩</a></li>
+                            </ul>
+                            <!-- 一颗按钮 -->
+                            <ul class="gameicon_other_details">
+                                <li><a href="lucky21.html" target="_blank">游戏介绍</a></li>
+                            </ul>
+                        </div>
+                        <div class="gameicon_other_pic gameicon_other_pic_size_index" style="background-image:url(/home/static/image/TriWuKong.png);">
+                            <!-- 两颗按钮 -->
+                            <ul class="gameicon_other_details" style="display:none;">
+                                <li><a href="triwukong.html" target="_blank">游戏介绍</a><br>
+                                <li><a href="javascript:void(0);" onclick="PlayGame()">立即玩</a></li>
+                            </ul>
+                            <!-- 一颗按钮 -->
+                            <ul class="gameicon_other_details">
+                                <li><a href="triwukong.html" target="_blank">游戏介绍</a></li>
+                            </ul>
+                        </div>
+                        <div class="gameicon_other_pic gameicon_other_pic_size_index" style="background-image:url(/home/static/image/md.png);">
+                            <!-- 两颗按钮 -->
+                            <ul class="gameicon_other_details" style="display:none;">
+                                <li><a href="index9.html" target="_blank">游戏介绍</a><br>
+                                <li><a href="javascript:void(0);" onclick="PlayGame()">立即玩</a></li>
+                            </ul>
+                            <!-- 一颗按钮 -->
+                            <ul class="gameicon_other_details">
+                                <li><a href="index9.html" target="_blank">游戏介绍</a></li>
+                            </ul>
+                        </div>
+                        <div class="gameicon_other_pic gameicon_other_pic_size_index" style="background-image:url(/home/static/image/kingkong.png);">
+                            <!-- 两颗按钮 -->
+                            <ul class="gameicon_other_details" style="display:none;">
+                                <li><a href="kingkong.html" target="_blank">游戏介绍</a><br>
+                                <li><a href="javascript:void(0);" onclick="PlayGame()">立即玩</a></li>
+                            </ul>
+                            <!-- 一颗按钮 -->
+                            <ul class="gameicon_other_details">
+                                <li><a href="kingkong.html" target="_blank">游戏介绍</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="gameicon_other_pic gameicon_other_pic_size_index" style="background-image:url(/home/static/image/nineoneone.png);">
+                            <!-- 两颗按钮 -->
+                            <ul class="gameicon_other_details" style="display:none;">
+                                <li><a href="nineoneone.html" target="_blank">游戏介绍</a><br>
+                                <li><a href="javascript:void(0);" onclick="PlayGame()">立即玩</a></li>
+                            </ul>
+                            <!-- 一颗按钮 -->
+                            <ul class="gameicon_other_details">
+                                <li><a href="nineoneone.html" target="_blank">游戏介绍</a></li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <!-- 其他游戏 END -->
+                </div>
+
+                <div class="RwdMobileData">
+                    <div class="content_btn"><a href="/Home/index/index5">更多游戏 &gt;&gt;</a></div>
+                </div>
+
+                <!-- 按钮和jackpot动画 -->
+                <div class="box_slot_machine">
+                    <!--拉杆-->
+                    <div class="box_pullrod"></div>
+                    <div class="box_rod"></div>
+                    <div class="box_spheric"></div>
+                    <!--机器-->
+                    <div class="box_machine"></div>
+                    <!--白色光芒-->
+                    <div class="box_light_white"></div>
+                    <!--黄色光芒-->
+                    <div class="box_light_yellow"></div>
+                    <!--金币动画-->
+                    <div class="money_animation">
+                        <!--金币1-->
+                        <div class="coin_animation">
+                            <div class="coin">
+                                <div class="coin_face"></div>
+                                <div class="coin_large"></div>
+                            </div>
+                        </div>
+                        <!--金币2-->
+                        <div class="coin_animation">
+                            <div class="coin">
+                                <div class="coin_face"></div>
+                                <div class="coin_large"></div>
+                            </div>
+                        </div>
+                        <!--金币3-->
+                        <div class="coin_animation">
+                            <div class="coin">
+                                <div class="coin_face"></div>
+                                <div class="coin_large"></div>
+                            </div>
+                        </div>
+                        <!--金币4-->
+                        <div class="coin_animation">
+                            <div class="coin">
+                                <div class="coin_face"></div>
+                                <div class="coin_large"></div>
+                            </div>
+                        </div>
+                        <!--金币5-->
+                        <div class="coin_animation">
+                            <div class="coin">
+                                <div class="coin_face"></div>
+                                <div class="coin_large"></div>
+                            </div>
+                        </div>
+                        <!--金币6-->
+                        <div class="coin_animation">
+                            <div class="coin">
+                                <div class="coin_face"></div>
+                                <div class="coin_large"></div>
+                            </div>
+                        </div>
+                        <!--金币7-->
+                        <div class="coin_animation">
+                            <div class="coin">
+                                <div class="coin_face"></div>
+                                <div class="coin_large"></div>
+                            </div>
+                        </div>
+                        <!--金币8-->
+                        <div class="coin_animation">
+                            <div class="coin">
+                                <div class="coin_face"></div>
+                                <div class="coin_large"></div>
+                            </div>
+                        </div>
+                        <!--金币9-->
+                        <div class="coin_animation">
+                            <div class="coin">
+                                <div class="coin_face"></div>
+                                <div class="coin_large"></div>
+                            </div>
+                        </div>
+                        <!--金币10-->
+                        <div class="coin_animation">
+                            <div class="coin">
+                                <div class="coin_face"></div>
+                                <div class="coin_large"></div>
+                            </div>
+                        </div>
+                        <!--金币11-->
+                        <div class="coin_animation">
+                            <div class="coin">
+                                <div class="coin_face"></div>
+                                <div class="coin_large"></div>
+                            </div>
+                        </div>
+                        <!--金币12-->
+                        <div class="coin_animation">
+                            <div class="coin">
+                                <div class="coin_face"></div>
+                                <div class="coin_large"></div>
+                            </div>
+                        </div>
+                        <!--金币13-->
+                        <div class="coin_animation">
+                            <div class="coin">
+                                <div class="coin_face"></div>
+                                <div class="coin_large"></div>
+                            </div>
+                        </div>
+                        <!--金币14-->
+                        <div class="coin_animation">
+                            <div class="coin">
+                                <div class="coin_face"></div>
+                                <div class="coin_large"></div>
+                            </div>
+                        </div>
+                        <!--金币15-->
+                        <div class="coin_animation">
+                            <div class="coin">
+                                <div class="coin_face"></div>
+                                <div class="coin_large"></div>
+                            </div>
+                        </div>
+                        <!--金币16-->
+                        <div class="coin_animation">
+                            <div class="coin">
+                                <div class="coin_face"></div>
+                                <div class="coin_large"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="box_jackpot">
+                        <div class="nav_stap_jackpot_hall" id="JpGameName"></div>
+                        <div class="nav_stap_jackpot_number" id="JpValue">0</div>
+                    </div>
+                    <div class="box_slot">
+                        <ul>
+                            <li class="slotbtn01"><a href="javascript:;">安装游戏</a></li>
+                            <li class="slotbtn02"><a onclick="if(IsLogin()){alert('您已经登入会员！');} else {ResetVerifyCode();$('.SignUp').click();}">注册会员</a></li>
+                            <li class="slotbtn03"><a href="/Home/index/index5">玩游戏</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 按钮和jackpot -->
+                <div class="nav_stap">
+                    <div class="nav_stap_btn">
+                        <ul>
+                            <li class="lapabtn01"><a href="javascript:;">安装游戏</a></li>
+                            <li class="lapabtn02"><a onclick="if(IsLogin()){alert('您已经登入会员！');} else {ResetVerifyCode();$('.SignUp').click();}">注册会员</a></li>
+                            <li class="lapabtn03"><a href="/Home/index/index5">玩游戏</a></li>
+                        </ul>
+                    </div>
+                    <div class="nav_stap_jackpot">
+                        <div class="nav_stap_jackpot_hall" id="JpGameName"></div>
+                        <div class="nav_stap_jackpot_number" id="JpValue">0</div>
+                    </div>
+                </div>
+
+                <!-- 新闻区 -->
+                <h3 class="title_news" id="news">游戏公告</h3>
+
+                <!-- 新闻区 -->
+                <div class="news">
+                    <!-- 新闻标题 -->
+                    <div class="news_nav">
+                        <ul>
+                            <li id="NewsAll" class="news_nav_btnover"><a href="#news">全部</a></li>
+                            <li id="NewsGame"><a href="index-01.html#news">游戏活动</a></li>
+                            <li id="NewsConsumption"><a href="index-11.html#news">消费活动</a></li>
+                            <li id="NewsSystem"><a href="index-21.html#news">系统公告</a></li>
+                        </ul>
+                    </div>
+                    <!--新闻列表-->
+                    <div class="news_content">
+                        <ul id="NewsList">
+
+                            <li>
+                                <span class="news_icon news_icon_danger">游戏</span>
+
+                                <span class="news_date">2020-02-12</span>
+                                <a href="index10.html" target="_blank" style="color:#fdfdfd">满贯与你相约情人节，伟士牌让你骑回家！</a>
+                            </li>
+
+                            <li>
+                                <span class="news_icon news_icon_info">消费</span>
+
+                                <span class="news_date">2020-02-12</span>
+                                <a href="index11.html" target="_blank" style="color:#fdfdfd">甜蜜心愿，永恆不断。碎片合成再抽幻彩条块！</a>
+                            </li>
+
+                            <li>
+                                <span class="news_icon news_icon_primary">系统</span>
+
+                                <span class="news_date">2020-02-11</span>
+                                <a href="viewdoc-130133_2.html" style="color:#fdfdfd">满贯扑克榜显示异常公告</a>
+                            </li>
+
+                            <li>
+                                <span class="news_icon news_icon_danger">游戏</span>
+
+                                <span class="news_date">2020-02-06</span>
+                                <a href="viewdoc-130124_0.html" style="color:#fdfdfd">《百万总奖週週抽_第三週》中奖名单，出炉囉！</a>
+                            </li>
+
+                            <li>
+                                <span class="news_icon news_icon_danger">游戏</span>
+
+                                <span class="news_date">2020-02-05</span>
+                                <a href="index12.html" target="_blank" style="color:#fdfdfd">街机游戏首选 『彩金捕鱼』，满贯通四海  千万彩金大放送！</a>
+                            </li>
+
+                            <li>
+                                <span class="news_icon news_icon_primary">系统</span>
+
+                                <span class="news_date">2020-02-04</span>
+                                <a href="viewdoc-130104_2.html" style="color:#fdfdfd">2/5(三) 临时维护公告</a>
+                            </li>
+
+                            <li>
+                                <span class="news_icon news_icon_danger">游戏</span>
+
+                                <span class="news_date">2020-01-30</span>
+                                <a href="viewdoc-130090_0.html" style="color:#fdfdfd">《百万总奖週週抽_第二週》中奖名单，出炉囉！</a>
+                            </li>
+
+                            <li>
+                                <span class="news_icon news_icon_danger">游戏</span>
+
+                                <span class="news_date">2020-01-29</span>
+                                <a href="index13.html" target="_blank" style="color:#fdfdfd">全新机台『玖一一』帅气登场！超猛2400连线组合，局数无上限！赢分让你再加倍！</a>
+                            </li>
+
+                            <li>
+                                <span class="news_icon news_icon_danger">游戏</span>
+
+                                <span class="news_date">2020-01-23</span>
+                                <a href="viewdoc-130078_0.html" style="color:#fdfdfd">《百万总奖週週抽_第一週》中奖名单，出炉囉！</a>
+                            </li>
+
+                            <li>
+                                <span class="news_icon news_icon_primary">系统</span>
+
+                                <span class="news_date">2020-01-23</span>
+                                <a href="viewdoc-130072_2.html" style="color:#fdfdfd">01/24 (五) 除夕17:30~24:00，客服中心暂停服务</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="content_btn"><a href="index14.html">更多消息 &gt;&gt;</a></div>
+
+            </div>
+        </div>
+    </div>
+    <!-- 主内容 END -->
+
+    <!-- 版权宣告 -->
+    <div class="footer">
+        <!-- Google Tag Manager (noscript) -->
+        <noscript>
+            <iframe src="javascript:;" height="0" width="0" style="display:none;visibility:hidden">
+            </iframe>
+        </noscript>
+        <!-- End Google Tag Manager (noscript) -->
+
+        <!-- 版权广告_满版底线 -->
+        <div class="header_line_color footer_line"></div>
+
+        <div class="container">
+            <!-- 选单 -->
+            <div class="footer_nav">
+                <ul>
+                    <li><a href="index15.html">会员中心</a></li>
+                    <li><a href="privacy.html">隐私权保护</a></li>
+                    <li><a href="contract.html">使用者合约</a></li>
+                    <li><a href="demand.html">需求配备</a></li>
+                    <li><a href="cooperation.html">合作提案</a></li>
+                    <li><a href="contact.html">联络我们</a></li>
+                </ul>
+            </div>
+
+            <p>※游戏为免费使用，游戏内另提供购买虚拟游戏币、物品等付费服务。请注意游戏时间，避免沉迷。<br>
+                ※本游戏提供之机会中奖商品，消费者购买或参加活动不代表即可获得特定商品。<br>
+                ※本游戏情节涉及棋牌益智及娱乐，非现金交易赌博，使用者请勿进行非法游戏币交易。<br>
+                例行维护时间   02/26(三) 09:00~12:00
+                客服专线：</p>
+            <div class="footer_secondary"><p></p><div class="footer_level"></div></div>
+
+
+        </div>
+        <div class="SignIn" style="display:none"></div>
+
+
+ </div>
+
+</div>
+<script type="text/javascript">
+
+    var			bIsJpPlay			= false ;		// JP数值是否开始执行动画
+    var			nJpEndValue			= 0 ;			// JP结束数值
+    var			nJpStartValue		= 0 ;			// JP开始数值
+    var			csUpdateJpValueIntervalId ;			// 每5分钟更新JP数值的变数ID
+
+    // JP数字动画设定并开始跑
+    function PlayJpAnimation(_nJpValue)
+    {
+        nJpEndValue					= (typeof(_nJpValue) !=  "undefined" ? _nJpValue : nJpEndValue) ;
+        nJpStartValue				= (typeof(_nJpValue) !=  "undefined" ? Math.round(_nJpValue * 0.99) : Number($('#JpValue').html())) ;
+
+        $('#JpValue').animationCounter({
+            start: nJpStartValue,
+            end: nJpEndValue,
+            step: 1,
+            delay: 10
+        });
+    }
+
+    $(document).ready(function() {
+        // 侦测网页捲动
+        var		nWindowHeight		= window.innerHeight,
+            nGridTop			= nWindowHeight * 0.2,
+            nGridBottom			= nWindowHeight * 0.8;
+
+        $(window).on('scroll', function() {
+            $('.nav_stap_jackpot_number').each(function() {
+                var thisTop			= jQuery(this).offset().top - $(window).scrollTop();
+
+                // 侦测网页捲动到JP数字且JP尚未跑动且未处在Loading状态下才执行动画
+                if (thisTop >= nGridTop && (thisTop + $(this).height()) <= nGridBottom && !bIsJpPlay && typeof($('#custom-overlay').val()) == "undefined") {
+                    bIsJpPlay		= true ;
+                    // 取得JP数并开始跑动画
+                    GetJpValue(true) ;
+                    // 每五分钟更新JP值
+                    csUpdateJpValueIntervalId = setInterval("GetJpValue(true)", 5 * 60 * 1000) ;
+                }
+            });
+        });
+
+        $(window).trigger('scroll');
+
+        if(!bIsJpPlay)
+        // 取得JP数但不跑动画
+            GetJpValue(false) ;
+    });
+
+    // 取得JP并看参数旗标决定是否跑动画
+    function GetJpValue(_bPlayJpAnimation)
+    {
+        $.ajax
+        ({
+            type: "POST",
+            url: '/Games/tmd/x_GetJpValue.aspx',
+            dataType: "json",
+            success: function (JData)
+            {
+                $('#JpValue').html(Math.round(JData.JP * 0.99)) ;
+                $('#JpGameName').html(JData.GAME_NAME) ;
+                if(_bPlayJpAnimation)
+                    PlayJpAnimation(JData.JP) ;
+            },
+            error: function (xmlHttpRequest, error)
+            {
+                console.log(xmlHttpRequest) ;
+            }
+        });
+    }
+
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,118 @@
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_head.html'); ?>
+    <body>
+<style>
+    .layui-laydate-content th {
+        font-weight: 400;
+        color: white;
+    !important;
+    }
+</style>
+<div class="templatemo-flex-row">
+    <?php include _include(__APPDIR__ . 'Controller/Com/View/Public_nav.html'); ?>
+
+    <div class="templatemo-content col-1 light-gray-bg">
+        <?php include _include(__APPDIR__ . 'Controller/Com/View/Public_top.html'); ?>
+        <div class="row content" style="padding:5px 0px 0px 0px;">
+
+            <section class="content">
+                <div class="box box-primary box-solid">
+                    <div class="box-header with-border">
+                        <h3 class="box-title text-muted"><span style=" color:White;">编辑排行
+                                <small
+                                        style="margin-left:8px; margin-right:8px;">
+                                    <a
+                                            href="javascript:window.history.back()" target="_self"
+                                            ><i
+                                                class="fa fa-arrow-left"></i> 返回</a>
+
+                                </small>
+                            </span>
+                        </h3>
+                    </div>
+                <input type="hidden" id="txt_id" value="<?= $editData["id"] ?>">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label>昵称</label>
+                            <input type="text" class="form-control" required value="<?= $editData["player_name"] ?>" id="txt_player_name" maxlength="17">
+                            <p id="p1"></p>
+                        </div>
+                        <div class="form-group">
+                            <label>签名</label>
+                            <textarea rows="2" class="form-control" id="txt_qianming" maxlength="100"><?= $editData["qianming"] ?></textarea>
+                        </div>
+                        <div class="form-group" >
+                            <label>分数</label>
+                            <input type="number" class="form-control" id="txt_value" required  value="<?= $editData["value"] ?>"  maxlength="10">
+                            <p id="p4"></p>
+                        </div>
+                        <div class="form-group"  >
+                            <label>微信号</label>
+                            <input type="text" class="form-control" id="txt_wechat"  value="<?= $editData["wechat"] ?>"  maxlength="20">
+                            <p id="p3"></p>
+                        </div>
+                    </div>
+
+                        <div class="box-footer">
+                            <button type="button" class="btn btn-primary" id="Button_OK" onclick="submitRank(this)">确定</button>
+                            <button type="button" class="btn btn-default" style=" margin-left:15px;" id="Button_Cancel">取消
+                            </button>
+                        </div>
+
+
+                </div>
+
+
+            </section>
+
+
+        </div>
+    </div>
+</div>
+    <script>
+        function submitRank(a){
+            var dataSubmit={};
+            dataSubmit.player_name=$("#txt_player_name").val();
+            dataSubmit.qianming=$("#txt_qianming").val();
+            dataSubmit.value=$("#txt_value").val();
+            dataSubmit.wechat=$("#txt_wechat").val();
+            dataSubmit.id=$("#txt_id").val();
+            dataSubmit.action="add_rank_virtual";
+            dataSubmit.rand=rand();
+            if(!dataSubmit.player_name){
+                swal("玩家昵称不能为空.", "", "info")
+                return;
+            }
+            if(!dataSubmit.value){
+                swal("请填写分数.", "", "info")
+                return;
+            }
+            if(!dataSubmit.wechat){
+                swal("请填写微信.", "", "info")
+                return;
+            }
+            $.ajax({
+                url: "../ashx/editfield/editField.ashx",
+                type: "post",
+                dataType: "json",
+                cache: !1,
+                data: dataSubmit,
+                success: function(b) {
+                    b.success ? (swal("操作成功.", "", "success"),location.href='com_rank_virtual') : global_NoLicense == b.msg ? parent.location.href = global_jump_login: swal(b.msg, "", "info")
+                },
+                beforeSend: function() {
+                    web_tips("操作中,请稍后 ....."),
+                        $(a).attr("disabled", "disabled").text("稍后")
+                },
+                complete: function() {
+                    $(a).removeAttr("disabled")
+                }
+            })
+
+        }
+
+
+
+        </script>
+
+
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_footjs.html'); ?>

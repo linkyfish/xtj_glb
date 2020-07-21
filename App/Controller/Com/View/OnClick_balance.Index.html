@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.01, user-scalable=no">
+    <title></title>
+    <link rel="stylesheet" href="/res/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/res/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/res/css/AdminLTE.css">
+    <link rel="stylesheet" href="/res/css/page.css">
+    <link rel="stylesheet" href="/res/css/sweetalert.css">
+    <link rel="stylesheet" href="/res/css/black.css">
+    <script src="/res/js/sweetalert.min.js" type="text/javascript"></script>
+    <script src="/res/js/layer.js" type="text/javascript"></script>
+    <link href="/res/css/layer.css" type="text/css" rel="styleSheet" id="layermcss">
+    <link type="text/css" rel="stylesheet" href="/res/css/laypage.css" id="laypagecss">
+
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="table-responsive">
+                <table class="table table-bordered table-condensed">
+                    <tbody>
+                    <tr>
+                        <td class="text-right">下级用户总消耗：</td>
+                        <td >
+                            <span style="text-align:left"><?php echo  $profit_arr['my_gamebi']?> (游戏币)</span>
+                        </td>
+                    </tr>
+
+                     <tr>
+                        <td class="text-right">下级用户总收益：</td>
+                        <td>
+                            <span style="text-align:left"><?php echo  $profit_arr['my_profit']?> (元)</span>
+                        </td>
+                    </tr>
+                     <tr>
+                        <td class="text-right">下级代理总消耗：</td>
+                        <td>
+                            <?php echo  $profit_arr['agent_gamebi']?> (游戏币)
+                        </td>
+                    </tr>
+                     <tr>
+                        <td class="text-right">下级代理总收益：</td>
+                        <td>
+                            <span style="text-align:left"><?php echo  $profit_arr['agent_profit']?> (元)</span>
+                        </td>
+                    </tr>
+
+                     <tr>
+                        <td class="text-right">我的总收益：</td>
+                        <td>
+                            <span style="text-align:left"><?php echo  $profit_arr['total_profit']?> (元)</span>
+                        </td>
+                    </tr>
+                     <tr>
+                        <td class="text-right">已结算收益：</td>
+                        <td>
+                            <span style="text-align:left"><?php echo  $already_profit?> (元)</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="text-right">结算中收益：</td>
+                        <td>
+                            <span style="text-align:left"><?php echo  $apply_profit?> (元)</span>
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="text-right">未结算收益：</td>
+                        <td>
+                            <span style="text-align:left"><?php echo  $no_profit?> (元)</span>
+                        </td>
+                    </tr>
+                    <?php if ($isadmin) { ?>
+                    <tr>
+                        <td>
+                            <div class="direct-chat-text bg-red msg" style=" display:none;"></div>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-primary" id="Button_OK">确定结算</button>
+                            <button type="button" class="btn btn-default" id="Button_Ref">刷新</button>
+                        </td>
+                    </tr>
+                    <?php } ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-xs-12">
+        <div class="box-body" style="display: block; padding:0px;">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped" id="tb_agent">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th nowrap='nowrap'>结算金额</th>
+                        <th nowrap='nowrap'>状态</th>
+                        <th nowrap='nowrap'>申请时间</th>
+                    </tr>
+                    </thead>
+                    <tbody id="t_agentList"></tbody>
+                </table>
+
+            </div>
+            <!--Pager-->
+            <div id="pager_agent" class="pull-left"></div>
+        </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+<script src="/res/js/jquery-1.11.3.min.js" type="text/javascript"></script>
+<script src="/res/js/js-cn.js" type="text/javascript"></script>
+<script src="/res/js/laypage.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+
+    var  _user = "<?php echo  $agent_info['AgentID']?>";
+    $(function () {
+        var pagei;
+        function page_agent_callback(a) {
+            getlist(a)
+        }
+
+        function getlist(a){
+            var b = a;
+            $("#t_agentList tr").remove();
+            pagei = layer.msg('请稍候..', {icon: 16,shade: 0.01});
+            $.ajax({
+                url: "../ashx/log/log.ashx",
+                type: "post",
+                dataType: "json",
+                data: {
+                    action: "Getagentbill",
+                    user: _user,
+                    pageIndex: b + 1,
+                    pageSize: 10,
+                    CurDateTime: rand()
+                },
+                success: function (t) {
+                    if (t.success) {
+                        if (t.results.length > 0) {
+                            var e = "";
+                            c = t.total;
+
+                            $.each(t.results,
+                                function (a, l) {
+                                    e += "<tr>";
+                                    e += "<td>";
+                                    e += t.results[a].rid;
+                                    e += "</td>";
+                                    e += "<td>";
+                                    e += parseFloat(t.results[a].Gamebi).toFixed(2);
+                                    e += "</td>";
+                                    e += "<td>";
+                                    if(t.results[a].Status==1){
+                                        e += '<span class="badge bg-gray">处理中</span>';
+                                    }else if(t.results[a].Status==2){
+                                        e += '<span class="badge bg-green">已结算</span>';
+                                    }else{
+                                        e += '';
+                                    }
+                                    e += "</td>";
+                                    e += "<td>";
+                                    e += t.results[a].AddTime;
+                                    e += "</td>";
+                                    e += "</tr>"
+                                });
+                            $("#t_agentList").append(e);
+
+                            $("#pager_agent").show(), laypage({
+                                cont: "pager_agent",
+                                pages: numPages(c, 10),
+                                skip: !0,
+                                skin: "molv",
+                                first: 1,
+                                last: numPages(c, 10),
+                                prev: "<",
+                                next: ">",
+                                curr: b + 1,
+                                groups: 2,
+                                jump: function (a, b) {
+                                    b || page_agent_callback(a.curr - 1)
+                                }
+                            })
+
+                            layer.close(pagei)
+                        } else {
+                            layer.close(pagei);
+                            web_tips("暂无记录.")
+                        }
+                    } else {
+                        layer.close(pagei);
+                        if (global_Error500 == t.ERROR_TYPE) {
+                            parent.location.href = global_e_p_500
+                        }
+                        if (global_NoLicense != t.msg) {
+                            web_tips("暂无记录.");
+                        } else {
+                            parent.location.href = global_jump_login
+                        }
+                    }
+                },
+
+            })
+        }
+        getlist(0);
+        $("#Button_Ref").click(function () {
+            window.location.reload(),  $(".msg").hide(), $(".loading").show().fadeOut(3e3)
+        }),
+        $("#Button_OK").click(function () {
+             $.ajax({
+                url: "../ashx/account/account.ashx",
+                type: "post",
+                dataType: "json",
+                data: {
+                    action: "doBalance",
+                    user: _user,
+                    CurDateTime: rand()
+                },
+                success: function (a) {
+                    a.success ? $(".msg").show().text("操作成功.") : $(".msg").show().text(a.msg)
+                },
+                beforeSend: function () {
+                    $("#Button_OK").attr("disabled", "disabled").text("正在提交")
+                },
+                complete: function () {
+                    $("#Button_OK").removeAttr("disabled").text("确定结算")
+                }
+            })
+        })
+    });
+
+</script>

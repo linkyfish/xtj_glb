@@ -1,0 +1,138 @@
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_head.html'); ?>
+<body>
+<style>
+    .layui-laydate-content th {
+        font-weight: 400;
+        color: white;
+    !important;
+    }
+</style>
+<div class="templatemo-flex-row">
+    <?php include _include(__APPDIR__ . 'Controller/Com/View/Public_nav.html'); ?>
+
+    <div class="templatemo-content col-1 light-gray-bg">
+        <?php include _include(__APPDIR__ . 'Controller/Com/View/Public_top.html'); ?>
+        <div class="row content" style="padding:5px 0px 0px 0px;">
+
+            <section class="content">
+                <div class="box box-primary box-solid">
+                    <div class="box-header with-border">
+                        <h3 class="box-title text-muted"><span style="color:White;">后台IP白名单
+                                <small style="margin-left:8px; margin-right:8px;">
+                                    <a href="javascript:window.history.back()" target="_self" onclick="javascript:window.history.back();"><i class="fa fa-arrow-left"></i> 返回</a>
+                                </small>
+                                 <small><a href="###" target="_self" onclick='javascript:DefaultGet();'><i class="fa fa-refresh"></i>刷新</a></small>
+                            </span>
+                        </h3>
+
+                    </div>
+
+                    <div class="box-body">
+                        <div class="table-responsive">
+
+                                <table class="table table-hover table-bordered" style="width: 100%" >
+                                    <thead>
+                                    <tr>
+                                        <th>IP</th>
+                                        <th>账户</th>
+                                        <th>备注</th>
+                                        <th>添加</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td><input type="text" id="txt_IP" maxlength="17" class="form-control text-bold text-blue" ></td>
+                                        <td><input type="text" id="txt_admin" maxlength="17" class="form-control text-bold text-blue"></td>
+                                        <td><input type="text" id="txt_Note" maxlength="40" class="form-control text-bold text-blue"></td>
+                                        <td ><button type="button" id="Button_OK" class="btn btn-info btn-flat">添加IP</button></td>
+                                    </tr>
+                                </table>
+
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover table-bordered" id="data_list">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>账户</th>
+                                    <th>IP</th>
+                                    <th>备注</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tblData"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="box-footer">
+
+                    </div>
+                </div>
+            </section>
+
+
+        </div>
+    </div>
+</div>
+<script src="/res/js/jquery.jeditable.mini.js" type="text/javascript"></script>
+<script type="text/javascript">
+    function DefaultGet() {
+        $("#data_list tr:gt(0)").remove(), $.ajax({
+            url: "../ashx/getData/AccountList.ashx",
+            type: "post",
+            dataType: "json",
+            data: {action: "getAdminIpList", CurDateTime: rand()},
+            success: function (a) {
+                if (a.success) if (a.results.length > 0) {
+                    var b = "";
+                    $.each(a.results, function (c) {
+                        var e = a.results[c].id;
+                        b += "<tr>", b += "<td>", b += c + 1, b += "</td>", b += "<td>", b += a.results[c].username, b += "</td>", b += "<td>", b += a.results[c].ip, b += "</td>", b += "<td>", b += a.results[c].note, b += "</td>", b += '<td >',  b += '<button type="button" class="btn btn-warning btn-xs" title="' + e + '" onfocus="this.blur();" onclick=\'onAdminIpDel(this,"' + e + "\",DefaultGet);'>删除</button>", b += "</td>", b += "</tr>"
+                    }), $("#tblData").append(b), $("#tb_list").show(), $("#overlay_Log").fadeOut(1000)
+                } else $("#tb_list").show(), $("#overlay_Log").fadeOut(1000), $("#tblData").append('<tr class="tr_h"><td>-</td><td>-</td><td>暂无数据</td></tr>'); else $("#tb_list,#overlay_Log").fadeOut(1000), a.ERROR_TYPE == global_Error500 && (parent.location.href = "../PageError/500.html"), global_NoLicense != a.msg ? web_tips(a.msg) : parent.location.href = "../Login.aspx"
+            },
+            beforeSend: function () {
+                $("#Button_OK").attr("disabled", "disabled").text("添加IP"), $("#overlay_Log").show()
+            },
+            complete: function () {
+                $("#Button_OK").removeAttr("disabled").text("添加IP")
+            }
+        })
+    }
+
+    var _ip;
+    var txt_Note;
+    var txt_admin;
+    $(function () {
+        DefaultGet(), $("#Button_OK").click(function () {
+              _ip = $("#txt_IP").val(), $("#txt_IP").trigger("blur");
+             txt_Note = $("#txt_Note").val(), $("#txt_Note").trigger("blur");
+            txt_admin = $("#txt_admin").val(), $("#txt_admin").trigger("blur");
+            var a = $(".has-warning").length;
+            return a ? !1 : ($.ajax({
+                url: "../ashx/account/account.ashx",
+                type: "post",
+                dataType: "json",
+                data: {
+                    action: "addAdminIp",
+                    ip: _ip,
+                    admin: txt_admin,
+                    note: txt_Note,
+                    CurDateTime: rand()
+                },
+                success: function (a) {
+                    a.success ? (web_dialog(a.msg), $("#Button_Cancel").click(), DefaultGet) : (a.ERROR_TYPE == global_Error500 && (parent.location.href = "../PageError/500.html"), global_NoLicense != a.msg ? web_dialog(a.msg) : parent.location.href = "../Login.aspx")
+                },
+                beforeSend: function () {
+                    $("#Button_OK").attr("disabled", "disabled").text("正在提交")
+                },
+                complete: function () {
+                    $("#Button_OK").removeAttr("disabled").text("确定")
+                }
+            }), void 0)
+        });
+    });
+</script>
+
+
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_footjs.html'); ?>

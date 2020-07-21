@@ -1,0 +1,237 @@
+
+.hotGameBox01, .hotGameBox02, .hotGameBox03 {
+	display:block;
+	width:215px;
+	height:260px;
+	border-radius:12px;
+	float:left;
+	
+}
+.hotGameBox01{
+	margin-right:20px;
+}
+.hotGameBox02{
+	margin-right:20px;
+}
+.hotGameBox03{
+}
+.hotGameIcon{
+	position: absolute;
+	display:block;
+	width:215px;
+	height:210px;
+	float:left;
+	border-radius:12px 12px 0px 0px;
+	overflow: hidden;
+	z-index:2;
+}
+.hotGameQRCode {
+	position: absolute;
+	top: 220px;	
+	width: 215px;	
+	height:100px;
+	
+	padding:70px 0px 90px 0px;
+	margin-bottom:20px;
+	background:rgba(0, 0, 0, 0.5);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#99081459', endColorstr='#99081459',GradientType=0 ); 
+	z-index:2;
+}
+h2{
+	position: absolute;
+	font-size:16px;
+	line-height:34px;
+	color: #ffffff;
+	float:left;
+	margin-left:16px;
+	margin-top:216px;
+	z-index:2;
+}
+.hotGameBoxBtn{
+	position: absolute;
+	margin-top:220px;
+	margin-left:96px;
+	z-index:99;
+}
+.hotGameBoxBtn img {
+	margin:0 auto;
+}
+.hotGameQRCode img {
+	width:60%;
+	margin:0 auto;
+}
+.pic{
+	position: absolute;
+	display:block;
+	width:215px;
+	height:260px;
+	z-index:1;
+}
+.colorbox{
+	position: absolute;
+	display:block;
+	width:215px;
+	height:50px;
+	background:rgba(0, 0, 0, 0.5);
+	border-radius:0px 0px 12px 12px;
+	bottom:0px;
+	z-index:1;
+}
+
+
+
+.box01, .box02{
+	display:block;
+	width:152px;
+	height:220px;
+	background-color: #FFF;
+	border-radius:12px;
+	float:left;
+	margin:2px 17px 30px 17px;
+	
+	box-shadow:0px 3px 4px #CCC;
+}
+
+
+
+.box03{
+	display:block;
+	width:152px;
+	height:220px;
+	background-color: #FFF;
+	border-radius:12px;
+	float:left;
+	margin-right:30px;
+	box-shadow:0px 3px 4px #CCC;
+}
+.box04{
+	display:block;
+	width:152px;
+	height:220px;
+	background-color: #FFF;
+	border-radius:12px;
+	float: right;
+	box-shadow:0px 3px 4px #CCC;
+}
+
+.icon {
+	position: absolute;
+	display:block;
+	width:135px;
+	height:130px;
+	float:left;
+	margin-top:5px;
+	margin-left:11px;
+	overflow: hidden;
+}
+.QRCode {
+	position: absolute;
+	top: 130px;	
+	width: 130px;	
+	height:130px;
+	
+	padding:10px 0px 75px 0px;
+	background:rgba(0, 0, 0, 0.7);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#99081459', endColorstr='#99081459',GradientType=0 ); 
+}
+h3{
+	
+	
+	margin-top:135px;
+	font-size:15px;
+	line-height:36px;
+	color: #000;
+	font-weight: normal;
+	margin-bottom:0;
+}
+.btn{	
+    display:block;
+	position:relative;
+    padding: inherit;
+	margin:0;
+	margin-left:22px;
+    color: #333;
+    text-align: center;
+    text-shadow: none;
+    cursor: pointer;
+    background-color: transparent;
+    background-image: none;
+    border: none;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+	box-shadow: none;
+}
+.btn:hover {
+	box-shadow: none;
+	margin-top:0;
+	margin-bottom: inherit;
+	transition: none;
+	}
+.btn img{
+	margin:0 auto;	
+}
+a.btnmove {}
+a.btnmove:hover {
+	position:relative;
+	top:1px;
+	left:1px;}
+	
+.icon img {
+	width:85%;
+	padding-left:8px;
+	padding-top:10px;
+}
+.QRCode img{
+	width:75%;
+	margin-top:-6px;
+	margin-left:8px;
+}
+
+
+
+.hideBtn, .hideBtn02 {
+	position: relative;
+	display:block;
+	width:100px;
+	height:100px;
+	float: left;
+	margin-left:2px;
+	z-index:99;
+}
+.hideBtn ul {
+	list-style-position:inside;
+	list-style-type:none;
+	display:block;
+	padding:0px;
+	margin-top:16px;
+	*margin-left:0px;
+}
+.hideBtn02 ul {
+	list-style-position:inside;
+	list-style-type:none;
+	display:block;
+	padding:0px;
+	margin-top:36px;
+	*margin-left:0px;
+}
+.hideBtn li, .hideBtn02 li {
+	margin:0px 0px 12px 13px;
+}
+.hideBtn li.btn01 a, .hideBtn li.btn02 a, .hideBtn02 li.btn03 a {
+	display:block;
+	width:100px;
+	height:30px;
+	background-color:#ffffff;
+	border-radius:8px;
+	color: #666;
+	font-size: 15px;
+	line-height: 30px;
+	font-weight: bold;
+	text-align: center;
+}
+.hideBtn li.btn01 a:hover, .hideBtn li.btn02 a:hover, .hideBtn02 li.btn03 a:hover {
+	text-decoration: none;
+}

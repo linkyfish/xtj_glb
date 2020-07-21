@@ -1,0 +1,214 @@
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_head.html'); ?>
+<body>
+<style>
+    .layui-laydate-content th {
+        font-weight: 400;
+        color: white;
+    !important;
+    }
+    .layui-table-view .layui-table .layui-table-cell{text-align: center}
+</style>
+<div class="templatemo-flex-row">
+    <?php include _include(__APPDIR__ . 'Controller/Com/View/Public_nav.html'); ?>
+
+    <div class="templatemo-content col-1 light-gray-bg">
+        <?php include _include(__APPDIR__ . 'Controller/Com/View/Public_top.html'); ?>
+        <div class="row content" style="padding:5px 0px 0px 0px;">
+
+            <section class="content">
+                <div class="box box-primary box-solid">
+                    <div class="box-header with-border">
+                        <h3 class="box-title text-muted"><span style=" color:White;">权限配置<small
+                                        style="margin-left:8px; margin-right:8px;"><a
+                                            href="javascript:window.history.back()" target="_self"
+                                            onclick='javascript:window.history.back();'><i class="fa fa-arrow-left"></i> 返回</a></small></span>
+                        </h3>
+                        <div class="box-tools pull-right">
+                            <button data-widget="collapse" class="btn btn-box-tool" type="button"><i
+                                        class="fa fa-minus"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="box-body">
+                    <table class="layui-hide" id="<?php echo $__PRE__?>table" lay-filter="<?php echo $__PRE__?>table"></table>
+                </div>
+            </section>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_footjs.html'); ?>
+<script src="/js/index.js?ver=<?php echo _CONF('app_v')?>"></script>
+<script src="/xtree/xtree.js?ver=<?php echo _CONF('app_v')?>"></script>
+<script>
+    var  <?php echo $__PRE__?>table = table.render({
+        elem: '#<?php echo $__PRE__?>table'
+        ,url:'../../admin/role/index'
+        ,page: true
+        ,height: 'full-160'
+        ,limit:50
+        ,limits: [50,100,200]
+        ,cols: [[
+            {field:'RoleID', title:'ID', width:80, unresize: true}
+            ,{field:'RoleName', title:'组名称', width:140, edit: 'text'}
+            ,{field:'RoleDesc', title:'简介', minWidth:200, edit: 'text'}
+           ,{field:'dh', title:'长号',width:80,templet:function (d) {
+                    return " <input type=\"checkbox\" name=\"dh\"  value=\""+d.RoleID+"\" lay-skin=\"switch\" lay-text=\"启用|禁用\" lay-filter=\"<?php echo $__PRE__?>_rule\" "+(d.dh == 1 ? 'checked' : '' )+">"
+                }}
+           ,{field:'RoleDesc', title:'占成', width:70,templet:function (d) {
+                    return " <input type=\"checkbox\" name=\"zc\"  value=\""+d.RoleID+"\" lay-skin=\"switch\" lay-text=\"启用|禁用\" lay-filter=\"<?php echo $__PRE__?>_rule\" "+(d.zc == 1 ? 'checked' : '' )+">"
+                }}
+           ,{field:'RoleDesc', title:'禁用', width:70,templet:function (d) {
+                    return " <input type=\"checkbox\" name=\"jy\"  value=\""+d.RoleID+"\" lay-skin=\"switch\" lay-text=\"启用|禁用\" lay-filter=\"<?php echo $__PRE__?>_rule\" "+(d.jy == 1 ? 'checked' : '' )+">"
+                }}
+           ,{field:'RoleDesc', title:'改密', width:70,templet:function (d) {
+                    return " <input type=\"checkbox\" name=\"gm\"  value=\""+d.RoleID+"\" lay-skin=\"switch\" lay-text=\"启用|禁用\" lay-filter=\"<?php echo $__PRE__?>_rule\" "+(d.gm == 1 ? 'checked' : '' )+">"
+                }}
+           ,{field:'RoleDesc', title:'分值', width:70,templet:function (d) {
+                    return " <input type=\"checkbox\" name=\"fz\"  value=\""+d.RoleID+"\" lay-skin=\"switch\" lay-text=\"启用|禁用\" lay-filter=\"<?php echo $__PRE__?>_rule\" "+(d.fz == 1 ? 'checked' : '' )+">"
+                }}
+           ,{field:'RoleDesc', title:'踢人', width:70,templet:function (d) {
+                    return " <input type=\"checkbox\" name=\"tr\"  value=\""+d.RoleID+"\" lay-skin=\"switch\" lay-text=\"启用|禁用\" lay-filter=\"<?php echo $__PRE__?>_rule\" "+(d.tr == 1 ? 'checked' : '' )+">"
+                }}
+           ,{field:'RoleDesc', title:'绿色', width:70,templet:function (d) {
+                    return " <input type=\"checkbox\" name=\"ls\"  value=\""+d.RoleID+"\" lay-skin=\"switch\" lay-text=\"启用|禁用\" lay-filter=\"<?php echo $__PRE__?>_rule\" "+(d.ls == 1 ? 'checked' : '' )+">"
+                }}
+           ,{field:'RoleDesc', title:'银行', width:70,templet:function (d) {
+                    return " <input type=\"checkbox\" name=\"yh\"  value=\""+d.RoleID+"\" lay-skin=\"switch\" lay-text=\"启用|禁用\" lay-filter=\"<?php echo $__PRE__?>_rule\" "+(d.yh == 1 ? 'checked' : '' )+">"
+                }}
+           ,{field:'RoleDesc', title:'编辑', width:70,templet:function (d) {
+                    return " <input type=\"checkbox\" name=\"bj\"  value=\""+d.RoleID+"\" lay-skin=\"switch\" lay-text=\"启用|禁用\" lay-filter=\"<?php echo $__PRE__?>_rule\" "+(d.bj == 1 ? 'checked' : '' )+">"
+                }}
+           ,{field:'RoleDesc', title:'设定', width:70,templet:function (d) {
+                    return " <input type=\"checkbox\" name=\"sd\"  value=\""+d.RoleID+"\" lay-skin=\"switch\" lay-text=\"启用|禁用\" lay-filter=\"<?php echo $__PRE__?>_rule\" "+(d.sd == 1 ? 'checked' : '' )+">"
+                }}
+            ,{field:'RoleDesc', title:'功能', width:70,templet:function (d) {
+                    return " <input type=\"checkbox\" name=\"gn\"  value=\""+d.RoleID+"\" lay-skin=\"switch\" lay-text=\"启用|禁用\" lay-filter=\"<?php echo $__PRE__?>_rule\" "+(d.gn == 1 ? 'checked' : '' )+">"
+                }}
+            ,{field:'reg', title:'注册送', width:70,align:'center',templet:function (d) {
+                    return " <input type=\"checkbox\" name=\"reg\" "+(d.RoleID ==1 ? 'disabled':'')+" value=\""+d.RoleID+"\" lay-skin=\"switch\" lay-text=\"启用|禁用\" lay-filter=\"<?php echo $__PRE__?>_rule\" "+(d.reg == 1 ? 'checked' : '' )+">"
+                }}
+            ,{field:'czs', title:'充值数', width:70,align:'center',templet:function (d) {
+                    return " <input type=\"checkbox\" name=\"czs\" "+(d.RoleID ==1 ? 'disabled':'')+" value=\""+d.RoleID+"\" lay-skin=\"switch\" lay-text=\"启用|禁用\" lay-filter=\"<?php echo $__PRE__?>_rule\" "+(d.czs == 1 ? 'checked' : '' )+">"
+                }}
+            ,{field:'czs', title:'修改备注', width:70,align:'center',templet:function (d) {
+                    return " <input type=\"checkbox\" name=\"xgbz\" "+(d.RoleID ==1 ? 'disabled':'')+" value=\""+d.RoleID+"\" lay-skin=\"switch\" lay-text=\"启用|禁用\" lay-filter=\"<?php echo $__PRE__?>_rule\" "+(d.czs == 1 ? 'checked' : '' )+">"
+                }}
+            ,{field:'IsEnable', title:'状态', width:70,align:'center',templet:function (d) {
+                    return " <input type=\"checkbox\" name=\"IsEnable\" "+(d.RoleID ==1 ? 'disabled':'')+" value=\""+d.RoleID+"\" lay-skin=\"switch\" lay-text=\"启用|禁用\" lay-filter=\"<?php echo $__PRE__?>_rule\" "+(d.IsEnable == 1 ? 'checked' : '' )+">"
+                }}
+
+            ,{field:'doit', title:'操作', width:80,templet:function (d) {
+                    if(d.RoleID ==1){return ''}
+                    return "<div class='layui-btn-group'><button lay-event='edit2' class='layui-btn layui-btn-sm layui-btn-normal'>权限</button></div>"
+                }}
+        ]]
+        ,response: {
+            statusCode: "0000"
+        }
+        ,parseData: function(res){
+            return {
+                "code": res.resp_code,
+                "msg": res.msg,
+                "count": res.data.total,
+                "data": res.data.results
+            };
+        }
+    });
+
+    table.on('sort(<?php echo $__PRE__?>table)', function(obj){
+        <?php echo $__PRE__?>table.reload({
+            initSort: obj
+            ,where: {
+                field: obj.field
+                ,order: obj.type
+            }
+        });
+    });
+    table.on('tool(<?php echo $__PRE__?>table)', function(obj){
+        var data = obj.data;
+        var layEvent = obj.event;
+        var tr = obj.tr;
+
+        if(layEvent === 'delete'){
+            layer.confirm('真的删除'+data.RoleName+'组吗？',{title:'删除确认'}, function(index){
+                $.xdelete('../../admin/role/index',{RoleID:data.RoleID},function (e) {
+                    layer.msg(e.msg)
+                    obj.del();
+                });
+            });
+
+        } else if(layEvent === 'edit2'){
+
+            layer.open({
+                type: 1,
+                title:data.RoleName+'组权限设置',
+                area: ['650px', '500px'],
+                btn:['保存','取消'],
+                closeBtn: 0,
+                maxmin: true,
+                content: '<form class="layui-form"><input type="hidden" name="Type" value="1"><input type="hidden" name="RoleID" value="'+data.RoleID+'">\n' +
+                    '<div id="<?php echo $__PRE__?>xtree" style="width:430px;"></div>\n' +
+                    '<button style="display:none" class="layui-btn" lay-submit lay-filter="<?php echo $__PRE__?>save_menu" id="<?php echo $__PRE__?>save_menu">保存</button></form>',yes:function (e) {
+                    $('#<?php echo $__PRE__?>save_menu').click();
+                }
+            });
+
+            form.on('submit(<?php echo $__PRE__?>save_menu)', function(data){
+                $.xpost('../../admin/role/auth',data.field,function (e) {
+                    layer.msg(e.msg)
+                })
+                return false;
+            });
+
+            var xtree2 = new layuiXtree({
+                elem: '<?php echo $__PRE__?>xtree'
+                , form: form
+                , data: '../../admin/menu/role?Type=1&RoleID='+data.RoleID
+            });
+
+
+        }
+    });
+
+    form.on('switch(<?php echo $__PRE__?>_rule)', function(obj){
+        $.xpost('../../admin/role/field',{RoleID:this.value,field:obj.elem.name,value:obj.elem.checked==true?1:0},function (e) {
+            if(e.resp_code=='0000'){
+                layer.tips(e.msg, obj.othis,{tips: [4, '#393D49']});
+            }else{
+                if(obj.elem.checked==true){
+                    obj.elem.checked=false
+                    $(obj.othis).removeClass("layui-form-onswitch").find('em').text('禁用');
+                }else{
+                    obj.elem.checked=true
+                    $(obj.othis).addClass("layui-form-onswitch").find('em').text('启用');
+                }
+            }
+        })
+    });
+
+    table.on('edit(<?php echo $__PRE__?>table)', function(obj){
+        $.xpost('../../admin/role/field',{RoleID:obj.data.RoleID,field: obj.field,value:obj.value},function (e) {
+            if(e.resp_code=='0000'){
+                layer.msg(e.msg);
+            }else{
+                layer.msg(e.msg);
+            }
+        })
+    });
+
+
+    form.on('submit(<?php echo $__PRE__?>search_submit)', function(data){
+        <?php echo $__PRE__?>table.reload({
+            where: data.field
+        });
+        form.val("<?php echo $__PRE__?>search_form",data.field);
+        return false;
+    });
+    form.render();
+</script>
+

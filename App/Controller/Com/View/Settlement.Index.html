@@ -1,0 +1,167 @@
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_head.html'); ?>
+<body>
+<style>
+    .layui-laydate-content th {
+        font-weight: 400;
+        color: white;
+    !important;
+    }
+
+
+</style>
+<div class="templatemo-flex-row">
+    <?php include _include(__APPDIR__ . 'Controller/Com/View/Public_nav.html'); ?>
+
+    <div class="templatemo-content col-1 light-gray-bg">
+        <?php include _include(__APPDIR__ . 'Controller/Com/View/Public_top.html'); ?>
+        <div class="row content" style="padding:5px 0px 0px 0px;">
+
+
+            <section class="content">
+                <div class="box box-primary box-solid" id="ListFlag" style="">
+                    <div class="box-header with-border">
+                        <h6 class="box-title text-muted" style="color:white">
+                            <span class="hidden-xs hidden-sm text-bold">结算确认</span>
+
+                        </h6>
+                        <span class="hidden-xs hidden-sm">　｜　</span>
+                        <span class="hidden-xs hidden-sm"><a href="javascript:reloadList();" target="_self" onclick='javascript:reloadList();'><i
+                                        class="fa fa-refresh"></i> 刷新</a></span>
+                    </div>
+                    <div class="box-body" style="display: block; padding:10px 5px;">
+                        <form class="layui-form" lay-filter="<?php echo $__PRE__ ?>search_form">
+                        <div class="form-group">
+                            <div class="layui-row layui-col-space10">
+                                <div class="layui-col-md2">
+                                    <label>审核状态</label>
+                                    <select style="width:200px" class="form-control" name="Status" lay-ignore>
+                                        <option value="0">未提交</option>
+                                        <option value="1" selected>待审核</option>
+                                        <option value="2">已审核</option>
+                                    </select>
+                                </div>
+                                <div class="layui-col-md2">
+                                    <label>审核日期</label>
+                                    <input name="ymd" type="text" class="form-control" id="monthday" placeholder="yyyy-MM-dd">
+                                </div>
+                                <div class="layui-col-md1">
+                                    <label>&nbsp;</label>
+                                    <input value="查询" type="button" class="btn btn-primary form-control" lay-submit lay-filter="<?php echo $__PRE__ ?>search_submit">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="layui-hide" id="<?php echo $__PRE__ ?>table" lay-filter="<?php echo $__PRE__ ?>table"></table>
+                        </div>
+                        </form>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+        </div>
+    </div>
+</div>
+<script type="text/html" id="<?php echo $__PRE__ ?>bar">
+
+    <div class="layui-btn-group">
+
+        {{# if(d.Status==1){ }}
+        <a class="layui-btn layui-btn-sm " lay-event="cash">确认打款</a>
+        {{# } }}
+
+    </div>
+</script>
+
+<?php include _include(__APPDIR__ . 'Controller/Com/View/Public_footjs.html'); ?>
+<script src="/js/index.js?ver=<?php echo _CONF('app_v') ?>"></script>
+<script>
+    var <?php echo $__PRE__?>table = table.render({
+        elem: '#<?php echo $__PRE__?>table'
+        , url: '../../com/exchange.aspx'
+        , where:{action:"need_confirm"}
+        , page: true
+        , totalRow:true
+        , height: 'full-140'
+        , limits: [10, 15, 20, 50, 100, 200,500,1000,2000,5000]
+        , cols: [[
+            {type: 'numbers', title: '序号', width: 80, unresize: true}
+            , {field: 'Ymd', title: '结算日期',align:'center',width: 100}
+            , {field: 'PayAT', title: '审核日期',align:'center',width: 100,totalRowText:'合计'}
+            , {field: 'UserName', title: '代理号',align:'center', width: 150}
+            , {field: 'SumNum', title: '总数据',align:'center', width: 140,totalRow:true}
+            , {field: 'PoNum', title: '占成数据',align:'center', width: 140,totalRow:true}
+            , {field: 'SubNum', title: '分成数据',align:'center', width: 140,totalRow:true}
+            , {field: 'RealNum', title: '实际数据',align:'center', width: 140,totalRow:true}
+            , {field: 'Num', title: '实出金额',align:'center', width: 140,totalRow:true}
+            , {field: 'UsrID', title: '收益账户',align:'center', width: 140}
+            , {field: 'Status', title: '结算状态',align:'center', width: 120,templet:function (d) {
+                    return d.Status==2?'已结算':(d.Status==1?'待审核':'待提现');
+                }}
+            , {field: 'Do', title: '操作',align:'center', width: 120,toolbar: "#<?php echo $__PRE__?>bar"}
+            , {field: 'z', title: '',align:'center'}
+        ]]
+
+        , response: {
+            statusCode: "0000"
+        }
+        , parseData: function (res) {
+            return {
+                "code": res.resp_code,
+                "msg": res.msg,
+                "count": res.total,
+                "data": res.results
+            };
+        }
+    });
+
+    table.on('tool(<?php echo $__PRE__?>table)', function (obj) {
+        var data = obj.data;
+        var layEvent = obj.event;
+        var tr = obj.tr;
+
+        if (layEvent === 'cash') {
+            layer.confirm('打款确认?', {icon: 3, title:'打款确认'}, function(index){
+                $.xpost('../../com/settlement.aspx', {action:'cash_confirm',Ymd:data.Ymd,AgentID:data.AgentID}, function (e) {
+                    if(e.resp_code == '0000'){
+                        layer.close(index);
+                        layer.msg('提交成功.');
+                        setTimeout(function () {
+                            <?php echo $__PRE__?>table.reload();
+                        },1500)
+                    }else{
+                        layer.msg(e.msg,{icon:5,anim:6});
+                    }
+                })
+
+                layer.close(index);
+            });
+
+        }
+    });
+
+
+    form.on('submit(<?php echo $__PRE__?>search_submit)', function (data) {
+        data.field.ymd = (data.field.ymd).replace(/\-/g,'');
+        <?php echo $__PRE__?>table.reload({
+            where: data.field
+        });
+        return false;
+    });
+
+    function reloadList() {
+       window.location.reload();
+    }
+    var ins1 = laydate.render({
+        elem: '#monthday'
+        ,format: 'yyyy-MM-dd'
+        ,change: function(value, date, endDate){
+            ins1.hint(value); //在控件上弹出value值
+        }
+    });
+
+    form.render();
+</script>
+
